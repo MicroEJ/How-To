@@ -1,25 +1,25 @@
 # Overview
-This document explains how to convert a Standalone app into a Sandboxed app.
+This document explains how to convert a standalone app into a sandboxed app.
 
 # Usage
 ## CREATE THE APPLICATION
-1. Use the wizard to create a new Sandboxed Application
+1. Use the wizard to create a new sandboxed app
 	1. **File** → **New** → **MicroEJ Sandboxed Application Project**
 	
 ## ADD THE DEPENDENCIES
-1. Open the `module.ivy` file from the Standalone project
+1. Open the `module.ivy` file from the standalone project
 2. Copy all the dependencies located in `<dependencies></dependencies>`
-3. Open the `module.ivy` file from the Sandboxed project
+3. Open the `module.ivy` file from the sandboxed project
 4. Paste the copied dependencies into `<dependencies></dependencies>`
 
 ## COPY THE SOURCES AND RESOURCES
 1. From the Standalone project copy the content of `src/main/java`
-2. Paste it into `src/main/java` in the Sandboxed project.
+2. Paste it into `src/main/java` in the sandboxed project.
 3. From the Standalone project copy the content of `src/main/resources`
-4. Paste it into `src/main/resources` in the Sandboxed project.
+4. Paste it into `src/main/resources` in the sandboxed project.
 
 ## LINK THE PROJECT TO A SANDBOXED APP ENTRY POINT
-A Sandboxed app needs a specific entry point which is not the main of the Standalone app.
+A sandboxed app needs a specific entry point which is not the main of the standalone app.
 
 * If you have a GUI (i.e. using a GUI library such as MicroUI):
 	1. Create a new class implementing `ej.wadapps.app.Activity`.
