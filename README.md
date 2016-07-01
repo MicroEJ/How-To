@@ -11,4 +11,4 @@ Each subfolder contains a distinct how-to.
 - See the change log file [CHANGELOG.md](CHANGELOG.md) located at the root of this repository.
 
 # License
-See the license file [LICENSE.md](LICENSE.md) located at the root of this repository.
+- See the license file [LICENSE.md](LICENSE.md) located at the root of this repository.
