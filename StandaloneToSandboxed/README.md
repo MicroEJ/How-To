@@ -7,16 +7,16 @@ This document explains how to convert a standalone app into a sandboxed app.
 	1. **File** → **New** → **MicroEJ Sandboxed Application Project**
 	
 ## ADD THE DEPENDENCIES
-1. Open the `module.ivy` file from the standalone project
+1. Open the `module.ivy` file from the **standalone project**
 2. Copy all the dependencies located in `<dependencies></dependencies>`
-3. Open the `module.ivy` file from the sandboxed project
+3. Open the `module.ivy` file from the **sandboxed project**
 4. Paste the copied dependencies into `<dependencies></dependencies>`
 
 ## COPY THE SOURCES AND RESOURCES
-1. From the Standalone project copy the content of `src/main/java`
-2. Paste it into `src/main/java` in the sandboxed project.
-3. From the Standalone project copy the content of `src/main/resources`
-4. Paste it into `src/main/resources` in the sandboxed project.
+1. From the **standalone project**, copy the content of `src/main/java`
+2. Paste it into `src/main/java` in the **sandboxed project**.
+3. From the **standalone project** copy the content of `src/main/resources`
+4. Paste it into `src/main/resources` in the **sandboxed project**.
 
 ## LINK THE PROJECT TO A SANDBOXED APP ENTRY POINT
 A sandboxed app needs a specific entry point which is not the main of the standalone app.
@@ -29,11 +29,13 @@ A sandboxed app needs a specific entry point which is not the main of the standa
 	2. On the **onStart()**, call your project's **main**.
 	
 ## UPDATE THE META-INF
-1. Move the **system.properties** except the services declarations to the **application.properties**
-	* In your code, change the call of `System.getProperty()` to : 	`ServiceLoaderFactory.getServiceLoader().getService(ApplicationsManager.class).getCurrentApplication().getProperty();`
-2. **For each local service declared, create a file** with the full qualified name of the service and one line containing full qualified name of the implementation class as the body, put it in the folder **services**
+1. Move the **system.properties** except the services declarations to the **application.properties** file
+	* In your code, replace the calls to `System.getProperty()` by calls to `ServiceLoaderFactory.getServiceLoader().getService(ApplicationsManager.class).getCurrentApplication().getProperty()`
+2. For each local service declared
+	* create a file with the fully qualified name of the service in the folder **services**
+	* write one line containing the fully qualified name of the implementation class into this file
 3. Update the `MANIFEST.MF` :
-	* Set the **Application-Activities** to the created activity (if you have a GU).
+	* Set the **Application-Activities** to the created activities (if you have a GU).
 	* Set the **Application-BackgroundServices** to the created background services (if you do not have a GUI).
 
 ## RUN ON MICROEJ SIMULATOR
