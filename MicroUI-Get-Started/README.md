@@ -8,53 +8,53 @@
 This library contains simple examples to understand how to use the main MicroUI library APIs. It is recommended to study them in the following order :
 
 
-- [Primitives](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/Primitives.java)
+- [com.microej.howto.microui.drawing.Primitives](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/Primitives.java)
 
 ![Primitives](screenshots/Primitives.png)
 
-- [PrimitivesAntiAliased](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/PrimitivesAntiAliased.java)
+- [com.microej.howto.microui.drawing.PrimitivesAntiAliased](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/PrimitivesAntiAliased.java)
 
 ![PrimitivesAntiAliased](screenshots/PrimitivesAntiAliased.png)
 
-- [Text](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/Text.java)
+- [com.microej.howto.microui.font.Text](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/Text.java)
 
 ![Text](screenshots/Text.png)
 
-- [PictosWithCustomFont](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/PictosWithCustomFont.java)
+- [com.microej.howto.microui.font.PictosWithCustomFont](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/PictosWithCustomFont.java)
 
 ![PictosWithCustomFont](screenshots/PictosWithCustomFont.png)
 
-- [TransparentImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TransparentImages.java)
+- [com.microej.howto.microui.image.TransparentImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TransparentImages.java)
 
 ![TransparentImages](screenshots/TransparentImages.png)
 
-- [FlippedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/FlippedImages.java)
+- [com.microej.howto.microui.image.FlippedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/FlippedImages.java)
 
 ![FlippedImages](screenshots/FlippedImages.png)
 
-- [RotatedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/RotatedImages.java)
+- [com.microej.howto.microui.image.RotatedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/RotatedImages.java)
 
 ![RotatedImages](screenshots/RotatedImages.png)
 
-- [ScaledImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/ScaledImages.java)
+- [com.microej.howto.microui.image.ScaledImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/ScaledImages.java)
 
 ![ScaledImages](screenshots/ScaledImages.png)
 
-- [TilingWithImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TilingWithImages.java)
+- [com.microej.howto.microui.image.TilingWithImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TilingWithImages.java)
 
 ![TilingWithImages](screenshots/TilingWithImages.png)
 
-- [DeformedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/DeformedImages.java)
+- [com.microej.howto.microui.image.DeformedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/DeformedImages.java)
 
 ![DeformedImages](screenshots/DeformedImages.png)
 
-- [InputEvents](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/events/InputEvents.java)
+- [com.microej.howto.microui.events.InputEvents](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/events/InputEvents.java)
 
 ![InputEvents](screenshots/InputEvents.png)
 
-- [AnimationSampleWithFullRepaint](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFullRepaint.java)
+- [com.microej.howto.microui.animation.AnimationSampleWithFullRepaint](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFullRepaint.java)
 
-- [AnimationSampleWithFlyingImage](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFlyingImage.java)
+- [com.microej.howto.microui.animation.AnimationSampleWithFlyingImage](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFlyingImage.java)
 
 
 Note that the same set of resources (images and fonts) is used across all of the examples.
