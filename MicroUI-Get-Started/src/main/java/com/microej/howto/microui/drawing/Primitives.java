@@ -28,6 +28,9 @@ public class Primitives {
 			@Override
 			public void paint(GraphicsContext g) {
 
+				final int displayCenterX = display.getWidth() / 2;
+				final int displayCenterY = display.getHeight() / 2;
+
 				// fill up background with black
 				g.setColor(Colors.BLACK);
 				g.fillRect(0, 0, display.getWidth(), display.getHeight());
@@ -37,36 +40,88 @@ public class Primitives {
 				g.fillRect(0, 0, display.getWidth()/2, display.getHeight());
 
 				// draw a dotted red line across the area diagonal
-				g.setColor(Colors.RED);
+				g.setColor(Colors.GRAY);
 				g.setStrokeStyle(GraphicsContext.DOTTED);
 				g.drawLine(0, 0, display.getWidth(), display.getHeight());
 
 				{
-					// draw a blue circle at the center of the area
+					// draw a maroon arc at the center of the area
+					g.setColor(Colors.MAROON);
+
+					final int radius = display.getWidth() / 2;
+
+					// Note that x and y parameters are the top left coordinates
+					// of the rectangle bounding box.
+					// Therefore some offset of half the rectangle width and
+					// height have to be applied to center the rectangle on the
+					// display
+					final int x = displayCenterX - radius / 2;
+					final int y = displayCenterY - radius / 2;
+
+					g.fillCircleArc(x, y, radius, 45, 270);
+				}
+
+				{
+					// draw a red rounded rectangle at the center of the area
+					g.setColor(Colors.RED);
+
+					final int rectangleWidth = display.getWidth() / 3;
+					final int rectangleHeight = display.getHeight() / 3;
+					final int arcHeight = 20;
+					final int arcWidth = 20 * (display.getWidth() / display.getHeight());
+
+					// Note that x and y parameters are the top left coordinates
+					// of the rectangle bounding box.
+					// Therefore some offset of half the rectangle width and
+					// height have to be applied to center the rectangle on the
+					// display
+					final int x = displayCenterX - rectangleWidth / 2;
+					final int y = displayCenterY - rectangleHeight / 2;
+
+					g.fillRoundRect(x, y, rectangleWidth, rectangleHeight, arcWidth, arcHeight);
+				}
+
+				{
+					// draw a yellow ellipse at the center of the area
+					g.setColor(Colors.YELLOW);
+
 					final int ellipseWidth = display.getWidth() / 4;
 					final int ellipseHeight = display.getHeight() / 4;
-					g.setColor(Colors.YELLOW);
 					// Note that x and y parameters are the top left coordinates
 					// of the ellipse bounding box.
 					// Therefore some offset of half the ellipse width and
 					// height have to be applied to center the ellipse on the
 					// display
-					g.fillEllipse((display.getWidth() / 2) - (ellipseWidth / 2),
-							(display.getHeight() / 2) - ellipseHeight / 2, ellipseWidth, ellipseHeight);
+					final int x = displayCenterX - ellipseWidth / 2;
+					final int y = displayCenterY - ellipseHeight / 2;
+					g.fillEllipse(x, y, ellipseWidth, ellipseHeight);
 				}
 
 				{
 					// draw a blue circle at the center of the area
+					g.setColor(Colors.BLUE);
+
 					final int diameter = display.getHeight() / 6;
 					final int radius = diameter / 2;
-					g.setColor(Colors.BLUE);
+
 					// Note that x and y parameters are the top left coordinates
 					// of the circle bounding box.
 					// Therefore some offset of half the circle diameter
 					// has to be applied to center the circle on the display
-					g.fillCircle((display.getWidth() / 2) - radius, (display.getHeight() / 2) - radius, diameter);
+					final int x = displayCenterX - radius;
+					final int y = displayCenterY - radius;
+					g.fillCircle(x, y, diameter);
 				}
 
+				{
+					// draw a green triangle at the center of the area
+					g.setColor(Colors.LIME);
+
+					final int radius = display.getHeight() / 20;
+					final int xys[] = { displayCenterX - radius, displayCenterY + radius, displayCenterX,
+							displayCenterY - radius, displayCenterX + radius, displayCenterY + radius };
+					g.fillPolygon(xys);
+				}
 			}
 
 			@Override

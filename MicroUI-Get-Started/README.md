@@ -9,7 +9,7 @@ This library contains simple examples to understand how to use the main MicroUI 
 
 
 - [Drawing Primitives](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/Primitives.java)
-- [Brushes](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/Brushes.java)
+- [PrimitivesAntiAliased](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/PrimitivesAntiAliased.java)
 
 - [Text] (/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/Text.java)
 - [PictosWithCustomFont] (/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/PictosWithCustomFont.java)
