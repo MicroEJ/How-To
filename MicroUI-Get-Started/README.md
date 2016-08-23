@@ -61,7 +61,8 @@ Note that the same set of resources (images and fonts) is used across all of the
 
 # Usage
 Add the following line to your `module.ivy` or your `ivy.xml`:
-> <dependency org="ej.api" name="microui" rev="[2.0.0-RC0,3.0.0-RC0[" conf="provided->*" />
+
+```<dependency org="ej.api" name="microui" rev="[2.0.0-RC0,3.0.0-RC0[" conf="provided->*" />```
 	
 # Requirements
 - EDC 1.2 or later
