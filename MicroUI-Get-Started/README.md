@@ -9,32 +9,51 @@ This library contains simple examples to understand how to use the main MicroUI 
 
 
 - [Primitives](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/Primitives.java)
-<img src="./screenshots/Primitives.png"/>
+
+![Primitives](screenshots/Primitives.png)
+
 - [PrimitivesAntiAliased](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/PrimitivesAntiAliased.java)
-<img src="./screenshots/PrimitivesAntiAliased.png"/>
+
+![PrimitivesAntiAliased](screenshots/PrimitivesAntiAliased.png)
 
 - [Text](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/Text.java)
-<img src="./screenshots/Text.png"/>
+
+![Text](screenshots/Text.png)
+
 - [PictosWithCustomFont](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/PictosWithCustomFont.java)
-<img src="./screenshots/PictosWithCustomFont.png"/>
+
+![PictosWithCustomFont](screenshots/PictosWithCustomFont.png)
 
 - [TransparentImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TransparentImages.java)
-<img src="./screenshots/TransparentImages.png"/>
+
+![TransparentImages](screenshots/TransparentImages.png)
+
 - [FlippedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/FlippedImages.java)
-<img src="./screenshots/FlippedImages.png"/>
+
+![FlippedImages](screenshots/FlippedImages.png)
+
 - [RotatedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/RotatedImages.java)
-<img src="./screenshots/RotatedImages.png"/>
+
+![RotatedImages](screenshots/RotatedImages.png)
+
 - [ScaledImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/ScaledImages.java)
-<img src="./screenshots/ScaledImages.png"/>
+
+![ScaledImages](screenshots/ScaledImages.png)
+
 - [TilingWithImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TilingWithImages.java)
-<img src="./screenshots/TilingWithImages.png"/>
+
+![TilingWithImages](screenshots/TilingWithImages.png)
+
 - [DeformedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/DeformedImages.java)
-<img src="./screenshots/DeformedImages.png"/>
+
+![DeformedImages](screenshots/DeformedImages.png)
 
 - [InputEvents](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/events/InputEvents.java)
-<img src="./screenshots/InputEvents.png"/>
+
+![InputEvents](screenshots/InputEvents.png)
 
 - [AnimationSampleWithFullRepaint](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFullRepaint.java)
+
 - [AnimationSampleWithFlyingImage](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFlyingImage.java)
 
 
