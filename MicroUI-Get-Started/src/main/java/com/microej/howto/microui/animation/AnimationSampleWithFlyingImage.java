@@ -72,9 +72,6 @@ public class AnimationSampleWithFlyingImage {
 		displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
-
-				System.out
-				.println("AnimationSampleWithFlyingImage.createDisplayable().new Displayable() {...}.paint()");
 				// fill up background with black
 				g.setColor(Colors.BLACK);
 				g.fillRect(0, 0, display.getWidth(), display.getHeight());
@@ -107,8 +104,6 @@ public class AnimationSampleWithFlyingImage {
 	 */
 	public AnimationSampleWithFlyingImage(Display display) {
 		this.display = display;
-		this.imageX = display.getWidth() / 2;
-		this.imageY = display.getHeight() / 2;
 
 		try {
 			microejImage = Image.createImage("/images/microej.png");
@@ -116,6 +111,9 @@ public class AnimationSampleWithFlyingImage {
 		} catch (IOException e) {
 			throw new AssertionError(e);
 		}
+
+		this.imageX = display.getWidth() / 2 - microejImage.getWidth() / 2;
+		this.imageY = display.getHeight() / 2 - microejImage.getHeight() / 2;
 
 		this.animate();
 	}
