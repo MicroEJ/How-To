@@ -64,9 +64,9 @@ Add the following line to your `module.ivy` or your `ivy.xml`:
 > <dependency org="ej.api" name="microui" rev="[2.0.0-RC0,3.0.0-RC0[" conf="provided->*" />
 	
 # Requirements
-  - EDC 1.2 or later
-  - BON 1.2 or later
-  - MICROUI 2 or later
+- EDC 1.2 or later
+- BON 1.2 or later
+- MICROUI 2 or later
 
 This project gathers some basic examples of the foundation libraries. Those examples are developed as standalone applications and as such can be run by following the associated instructions (see **README.md** file of each example).
 
