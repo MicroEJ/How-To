@@ -1,7 +1,7 @@
 <!--
 	Markdown
-	Copyright 2015-2016 IS2T. All rights reserved.
-	IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+	Copyright 2016 IS2T. All rights reserved.
+	Use of this source code is governed by a BSD-style license that can be found at http://www.is2t.com/open-source-bsd-license/.
 -->
 
 # Overview
@@ -12,13 +12,20 @@ This library contains simple examples to understand how to use the main MicroUI 
 - [Brushes](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/Brushes.java)
 
 - [Text] (/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/Text.java)
-- [TextWithCustomFont] (/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/TextWithCustomFont.java)
+- [PictosWithCustomFont] (/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/PictosWithCustomFont.java)
 
 - [TransparentImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TransparentImages.java)
 - [FlippedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/FlippedImages.java)
 - [RotatedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/RotatedImages.java)
-- [Event Handling]
-...
+- [ScaledImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/ScaledImages.java)
+- [TilingWithImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TilingWithImages.java)
+- [DeformedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/DeformedImages.java)
+
+- [InputEvents](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/events/InputEvents.java)
+
+- [AnimationSampleWithFullRepaint](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFullRepaint.java)
+- [AnimationSampleWithFlyingImage](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFlyingImage.java)
+
 
 Note that the same set of resources (images and fonts) is used across all of the examples.
 
