@@ -8,20 +8,31 @@
 This library contains simple examples to understand how to use the main MicroUI library APIs. It is recommended to study them in the following order :
 
 
-- [Drawing Primitives](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/Primitives.java)
+- [Primitives](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/Primitives.java)
+<img src="../screenshots/Primitives.png"/>
 - [PrimitivesAntiAliased](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/PrimitivesAntiAliased.java)
+<img src="../screenshots/PrimitivesAntiAliased.png"/>
 
-- [Text] (/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/Text.java)
-- [PictosWithCustomFont] (/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/PictosWithCustomFont.java)
+- [Text](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/Text.java)
+<img src="../screenshots/Text.png"/>
+- [PictosWithCustomFont](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/PictosWithCustomFont.java)
+<img src="../screenshots/PictosWithCustomFont.png"/>
 
 - [TransparentImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TransparentImages.java)
+<img src="../screenshots/TransparentImages.png"/>
 - [FlippedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/FlippedImages.java)
+<img src="../screenshots/FlippedImages.png"/>
 - [RotatedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/RotatedImages.java)
+<img src="../screenshots/RotatedImages.png"/>
 - [ScaledImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/ScaledImages.java)
+<img src="../screenshots/ScaledImages.png"/>
 - [TilingWithImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TilingWithImages.java)
+<img src="../screenshots/TilingWithImages.png"/>
 - [DeformedImages](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/DeformedImages.java)
+<img src="../screenshots/DeformedImages.png"/>
 
 - [InputEvents](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/events/InputEvents.java)
+<img src="../screenshots/InputEvents.png"/>
 
 - [AnimationSampleWithFullRepaint](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFullRepaint.java)
 - [AnimationSampleWithFlyingImage](/MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFlyingImage.java)
