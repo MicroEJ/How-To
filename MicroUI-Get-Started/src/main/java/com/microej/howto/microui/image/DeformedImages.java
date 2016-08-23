@@ -19,7 +19,7 @@ import ej.microui.util.EventHandler;
 
 
 /**
- * This class shows how to use the ImageFlip utility class
+ * This class shows how to use the ImageDeformation utility class
  */
 public class DeformedImages {
 
@@ -128,8 +128,8 @@ public class DeformedImages {
 		// runtime environment
 		MicroUI.start();
 
-		DeformedImages transparentImages = new DeformedImages();
-		transparentImages.display();
+		DeformedImages deformedImages = new DeformedImages();
+		deformedImages.display();
 	}
 
 }
