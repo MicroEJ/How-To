@@ -37,34 +37,34 @@ public class AnimationSampleWithFlyingImage {
 	private Displayable displayable;
 
 	/**
-	 * Timer task doing an horizontal linear motion of MicroEJ.
+	 * Timer task doing an horizontal linear motion of MicroEJ logo.
 	 */
-	private class HorizontalAnimatorTask extends TimerTask {
+	class HorizontalAnimatorTask extends TimerTask {
 
-		final int ABSOLUTE_INCREMENT = 2;
-		AnimationSampleWithFlyingImage animated;
+		private final int ABSOLUTE_INCREMENT = 2;
+		private final AnimationSampleWithFlyingImage animated;
+		private int horizontalIncrement = ABSOLUTE_INCREMENT;
 		private final int leftLimit;
 		private final int rightLimit;
 
-		/**
-		 * Whether MicroEJ is going left or right.
-		 */
-		private boolean left = true;
-
 		public HorizontalAnimatorTask(AnimationSampleWithFlyingImage animated) {
 			this.animated = animated;
-			leftLimit = animated.microejImage.getWidth() / 2;
-			rightLimit = animated.display.getWidth() - animated.microejImage.getWidth() / 2;
+			leftLimit = 0;
+			rightLimit = animated.display.getWidth() - microejImage.getWidth();
 		}
 
 		@Override
 		public void run() {
-			if (animated.imageX <= leftLimit) {
-				left = true;
-			} else if (animated.imageX >= rightLimit) {
-				left = false;
+			animated.imageX += horizontalIncrement;
+			if (animated.imageX > rightLimit) {
+				animated.imageX = rightLimit;
+				horizontalIncrement = -ABSOLUTE_INCREMENT;
+			} else {
+				if (animated.imageX < leftLimit) {
+					animated.imageX = leftLimit;
+					horizontalIncrement = ABSOLUTE_INCREMENT;
+				}
 			}
-			animated.imageX += (left) ? ABSOLUTE_INCREMENT : -ABSOLUTE_INCREMENT;
 
 			flyingImage.setLocation(animated.imageX, animated.imageY);
 		}
@@ -90,10 +90,10 @@ public class AnimationSampleWithFlyingImage {
 			@Override
 			public EventHandler getController() {
 				// No event handling is required for this sample.
-
 				return null;
 			}
 		};
+
 		displayable.show();
 		flyingImage.show();
 	}

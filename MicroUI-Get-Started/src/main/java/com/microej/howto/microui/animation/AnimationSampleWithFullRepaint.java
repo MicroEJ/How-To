@@ -36,32 +36,33 @@ public class AnimationSampleWithFullRepaint {
 	/**
 	 * Timer task doing an horizontal linear motion of MicroEJ.
 	 */
-	private class HorizontalAnimatorTask extends TimerTask {
+	class HorizontalAnimatorTask extends TimerTask {
 
-		private static final int ABSOLUTE_INCREMENT = 2;
+		private final int ABSOLUTE_INCREMENT = 2;
 		private final AnimationSampleWithFullRepaint animated;
+		private int horizontalIncrement = ABSOLUTE_INCREMENT;
 		private final int leftLimit;
 		private final int rightLimit;
 
-		/**
-		 * Whether MicroEJ is going left or right.
-		 */
-		private boolean left = true;
-
 		public HorizontalAnimatorTask(AnimationSampleWithFullRepaint animated) {
 			this.animated = animated;
-			leftLimit = animated.microejImage.getWidth() / 2;
-			rightLimit = animated.display.getWidth() - animated.microejImage.getWidth() / 2;
+			final int animatedImageHalfWidth = animated.microejImage.getWidth() / 2;
+			leftLimit = animatedImageHalfWidth;
+			rightLimit = animated.display.getWidth() - animatedImageHalfWidth;
 		}
 
 		@Override
 		public void run() {
-			if (animated.imageX <= leftLimit) {
-				left = true;
-			} else if (animated.imageX >= rightLimit) {
-				left = false;
+			animated.imageX += horizontalIncrement;
+			if (animated.imageX > rightLimit) {
+				animated.imageX = rightLimit;
+				horizontalIncrement = -ABSOLUTE_INCREMENT;
+			} else {
+				if (animated.imageX < leftLimit) {
+					animated.imageX = leftLimit;
+					horizontalIncrement = ABSOLUTE_INCREMENT;
+				}
 			}
-			animated.imageX += (left) ? ABSOLUTE_INCREMENT : -ABSOLUTE_INCREMENT;
 			animated.displayable.repaint();
 		}
 	}
@@ -89,7 +90,6 @@ public class AnimationSampleWithFullRepaint {
 			@Override
 			public EventHandler getController() {
 				// No event handling is required for this sample.
-
 				return null;
 			}
 		};
@@ -97,14 +97,10 @@ public class AnimationSampleWithFullRepaint {
 		displayable.show();
 	}
 
-
-	/**
-	 * Starts the animation.
-	 */
 	public void animate() {
 		HorizontalAnimatorTask animator = new HorizontalAnimatorTask(this);
 		Timer animationTimer = new Timer();
-		animationTimer.schedule(animator, 0, ANIMATION_TIME);
+		animationTimer.schedule(animator, ANIMATION_TIME, ANIMATION_TIME);
 	}
 
 	/**
@@ -129,7 +125,7 @@ public class AnimationSampleWithFullRepaint {
 	 * Entry Point for the example.
 	 *
 	 * @param args
-	 *             Not used.
+	 *            Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics

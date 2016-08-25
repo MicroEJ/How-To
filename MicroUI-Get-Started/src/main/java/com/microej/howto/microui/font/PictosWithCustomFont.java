@@ -89,10 +89,7 @@ public class PictosWithCustomFont {
 	/**
 	 * Entry Point for the example.
 	 *
-	 * Entry Point for the example.
-	 *
 	 * @param args
-	 *             Not used.
 	 *            Not used.
 	 */
 	public static void main(String[] args) {

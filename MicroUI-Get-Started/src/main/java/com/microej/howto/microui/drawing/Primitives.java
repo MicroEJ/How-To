@@ -43,7 +43,6 @@ public class Primitives {
 				g.setColor(Colors.GRAY);
 				g.setStrokeStyle(GraphicsContext.SOLID);
 				g.drawLine(0, 0, display.getWidth(), display.getHeight());
-				g.setStrokeStyle(GraphicsContext.SOLID);
 
 				{ // draw a maroon circle at the center of the area
 					g.setColor(Colors.MAROON);
@@ -51,9 +50,9 @@ public class Primitives {
 					final int diameter = display.getWidth() / 2;
 
 					// Note that x and y parameters are the top left coordinates
-					// of the rectangle bounding box.
+					// of the circle bounding box.
 					// Therefore some offset of half the rectangle width and
-					// height have to be applied to center the rectangle on the
+					// height have to be applied to center the circle on the
 					// display
 					final int x = displayCenterX - diameter / 2;
 					final int y = displayCenterY - diameter / 2;
@@ -119,9 +118,9 @@ public class Primitives {
 					final int rightX = displayCenterX + radius;
 					final int topY = displayCenterY - radius;
 					final int bottomY = displayCenterY + radius;
-					final int xys[] = { leftX, bottomY, // Bottom left corner
-							centerX, topY, // Top corner
-							rightX, bottomY // Bottom right corner
+					final int xys[] = { leftX, bottomY, // Bottom left vertex
+							centerX, topY, // Top vertex
+							rightX, bottomY // Bottom right vertex
 					};
 
 					g.fillPolygon(xys);
@@ -141,10 +140,7 @@ public class Primitives {
 	/**
 	 * Entry Point for the example.
 	 *
-	 * Entry Point for the example.
-	 *
 	 * @param args
-	 *             Not used.
 	 *            Not used.
 	 */
 	public static void main(String[] args) {

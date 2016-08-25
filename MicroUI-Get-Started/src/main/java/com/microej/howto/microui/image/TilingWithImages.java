@@ -37,31 +37,32 @@ public class TilingWithImages {
 				g.setColor(Colors.BLACK);
 				g.fillRect(0, 0, display.getWidth(), display.getHeight());
 
-				// Creates a new mutable image to draw the tile. To leverage
-				// the CPU usage, we will draw a full column and repeat the
-				// pattern.
-				Image squareTile = Image.createImage(TILE_SIZE, TILE_SIZE * nbTilesY);
+				// Creates a new mutable image to draw the tile.
+				// To leverage CPU usage, we will draw a full column and then
+				// repeat the pattern horizontally.
+				Image squareTileColumn = Image.createImage(TILE_SIZE, TILE_SIZE * nbTilesY);
 
-				GraphicsContext graphicsContext = squareTile.getGraphicsContext();
-				// ensure dark background for tile (images are filled with white
-				// pixels by default))
-				graphicsContext.setColor(Colors.BLACK);
-				graphicsContext.fillRect(0, 0, squareTile.getWidth(), squareTile.getHeight());
+				GraphicsContext columnGraphicsContext = squareTileColumn.getGraphicsContext();
+				// ensure dark background for tile (images are filled with white pixels by default))
+				columnGraphicsContext.setColor(Colors.BLACK);
+				columnGraphicsContext.fillRect(0, 0, squareTileColumn.getWidth(), squareTileColumn.getHeight());
 
-				// draw a column of tile.
-				graphicsContext.setColor(Colors.YELLOW);
+				// draw a column of tiles.
+				columnGraphicsContext.setColor(Colors.YELLOW);
 				for (int y = 0; y < nbTilesY; y++) {
-					int yOffset = TILE_SIZE * y;
-					// A triangle
-					int xys[] = { 0, yOffset + TILE_SIZE, TILE_SIZE / 2, yOffset, TILE_SIZE, yOffset + TILE_SIZE };
-					graphicsContext.fillPolygon(xys);
+					int yOffsetTile = TILE_SIZE * y;
+					// A single triangle-shaped tile
+					int xys[] = { 0, yOffsetTile + TILE_SIZE, TILE_SIZE / 2, yOffsetTile, TILE_SIZE,
+							yOffsetTile + TILE_SIZE };
+					columnGraphicsContext.fillPolygon(xys);
 				}
 
-				int alphaIncrement = 0xFF / nbTilesX;
+				final int alphaIncrement = 0xFF / nbTilesX;
 				int currentAlpha = 0;
-				int yOffset = (display.getHeight() - squareTile.getHeight()) / 2;
+				int yOffsetColumn = (display.getHeight() - squareTileColumn.getHeight()) / 2;
 				for (int x = 0; x < nbTilesX; x++, currentAlpha += alphaIncrement) {
-					g.drawImage(squareTile, x * TILE_SIZE, yOffset, GraphicsContext.LEFT | GraphicsContext.TOP,
+					g.drawImage(squareTileColumn, x * TILE_SIZE, yOffsetColumn,
+							GraphicsContext.LEFT | GraphicsContext.TOP,
 							currentAlpha);
 				}
 			}
