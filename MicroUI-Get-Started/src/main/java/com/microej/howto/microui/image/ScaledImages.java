@@ -28,7 +28,7 @@ public class ScaledImages {
 		// We will need to access the display to draw stuff
 		final Display display = Display.getDefaultDisplay();
 
-		// A displayable is an object that will draw on the display
+		// A displayable is an object that will be drawn on the display
 		Displayable displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
@@ -65,8 +65,8 @@ public class ScaledImages {
 
 			@Override
 			public EventHandler getController() {
-				// No event handling is performed for this sample, therefore do
-				// not bother with implementing this
+				// No event handling is required for this sample.
+				
 				return null;
 			}
 		};
@@ -75,7 +75,10 @@ public class ScaledImages {
 	}
 
 	/**
+	 * Entry Point for the example.
+	 *
 	 * @param args
+	 *             Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics

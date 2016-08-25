@@ -27,7 +27,7 @@ public class DeformedImages {
 		// We will need to access the display to draw stuff
 		final Display display = Display.getDefaultDisplay();
 
-		// A displayable is an object that will draw on the display
+		// A displayable is an object that will be drawn on the display
 		Displayable displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
@@ -49,16 +49,14 @@ public class DeformedImages {
 				try {
 					Image microejImage = Image.createImage("/images/microej.png");
 
-					// top-left corner - stretch X and Y
-					{
+					{ // top-left corner - stretch X and Y
 						int xys[] = { 0, 0, displayCenterX - 1, 0, displayCenterX - 1, displayCenterY - 1, 0,
 								displayCenterY - 1 };
 						ImageDeformation.Singleton.draw(g, microejImage, xys, 0, 0,
 								GraphicsContext.TOP | GraphicsContext.LEFT);
 					}
 
-					// top-right corner - stretch Y
-					{
+					{ // top-right corner - stretch Y
 						int xys[] = { 0, 0, microejImage.getWidth() - 1, 0, microejImage.getWidth() - 1,
 								displayCenterY - 1, 0, displayCenterY - 1 };
 
@@ -69,8 +67,7 @@ public class DeformedImages {
 
 					}
 
-					// bottom-left corner - stretch X
-					{
+					{ // bottom-left corner - stretch X
 						int xys[] = { 0, 0, displayCenterX - 1, 0, displayCenterX - 1, microejImage.getHeight() - 1, 0,
 								microejImage.getHeight() - 1 };
 						g.translate(0, bottom);
@@ -79,8 +76,7 @@ public class DeformedImages {
 						g.translate(0, -bottom);
 					}
 
-					// bottom-right corner - NO stretch
-					{
+					{ // bottom-right corner - NO stretch
 						int xys[] = { 0, 0, microejImage.getWidth() - 1, 0, microejImage.getWidth() - 1,
 								microejImage.getHeight() - 1, 0, microejImage.getHeight() - 1 };
 						g.translate(right, bottom);
@@ -111,8 +107,8 @@ public class DeformedImages {
 
 			@Override
 			public EventHandler getController() {
-				// No event handling is performed for this sample, therefore do
-				// not bother with implementing this
+				// No event handling is required for this sample.
+
 				return null;
 			}
 		};
@@ -121,7 +117,10 @@ public class DeformedImages {
 	}
 
 	/**
+	 * Entry Point for the example.
+	 *
 	 * @param args
+	 *             Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics

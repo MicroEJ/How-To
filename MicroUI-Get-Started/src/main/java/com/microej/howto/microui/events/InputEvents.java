@@ -23,9 +23,9 @@ public class InputEvents extends Displayable implements EventHandler {
 
 
 	private final Display display;
-	int nbClicks;
-	int pointerX;
-	int pointerY;
+	private int nbClicks;
+	private int pointerX;
+	private int pointerY;
 
 	public InputEvents(Display display) {
 		super(display);
@@ -61,6 +61,7 @@ public class InputEvents extends Displayable implements EventHandler {
 	public boolean handleEvent(int event) {
 		boolean eventWasProcessed = false;
 
+		// Gets the event generator.
 		final int genId = Event.getGeneratorID(event);
 		EventGenerator gen;
 		try {
@@ -71,10 +72,10 @@ public class InputEvents extends Displayable implements EventHandler {
 		}
 
 		if (gen != null) {
+			// Gets the type of event.
 			final int type = Event.getType(event);
 			if (Event.POINTER == type) {
 				Pointer pointer = (Pointer) gen;
-				final int data = Event.getData(event);
 
 				pointerX = pointer.getAbsoluteX();
 				pointerY = pointer.getAbsoluteY();
@@ -84,17 +85,24 @@ public class InputEvents extends Displayable implements EventHandler {
 				}
 
 				eventWasProcessed = true;
+			} else { // The event was a pointer.
+				// Gets the event raw data.
+				final int data = Event.getData(event);
+				System.out.println("Event not managed, type=" + type + " data=" + data);
 			}
+		}
 
-			if (eventWasProcessed) {
-				this.repaint();
-			}
+		if (eventWasProcessed) {
+			this.repaint();
 		}
 		return eventWasProcessed;
 	}
 
 	/**
+	 * Entry Point for the example.
+	 *
 	 * @param args
+	 *             Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics

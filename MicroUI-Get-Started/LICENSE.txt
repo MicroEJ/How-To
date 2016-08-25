@@ -1,5 +1,3 @@
-Copyright (c) 2015-2016, IS2T S.A.
-
 The software contained in this package is part of MicroEJ Technology and is licensed under the following terms and conditions.
 
 IF YOU ARE NOT A MICROEJ (STUDIO OR SDK) LICENSEE – READ ONLY LICENSE

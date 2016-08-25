@@ -28,7 +28,7 @@ public class FlippedImages {
 		// We will need to access the display to draw stuff
 		final Display display = Display.getDefaultDisplay();
 
-		// A displayable is an object that will draw on the display
+		// A displayable is an object that will be drawn on the display
 		Displayable displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
@@ -46,28 +46,24 @@ public class FlippedImages {
 					final int right = display.getWidth() / 4 * 3;
 					final int bottom = display.getHeight() / 4 * 3;
 
-					// top-left corner - no flip
-					{
+					{ // top-left corner - no flip
 						g.drawImage(microejImage, left, top,
 								GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 					}
 
-					// top-right corner - 90° flip
-					{
+					{ // top-right corner - 90° flip
 						ImageFlip.Singleton.setAction(Action.FLIP_90);
 						ImageFlip.Singleton.draw(g, microejImage, right, top,
 								GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 					}
 
-					// bottom-left corner - 180° flip
-					{
+					{ // bottom-left corner - 180° flip
 						ImageFlip.Singleton.setAction(Action.FLIP_180);
 						ImageFlip.Singleton.draw(g, microejImage, left, bottom,
 								GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 					}
 
-					// bottom-right corner - 270° flip
-					{
+					{ // bottom-right corner - 270° flip
 						ImageFlip.Singleton.setAction(Action.FLIP_270);
 						ImageFlip.Singleton.draw(g, microejImage, right, bottom,
 								GraphicsContext.HCENTER | GraphicsContext.VCENTER);
@@ -81,8 +77,8 @@ public class FlippedImages {
 
 			@Override
 			public EventHandler getController() {
-				// No event handling is performed for this sample, therefore do
-				// not bother with implementing this
+				// No event handling is required for this sample.
+
 				return null;
 			}
 		};
@@ -91,7 +87,10 @@ public class FlippedImages {
 	}
 
 	/**
+	 * Entry Point for the example.
+	 *
 	 * @param args
+	 *             Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics

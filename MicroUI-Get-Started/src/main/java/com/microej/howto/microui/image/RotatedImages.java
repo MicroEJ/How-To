@@ -27,7 +27,7 @@ public class RotatedImages {
 		// We will need to access the display to draw stuff
 		final Display display = Display.getDefaultDisplay();
 
-		// A displayable is an object that will draw on the display
+		// A displayable is an object that will be drawn on the display
 		Displayable displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
@@ -45,43 +45,50 @@ public class RotatedImages {
 					final int right = display.getWidth() / 4 * 3;
 					final int bottom = display.getHeight() / 4 * 3;
 
-					// top-left corner - 45°
-					{
+					{ // top-left corner - 45°
 						ImageRotation rotation = new ImageRotation();
 						rotation.setRotationCenter(left, top);
 						rotation.setAngle(45);
 
+						// Use the bilinear algorithm to render the image. This
+						// algorithm performs better rendering than nearest
+						// neighbor algorithm but it is slower to apply.
 						rotation.drawBilinear(g, microejImage, left, top,
 								GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 					}
 
-					// top-right corner - 135°
-					{
+					{ // top-right corner - 135°
 						ImageRotation rotation = new ImageRotation();
 						rotation.setRotationCenter(right, top);
 						rotation.setAngle(135);
 
+						// Use the bilinear algorithm to render the image. This
+						// algorithm performs better rendering than nearest
+						// neighbor algorithm but it is slower to apply.
 						rotation.drawBilinear(g, microejImage, right, top,
 								GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 					}
 
-
-					// bottom-left corner - 45°
-					{
+					{ // bottom-left corner - 45°
 						ImageRotation rotation = new ImageRotation();
 						rotation.setRotationCenter(left, bottom);
 						rotation.setAngle(45);
 
+						// Uses the nearest neighbor algorithm to render the
+						// image. This algorithm is faster than bilinear
+						// algorithm but its rendering is more simple.
 						rotation.drawNearestNeighbor(g, microejImage, left, bottom,
 								GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 					}
 
-					// bottom-right corner - 270°
-					{
+					{ // bottom-right corner - 270°
 						ImageRotation rotation = new ImageRotation();
 						rotation.setRotationCenter(right, bottom);
 						rotation.setAngle(135);
 
+						// Uses the nearest neighbor algorithm to render the
+						// image. This algorithm is faster than bilinear
+						// algorithm but its rendering is more simple.
 						rotation.drawNearestNeighbor(g, microejImage, right, bottom,
 								GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 					}
@@ -93,8 +100,8 @@ public class RotatedImages {
 
 			@Override
 			public EventHandler getController() {
-				// No event handling is performed for this sample, therefore do
-				// not bother with implementing this
+				// No event handling is required for this sample.
+
 				return null;
 			}
 		};
@@ -103,7 +110,10 @@ public class RotatedImages {
 	}
 
 	/**
+	 * Entry Point for the example.
+	 *
 	 * @param args
+	 *             Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics

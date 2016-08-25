@@ -20,53 +20,56 @@ import ej.microui.util.EventHandler;
  */
 public class TilingWithImages {
 
-	final int TILE_SIZE = 20;
+	private static final int TILE_SIZE = 20;
 
 	public void display() {
-
 		// We will need to access the display to draw stuff
 		final Display display = Display.getDefaultDisplay();
 
-		// A displayable is an object that will draw on the display
+		// A displayable is an object that will be drawn on the display
 		Displayable displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
+				final int nbTilesX = display.getWidth() / TILE_SIZE;
+				final int nbTilesY = display.getHeight() / TILE_SIZE;
 
 				// fill up background with black
 				g.setColor(Colors.BLACK);
 				g.fillRect(0, 0, display.getWidth(), display.getHeight());
 
-				Image squareTile = Image.createImage(TILE_SIZE, TILE_SIZE);
+				// Creates a new mutable image to draw the tile. To leverage
+				// the CPU usage, we will draw a full column and repeat the
+				// pattern.
+				Image squareTile = Image.createImage(TILE_SIZE, TILE_SIZE * nbTilesY);
 
 				GraphicsContext graphicsContext = squareTile.getGraphicsContext();
 				// ensure dark background for tile (images are filled with white
 				// pixels by default))
 				graphicsContext.setColor(Colors.BLACK);
-				graphicsContext.fillRect(0, 0, TILE_SIZE, TILE_SIZE);
+				graphicsContext.fillRect(0, 0, squareTile.getWidth(), squareTile.getHeight());
 
-				// draw
+				// draw a column of tile.
 				graphicsContext.setColor(Colors.YELLOW);
-				int xys[] = { 0, TILE_SIZE, TILE_SIZE / 2, 0, TILE_SIZE, TILE_SIZE };
-				graphicsContext.fillPolygon(xys);
-
-				final int nbTilesX = display.getWidth() / TILE_SIZE;
-				final int nbTilesY = display.getHeight() / TILE_SIZE;
-				int alphaIncrement = 0xFF / nbTilesX;
-				int currentAlpha = 0;
-
-				for (int x = 0; x < nbTilesX; x++, currentAlpha += alphaIncrement) {
-					for (int y = 0; y < nbTilesY; y++) {
-						g.drawImage(squareTile, x * TILE_SIZE, y * TILE_SIZE,
-								GraphicsContext.LEFT | GraphicsContext.TOP, currentAlpha);
-					}
+				for (int y = 0; y < nbTilesY; y++) {
+					int yOffset = TILE_SIZE * y;
+					// A triangle
+					int xys[] = { 0, yOffset + TILE_SIZE, TILE_SIZE / 2, yOffset, TILE_SIZE, yOffset + TILE_SIZE };
+					graphicsContext.fillPolygon(xys);
 				}
 
+				int alphaIncrement = 0xFF / nbTilesX;
+				int currentAlpha = 0;
+				int yOffset = (display.getHeight() - squareTile.getHeight()) / 2;
+				for (int x = 0; x < nbTilesX; x++, currentAlpha += alphaIncrement) {
+					g.drawImage(squareTile, x * TILE_SIZE, yOffset, GraphicsContext.LEFT | GraphicsContext.TOP,
+							currentAlpha);
+				}
 			}
 
 			@Override
 			public EventHandler getController() {
-				// No event handling is performed for this sample, therefore do
-				// not bother with implementing this
+				// No event handling is required for this sample.
+
 				return null;
 			}
 		};
@@ -75,7 +78,10 @@ public class TilingWithImages {
 	}
 
 	/**
+	 * Entry Point for the example.
+	 *
 	 * @param args
+	 *             Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics
@@ -84,6 +90,7 @@ public class TilingWithImages {
 
 		TilingWithImages tilingWithImages = new TilingWithImages();
 		tilingWithImages.display();
+
 	}
 
 }

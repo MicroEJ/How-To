@@ -60,26 +60,35 @@ This library contains simple examples to understand how to use the main MicroUI 
 Note that the same set of resources (images and fonts) is used across all of the examples.
 
 # Usage
-Add the following line to your `module.ivy` or your `ivy.xml`:
+For each example:
+## Run on MicroEJ Simulator
+1. Right Click on the example to run `.java` file
+2. Select **Run as -> MicroEJ Application**
+3. Select your platform 
+4. Press **Ok**
 
-```<dependency org="ej.api" name="microui" rev="[2.0.0-RC0,3.0.0-RC0[" conf="provided->*" />```
+
+## Run on device
+### Build
+1. Right Click on the example to build `.java` file
+2. Select **Run as -> Run Configuration** 
+3. Select **MicroEJ Application** configuration kind
+4. Click on **New launch configuration** icon
+5. In **Execution** tab
+	1. In **Target** frame, in **Platform** field, select a relevant platform (but not a virtual device)
+	2. In **Execution** frame
+		1. Select **Execute on Device**
+		2. In **Settings** field, select **Build & Deploy**
+6. Press **Apply**
+7. Press **Run**
+8. Copy the generated `.out` file path
 	
 # Requirements
-- EDC 1.2 or later
-- BON 1.2 or later
-- MICROUI 2 or later
-
-This project gathers some basic examples of the foundation libraries. Those examples are developed as standalone applications and as such can be run by following the associated instructions (see **README.md** file of each example).
-
-Note that to run them on board :
-
-* If you are using MicroEJ SDK
-	* You need a supported board (see http://developer.microej.com/index.php?resource=JPF for a list of supported boards using MicroEJ SDK evaluation version)
-	* And the associated platform reference implementation binary .jpf file (retrieve it from the previous link and import it into MicroEJ SDK)
-
-* If you are using MicroEJ Studio
-	* You need to convert them from standalone applications to sandboxed applications.
-	* Follow the [How-To convert a standalone app into a sandboxed app](https://github.com/MicroEJ/How-To/tree/master/StandaloneToSandboxed) guide.
+* MicroEJ Studio or SDK 4.0 or later
+* A platform with at least:
+	* EDC-1.2 or higher
+	* BON-1.2 or higher
+	* MICROUI-2.0 or higher
 
 # Dependencies
 _All dependencies are retrieved transitively by Ivy resolver_.

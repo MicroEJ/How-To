@@ -25,7 +25,7 @@ public class PrimitivesAntiAliased {
 		// We will need to access the display to draw stuff
 		final Display display = Display.getDefaultDisplay();
 
-		// A displayable is an object that will draw on the display
+		// A displayable is an object that will be drawn on the display
 		Displayable displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
@@ -41,46 +41,42 @@ public class PrimitivesAntiAliased {
 				g.setColor(Colors.WHITE);
 				g.fillRect(0, 0, display.getWidth() / 2, display.getHeight());
 
-
-				// draw a dotted red line across the area diagonal
+				// draw a gray line across the area diagonal
 				g.setColor(Colors.GRAY);
-				g.setStrokeStyle(GraphicsContext.DOTTED);
-				// g.drawLine(0, 0, display.getWidth(), display.getHeight());
-
 				// specify line thickness
 				AntiAliasedShapes.Singleton.setThickness(10);
 				// specify line thickness
 				AntiAliasedShapes.Singleton.setFade(10);
-
 				AntiAliasedShapes.Singleton.drawLine(g, 0, 0, display.getWidth(), display.getHeight());
 
-				{
-					// draw a maroon arc at the center of the area
+				{ // draw a maroon circle at the center of the area
 					g.setColor(Colors.MAROON);
 
-					final int radius = display.getWidth() / 2;
+					final int diameter = display.getWidth() / 2;
 
 					// Note that x and y parameters are the top left coordinates
 					// of the rectangle bounding box.
 					// Therefore some offset of half the rectangle width and
 					// height have to be applied to center the rectangle on the
 					// display
-					final int x = displayCenterX - radius / 2;
-					final int y = displayCenterY - radius / 2;
+					final int x = displayCenterX - diameter / 2;
+					final int y = displayCenterY - diameter / 2;
 
-					g.fillCircleArc(x, y, radius, 45, 270);
+					g.fillCircle(x, y, diameter);
 
 					AntiAliasedShapes.Singleton.setThickness(9);
 					// specify line thickness
 					AntiAliasedShapes.Singleton.setFade(9);
-
-					AntiAliasedShapes.Singleton.drawCircleArc(g, x, y, radius, 45, 270);
+					AntiAliasedShapes.Singleton.drawCircle(g, x, y, diameter);
 
 				}
 
 				{
 					// draw a red rounded rectangle at the center of the area
 					g.setColor(Colors.RED);
+					// The backround is full, so we can optimized the drawing of
+					// the AntiAlisedShapes.
+					// g.setBackgroundColor(Colors.MAROON);
 
 					final int rectangleWidth = display.getWidth() / 3;
 					final int rectangleHeight = display.getHeight() / 3;
@@ -97,11 +93,29 @@ public class PrimitivesAntiAliased {
 
 					g.fillRoundRect(x, y, rectangleWidth, rectangleHeight, arcWidth, arcHeight);
 
+					// specify line thickness
+					AntiAliasedShapes.Singleton.setThickness(8);
+					// specify line thickness
+					int halfFade = 2;
+					AntiAliasedShapes.Singleton.setFade(halfFade * 2);
+					AntiAliasedShapes.Singleton.drawLine(g, x + halfFade, y - halfFade, x + rectangleWidth - halfFade,
+							y - halfFade);
+					AntiAliasedShapes.Singleton.drawLine(g, x + rectangleWidth - halfFade, y - halfFade,
+							x + rectangleWidth - halfFade, y + rectangleHeight - halfFade);
+					AntiAliasedShapes.Singleton.drawLine(g, x + halfFade, y + rectangleHeight - halfFade,
+							x + rectangleWidth - halfFade, y + rectangleHeight - halfFade);
+					AntiAliasedShapes.Singleton.drawLine(g, x - halfFade, y - halfFade, x - halfFade,
+							y + rectangleHeight - halfFade);
 				}
 
 				{
 					// draw a yellow ellipse at the center of the area
 					g.setColor(Colors.YELLOW);
+					// The background is full, so we can optimized the drawing
+					// of AntiAliasedShapes using setBackgroundColor. This will
+					// avoid to read the color of each pixel in the memory
+					// before merging it with the foreground color.
+					g.setBackgroundColor(Colors.RED);
 
 					final int ellipseWidth = display.getWidth() / 4;
 					final int ellipseHeight = display.getHeight() / 4;
@@ -112,18 +126,23 @@ public class PrimitivesAntiAliased {
 					// display
 					final int x = displayCenterX - ellipseWidth / 2;
 					final int y = displayCenterY - ellipseHeight / 2;
-					g.fillEllipse(x, y, ellipseWidth, ellipseHeight);
 
 					// specify line thickness
 					AntiAliasedShapes.Singleton.setThickness(8);
 					// specify line thickness
 					AntiAliasedShapes.Singleton.setFade(8);
 					AntiAliasedShapes.Singleton.drawEllipse(g, x, y, ellipseWidth, ellipseHeight);
+					g.fillEllipse(x, y, ellipseWidth, ellipseHeight);
 				}
 
 				{
-					// draw a blue circle at the center of the area
+					// draw a blue circle arc at the center of the area
 					g.setColor(Colors.BLUE);
+					// The background is full, so we can optimized the drawing
+					// of AntiAliasedShapes using setBackgroundColor. This will
+					// avoid to read the color of each pixel in the memory
+					// before merging it with the foreground color.
+					g.setBackgroundColor(Colors.YELLOW);
 
 					final int diameter = display.getHeight() / 6;
 					final int radius = diameter / 2;
@@ -134,18 +153,30 @@ public class PrimitivesAntiAliased {
 					// has to be applied to center the circle on the display
 					final int x = displayCenterX - radius;
 					final int y = displayCenterY - radius;
-					g.fillCircle(x, y, diameter);
+					final int startAngle = 25;
+					final int arcAngle = 310;
 
 					// specify line thickness
 					AntiAliasedShapes.Singleton.setThickness(6);
 					// specify line thickness
 					AntiAliasedShapes.Singleton.setFade(6);
-					AntiAliasedShapes.Singleton.drawCircle(g, x, y, diameter);
+					double xOffset = radius * Math.sin(arcAngle);
+					double yOffset = radius * Math.cos(arcAngle);
+					int tmp = 12;
+					AntiAliasedShapes.Singleton.drawCircleArc(g, x, y, diameter, startAngle + tmp, arcAngle - tmp * 2);
 
+					// The background is not full anymore, so we can not reuse
+					// the
+					// optimization.
+					g.removeBackgroundColor();
+					AntiAliasedShapes.Singleton.drawLine(g, displayCenterX, displayCenterY,
+							(int) (displayCenterX + xOffset), (int) (displayCenterY + yOffset));
+					AntiAliasedShapes.Singleton.drawLine(g, displayCenterX, displayCenterY,
+							(int) (displayCenterX + xOffset), (int) (displayCenterY - yOffset));
+					g.fillCircleArc(x, y, diameter, startAngle, arcAngle);
 				}
 
-				{
-					// draw a green triangle at the center of the area
+				{ // draw a green triangle at the center of the area
 					g.setColor(Colors.LIME);
 
 					final int radius = display.getHeight() / 20;
@@ -166,8 +197,8 @@ public class PrimitivesAntiAliased {
 
 			@Override
 			public EventHandler getController() {
-				// No event handling is performed for this sample, therefore do
-				// not bother with implementing this
+				// No event handling is required for this sample.
+				
 				return null;
 			}
 		};
@@ -179,7 +210,7 @@ public class PrimitivesAntiAliased {
 		// We will need to access the display to draw stuff
 		final Display display = Display.getDefaultDisplay();
 
-		// A displayable is an object that will draw on the display
+		// A displayable is an object that will be drawn on the display
 		Displayable displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
@@ -250,8 +281,7 @@ public class PrimitivesAntiAliased {
 
 			@Override
 			public EventHandler getController() {
-				// No event handling is performed for this sample, therefore do
-				// not bother with implementing this
+				// No event handling is required for this sample.
 				return null;
 			}
 		};
@@ -260,7 +290,11 @@ public class PrimitivesAntiAliased {
 	}
 
 	/**
+	 * Entry Point for the example.
+	 *
 	 * @param args
+	 *             Not used.
+	 *            Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics

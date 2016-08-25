@@ -27,40 +27,48 @@ public class AnimationSampleWithFullRepaint {
 
 	private static final int ANIMATION_TIME = 40; // in ms
 
-	int imageX;
-	int imageY;
-	Image microejImage;
-	Display display;
-	Displayable displayable;
+	private int imageX;
+	private final int imageY;
+	private Image microejImage;
+	private final Display display;
+	private Displayable displayable;
 
-	class HorizontalAnimatorTask extends TimerTask {
+	/**
+	 * Timer task doing an horizontal linear motion of MicroEJ.
+	 */
+	private class HorizontalAnimatorTask extends TimerTask {
 
-		final int ABSOLUTE_INCREMENT = 2;
-		AnimationSampleWithFullRepaint animated;
-		int horizontalIncrement = ABSOLUTE_INCREMENT;
-		final int animatedImageHalfWidth;
+		private static final int ABSOLUTE_INCREMENT = 2;
+		private final AnimationSampleWithFullRepaint animated;
+		private final int leftLimit;
+		private final int rightLimit;
+
+		/**
+		 * Whether MicroEJ is going left or right.
+		 */
+		private boolean left = true;
 
 		public HorizontalAnimatorTask(AnimationSampleWithFullRepaint animated) {
 			this.animated = animated;
-			animatedImageHalfWidth = animated.microejImage.getWidth() / 2;
+			leftLimit = animated.microejImage.getWidth() / 2;
+			rightLimit = animated.display.getWidth() - animated.microejImage.getWidth() / 2;
 		}
 
 		@Override
 		public void run() {
-			animated.imageX += horizontalIncrement;
-			if (animated.imageX > animated.display.getWidth() - animatedImageHalfWidth) {
-				animated.imageX = animated.display.getWidth() - animatedImageHalfWidth;
-				horizontalIncrement = -ABSOLUTE_INCREMENT;
-			} else {
-				if (animated.imageX < animatedImageHalfWidth) {
-					animated.imageX = animatedImageHalfWidth;
-					horizontalIncrement = ABSOLUTE_INCREMENT;
-				}
+			if (animated.imageX <= leftLimit) {
+				left = true;
+			} else if (animated.imageX >= rightLimit) {
+				left = false;
 			}
+			animated.imageX += (left) ? ABSOLUTE_INCREMENT : -ABSOLUTE_INCREMENT;
 			animated.displayable.repaint();
 		}
 	}
 
+	/**
+	 * Creates the displayable and shows it.
+	 */
 	public void createDisplayable() {
 
 		displayable = new Displayable(display) {
@@ -80,8 +88,8 @@ public class AnimationSampleWithFullRepaint {
 
 			@Override
 			public EventHandler getController() {
-				// No event handling is performed for this sample, therefore do
-				// not bother with implementing this
+				// No event handling is required for this sample.
+
 				return null;
 			}
 		};
@@ -89,18 +97,23 @@ public class AnimationSampleWithFullRepaint {
 		displayable.show();
 	}
 
+
+	/**
+	 * Starts the animation.
+	 */
 	public void animate() {
-		this.createDisplayable();
 		HorizontalAnimatorTask animator = new HorizontalAnimatorTask(this);
 		Timer animationTimer = new Timer();
-		animationTimer.scheduleAtFixedRate(animator, ANIMATION_TIME, ANIMATION_TIME);
+		animationTimer.schedule(animator, 0, ANIMATION_TIME);
 	}
 
 	/**
-	 *
+	 * Instantiate an AnimationSampleWithFullRepaint.
 	 */
 	public AnimationSampleWithFullRepaint(Display display) {
 		this.display = display;
+
+		// Starts at the center of the screen.
 		this.imageX = display.getWidth() / 2;
 		this.imageY = display.getHeight() / 2;
 
@@ -109,12 +122,14 @@ public class AnimationSampleWithFullRepaint {
 		} catch (IOException e) {
 			throw new AssertionError(e);
 		}
-
-		this.animate();
+		this.createDisplayable();
 	}
 
 	/**
+	 * Entry Point for the example.
+	 *
 	 * @param args
+	 *             Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics
@@ -123,6 +138,7 @@ public class AnimationSampleWithFullRepaint {
 		final Display display = Display.getDefaultDisplay();
 
 		AnimationSampleWithFullRepaint animationSample = new AnimationSampleWithFullRepaint(display);
+		animationSample.animate();
 	}
 
 }

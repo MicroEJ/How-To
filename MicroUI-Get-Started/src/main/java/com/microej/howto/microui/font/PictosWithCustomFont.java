@@ -24,11 +24,15 @@ import ej.microui.util.EventHandler;
  */
 public class PictosWithCustomFont {
 
-	static final int CUSTOM_FONT_ID = 81;
-	static final int CUSTOM_FONT_SIZE = 32;
+	private static final int CUSTOM_FONT_ID = 81;
+	private static final int CUSTOM_FONT_SIZE = 32;
 
-	static final char PICTO_START = 0xF04A;
-	static final char PICTO_END = 0xF04E;
+	/**
+	 * We use the range 0xF04A-0xF04E, it matches the picto positions defined in
+	 * media-player-pictos-32px.ejf.
+	 */
+	private static final char PICTO_START = 0xF04A;
+	private static final char PICTO_END = 0xF04E;
 
 	public void display() {
 		final Display display = Display.getDefaultDisplay();
@@ -48,7 +52,7 @@ public class PictosWithCustomFont {
 		final String message = messageBuilder.toString();
 
 
-		// A displayable is an object that will draw on the display
+		// A displayable is an object that will be drawn on the display
 		Displayable displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
@@ -74,8 +78,7 @@ public class PictosWithCustomFont {
 
 			@Override
 			public EventHandler getController() {
-				// No event handling is performed for this sample, therefore do
-				// not bother with implementing this
+				// No event handling is required for this sample.
 				return null;
 			}
 		};
@@ -84,7 +87,13 @@ public class PictosWithCustomFont {
 	}
 
 	/**
+	 * Entry Point for the example.
+	 *
+	 * Entry Point for the example.
+	 *
 	 * @param args
+	 *             Not used.
+	 *            Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics
