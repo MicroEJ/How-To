@@ -51,12 +51,12 @@ public class Gradient {
 
 				// draw gradient
 				// * from right to left
-				// * from left to right
+				// * from top to bottom
 				{
 					int[] whiteToBlackGradient = getGradient(g, Colors.WHITE, Colors.BLACK);
 					drawGradientRightToLeft(g, whiteToBlackGradient, 0, display.getHeight() / 2, display.getWidth(),
 							display.getHeight() / 4 * 3);
-					drawGradientLeftToRight(g, whiteToBlackGradient, 0, display.getHeight() / 4 * 3, display.getWidth(),
+					drawGradientTopToBottom(g, whiteToBlackGradient, 0, display.getHeight() / 4 * 3, display.getWidth(),
 							display.getHeight());
 				}
 
@@ -64,8 +64,7 @@ public class Gradient {
 
 			@Override
 			public EventHandler getController() {
-				// No event handling is performed for this sample, therefore do
-				// not bother with implementing this
+				// No event handling is required for this sample
 				return null;
 			}
 		};
@@ -73,14 +72,19 @@ public class Gradient {
 		displayable.show();
 	}
 
+	public static void drawGradientTopToBottom(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd,
+			int yEnd) {
+		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, false, true);
+	}
+
 	public static void drawGradientLeftToRight(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd,
 			int yEnd) {
-		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, true);
+		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, true, true);
 	}
 
 	public static void drawGradientRightToLeft(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd,
 			int yEnd) {
-		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, false);
+		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, true, false);
 	}
 
 	/**
@@ -101,68 +105,122 @@ public class Gradient {
 	 * @param yEnd
 	 */
 	public static void drawGradient(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd,
-			boolean leftToRight) {
-		int xWidth = xEnd - xStart;
-		int yHeight = yEnd - yStart;
+			boolean horizontal, boolean startToFinish) {
+		final int xWidth = xEnd - xStart;
+		final int yHeight = yEnd - yStart;
 
 		int nbSteps = 0;
 
-		boolean gradientIsWiderThanRectangle = false;
-		if ( xWidth > gradient.length )
+		boolean gradientIsBiggerThanDirection = false;
+		if (horizontal)
 		{
-			nbSteps = gradient.length;
+			if (xWidth > gradient.length) {
+				nbSteps = gradient.length;
+			} else {
+				gradientIsBiggerThanDirection = true;
+				nbSteps = xWidth;
+			}
 		}
 		else
 		{
-			gradientIsWiderThanRectangle = true;
-			nbSteps = xWidth;
+			if (yHeight > gradient.length) {
+				nbSteps = gradient.length;
+			} else {
+				gradientIsBiggerThanDirection = true;
+				nbSteps = xWidth;
+			}
+
 		}
 
-		int colorIndex = leftToRight ? 0 : gradient.length - 1;
+		int colorIndex = startToFinish ? 0 : gradient.length - 1;
 
-		if ( gradientIsWiderThanRectangle )
+		if ( gradientIsBiggerThanDirection )
 		{
 
-			int colorStep = gradient.length / nbSteps;
-			int currentX = xStart;
+			final int colorStep = gradient.length / nbSteps;
 
-			for ( int i = 0; i < nbSteps ; i++ )
+			if (horizontal)
 			{
-				g.setColor(gradient[colorIndex]);
-				g.fillRect(currentX, yStart, 1, yHeight);
-				currentX++;
-				if (leftToRight) {
-					colorIndex += colorStep;
-				} else {
-					colorIndex -= colorStep;
+				int currentX = xStart;
+
+				for (int i = 0; i < nbSteps; i++) {
+					g.setColor(gradient[colorIndex]);
+					g.fillRect(currentX, yStart, 1, yHeight);
+					currentX++;
+					if (startToFinish) {
+						colorIndex += colorStep;
+					} else {
+						colorIndex -= colorStep;
+					}
+				}
+			}
+			else {
+				int currentY = yStart;
+
+				for (int j = 0; j < nbSteps; j++) {
+					g.setColor(gradient[colorIndex]);
+					g.fillRect(xStart, currentY, xWidth, 1);
+					currentY++;
+					if (startToFinish) {
+						colorIndex += colorStep;
+					} else {
+						colorIndex -= colorStep;
+					}
 				}
 			}
 		}
 		else
 		{
-			final int stepWidth = xWidth / nbSteps;
-			// if the nb of colors in gradient is not a divider of the width of the
-			// drawing area
-			// there will be a gap if we
-			final int gap = xWidth - (nbSteps * stepWidth);
+			if (horizontal) {
+				final int stepWidth = xWidth / nbSteps;
+				// if the nb of colors in gradient is not a divider of the width
+				// of the
+				// drawing area
+				// there will be a gap if we
+				final int gap = xWidth - (nbSteps * stepWidth);
 
-			int currentX = xStart;
-			int gapFilling = 0;
-			for ( int i = 0; i < nbSteps ; i++ )
-			{
-				int actualStepWidth = stepWidth;
-				if (gap > 0 && gapFilling < gap) {
-					gapFilling++;
-					actualStepWidth++;
+				int currentX = xStart;
+				int gapFilling = 0;
+				for (int i = 0; i < nbSteps; i++) {
+					int actualStepWidth = stepWidth;
+					if (gap > 0 && gapFilling < gap) {
+						gapFilling++;
+						actualStepWidth++;
+					}
+					if (startToFinish) {
+						g.setColor(gradient[i]);
+					} else {
+						g.setColor(gradient[(gradient.length - 1) - i]);
+					}
+					g.fillRect(currentX, yStart, actualStepWidth, yHeight);
+					currentX += actualStepWidth;
 				}
-				if (leftToRight) {
-					g.setColor(gradient[i]);
-				} else {
-					g.setColor(gradient[(gradient.length - 1) - i]);
+			} else {
+				final int stepWidth = yHeight / nbSteps;
+				// if the nb of colors in gradient is not a divider of the width
+				// of the
+				// drawing area
+				// there will be a gap that we will need to compensate for
+				final int gap = yHeight - (nbSteps * stepWidth);
+
+				int currentY = yStart;
+				int gapFilling = 0;
+				for (int i = 0; i < nbSteps; i++) {
+					int actualStepWidth = stepWidth;
+					if (gap > 0 && gapFilling < gap) {
+						gapFilling++;
+						actualStepWidth++;
+					}
+					if (startToFinish) {
+						g.setColor(gradient[i]);
+					} else {
+						g.setColor(gradient[(gradient.length - 1) - i]);
+					}
+					g.fillRect(xStart, currentY, xWidth, actualStepWidth);
+					currentY += actualStepWidth;
 				}
-				g.fillRect(currentX, yStart, actualStepWidth, yHeight);
-				currentX += actualStepWidth;
 			}
+
 		}
 
 	}
