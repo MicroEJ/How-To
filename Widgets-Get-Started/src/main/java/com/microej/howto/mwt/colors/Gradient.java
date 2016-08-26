@@ -77,6 +77,11 @@ public class Gradient {
 		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, false, true);
 	}
 
+	public static void drawGradientBottomToTop(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd,
+			int yEnd) {
+		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, false, false);
+	}
+
 	public static void drawGradientLeftToRight(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd,
 			int yEnd) {
 		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, true, true);
@@ -88,14 +93,19 @@ public class Gradient {
 	}
 
 	/**
-	 * Fills the rectangle specified by (xStart,yStart,yEnd,yEnd) with vertical
-	 * stripes of homogeneous width using colors from the gradient for each
+	 * Fills the rectangle specified by (xStart,yStart,yEnd,yEnd) with stripes
+	 * of homogeneous width or height using colors from the gradient for each
 	 * stripe. <br/>
-	 * If the width of the rectangle is greated than the number of colors in the
+	 * Stripes are either horizontal or vertical depending on the horizontal
+	 * parameter. <br/>
+	 * Gradient colors are used either from start to finish or from finish to
+	 * start depending on the startToFinish parameter. <br/>
+	 * If the width of the rectangle is greater than the number of colors in the
 	 * gradient then the number of stripes is the number of colors in the
 	 * gradient. <br/>
-	 * If the width of the rectangle is lower than the number of colors in the
-	 * gradient then the number of stripes is the width of the rectangle.
+	 * If the side of the rectangle matching the horizontal parameter is smaller
+	 * than the number of colors in the gradient then the number of stripes is
+	 * set to the size of this side.
 	 *
 	 * @param g
 	 * @param gradient
@@ -103,8 +113,10 @@ public class Gradient {
 	 * @param yStart
 	 * @param xEnd
 	 * @param yEnd
+	 * @param horizontal
+	 * @param startToFinish
 	 */
-	public static void drawGradient(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd,
+	private static void drawGradient(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd,
 			boolean horizontal, boolean startToFinish) {
 		final int xWidth = xEnd - xStart;
 		final int yHeight = yEnd - yStart;
@@ -174,9 +186,7 @@ public class Gradient {
 			if (horizontal) {
 				final int stepWidth = xWidth / nbSteps;
 				// if the nb of colors in gradient is not a divider of the width
-				// of the
-				// drawing area
-				// there will be a gap if we
+				// of the drawing area there will be a gap that we will need to compensate for
 				final int gap = xWidth - (nbSteps * stepWidth);
 
 				int currentX = xStart;
@@ -198,9 +208,7 @@ public class Gradient {
 			} else {
 				final int stepWidth = yHeight / nbSteps;
 				// if the nb of colors in gradient is not a divider of the width
-				// of the
-				// drawing area
-				// there will be a gap that we will need to compensate for
+				// of the drawing area there will be a gap that we will need to compensate for
 				final int gap = yHeight - (nbSteps * stepWidth);
 
 				int currentY = yStart;
@@ -275,7 +283,10 @@ public class Gradient {
 	}
 
 	/**
+	 * Entry Point for the example.
+	 *
 	 * @param args
+	 *            Not used.
 	 */
 	public static void main(String[] args) {
 		MicroUI.start();
