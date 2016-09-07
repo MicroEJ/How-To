@@ -26,6 +26,7 @@ public class InputEvents extends Displayable implements EventHandler {
 	private int nbClicks;
 	private int pointerX;
 	private int pointerY;
+	private String message;
 
 	public InputEvents(Display display) {
 		super(display);
@@ -33,21 +34,23 @@ public class InputEvents extends Displayable implements EventHandler {
 		nbClicks = 0;
 		pointerX = 0;
 		pointerY = 0;
+		this.message = "Touch the screen !";
 	}
 
 	@Override
 	public void paint(GraphicsContext g) {
 
+		final int DISPLAY_WIDTH = display.getWidth();
+		final int DISPLAY_HEIGHT = display.getHeight();
+
 		// fill up background with black
 		g.setColor(Colors.BLACK);
-		g.fillRect(0, 0, display.getWidth(), display.getHeight());
+		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 		// use White color to render text
 		g.setColor(Colors.WHITE);
 
-
-		String pointerMessage = "NbClicks : " + nbClicks + " - Last Click at : " + pointerX + " , " + pointerY;
-		g.drawString(pointerMessage, display.getWidth() / 2, display.getHeight() / 2,
+		g.drawString(message, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2,
 				GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
 	}
@@ -59,7 +62,7 @@ public class InputEvents extends Displayable implements EventHandler {
 
 	@Override
 	public boolean handleEvent(int event) {
-		boolean eventWasProcessed = false;
+		boolean eventProcessed = false;
 
 		// Gets the event generator.
 		final int genId = Event.getGeneratorID(event);
@@ -68,7 +71,7 @@ public class InputEvents extends Displayable implements EventHandler {
 			gen = EventGenerator.get(genId);
 		} catch (IndexOutOfBoundsException e) {
 			gen = null;
-			System.out.println("unknown event");
+			message = "unknown event " + event;
 		}
 
 		if (gen != null) {
@@ -84,18 +87,20 @@ public class InputEvents extends Displayable implements EventHandler {
 					nbClicks++;
 				}
 
-				eventWasProcessed = true;
-			} else { // The event was a pointer.
+				message = "NbClicks : " + nbClicks + " - Last Click at : " + pointerX + " , " + pointerY;
+
+			} else { // The event is NOT a pointer.
 				// Gets the event raw data.
 				final int data = Event.getData(event);
-				System.out.println("Event not managed, type=" + type + " data=" + data);
+				message = "Event not managed, type=" + type + " data=" + data;
 			}
+			eventProcessed = true;
 		}
 
-		if (eventWasProcessed) {
+		if (eventProcessed) {
 			this.repaint();
 		}
-		return eventWasProcessed;
+		return eventProcessed;
 	}
 
 	/**

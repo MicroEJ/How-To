@@ -21,13 +21,15 @@ import ej.microui.util.EventHandler;
 
 /**
  * This class shows how to create an animation using MicroUI Flying Images and
- * TimerTask
+ * TimerTask.
+ * 
+ * It will draw the MicroEJ robot moving from one side of the screen to the other.
  *
  * Note that the whole display is NOT redrawn on every frame
  */
 public class AnimationSampleWithFlyingImage {
 
-	private static final int ANIMATION_TIME = 40; // in ms
+	private static final int ANIMATION_PERIOD = 1000/60; // in ms - 60 frames per second
 
 	private int imageX;
 	private final int imageY;
@@ -78,13 +80,17 @@ public class AnimationSampleWithFlyingImage {
 		displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
+
+				final int DISPLAY_WIDTH = display.getWidth();
+				final int DISPLAY_HEIGHT = display.getHeight();
+
 				// fill up background with black
 				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, display.getWidth(), display.getHeight());
+				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 				// fill up half the area with white
 				g.setColor(Colors.WHITE);
-				g.fillRect(0, 0, display.getWidth()/2, display.getHeight());
+				g.fillRect(0, 0, DISPLAY_WIDTH/2, DISPLAY_HEIGHT);
 			}
 
 			@Override
@@ -104,7 +110,7 @@ public class AnimationSampleWithFlyingImage {
 	public void animate() {
 		HorizontalAnimatorTask animator = new HorizontalAnimatorTask(this);
 		Timer animationTimer = new Timer();
-		animationTimer.schedule(animator, ANIMATION_TIME, ANIMATION_TIME);
+		animationTimer.schedule(animator, ANIMATION_PERIOD, ANIMATION_PERIOD);
 	}
 
 	/**

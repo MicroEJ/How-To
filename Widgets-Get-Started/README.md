@@ -42,6 +42,7 @@ For each example:
 	* EDC-1.2 or later
 	* BON-1.2 or later
 	* MICROUI-2.0 or later
+	* MWT-2.1 or later
 
 * Add the following line to your `module.ivy` or your `ivy.xml`:
 > `<dependency org="ej.library.ui" name="widget" rev="2.0.0-alpha.10"/>`

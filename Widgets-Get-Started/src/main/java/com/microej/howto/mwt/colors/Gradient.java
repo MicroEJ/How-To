@@ -206,26 +206,26 @@ public class Gradient {
 					currentX += actualStepWidth;
 				}
 			} else {
-				final int stepWidth = yHeight / nbSteps;
+				final int stepHeight = yHeight / nbSteps;
 				// if the nb of colors in gradient is not a divider of the width
 				// of the drawing area there will be a gap that we will need to compensate for
-				final int gap = yHeight - (nbSteps * stepWidth);
+				final int gap = yHeight - (nbSteps * stepHeight);
 
 				int currentY = yStart;
 				int gapFilling = 0;
 				for (int i = 0; i < nbSteps; i++) {
-					int actualStepWidth = stepWidth;
+					int actualStepHeight = stepHeight;
 					if (gap > 0 && gapFilling < gap) {
 						gapFilling++;
-						actualStepWidth++;
+						actualStepHeight++;
 					}
 					if (startToFinish) {
 						g.setColor(gradient[i]);
 					} else {
 						g.setColor(gradient[(gradient.length - 1) - i]);
 					}
-					g.fillRect(xStart, currentY, xWidth, actualStepWidth);
-					currentY += actualStepWidth;
+					g.fillRect(xStart, currentY, xWidth, actualStepHeight);
+					currentY += actualStepHeight;
 				}
 			}
 

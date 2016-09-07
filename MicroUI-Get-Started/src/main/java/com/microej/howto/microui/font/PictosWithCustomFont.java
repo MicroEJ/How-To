@@ -57,21 +57,23 @@ public class PictosWithCustomFont {
 			@Override
 			public void paint(GraphicsContext g) {
 
+				final int DISPLAY_WIDTH = display.getWidth();
+				final int DISPLAY_HEIGHT = display.getHeight();
 
 				// fill up background with black
 				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, display.getWidth(), display.getHeight());
+				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 				g.setFont(myCustomFont);
 				// use White color to render text
 				g.setColor(Colors.WHITE);
 
-				g.drawString(message, display.getWidth() / 2, display.getHeight() / 4,
+				g.drawString(message, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 4,
 						GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
 				// use Yellow color to render text
 				g.setColor(Colors.YELLOW);
-				g.drawString(message, display.getWidth() / 2, (display.getHeight() / 4) * 3,
+				g.drawString(message, DISPLAY_WIDTH / 2, (DISPLAY_HEIGHT / 4) * 3,
 						GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
 			}

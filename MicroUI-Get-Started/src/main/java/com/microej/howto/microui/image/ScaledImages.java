@@ -33,27 +33,34 @@ public class ScaledImages {
 			@Override
 			public void paint(GraphicsContext g) {
 
+				final int DISPLAY_WIDTH = display.getWidth();
+				final int DISPLAY_HEIGHT = display.getHeight();
+
 				// fill up background with black
 				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, display.getWidth(), display.getHeight());
+				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 
 				try {
 					Image microejImage = Image.createImage("/images/microej.png");
 
-					// compute scaling factor
-					final int imageSmallestDimension = Math.min(microejImage.getWidth(), microejImage.getHeight());
-					final int displaySmallestDimension = Math.min(display.getWidth(), display.getHeight());
-					final float scalingFactor = displaySmallestDimension / imageSmallestDimension;
+					final int IMAGE_WIDTH = microejImage.getWidth();
+					final int IMAGE_HEIGHT = microejImage.getHeight();
 
+					// compute scaling factors on both dimensions					
+					final float horizontalScalingFactor = DISPLAY_WIDTH / IMAGE_WIDTH;
+					final float verticalScalingFactor = DISPLAY_HEIGHT / IMAGE_HEIGHT;
+					// keep only the smallest one
+					final float actualScalingFactor = Math.min(horizontalScalingFactor, verticalScalingFactor);
+					
 					// compute image top left anchor
-					final int imageWidthScaled = (int) (microejImage.getWidth() * scalingFactor);
-					final int imageHeightScaled = (int) (microejImage.getHeight() * scalingFactor);
-					final int anchorX = (display.getWidth() - imageWidthScaled) / 2;
-					final int anchorY = (display.getHeight() - imageHeightScaled) / 2;
+					final int imageWidthScaled = (int) (IMAGE_WIDTH * actualScalingFactor);
+					final int imageHeightScaled = (int) (IMAGE_HEIGHT * actualScalingFactor);
+					final int anchorX = (DISPLAY_WIDTH - imageWidthScaled) / 2;
+					final int anchorY = (DISPLAY_HEIGHT - imageHeightScaled) / 2;
 
 					// draw scaled image
-					ImageScale.Singleton.setFactor(scalingFactor);
+					ImageScale.Singleton.setFactor(actualScalingFactor);
 					ImageScale.Singleton.draw(g, microejImage, anchorX, anchorY,
 							GraphicsContext.TOP | GraphicsContext.LEFT);
 

@@ -30,12 +30,16 @@ public class TilingWithImages {
 		Displayable displayable = new Displayable(display) {
 			@Override
 			public void paint(GraphicsContext g) {
-				final int nbTilesX = display.getWidth() / TILE_SIZE;
-				final int nbTilesY = display.getHeight() / TILE_SIZE;
+
+				final int DISPLAY_WIDTH = display.getWidth();
+				final int DISPLAY_HEIGHT = display.getHeight();
+
+				final int nbTilesX = DISPLAY_WIDTH / TILE_SIZE;
+				final int nbTilesY = DISPLAY_HEIGHT / TILE_SIZE;
 
 				// fill up background with black
 				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, display.getWidth(), display.getHeight());
+				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 				// Creates a new mutable image to draw the tile.
 				// To leverage CPU usage, we will draw a full column and then
@@ -57,9 +61,9 @@ public class TilingWithImages {
 					columnGraphicsContext.fillPolygon(xys);
 				}
 
-				final int alphaIncrement = 0xFF / nbTilesX;
+				final int alphaIncrement = GraphicsContext.OPAQUE / nbTilesX;
 				int currentAlpha = 0;
-				int yOffsetColumn = (display.getHeight() - squareTileColumn.getHeight()) / 2;
+				int yOffsetColumn = (DISPLAY_HEIGHT - squareTileColumn.getHeight()) / 2;
 				for (int x = 0; x < nbTilesX; x++, currentAlpha += alphaIncrement) {
 					g.drawImage(squareTileColumn, x * TILE_SIZE, yOffsetColumn,
 							GraphicsContext.LEFT | GraphicsContext.TOP,

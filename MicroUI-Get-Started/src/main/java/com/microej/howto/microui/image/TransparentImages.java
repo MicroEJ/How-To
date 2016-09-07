@@ -42,7 +42,7 @@ public class TransparentImages {
 				try {
 					Image microejImage = Image.createImage("/images/microej.png");
 					g.drawImage(microejImage, display.getWidth() / 2, display.getHeight() / 2,
-							GraphicsContext.HCENTER | GraphicsContext.VCENTER, 0xFF / 2);
+							GraphicsContext.HCENTER | GraphicsContext.VCENTER, GraphicsContext.OPAQUE / 2);
 				} catch (IOException e) {
 					throw new AssertionError(e);
 				}

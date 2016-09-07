@@ -32,18 +32,21 @@ public class RotatedImages {
 			@Override
 			public void paint(GraphicsContext g) {
 
+				final int DISPLAY_WIDTH = display.getWidth();
+				final int DISPLAY_HEIGHT = display.getHeight();
+
+				final int left = DISPLAY_WIDTH / 4;
+				final int top = DISPLAY_HEIGHT / 4;
+				final int right = 3 * DISPLAY_WIDTH / 4;
+				final int bottom = 3 * DISPLAY_HEIGHT / 4;
+
 				// fill up background with black
 				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, display.getWidth(), display.getHeight());
+				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 
 				try {
 					Image microejImage = Image.createImage("/images/microej.png");
-
-					final int left = display.getWidth() / 4;
-					final int top = display.getHeight() / 4;
-					final int right = display.getWidth() / 4 * 3;
-					final int bottom = display.getHeight() / 4 * 3;
 
 					{ // top-left corner - 45°
 						ImageRotation rotation = new ImageRotation();
@@ -81,7 +84,7 @@ public class RotatedImages {
 								GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 					}
 
-					{ // bottom-right corner - 270°
+					{ // bottom-right corner - 135°
 						ImageRotation rotation = new ImageRotation();
 						rotation.setRotationCenter(right, bottom);
 						rotation.setAngle(135);

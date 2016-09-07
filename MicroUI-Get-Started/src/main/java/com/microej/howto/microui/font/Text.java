@@ -15,7 +15,10 @@ import ej.microui.util.EventHandler;
 
 /**
  * This class shows how to print text to the screen using the default system
- * font via MicroUI APIs
+ * font via MicroUI APIs.
+ * 
+ * Note that default font use 1 bit per pixel (bpp) only and therefore does not support antialiasing.
+ * On displays supporting 16 bpp, such limited fonts are not really suitable.
  */
 public class Text {
 
@@ -28,13 +31,16 @@ public class Text {
 			@Override
 			public void paint(GraphicsContext g) {
 
+				final int DISPLAY_WIDTH = display.getWidth();
+				final int DISPLAY_HEIGHT = display.getHeight();
+
 				// fill up background with black
 				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, display.getWidth(), display.getHeight());
+				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 				// use White color to render text
 				g.setColor(Colors.WHITE);
-				g.drawString("Hello World !", display.getWidth() / 2, display.getHeight() / 2,
+				g.drawString("Hello World !", DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2,
 						GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
 			}

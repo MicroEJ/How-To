@@ -34,16 +34,19 @@ public class PrimitivesAntiAliased {
 			@Override
 			public void paint(GraphicsContext g) {
 
-				final int displayCenterX = display.getWidth() / 2;
-				final int displayCenterY = display.getHeight() / 2;
+				final int DISPLAY_WIDTH = display.getWidth();
+				final int DISPLAY_HEIGHT = display.getHeight();
+
+				final int displayCenterX = DISPLAY_WIDTH / 2;
+				final int displayCenterY = DISPLAY_HEIGHT / 2;
 
 				// fill up background with black
 				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, display.getWidth(), display.getHeight());
+				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 				// fill up half the area with white
 				g.setColor(Colors.WHITE);
-				g.fillRect(0, 0, display.getWidth() / 2, display.getHeight());
+				g.fillRect(0, 0, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT);
 
 				{ // antialiased rendering
 					// draw a gray line across the area diagonal
@@ -53,13 +56,13 @@ public class PrimitivesAntiAliased {
 					AntiAliasedShapes.Singleton.setThickness(10);
 					// specify line thickness
 					AntiAliasedShapes.Singleton.setFade(10);
-					AntiAliasedShapes.Singleton.drawLine(g, 0, 0, display.getWidth(), display.getHeight());
+					AntiAliasedShapes.Singleton.drawLine(g, 0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 				}
 
 				{ // draw a maroon circle at the center of the area
 					g.setColor(Colors.MAROON);
 
-					final int diameter = display.getWidth() / 2;
+					final int diameter = DISPLAY_WIDTH / 2;
 
 					// Note that x and y parameters are the top left coordinates
 					// of the circle bounding box.
@@ -89,10 +92,10 @@ public class PrimitivesAntiAliased {
 					// draw a red rounded rectangle at the center of the area
 					g.setColor(Colors.RED);
 
-					final int rectangleWidth = display.getWidth() / 3;
-					final int rectangleHeight = display.getHeight() / 3;
+					final int rectangleWidth = DISPLAY_WIDTH / 3;
+					final int rectangleHeight = DISPLAY_HEIGHT / 3;
 					final int arcHeight = 20;
-					final int arcWidth = 20 * (display.getWidth() / display.getHeight());
+					final int arcWidth = 20 * (DISPLAY_WIDTH / DISPLAY_HEIGHT);
 
 					// Note that x and y parameters are the top left coordinates
 					// of the rectangle bounding box.
@@ -137,8 +140,8 @@ public class PrimitivesAntiAliased {
 					// draw a yellow ellipse at the center of the area
 					g.setColor(Colors.YELLOW);
 
-					final int ellipseWidth = display.getWidth() / 4;
-					final int ellipseHeight = display.getHeight() / 4;
+					final int ellipseWidth = DISPLAY_WIDTH / 4;
+					final int ellipseHeight = DISPLAY_HEIGHT / 4;
 					// Note that x and y parameters are the top left coordinates
 					// of the ellipse bounding box.
 					// Therefore some offset of half the ellipse width and
@@ -167,7 +170,7 @@ public class PrimitivesAntiAliased {
 					// draw a blue circle arc at the center of the area
 					g.setColor(Colors.BLUE);
 
-					final int diameter = display.getHeight() / 6;
+					final int diameter = DISPLAY_HEIGHT / 6;
 					final int radius = diameter / 2;
 
 					// Note that x and y parameters are the top left coordinates
@@ -213,7 +216,7 @@ public class PrimitivesAntiAliased {
 				{ // draw a green triangle at the center of the area
 					g.setColor(Colors.LIME);
 
-					final int radius = display.getHeight() / 20;
+					final int radius = DISPLAY_HEIGHT / 20;
 					final int centerX = displayCenterX;
 					final int leftX = displayCenterX - radius;
 					final int rightX = displayCenterX + radius;

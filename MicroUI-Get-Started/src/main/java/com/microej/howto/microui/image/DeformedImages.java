@@ -32,33 +32,38 @@ public class DeformedImages {
 			@Override
 			public void paint(GraphicsContext g) {
 
+				final int DISPLAY_WIDTH = display.getWidth();
+				final int DISPLAY_HEIGHT = display.getHeight();
+
+				final int DISPLAY_CENTER_X = DISPLAY_WIDTH / 2;
+				final int DISPLAY_CENTER_Y = DISPLAY_HEIGHT / 2;
+
+				final int left = DISPLAY_WIDTH / 4;
+				final int top = DISPLAY_HEIGHT / 4;
+				final int right = 3 * DISPLAY_WIDTH / 4;
+				final int bottom = 3 * DISPLAY_HEIGHT / 4;
+
 				// fill up background with black
 				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, display.getWidth(), display.getHeight());
+				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
-				final int displayWidth = display.getWidth();
-				final int displayCenterX = displayWidth / 2;
-				final int displayHeight = display.getHeight();
-				final int displayCenterY = displayHeight / 2;
-
-				final int left = displayWidth / 4;
-				final int top = displayHeight / 4;
-				final int right = displayWidth / 4 * 3;
-				final int bottom = displayHeight / 4 * 3;
 
 				try {
 					Image microejImage = Image.createImage("/images/microej.png");
 
+					final int IMAGE_WIDTH = microejImage.getWidth();
+					final int IMAGE_HEIGHT = microejImage.getHeight();
+
 					{ // top-left corner - stretch X and Y
-						int xys[] = { 0, 0, displayCenterX - 1, 0, displayCenterX - 1, displayCenterY - 1, 0,
-								displayCenterY - 1 };
+						int xys[] = { 0, 0, DISPLAY_CENTER_X - 1, 0, DISPLAY_CENTER_X - 1, DISPLAY_CENTER_Y - 1, 0,
+								DISPLAY_CENTER_Y - 1 };
 						ImageDeformation.Singleton.draw(g, microejImage, xys, 0, 0,
 								GraphicsContext.TOP | GraphicsContext.LEFT);
 					}
 
 					{ // top-right corner - stretch Y
-						int xys[] = { 0, 0, microejImage.getWidth() - 1, 0, microejImage.getWidth() - 1,
-								displayCenterY - 1, 0, displayCenterY - 1 };
+						int xys[] = { 0, 0, IMAGE_WIDTH - 1, 0, IMAGE_WIDTH - 1,
+								DISPLAY_CENTER_Y - 1, 0, DISPLAY_CENTER_Y - 1 };
 
 						g.translate(right, 0);
 						ImageDeformation.Singleton.draw(g, microejImage, xys, 0, 0,
@@ -68,8 +73,8 @@ public class DeformedImages {
 					}
 
 					{ // bottom-left corner - stretch X
-						int xys[] = { 0, 0, displayCenterX - 1, 0, displayCenterX - 1, microejImage.getHeight() - 1, 0,
-								microejImage.getHeight() - 1 };
+						int xys[] = { 0, 0, DISPLAY_CENTER_X - 1, 0, DISPLAY_CENTER_X - 1, IMAGE_HEIGHT - 1, 0,
+								IMAGE_HEIGHT - 1 };
 						g.translate(0, bottom);
 						ImageDeformation.Singleton.draw(g, microejImage, xys, 0, 0,
 								GraphicsContext.VCENTER | GraphicsContext.LEFT);
@@ -77,27 +82,22 @@ public class DeformedImages {
 					}
 
 					{ // bottom-right corner - NO stretch
-						int xys[] = { 0, 0, microejImage.getWidth() - 1, 0, microejImage.getWidth() - 1,
-								microejImage.getHeight() - 1, 0, microejImage.getHeight() - 1 };
-						g.translate(right, bottom);
-						ImageDeformation.Singleton.draw(g, microejImage, xys, 0, 0,
-								GraphicsContext.HCENTER | GraphicsContext.VCENTER);
-						g.translate(-right, -bottom);
+						g.drawImage(microejImage, right, bottom, GraphicsContext.VCENTER | GraphicsContext.HCENTER);
 					}
 
 
 					// draw grid for visual alignment control
 					// divide display in 4 sections
 					g.setColor(Colors.YELLOW);
-					g.drawLine(0, displayCenterY, displayWidth, displayCenterY);
-					g.drawLine(displayCenterX, 0, displayCenterX, displayHeight);
+					g.drawLine(0, DISPLAY_CENTER_Y, DISPLAY_WIDTH, DISPLAY_CENTER_Y);
+					g.drawLine(DISPLAY_CENTER_X, 0, DISPLAY_CENTER_X, DISPLAY_HEIGHT);
 
 					// divide each section along horizontal & vertical axis
 					g.setColor(Colors.MAGENTA);
-					g.drawLine(0, top, displayWidth, top);
-					g.drawLine(0, bottom, displayWidth, bottom);
-					g.drawLine(left, 0, left, displayHeight);
-					g.drawLine(right, 0, right, displayHeight);
+					g.drawLine(0, top, DISPLAY_WIDTH, top);
+					g.drawLine(0, bottom, DISPLAY_WIDTH, bottom);
+					g.drawLine(left, 0, left, DISPLAY_HEIGHT);
+					g.drawLine(right, 0, right, DISPLAY_HEIGHT);
 
 				} catch (IOException e) {
 					throw new AssertionError(e);
