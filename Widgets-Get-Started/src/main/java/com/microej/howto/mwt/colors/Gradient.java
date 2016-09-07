@@ -93,6 +93,31 @@ public class Gradient {
 	}
 
 	/**
+	 * 
+	 * Gets a color index within the bounds of a gradient's index range from an estimated color index
+	 * 
+	 * @param gradient the gradient to pick colors from
+	 * @param estimatedColorIndex the floating point value close to the desired color index
+	 * @return
+	 */
+	private static int normalizeColorIndex(int[] gradient, float estimatedColorIndex)
+	{
+		final int roundedIndex = Math.round(estimatedColorIndex);
+		final int actualColorIndex;
+		if ( roundedIndex < 0 )
+		{
+			//if accumulated inaccuracy makes it so that roundedIndex is lower than 0, we might end up getting an ArrayOutOfBoundsException 
+			actualColorIndex = 0;
+		}
+		else
+		{
+			//if accumulated inaccuracy makes it so that roundedIndex is greater than gradient.length, we might end up getting an ArrayOutOfBoundsException 
+			actualColorIndex = Math.min(gradient.length, roundedIndex);
+		}
+		return actualColorIndex;
+	}
+
+	/**
 	 * Fills the rectangle specified by (xStart,yStart,yEnd,yEnd) with stripes
 	 * of homogeneous width or height using colors from the gradient for each
 	 * stripe. <br/>
@@ -156,7 +181,7 @@ public class Gradient {
 				int currentX = xStart;
 
 				for (int i = 0; i < nbSteps; i++) {
-					final int actualColorIndex = Math.round(colorIndex);
+					final int actualColorIndex = normalizeColorIndex(gradient, colorIndex);
 					g.setColor(gradient[actualColorIndex]);
 					g.fillRect(currentX, yStart, 1, yHeight);
 					currentX++;
@@ -171,7 +196,7 @@ public class Gradient {
 				int currentY = yStart;
 
 				for (int j = 0; j < nbSteps; j++) {
-					final int actualColorIndex = Math.round(colorIndex);
+					final int actualColorIndex = normalizeColorIndex(gradient, colorIndex);
 					g.setColor(gradient[actualColorIndex]);
 					g.fillRect(xStart, currentY, xWidth, 1);
 					currentY++;
