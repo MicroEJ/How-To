@@ -31,17 +31,17 @@ public class Gradient {
 				// the gradient
 				{
 					int[] greenToWhiteGradient = getGradient(g, Colors.GREEN, Colors.WHITE);
-					drawGradientLeftToRight(g, greenToWhiteGradient, 0, 0, 32, display.getHeight() / 2);
+					drawGradientLeftToRight(g, greenToWhiteGradient, 0, 0, 16, display.getHeight() / 2);
 
 					int[] whiteToRedGradient = getGradient(g, Colors.WHITE, Colors.RED);
-					drawGradientLeftToRight(g, whiteToRedGradient, 32, 0, 64, display.getHeight() / 2);
+					drawGradientLeftToRight(g, whiteToRedGradient, 16, 0, 48, display.getHeight() / 2);
 				}
 
 				// draw gradient on areas with more columns than the number of
 				// colors in the gradient
 				{
 					int[] redToWhiteGradient = getGradient(g, Colors.RED, Colors.WHITE);
-					drawGradientLeftToRight(g, redToWhiteGradient, 64, 0, display.getWidth() / 2,
+					drawGradientLeftToRight(g, redToWhiteGradient, 48, 0, display.getWidth() / 2,
 							display.getHeight() / 2);
 
 					int[] whiteToBlueGradient = getGradient(g, Colors.WHITE, Colors.BLUE);
@@ -139,24 +139,25 @@ public class Gradient {
 				nbSteps = gradient.length;
 			} else {
 				gradientIsBiggerThanDirection = true;
-				nbSteps = xWidth;
+				nbSteps = yHeight;
 			}
 
 		}
 
-		int colorIndex = startToFinish ? 0 : gradient.length - 1;
+		float colorIndex = startToFinish ? 0 : gradient.length - 1;
 
 		if ( gradientIsBiggerThanDirection )
 		{
 
-			final int colorStep = gradient.length / nbSteps;
+			final float colorStep = (float)gradient.length / (float)nbSteps;
 
 			if (horizontal)
 			{
 				int currentX = xStart;
 
 				for (int i = 0; i < nbSteps; i++) {
-					g.setColor(gradient[colorIndex]);
+					final int actualColorIndex = Math.round(colorIndex);
+					g.setColor(gradient[actualColorIndex]);
 					g.fillRect(currentX, yStart, 1, yHeight);
 					currentX++;
 					if (startToFinish) {
@@ -170,7 +171,8 @@ public class Gradient {
 				int currentY = yStart;
 
 				for (int j = 0; j < nbSteps; j++) {
-					g.setColor(gradient[colorIndex]);
+					final int actualColorIndex = Math.round(colorIndex);
+					g.setColor(gradient[actualColorIndex]);
 					g.fillRect(xStart, currentY, xWidth, 1);
 					currentY++;
 					if (startToFinish) {
