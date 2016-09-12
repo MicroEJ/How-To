@@ -25,20 +25,18 @@ import ej.microui.util.EventHandler;
  *
  * Note that the whole display is redrawn on every frame
  */
-public class AnimationSampleWithFullRepaint {
+public class AnimationSampleWithFullRepaint extends Displayable {
 
 	private static final int ANIMATION_PERIOD = 1000 / 60; // in ms - 60 frames per second
 
 	private int imageX;
 	private final int imageY;
 	private Image microejImage;
-	private final Display display;
-	private Displayable displayable;
 
 	/**
 	 * Timer task doing an horizontal linear motion of MicroEJ.
 	 */
-	class HorizontalAnimatorTask extends TimerTask {
+	private class HorizontalAnimatorTask extends TimerTask {
 
 		private final int ABSOLUTE_INCREMENT = 2;
 		private final AnimationSampleWithFullRepaint animated;
@@ -50,7 +48,7 @@ public class AnimationSampleWithFullRepaint {
 			this.animated = animated;
 			final int animatedImageHalfWidth = animated.microejImage.getWidth() / 2;
 			leftLimit = animatedImageHalfWidth;
-			rightLimit = animated.display.getWidth() - animatedImageHalfWidth;
+			rightLimit = animated.getDisplay().getWidth() - animatedImageHalfWidth;
 		}
 
 		@Override
@@ -65,56 +63,46 @@ public class AnimationSampleWithFullRepaint {
 					horizontalIncrement = ABSOLUTE_INCREMENT;
 				}
 			}
-			animated.displayable.repaint();
+			animated.repaint();
 		}
 	}
 
-	/**
-	 * Creates the displayable and shows it.
-	 */
-	public void createDisplayable() {
-
-		displayable = new Displayable(display) {
-			@Override
-			public void paint(GraphicsContext g) {
-
-				final int DISPLAY_WIDTH = display.getWidth();
-				final int DISPLAY_HEIGHT = display.getHeight();
-
-				// fill up background with black
-				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
-
-				// fill up half the area with white
-				g.setColor(Colors.WHITE);
-				g.fillRect(0, 0, DISPLAY_WIDTH/2, DISPLAY_HEIGHT);
-
-				//draw the image
-				g.drawImage(microejImage, imageX, imageY, GraphicsContext.HCENTER | GraphicsContext.VCENTER);
-
-			}
-
-			@Override
-			public EventHandler getController() {
-				// No event handling is required for this sample.
-				return null;
-			}
-		};
-
-		displayable.show();
-	}
-
-	public void animate() {
+	private void animate() {
 		HorizontalAnimatorTask animator = new HorizontalAnimatorTask(this);
 		Timer animationTimer = new Timer();
 		animationTimer.schedule(animator, ANIMATION_PERIOD, ANIMATION_PERIOD);
+	}
+
+	@Override
+	public void paint(GraphicsContext g) {
+
+		final int DISPLAY_WIDTH = getDisplay().getWidth();
+		final int DISPLAY_HEIGHT = getDisplay().getHeight();
+
+		// fill up background with black
+		g.setColor(Colors.BLACK);
+		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+
+		// fill up half the area with white
+		g.setColor(Colors.WHITE);
+		g.fillRect(0, 0, DISPLAY_WIDTH/2, DISPLAY_HEIGHT);
+
+		//draw the image
+		g.drawImage(microejImage, imageX, imageY, GraphicsContext.HCENTER | GraphicsContext.VCENTER);
+
+	}
+
+	@Override
+	public EventHandler getController() {
+		// No event handling is required for this sample.
+		return null;
 	}
 
 	/**
 	 * Instantiate an AnimationSampleWithFullRepaint.
 	 */
 	public AnimationSampleWithFullRepaint(Display display) {
-		this.display = display;
+		super(display);
 
 		// Starts at the center of the screen.
 		this.imageX = display.getWidth() / 2;
@@ -125,7 +113,9 @@ public class AnimationSampleWithFullRepaint {
 		} catch (IOException e) {
 			throw new AssertionError(e);
 		}
-		this.createDisplayable();
+		
+		this.show();
+		
 	}
 
 	/**

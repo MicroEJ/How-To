@@ -27,7 +27,7 @@ import ej.microui.util.EventHandler;
  *
  * Note that the whole display is NOT redrawn on every frame
  */
-public class AnimationSampleWithFlyingImage {
+public class AnimationSampleWithFlyingImage extends Displayable {
 
 	private static final int ANIMATION_PERIOD = 1000/60; // in ms - 60 frames per second
 
@@ -35,13 +35,11 @@ public class AnimationSampleWithFlyingImage {
 	private final int imageY;
 	private Image microejImage;
 	private FlyingImage flyingImage;
-	private final Display display;
-	private Displayable displayable;
 
 	/**
 	 * Timer task doing an horizontal linear motion of MicroEJ logo.
 	 */
-	class HorizontalAnimatorTask extends TimerTask {
+	private class HorizontalAnimatorTask extends TimerTask {
 
 		private final int ABSOLUTE_INCREMENT = 2;
 		private final AnimationSampleWithFlyingImage animated;
@@ -52,7 +50,7 @@ public class AnimationSampleWithFlyingImage {
 		public HorizontalAnimatorTask(AnimationSampleWithFlyingImage animated) {
 			this.animated = animated;
 			leftLimit = 0;
-			rightLimit = animated.display.getWidth() - microejImage.getWidth();
+			rightLimit = animated.getDisplay().getWidth() - microejImage.getWidth();
 		}
 
 		@Override
@@ -73,51 +71,40 @@ public class AnimationSampleWithFlyingImage {
 	}
 
 	/**
-	 * Creates the displayable and shows it with the flying image.
-	 */
-	public void createDisplayable() {
-
-		displayable = new Displayable(display) {
-			@Override
-			public void paint(GraphicsContext g) {
-
-				final int DISPLAY_WIDTH = display.getWidth();
-				final int DISPLAY_HEIGHT = display.getHeight();
-
-				// fill up background with black
-				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
-
-				// fill up half the area with white
-				g.setColor(Colors.WHITE);
-				g.fillRect(0, 0, DISPLAY_WIDTH/2, DISPLAY_HEIGHT);
-			}
-
-			@Override
-			public EventHandler getController() {
-				// No event handling is required for this sample.
-				return null;
-			}
-		};
-
-		displayable.show();
-		flyingImage.show();
-	}
-
-	/**
 	 * Starts the animation.
 	 */
-	public void animate() {
+	private void animate() {
 		HorizontalAnimatorTask animator = new HorizontalAnimatorTask(this);
 		Timer animationTimer = new Timer();
 		animationTimer.schedule(animator, ANIMATION_PERIOD, ANIMATION_PERIOD);
+	}
+
+	@Override
+	public void paint(GraphicsContext g) {
+
+		final int DISPLAY_WIDTH = getDisplay().getWidth();
+		final int DISPLAY_HEIGHT = getDisplay().getHeight();
+
+		// fill up background with black
+		g.setColor(Colors.BLACK);
+		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+
+		// fill up half the area with white
+		g.setColor(Colors.WHITE);
+		g.fillRect(0, 0, DISPLAY_WIDTH/2, DISPLAY_HEIGHT);
+	}
+
+	@Override
+	public EventHandler getController() {
+		// No event handling is required for this sample.
+		return null;
 	}
 
 	/**
 	 * Instantiate an AnimationSampleWithFlyingImage.
 	 */
 	public AnimationSampleWithFlyingImage(Display display) {
-		this.display = display;
+		super(display);
 
 		try {
 			microejImage = Image.createImage("/images/microej.png");
@@ -130,7 +117,9 @@ public class AnimationSampleWithFlyingImage {
 		this.imageX = display.getWidth() / 2 - microejImage.getWidth() / 2;
 		this.imageY = display.getHeight() / 2 - microejImage.getHeight() / 2;
 
-		this.createDisplayable();
+		this.show();
+		flyingImage.show();
+
 	}
 
 	/**
