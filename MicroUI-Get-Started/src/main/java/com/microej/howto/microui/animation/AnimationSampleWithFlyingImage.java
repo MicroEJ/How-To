@@ -37,6 +37,28 @@ public class AnimationSampleWithFlyingImage extends Displayable {
 	private FlyingImage flyingImage;
 
 	/**
+	 * Instantiate an AnimationSampleWithFlyingImage.
+	 */
+	public AnimationSampleWithFlyingImage(Display display) {
+		super(display);
+
+		try {
+			microejImage = Image.createImage("/images/microej.png");
+			flyingImage = new FlyingImage(microejImage);
+		} catch (IOException e) {
+			throw new AssertionError(e);
+		}
+
+		// Starts at the center of the screen.
+		this.imageX = display.getWidth() / 2 - microejImage.getWidth() / 2;
+		this.imageY = display.getHeight() / 2 - microejImage.getHeight() / 2;
+
+		this.show();
+		flyingImage.show();
+
+	}
+
+	/**
 	 * Timer task doing an horizontal linear motion of MicroEJ logo.
 	 */
 	private class HorizontalAnimatorTask extends TimerTask {
@@ -98,28 +120,6 @@ public class AnimationSampleWithFlyingImage extends Displayable {
 	public EventHandler getController() {
 		// No event handling is required for this sample.
 		return null;
-	}
-
-	/**
-	 * Instantiate an AnimationSampleWithFlyingImage.
-	 */
-	public AnimationSampleWithFlyingImage(Display display) {
-		super(display);
-
-		try {
-			microejImage = Image.createImage("/images/microej.png");
-			flyingImage = new FlyingImage(microejImage);
-		} catch (IOException e) {
-			throw new AssertionError(e);
-		}
-
-		// Starts at the center of the screen.
-		this.imageX = display.getWidth() / 2 - microejImage.getWidth() / 2;
-		this.imageY = display.getHeight() / 2 - microejImage.getHeight() / 2;
-
-		this.show();
-		flyingImage.show();
-
 	}
 
 	/**

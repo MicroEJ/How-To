@@ -34,6 +34,26 @@ public class AnimationSampleWithFullRepaint extends Displayable {
 	private Image microejImage;
 
 	/**
+	 * Instantiate an AnimationSampleWithFullRepaint.
+	 */
+	public AnimationSampleWithFullRepaint(Display display) {
+		super(display);
+
+		// Starts at the center of the screen.
+		this.imageX = display.getWidth() / 2;
+		this.imageY = display.getHeight() / 2;
+
+		try {
+			microejImage = Image.createImage("/images/microej.png");
+		} catch (IOException e) {
+			throw new AssertionError(e);
+		}
+		
+		this.show();
+		
+	}
+
+	/**
 	 * Timer task doing an horizontal linear motion of MicroEJ.
 	 */
 	private class HorizontalAnimatorTask extends TimerTask {
@@ -96,26 +116,6 @@ public class AnimationSampleWithFullRepaint extends Displayable {
 	public EventHandler getController() {
 		// No event handling is required for this sample.
 		return null;
-	}
-
-	/**
-	 * Instantiate an AnimationSampleWithFullRepaint.
-	 */
-	public AnimationSampleWithFullRepaint(Display display) {
-		super(display);
-
-		// Starts at the center of the screen.
-		this.imageX = display.getWidth() / 2;
-		this.imageY = display.getHeight() / 2;
-
-		try {
-			microejImage = Image.createImage("/images/microej.png");
-		} catch (IOException e) {
-			throw new AssertionError(e);
-		}
-		
-		this.show();
-		
 	}
 
 	/**
