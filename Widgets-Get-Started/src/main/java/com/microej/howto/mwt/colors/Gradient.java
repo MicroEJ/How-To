@@ -67,24 +67,20 @@ public class Gradient extends Displayable {
 		return null;
 	}
 
-	public static void drawGradientTopToBottom(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd,
-			int yEnd) {
-		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, false, true);
+	public static void drawGradientTopToBottom(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd) {
+		drawVerticalGradient(g, gradient, xStart, yStart, xEnd, yEnd, true);
 	}
 
-	public static void drawGradientBottomToTop(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd,
-			int yEnd) {
-		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, false, false);
+	public static void drawGradientBottomToTop(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd) {
+		drawVerticalGradient(g, gradient, xStart, yStart, xEnd, yEnd, false);
 	}
 
-	public static void drawGradientLeftToRight(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd,
-			int yEnd) {
-		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, true, true);
+	public static void drawGradientLeftToRight(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd) {
+		drawHorizontalGradient(g, gradient, xStart, yStart, xEnd, yEnd, true);
 	}
 
-	public static void drawGradientRightToLeft(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd,
-			int yEnd) {
-		drawGradient(g, gradient, xStart, yStart, xEnd, yEnd, true, false);
+	public static void drawGradientRightToLeft(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd) {
+		drawHorizontalGradient(g, gradient, xStart, yStart, xEnd, yEnd, false);
 	}
 
 	/**
@@ -103,9 +99,7 @@ public class Gradient extends Displayable {
 		{
 			//if accumulated inaccuracy makes it so that roundedIndex is lower than 0, we might end up getting an ArrayOutOfBoundsException 
 			actualColorIndex = 0;
-		}
-		else
-		{
+		} else {
 			//if accumulated inaccuracy makes it so that roundedIndex is greater than gradient.length, we might end up getting an ArrayOutOfBoundsException 
 			actualColorIndex = Math.min(gradient.length, roundedIndex);
 		}
@@ -113,16 +107,99 @@ public class Gradient extends Displayable {
 	}
 
 	/**
-	 * Fills the rectangle specified by (xStart,yStart,yEnd,yEnd) with stripes
-	 * of homogeneous width or height using colors from the gradient for each
-	 * stripe. <br/>
-	 * Stripes are either horizontal or vertical depending on the horizontal
-	 * parameter. <br/>
+	 * Fills the rectangle specified by (xStart,yStart,yEnd,yEnd) with horizontal stripes
+	 * of homogeneous width using colors from the gradient for each stripe. <p/>
+	 * 
 	 * Gradient colors are used either from start to finish or from finish to
-	 * start depending on the startToFinish parameter. <br/>
-	 * If the width of the rectangle is greater than the number of colors in the
+	 * start depending on the startToFinish parameter. <p/>
+	 * 
+	 * If the width of the rectangle is greater than the number of colors in the gradient then
+	 * the number of stripes is the number of colors in the gradient. <p/>
+	 * If the width of the rectangle is smaller than the number of colors in the gradient then
+	 * the number of stripes is set to the size of this side.
+	 *
+	 * @param g
+	 * @param gradient
+	 * @param xStart
+	 * @param yStart
+	 * @param xEnd
+	 * @param yEnd
+	 * @param startToFinish
+	 */
+	private static void drawHorizontalGradient(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd,
+		boolean startToFinish) {
+		final int xWidth = xEnd - xStart;
+		final int yHeight = yEnd - yStart;
+
+		int nbSteps = 0;
+
+		boolean gradientIsBiggerThanDirection = false;
+		if (xWidth > gradient.length) {
+			nbSteps = gradient.length;
+		} else {
+			gradientIsBiggerThanDirection = true;
+			nbSteps = xWidth;
+		}
+
+		float colorIndex = startToFinish ? 0 : gradient.length - 1;
+
+		if ( gradientIsBiggerThanDirection )
+		{
+			final float colorStep = (float)gradient.length / (float)nbSteps;
+
+			int currentX = xStart;
+
+			for (int i = 0; i < nbSteps; i++) {
+				final int actualColorIndex = normalizeColorIndex(gradient, colorIndex);
+				g.setColor(gradient[actualColorIndex]);
+				g.fillRect(currentX, yStart, 1, yHeight);
+				currentX++;
+				if (startToFinish) {
+					colorIndex += colorStep;
+				} else {
+					colorIndex -= colorStep;
+				}
+			}
+
+		} else {
+			final int stepWidth = xWidth / nbSteps;
+			// if the nb of colors in gradient is not a divider of the width
+			// of the drawing area there will be a gap that we will need to compensate for
+			final int gap = xWidth - (nbSteps * stepWidth);
+
+			int currentX = xStart;
+			int gapFilling = 0;
+			for (int i = 0; i < nbSteps; i++) {
+				int actualStepWidth = stepWidth;
+				if (gap > 0 && gapFilling < gap) {
+					gapFilling++;
+					actualStepWidth++;
+				}
+				if (startToFinish) {
+					g.setColor(gradient[i]);
+				} else {
+					g.setColor(gradient[(gradient.length - 1) - i]);
+				}
+				g.fillRect(currentX, yStart, actualStepWidth, yHeight);
+				currentX += actualStepWidth;
+			}
+
+
+		}
+
+	}
+
+	/**
+	 * Fills the rectangle specified by (xStart,yStart,yEnd,yEnd) with vertical stripes
+	 * of homogeneous height using colors from the gradient for each stripe. <p/>
+	 * 
+	 * Gradient colors are used either from start to finish or from finish to
+	 * start depending on the startToFinish parameter. <p/>
+	 * 
+	 * If the height of the rectangle is greater than the number of colors in the
 	 * gradient then the number of stripes is the number of colors in the
-	 * gradient. <br/>
+	 * gradient. <p/>
+	 * 
 	 * If the side of the rectangle matching the horizontal parameter is smaller
 	 * than the number of colors in the gradient then the number of stripes is
 	 * set to the size of this side.
@@ -133,128 +210,67 @@ public class Gradient extends Displayable {
 	 * @param yStart
 	 * @param xEnd
 	 * @param yEnd
-	 * @param horizontal
 	 * @param startToFinish
 	 */
-	private static void drawGradient(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd,
-			boolean horizontal, boolean startToFinish) {
+	private static void drawVerticalGradient(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd, boolean startToFinish) {
 		final int xWidth = xEnd - xStart;
 		final int yHeight = yEnd - yStart;
 
 		int nbSteps = 0;
 
 		boolean gradientIsBiggerThanDirection = false;
-		if (horizontal)
-		{
-			if (xWidth > gradient.length) {
-				nbSteps = gradient.length;
-			} else {
-				gradientIsBiggerThanDirection = true;
-				nbSteps = xWidth;
-			}
-		}
-		else
-		{
-			if (yHeight > gradient.length) {
-				nbSteps = gradient.length;
-			} else {
-				gradientIsBiggerThanDirection = true;
-				nbSteps = yHeight;
-			}
 
+		if (yHeight > gradient.length) {
+			nbSteps = gradient.length;
+		} else {
+			gradientIsBiggerThanDirection = true;
+			nbSteps = yHeight;
 		}
 
 		float colorIndex = startToFinish ? 0 : gradient.length - 1;
 
 		if ( gradientIsBiggerThanDirection )
 		{
-
 			final float colorStep = (float)gradient.length / (float)nbSteps;
 
-			if (horizontal)
-			{
-				int currentX = xStart;
+			int currentY = yStart;
 
-				for (int i = 0; i < nbSteps; i++) {
-					final int actualColorIndex = normalizeColorIndex(gradient, colorIndex);
-					g.setColor(gradient[actualColorIndex]);
-					g.fillRect(currentX, yStart, 1, yHeight);
-					currentX++;
-					if (startToFinish) {
-						colorIndex += colorStep;
-					} else {
-						colorIndex -= colorStep;
-					}
+			for (int j = 0; j < nbSteps; j++) {
+				final int actualColorIndex = normalizeColorIndex(gradient, colorIndex);
+				g.setColor(gradient[actualColorIndex]);
+				g.fillRect(xStart, currentY, xWidth, 1);
+				currentY++;
+				if (startToFinish) {
+					colorIndex += colorStep;
+				} else {
+					colorIndex -= colorStep;
 				}
 			}
-			else {
-				int currentY = yStart;
+		} else {
+			final int stepHeight = yHeight / nbSteps;
+			// if the nb of colors in gradient is not a divider of the width
+			// of the drawing area there will be a gap that we will need to compensate for
+			final int gap = yHeight - (nbSteps * stepHeight);
 
-				for (int j = 0; j < nbSteps; j++) {
-					final int actualColorIndex = normalizeColorIndex(gradient, colorIndex);
-					g.setColor(gradient[actualColorIndex]);
-					g.fillRect(xStart, currentY, xWidth, 1);
-					currentY++;
-					if (startToFinish) {
-						colorIndex += colorStep;
-					} else {
-						colorIndex -= colorStep;
-					}
+			int currentY = yStart;
+			int gapFilling = 0;
+			for (int i = 0; i < nbSteps; i++) {
+				int actualStepHeight = stepHeight;
+				if (gap > 0 && gapFilling < gap) {
+					gapFilling++;
+					actualStepHeight++;
 				}
+				if (startToFinish) {
+					g.setColor(gradient[i]);
+				} else {
+					g.setColor(gradient[(gradient.length - 1) - i]);
+				}
+				g.fillRect(xStart, currentY, xWidth, actualStepHeight);
+				currentY += actualStepHeight;
 			}
 		}
-		else
-		{
-			if (horizontal) {
-				final int stepWidth = xWidth / nbSteps;
-				// if the nb of colors in gradient is not a divider of the width
-				// of the drawing area there will be a gap that we will need to compensate for
-				final int gap = xWidth - (nbSteps * stepWidth);
-
-				int currentX = xStart;
-				int gapFilling = 0;
-				for (int i = 0; i < nbSteps; i++) {
-					int actualStepWidth = stepWidth;
-					if (gap > 0 && gapFilling < gap) {
-						gapFilling++;
-						actualStepWidth++;
-					}
-					if (startToFinish) {
-						g.setColor(gradient[i]);
-					} else {
-						g.setColor(gradient[(gradient.length - 1) - i]);
-					}
-					g.fillRect(currentX, yStart, actualStepWidth, yHeight);
-					currentX += actualStepWidth;
-				}
-			} else {
-				final int stepHeight = yHeight / nbSteps;
-				// if the nb of colors in gradient is not a divider of the width
-				// of the drawing area there will be a gap that we will need to compensate for
-				final int gap = yHeight - (nbSteps * stepHeight);
-
-				int currentY = yStart;
-				int gapFilling = 0;
-				for (int i = 0; i < nbSteps; i++) {
-					int actualStepHeight = stepHeight;
-					if (gap > 0 && gapFilling < gap) {
-						gapFilling++;
-						actualStepHeight++;
-					}
-					if (startToFinish) {
-						g.setColor(gradient[i]);
-					} else {
-						g.setColor(gradient[(gradient.length - 1) - i]);
-					}
-					g.fillRect(xStart, currentY, xWidth, actualStepHeight);
-					currentY += actualStepHeight;
-				}
-			}
-
-		}
-
 	}
-
+	
 	public static int[] getGradient(GraphicsContext g, int startColor, int endColor) {
 		// get color components
 		float currentRed = ColorHelper.getRed(startColor);
