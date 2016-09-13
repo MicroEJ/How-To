@@ -26,37 +26,48 @@ public class Gradient extends Displayable {
 	
 	public void paint(GraphicsContext g) {
 
+		final int DISPLAY_WIDTH = getDisplay().getWidth();
+		final int DISPLAY_HEIGHT = getDisplay().getHeight();
+
 		// draw gradient on areas smaller than the number of colors in
 		// the gradient
 		{
-			int[] greenToWhiteGradient = getGradient(g, Colors.GREEN, Colors.WHITE);
-			drawGradientLeftToRight(g, greenToWhiteGradient, 0, 0, 16, getDisplay().getHeight() / 2);
+			int[] tealToWhiteGradient = getGradient(g, Colors.TEAL, Colors.WHITE);
+			drawGradientLeftToRight(g, tealToWhiteGradient, 0, 0, 16, DISPLAY_HEIGHT / 2);
 
 			int[] whiteToRedGradient = getGradient(g, Colors.WHITE, Colors.RED);
-			drawGradientLeftToRight(g, whiteToRedGradient, 16, 0, 48, getDisplay().getHeight() / 2);
+			drawGradientLeftToRight(g, whiteToRedGradient, 16, 0, 48, DISPLAY_HEIGHT / 2);
 		}
 
 		// draw gradient on areas with more columns than the number of
 		// colors in the gradient
 		{
 			int[] redToWhiteGradient = getGradient(g, Colors.RED, Colors.WHITE);
-			drawGradientLeftToRight(g, redToWhiteGradient, 48, 0, getDisplay().getWidth() / 2,
-					getDisplay().getHeight() / 2);
+			drawGradientLeftToRight(g, redToWhiteGradient, 48, 0, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2);
 
 			int[] whiteToBlueGradient = getGradient(g, Colors.WHITE, Colors.BLUE);
-			drawGradientLeftToRight(g, whiteToBlueGradient, getDisplay().getWidth() / 2, 0, getDisplay().getWidth(),
-					getDisplay().getHeight() / 2);
+			drawGradientLeftToRight(g, whiteToBlueGradient, getDisplay().getWidth() / 2, 0, DISPLAY_WIDTH -48, DISPLAY_HEIGHT / 2);
+		}
+
+		// draw gradient on areas smaller than the number of colors in
+		// the gradient
+		{
+			int[] blueToWhiteGradient = getGradient(g, Colors.BLUE, Colors.WHITE);
+			drawGradientLeftToRight(g, blueToWhiteGradient, DISPLAY_WIDTH -48, 0, DISPLAY_WIDTH -16 , DISPLAY_HEIGHT / 2);
+
+			int[] whiteToMagentaGradient = getGradient(g, Colors.WHITE, Colors.MAGENTA);
+			drawGradientLeftToRight(g, whiteToMagentaGradient, DISPLAY_WIDTH -16, 0, DISPLAY_WIDTH , DISPLAY_HEIGHT / 2);
 		}
 
 		// draw gradient
 		// * from right to left
+		// * from left to right
 		// * from top to bottom
 		{
 			int[] whiteToBlackGradient = getGradient(g, Colors.WHITE, Colors.BLACK);
-			drawGradientRightToLeft(g, whiteToBlackGradient, 0, getDisplay().getHeight() / 2, getDisplay().getWidth(),
-					getDisplay().getHeight() / 4 * 3);
-			drawGradientTopToBottom(g, whiteToBlackGradient, 0, getDisplay().getHeight() / 4 * 3, getDisplay().getWidth(),
-					getDisplay().getHeight());
+			drawGradientRightToLeft(g, whiteToBlackGradient, 0, DISPLAY_HEIGHT / 2, DISPLAY_WIDTH/2 , 3 * DISPLAY_HEIGHT / 4 );
+			drawGradientLeftToRight(g, whiteToBlackGradient, DISPLAY_WIDTH/2, DISPLAY_HEIGHT / 2, DISPLAY_WIDTH , 3 * DISPLAY_HEIGHT / 4 );
+			drawGradientTopToBottom(g, whiteToBlackGradient, 0, 3 * DISPLAY_HEIGHT / 4 , DISPLAY_WIDTH,DISPLAY_HEIGHT);
 		}
 
 	}
