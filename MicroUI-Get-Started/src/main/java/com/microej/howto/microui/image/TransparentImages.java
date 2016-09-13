@@ -19,45 +19,41 @@ import ej.microui.util.EventHandler;
 /**
  * This class shows how to render an image using alpha blending
  */
-public class TransparentImages {
+public class TransparentImages extends Displayable {
 
-	public void display() {
-		// We will need to access the display to draw stuff
-		final Display display = Display.getDefaultDisplay();
+	public TransparentImages(Display display) {
+		super(display);
+	}
 
-		// A displayable is an object that will be drawn on the display
-		Displayable displayable = new Displayable(display) {
-			@Override
-			public void paint(GraphicsContext g) {
+	@Override
+	public void paint(GraphicsContext g) {
 
-				// fill up background with black
-				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, display.getWidth(), display.getHeight());
+		final int DISPLAY_WIDTH = getDisplay().getWidth();
+		final int DISPLAY_HEIGHT = getDisplay().getHeight();
 
-				// fill up half the area with white
-				g.setColor(Colors.WHITE);
-				g.fillRect(0, 0, display.getWidth()/2, display.getHeight());
+		// fill up background with black
+		g.setColor(Colors.BLACK);
+		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
-				// draw transparent image at the center
-				try {
-					Image microejImage = Image.createImage("/images/microej.png");
-					g.drawImage(microejImage, display.getWidth() / 2, display.getHeight() / 2,
-							GraphicsContext.HCENTER | GraphicsContext.VCENTER, GraphicsContext.OPAQUE / 2);
-				} catch (IOException e) {
-					throw new AssertionError(e);
-				}
+		// fill up half the area with white
+		g.setColor(Colors.WHITE);
+		g.fillRect(0, 0, DISPLAY_WIDTH/2, DISPLAY_HEIGHT);
 
-			}
+		// draw transparent image at the center
+		try {
+			Image microejImage = Image.createImage("/images/microej.png");
+			g.drawImage(microejImage, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2,
+					GraphicsContext.HCENTER | GraphicsContext.VCENTER, GraphicsContext.OPAQUE / 2);
+		} catch (IOException e) {
+			throw new AssertionError(e);
+		}
 
-			@Override
-			public EventHandler getController() {
-				// No event handling is required for this sample.
-				
-				return null;
-			}
-		};
+	}
 
-		displayable.show();
+	@Override
+	public EventHandler getController() {
+		// No event handling is required for this sample.
+		return null;
 	}
 
 	/**
@@ -71,8 +67,11 @@ public class TransparentImages {
 		// runtime environment
 		MicroUI.start();
 
-		TransparentImages transparentImages = new TransparentImages();
-		transparentImages.display();
+		// We will need to access the display to draw stuff
+		final Display display = Display.getDefaultDisplay();
+
+		TransparentImages transparentImages = new TransparentImages(display);
+		transparentImages.show();
 	}
 
 }

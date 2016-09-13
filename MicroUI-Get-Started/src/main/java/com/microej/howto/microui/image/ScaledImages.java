@@ -22,63 +22,57 @@ import ej.microui.util.EventHandler;
  * This class shows how to use the ImageScale utility class.
  * The example draws an image scaled up to the display smallest axis
  */
-public class ScaledImages {
+public class ScaledImages extends Displayable {
 
-	public void display() {
-		// We will need to access the display to draw stuff
-		final Display display = Display.getDefaultDisplay();
+	public ScaledImages(Display display) {
+		super(display);
+	}
 
-		// A displayable is an object that will be drawn on the display
-		Displayable displayable = new Displayable(display) {
-			@Override
-			public void paint(GraphicsContext g) {
+	@Override
+	public void paint(GraphicsContext g) {
 
-				final int DISPLAY_WIDTH = display.getWidth();
-				final int DISPLAY_HEIGHT = display.getHeight();
+		final int DISPLAY_WIDTH = getDisplay().getWidth();
+		final int DISPLAY_HEIGHT = getDisplay().getHeight();
 
-				// fill up background with black
-				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+		// fill up background with black
+		g.setColor(Colors.BLACK);
+		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 
-				try {
-					Image microejImage = Image.createImage("/images/microej.png");
+		try {
+			Image microejImage = Image.createImage("/images/microej.png");
 
-					final int IMAGE_WIDTH = microejImage.getWidth();
-					final int IMAGE_HEIGHT = microejImage.getHeight();
+			final int IMAGE_WIDTH = microejImage.getWidth();
+			final int IMAGE_HEIGHT = microejImage.getHeight();
 
-					// compute scaling factors on both dimensions					
-					final float horizontalScalingFactor = DISPLAY_WIDTH / IMAGE_WIDTH;
-					final float verticalScalingFactor = DISPLAY_HEIGHT / IMAGE_HEIGHT;
-					// keep only the smallest one
-					final float actualScalingFactor = Math.min(horizontalScalingFactor, verticalScalingFactor);
-					
-					// compute image top left anchor
-					final int imageWidthScaled = (int) (IMAGE_WIDTH * actualScalingFactor);
-					final int imageHeightScaled = (int) (IMAGE_HEIGHT * actualScalingFactor);
-					final int anchorX = (DISPLAY_WIDTH - imageWidthScaled) / 2;
-					final int anchorY = (DISPLAY_HEIGHT - imageHeightScaled) / 2;
+			// compute scaling factors on both dimensions					
+			final float horizontalScalingFactor = DISPLAY_WIDTH / IMAGE_WIDTH;
+			final float verticalScalingFactor = DISPLAY_HEIGHT / IMAGE_HEIGHT;
+			// keep only the smallest one
+			final float actualScalingFactor = Math.min(horizontalScalingFactor, verticalScalingFactor);
+			
+			// compute image top left anchor
+			final int imageWidthScaled = (int) (IMAGE_WIDTH * actualScalingFactor);
+			final int imageHeightScaled = (int) (IMAGE_HEIGHT * actualScalingFactor);
+			final int anchorX = (DISPLAY_WIDTH - imageWidthScaled) / 2;
+			final int anchorY = (DISPLAY_HEIGHT - imageHeightScaled) / 2;
 
-					// draw scaled image
-					ImageScale.Singleton.setFactor(actualScalingFactor);
-					ImageScale.Singleton.draw(g, microejImage, anchorX, anchorY,
-							GraphicsContext.TOP | GraphicsContext.LEFT);
+			// draw scaled image
+			ImageScale.Singleton.setFactor(actualScalingFactor);
+			ImageScale.Singleton.draw(g, microejImage, anchorX, anchorY,
+					GraphicsContext.TOP | GraphicsContext.LEFT);
 
-				} catch (IOException e) {
-					throw new AssertionError(e);
-				}
+		} catch (IOException e) {
+			throw new AssertionError(e);
+		}
 
-			}
+	}
 
-			@Override
-			public EventHandler getController() {
-				// No event handling is required for this sample.
-				
-				return null;
-			}
-		};
-
-		displayable.show();
+	@Override
+	public EventHandler getController() {
+		// No event handling is required for this sample.
+		
+		return null;
 	}
 
 	/**
@@ -92,8 +86,11 @@ public class ScaledImages {
 		// runtime environment
 		MicroUI.start();
 
-		ScaledImages scaledImages = new ScaledImages();
-		scaledImages.display();
+		// We will need to access the display to draw stuff
+		final Display display = Display.getDefaultDisplay();
+
+		ScaledImages scaledImages = new ScaledImages(display);
+		scaledImages.show();
 	}
 
 }

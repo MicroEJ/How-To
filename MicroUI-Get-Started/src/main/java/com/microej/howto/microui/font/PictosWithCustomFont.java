@@ -22,11 +22,14 @@ import ej.microui.util.EventHandler;
  * @see <b><code>Help > Help Contents > Font Designer User Guide</code></b> for
  *      indications on how to create a MicroEJ font
  */
-public class PictosWithCustomFont {
+public class PictosWithCustomFont extends Displayable {
 
 	private static final int CUSTOM_FONT_ID = 81;
 	private static final int CUSTOM_FONT_SIZE = 32;
 
+	public PictosWithCustomFont(Display display) {
+		super(display);
+	}
 	/**
 	 * We use the range 0xF04A-0xF04E, it matches the picto positions defined in
 	 * media-player-pictos-32px.ejf.
@@ -34,13 +37,7 @@ public class PictosWithCustomFont {
 	private static final char PICTO_START = 0xF04A;
 	private static final char PICTO_END = 0xF04E;
 
-	public void display() {
-		final Display display = Display.getDefaultDisplay();
-
-		final Font myCustomFont = Font.getFont(CUSTOM_FONT_ID, CUSTOM_FONT_SIZE, Font.STYLE_PLAIN);
-		if (myCustomFont == Font.getDefaultFont()) {
-			System.out.println("Unable to find custom font! Using default font instead");
-		}
+	public String getMessage() {
 
 		final StringBuilder messageBuilder = new StringBuilder();
 		for (char pictoId = PICTO_START; pictoId <= PICTO_END; pictoId++) {
@@ -49,43 +46,45 @@ public class PictosWithCustomFont {
 				messageBuilder.append(" ");
 			}
 		}
-		final String message = messageBuilder.toString();
 
+		return messageBuilder.toString();
+	}
 
-		// A displayable is an object that will be drawn on the display
-		Displayable displayable = new Displayable(display) {
-			@Override
-			public void paint(GraphicsContext g) {
+	@Override
+	public void paint(GraphicsContext g) {
 
-				final int DISPLAY_WIDTH = display.getWidth();
-				final int DISPLAY_HEIGHT = display.getHeight();
+		final int DISPLAY_WIDTH = getDisplay().getWidth();
+		final int DISPLAY_HEIGHT = getDisplay().getHeight();
 
-				// fill up background with black
-				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+		// fill up background with black
+		g.setColor(Colors.BLACK);
+		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
-				g.setFont(myCustomFont);
-				// use White color to render text
-				g.setColor(Colors.WHITE);
+		final Font myCustomFont = Font.getFont(CUSTOM_FONT_ID, CUSTOM_FONT_SIZE, Font.STYLE_PLAIN);
+		if (myCustomFont == Font.getDefaultFont()) {
+			System.out.println("Unable to find custom font! Using default font instead");
+		}
 
-				g.drawString(message, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 4,
-						GraphicsContext.HCENTER | GraphicsContext.VCENTER);
+		g.setFont(myCustomFont);
+		// use White color to render text
+		g.setColor(Colors.WHITE);
 
-				// use Yellow color to render text
-				g.setColor(Colors.YELLOW);
-				g.drawString(message, DISPLAY_WIDTH / 2, (DISPLAY_HEIGHT / 4) * 3,
-						GraphicsContext.HCENTER | GraphicsContext.VCENTER);
+		final String message = getMessage();
+		
+		g.drawString(message, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 4,
+				GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
-			}
+		// use Yellow color to render text
+		g.setColor(Colors.YELLOW);
+		g.drawString(message, DISPLAY_WIDTH / 2, (DISPLAY_HEIGHT / 4) * 3,
+				GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
-			@Override
-			public EventHandler getController() {
-				// No event handling is required for this sample.
-				return null;
-			}
-		};
+	}
 
-		displayable.show();
+	@Override
+	public EventHandler getController() {
+		// No event handling is required for this sample.
+		return null;
 	}
 
 	/**
@@ -99,8 +98,11 @@ public class PictosWithCustomFont {
 		// runtime environment
 		MicroUI.start();
 
-		PictosWithCustomFont sample = new PictosWithCustomFont();
-		sample.display();
+		// We will need to access the display to draw stuff
+		final Display display = Display.getDefaultDisplay();
+
+		PictosWithCustomFont sample = new PictosWithCustomFont(display);
+		sample.show();
 	}
 
 }

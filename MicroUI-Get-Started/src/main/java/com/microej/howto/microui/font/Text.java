@@ -20,39 +20,33 @@ import ej.microui.util.EventHandler;
  * Note that default font use 1 bit per pixel (bpp) only and therefore does not support antialiasing.
  * On displays supporting 16 bpp, such limited fonts are not really suitable.
  */
-public class Text {
+public class Text extends Displayable{
 
-	public void display() {
-		// We will need to access the display to draw stuff
-		final Display display = Display.getDefaultDisplay();
+	public Text(Display display) {
+		super(display);
+	}
 
-		// A displayable is an object that will be drawn on the display
-		Displayable displayable = new Displayable(display) {
-			@Override
-			public void paint(GraphicsContext g) {
+	@Override
+	public void paint(GraphicsContext g) {
 
-				final int DISPLAY_WIDTH = display.getWidth();
-				final int DISPLAY_HEIGHT = display.getHeight();
+		final int DISPLAY_WIDTH = getDisplay().getWidth();
+		final int DISPLAY_HEIGHT = getDisplay().getHeight();
 
-				// fill up background with black
-				g.setColor(Colors.BLACK);
-				g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+		// fill up background with black
+		g.setColor(Colors.BLACK);
+		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
-				// use White color to render text
-				g.setColor(Colors.WHITE);
-				g.drawString("Hello World !", DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2,
-						GraphicsContext.HCENTER | GraphicsContext.VCENTER);
+		// use White color to render text
+		g.setColor(Colors.WHITE);
+		g.drawString("Hello World !", DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2,
+				GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
-			}
+	}
 
-			@Override
-			public EventHandler getController() {
-				// No event handling is required for this sample.
-				return null;
-			}
-		};
-
-		displayable.show();
+	@Override
+	public EventHandler getController() {
+		// No event handling is required for this sample.
+		return null;
 	}
 
 	/**
@@ -66,8 +60,11 @@ public class Text {
 		// runtime environment
 		MicroUI.start();
 
-		Text sample = new Text();
-		sample.display();
+		// We will need to access the display to draw stuff
+		final Display display = Display.getDefaultDisplay();
+
+		Text sample = new Text(display);
+		sample.show();
 	}
 
 }
