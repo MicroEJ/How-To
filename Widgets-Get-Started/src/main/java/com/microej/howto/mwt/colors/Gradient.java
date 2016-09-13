@@ -18,58 +18,53 @@ import ej.microui.util.EventHandler;
 /**
  * This class shows how to create and draw a gradient
  */
-public class Gradient {
+public class Gradient extends Displayable {
 
-	public void display() {
-		final Display display = Display.getDefaultDisplay();
+	public Gradient(Display display) {
+		super(display);
+	}
+	
+	public void paint(GraphicsContext g) {
 
-		Displayable displayable = new Displayable(display) {
-			@Override
-			public void paint(GraphicsContext g) {
+		// draw gradient on areas smaller than the number of colors in
+		// the gradient
+		{
+			int[] greenToWhiteGradient = getGradient(g, Colors.GREEN, Colors.WHITE);
+			drawGradientLeftToRight(g, greenToWhiteGradient, 0, 0, 16, getDisplay().getHeight() / 2);
 
-				// draw gradient on areas smaller than the number of colors in
-				// the gradient
-				{
-					int[] greenToWhiteGradient = getGradient(g, Colors.GREEN, Colors.WHITE);
-					drawGradientLeftToRight(g, greenToWhiteGradient, 0, 0, 16, display.getHeight() / 2);
+			int[] whiteToRedGradient = getGradient(g, Colors.WHITE, Colors.RED);
+			drawGradientLeftToRight(g, whiteToRedGradient, 16, 0, 48, getDisplay().getHeight() / 2);
+		}
 
-					int[] whiteToRedGradient = getGradient(g, Colors.WHITE, Colors.RED);
-					drawGradientLeftToRight(g, whiteToRedGradient, 16, 0, 48, display.getHeight() / 2);
-				}
+		// draw gradient on areas with more columns than the number of
+		// colors in the gradient
+		{
+			int[] redToWhiteGradient = getGradient(g, Colors.RED, Colors.WHITE);
+			drawGradientLeftToRight(g, redToWhiteGradient, 48, 0, getDisplay().getWidth() / 2,
+					getDisplay().getHeight() / 2);
 
-				// draw gradient on areas with more columns than the number of
-				// colors in the gradient
-				{
-					int[] redToWhiteGradient = getGradient(g, Colors.RED, Colors.WHITE);
-					drawGradientLeftToRight(g, redToWhiteGradient, 48, 0, display.getWidth() / 2,
-							display.getHeight() / 2);
+			int[] whiteToBlueGradient = getGradient(g, Colors.WHITE, Colors.BLUE);
+			drawGradientLeftToRight(g, whiteToBlueGradient, getDisplay().getWidth() / 2, 0, getDisplay().getWidth(),
+					getDisplay().getHeight() / 2);
+		}
 
-					int[] whiteToBlueGradient = getGradient(g, Colors.WHITE, Colors.BLUE);
-					drawGradientLeftToRight(g, whiteToBlueGradient, display.getWidth() / 2, 0, display.getWidth(),
-							display.getHeight() / 2);
-				}
+		// draw gradient
+		// * from right to left
+		// * from top to bottom
+		{
+			int[] whiteToBlackGradient = getGradient(g, Colors.WHITE, Colors.BLACK);
+			drawGradientRightToLeft(g, whiteToBlackGradient, 0, getDisplay().getHeight() / 2, getDisplay().getWidth(),
+					getDisplay().getHeight() / 4 * 3);
+			drawGradientTopToBottom(g, whiteToBlackGradient, 0, getDisplay().getHeight() / 4 * 3, getDisplay().getWidth(),
+					getDisplay().getHeight());
+		}
 
-				// draw gradient
-				// * from right to left
-				// * from top to bottom
-				{
-					int[] whiteToBlackGradient = getGradient(g, Colors.WHITE, Colors.BLACK);
-					drawGradientRightToLeft(g, whiteToBlackGradient, 0, display.getHeight() / 2, display.getWidth(),
-							display.getHeight() / 4 * 3);
-					drawGradientTopToBottom(g, whiteToBlackGradient, 0, display.getHeight() / 4 * 3, display.getWidth(),
-							display.getHeight());
-				}
+	}
 
-			}
-
-			@Override
-			public EventHandler getController() {
-				// No event handling is required for this sample
-				return null;
-			}
-		};
-
-		displayable.show();
+	@Override
+	public EventHandler getController() {
+		// No event handling is required for this sample
+		return null;
 	}
 
 	public static void drawGradientTopToBottom(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd,
@@ -318,8 +313,11 @@ public class Gradient {
 	public static void main(String[] args) {
 		MicroUI.start();
 
-		Gradient sample = new Gradient();
-		sample.display();
+		// We will need to access the display to draw stuff
+		final Display display = Display.getDefaultDisplay();
+
+		Gradient sample = new Gradient(display);
+		sample.show();
 	}
 
 }
