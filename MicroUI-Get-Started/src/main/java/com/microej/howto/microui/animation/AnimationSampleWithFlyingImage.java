@@ -131,6 +131,8 @@ public class AnimationSampleWithFlyingImage extends Displayable {
 		// A call to MicroUI.start is required to initialize the graphics
 		// runtime environment
 		MicroUI.start();
+
+		// We will need to access the display to draw stuff
 		final Display display = Display.getDefaultDisplay();
 
 		AnimationSampleWithFlyingImage animationSample = new AnimationSampleWithFlyingImage(display);
