@@ -28,46 +28,46 @@ public class Gradient extends Displayable {
 
 		final int DISPLAY_WIDTH = getDisplay().getWidth();
 		final int DISPLAY_HEIGHT = getDisplay().getHeight();
+		final int THREE_QUARTERS_HEIGHT = 3 * DISPLAY_HEIGHT / 4;
+		final int QUARTER_HEIGHT = DISPLAY_HEIGHT / 4;
+		final int HALF_WIDTH = DISPLAY_WIDTH / 2;
+		final int SMALL_GRADIENT_WIDTH = 32;
+		final int MEDIUM_GRADIENT_WIDTH = 64;
+		final int SMALL_PLUS_MEDIUM_GRADIENT_WIDTH = SMALL_GRADIENT_WIDTH + MEDIUM_GRADIENT_WIDTH ;
+		
+		int[] redToWhiteGradient = getGradient(g, Colors.RED, Colors.WHITE);
+		int[] tealToWhiteGradient = getGradient(g, Colors.TEAL, Colors.WHITE);
+		int[] whiteToBlackGradient = getGradient(g, Colors.WHITE, Colors.BLACK);
+		int[] whiteToMagentaGradient = getGradient(g, Colors.WHITE, Colors.MAGENTA);
+		int[] whiteToBlueGradient = getGradient(g, Colors.WHITE, Colors.BLUE);
 
-		// draw gradient on areas smaller than the number of colors in
-		// the gradient
+		// draw small width gradient
 		{
-			int[] tealToWhiteGradient = getGradient(g, Colors.TEAL, Colors.WHITE);
-			drawGradientLeftToRight(g, tealToWhiteGradient, 0, 0, 16, DISPLAY_HEIGHT / 2);
-
-			int[] whiteToRedGradient = getGradient(g, Colors.WHITE, Colors.RED);
-			drawGradientLeftToRight(g, whiteToRedGradient, 16, 0, 48, DISPLAY_HEIGHT / 2);
+			drawGradientLeftToRight(g, tealToWhiteGradient, 0, 0, SMALL_GRADIENT_WIDTH, THREE_QUARTERS_HEIGHT);
+			drawGradientLeftToRight(g, whiteToMagentaGradient, DISPLAY_WIDTH - SMALL_GRADIENT_WIDTH, 0, DISPLAY_WIDTH , THREE_QUARTERS_HEIGHT);			
 		}
 
-		// draw gradient on areas with more columns than the number of
-		// colors in the gradient
+		// draw medium width gradient
 		{
-			int[] redToWhiteGradient = getGradient(g, Colors.RED, Colors.WHITE);
-			drawGradientLeftToRight(g, redToWhiteGradient, 48, 0, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2);
+			drawGradientLeftToRight(g, whiteToBlackGradient, SMALL_GRADIENT_WIDTH, 0, SMALL_PLUS_MEDIUM_GRADIENT_WIDTH, QUARTER_HEIGHT);
+			drawGradientRightToLeft(g, whiteToBlackGradient, DISPLAY_WIDTH - SMALL_PLUS_MEDIUM_GRADIENT_WIDTH, 0, DISPLAY_WIDTH - SMALL_GRADIENT_WIDTH , QUARTER_HEIGHT);
+			drawGradientRightToLeft(g, redToWhiteGradient, SMALL_GRADIENT_WIDTH, QUARTER_HEIGHT, SMALL_PLUS_MEDIUM_GRADIENT_WIDTH, THREE_QUARTERS_HEIGHT);
+			drawGradientRightToLeft(g, whiteToBlueGradient, DISPLAY_WIDTH - SMALL_PLUS_MEDIUM_GRADIENT_WIDTH, QUARTER_HEIGHT, DISPLAY_WIDTH - SMALL_GRADIENT_WIDTH , THREE_QUARTERS_HEIGHT);
+		}
+		
+		//draw large width gradient
+		{
+			drawGradientLeftToRight(g, whiteToBlackGradient, HALF_WIDTH, 0, DISPLAY_WIDTH - SMALL_PLUS_MEDIUM_GRADIENT_WIDTH  , QUARTER_HEIGHT );
+			drawGradientRightToLeft(g, whiteToBlackGradient, SMALL_PLUS_MEDIUM_GRADIENT_WIDTH, 0, HALF_WIDTH , QUARTER_HEIGHT );
 
-			int[] whiteToBlueGradient = getGradient(g, Colors.WHITE, Colors.BLUE);
-			drawGradientLeftToRight(g, whiteToBlueGradient, getDisplay().getWidth() / 2, 0, DISPLAY_WIDTH -48, DISPLAY_HEIGHT / 2);
+			drawGradientLeftToRight(g, whiteToBlueGradient, HALF_WIDTH, QUARTER_HEIGHT, DISPLAY_WIDTH - SMALL_PLUS_MEDIUM_GRADIENT_WIDTH, THREE_QUARTERS_HEIGHT);
+			drawGradientLeftToRight(g, redToWhiteGradient, SMALL_PLUS_MEDIUM_GRADIENT_WIDTH, QUARTER_HEIGHT, HALF_WIDTH, THREE_QUARTERS_HEIGHT);
 		}
 
-		// draw gradient on areas smaller than the number of colors in
-		// the gradient
-		{
-			int[] blueToWhiteGradient = getGradient(g, Colors.BLUE, Colors.WHITE);
-			drawGradientLeftToRight(g, blueToWhiteGradient, DISPLAY_WIDTH -48, 0, DISPLAY_WIDTH -16 , DISPLAY_HEIGHT / 2);
 
-			int[] whiteToMagentaGradient = getGradient(g, Colors.WHITE, Colors.MAGENTA);
-			drawGradientLeftToRight(g, whiteToMagentaGradient, DISPLAY_WIDTH -16, 0, DISPLAY_WIDTH , DISPLAY_HEIGHT / 2);
-		}
-
-		// draw gradient
-		// * from right to left
-		// * from left to right
-		// * from top to bottom
+		// from top to bottom
 		{
-			int[] whiteToBlackGradient = getGradient(g, Colors.WHITE, Colors.BLACK);
-			drawGradientRightToLeft(g, whiteToBlackGradient, 0, DISPLAY_HEIGHT / 2, DISPLAY_WIDTH/2 , 3 * DISPLAY_HEIGHT / 4 );
-			drawGradientLeftToRight(g, whiteToBlackGradient, DISPLAY_WIDTH/2, DISPLAY_HEIGHT / 2, DISPLAY_WIDTH , 3 * DISPLAY_HEIGHT / 4 );
-			drawGradientTopToBottom(g, whiteToBlackGradient, 0, 3 * DISPLAY_HEIGHT / 4 , DISPLAY_WIDTH,DISPLAY_HEIGHT);
+			drawGradientTopToBottom(g, whiteToBlackGradient, 0, THREE_QUARTERS_HEIGHT , DISPLAY_WIDTH,DISPLAY_HEIGHT);
 		}
 
 	}
