@@ -14,16 +14,20 @@ import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.microui.display.Display;
 import ej.microui.display.Displayable;
+import ej.microui.display.FlyingImage;
 import ej.microui.display.GraphicsContext;
 import ej.microui.display.Image;
 import ej.microui.util.EventHandler;
 
 /**
- * This class shows how to create an animation using MicroUI and TimerTask
+ * This class shows how to create an animation using MicroUI and TimerTask.<p/>
  *
- * It will draw the MicroEJ robot moving from one side of the screen to the other.
+ * It will draw the MicroEJ robot moving from one side of the screen to the other.<p/>
  *
- * Note that the whole display is redrawn on every frame
+ * Note that the whole display is redrawn on every frame.<p/>
+ *
+ * @see FlyingImage
+ * @see TimerTask
  */
 public class AnimationSampleWithFullRepaint extends Displayable {
 

@@ -20,11 +20,14 @@ import ej.microui.display.Image;
 import ej.microui.util.EventHandler;
 
 /**
- * This class shows how to create an animation using MicroUI Flying Images and TimerTask.
- * 
- * It will draw the MicroEJ robot moving from one side of the screen to the other.
+ * This class shows how to create an animation using MicroUI Flying Images and TimerTask.<p/>
  *
- * Note that the whole display is NOT redrawn on every frame
+ * It will draw the MicroEJ robot moving from one side of the screen to the other.<p/>
+ *
+ * Note that the whole display is NOT redrawn on every frame.<p/>
+ *
+ * @see FlyingImage
+ * @see TimerTask
  */
 public class AnimationSampleWithFlyingImage extends Displayable {
 
