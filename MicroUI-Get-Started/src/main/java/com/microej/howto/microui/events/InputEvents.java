@@ -34,7 +34,7 @@ public class InputEvents extends Displayable implements EventHandler {
 		nbClicks = 0;
 		pointerX = 0;
 		pointerY = 0;
-		this.message = "Touch the screen !";
+		this.message = "Touch the screen!";
 	}
 
 	@Override
