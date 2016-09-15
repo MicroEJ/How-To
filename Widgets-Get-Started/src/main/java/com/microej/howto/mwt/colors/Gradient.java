@@ -144,17 +144,17 @@ public class Gradient extends Displayable {
 
 		int nbSteps = 0;
 
-		boolean gradientIsBiggerThanDirection = false;
+		boolean gradientIsBiggerThanSide = false;
 		if (xWidth > gradient.length) {
 			nbSteps = gradient.length;
 		} else {
-			gradientIsBiggerThanDirection = true;
+			gradientIsBiggerThanSide = true;
 			nbSteps = xWidth;
 		}
 
 		float colorIndex = startToFinish ? 0 : gradient.length - 1;
 
-		if ( gradientIsBiggerThanDirection )
+		if ( gradientIsBiggerThanSide )
 		{
 			final float colorStep = (float)gradient.length / (float)nbSteps;
 
@@ -229,18 +229,18 @@ public class Gradient extends Displayable {
 
 		int nbSteps = 0;
 
-		boolean gradientIsBiggerThanDirection = false;
+		boolean gradientIsBiggerThanSide = false;
 
 		if (yHeight > gradient.length) {
 			nbSteps = gradient.length;
 		} else {
-			gradientIsBiggerThanDirection = true;
+			gradientIsBiggerThanSide = true;
 			nbSteps = yHeight;
 		}
 
 		float colorIndex = startToFinish ? 0 : gradient.length - 1;
 
-		if ( gradientIsBiggerThanDirection )
+		if ( gradientIsBiggerThanSide )
 		{
 			final float colorStep = (float)gradient.length / (float)nbSteps;
 
