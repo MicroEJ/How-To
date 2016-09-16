@@ -68,8 +68,8 @@ public class Primitives extends Displayable {
 
 			final int rectangleWidth = DISPLAY_WIDTH / 3;
 			final int rectangleHeight = DISPLAY_HEIGHT / 3;
-			final int arcHeight = 20;
-			final int arcWidth = 20 * (DISPLAY_WIDTH / DISPLAY_HEIGHT);
+			final int arcHeight = 40;
+			final int arcWidth = 40 * (DISPLAY_WIDTH / DISPLAY_HEIGHT);
 
 			// Note that x and y parameters are the top left coordinates
 			// of the rectangle bounding box.
@@ -109,7 +109,9 @@ public class Primitives extends Displayable {
 			// has to be applied to center the circle on the display
 			final int x = displayCenterX - radius;
 			final int y = displayCenterY - radius;
-			g.fillCircleArc(x, y, diameter, 25, 310);
+			final int startAngle = 25;
+			final int arcAngle = 310;
+			g.fillCircleArc(x, y, diameter, startAngle, arcAngle);
 		}
 
 		{ // draw a triangle at the center of the area
