@@ -7,6 +7,8 @@
 package com.microej.howto.microui.drawing;
 
 
+import com.microej.howto.microui.MicroEJColors;
+
 import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.microui.display.Display;
@@ -33,20 +35,20 @@ public class Primitives extends Displayable {
 		final int displayCenterY = DISPLAY_HEIGHT / 2;
 
 		// fill up background with black
-		g.setColor(Colors.BLACK);
+		g.setColor(MicroEJColors.CONCRETE_BLACK_75);
 		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 		// fill up half the area with white
-		g.setColor(Colors.WHITE);
+		g.setColor(MicroEJColors.WHITE);
 		g.fillRect(0, 0, DISPLAY_WIDTH/2, DISPLAY_HEIGHT);
 
-		// draw a gray line across the area diagonal
-		g.setColor(Colors.GRAY);
+		// draw a line across the area diagonal
+		g.setColor(MicroEJColors.TURQUOISE);
 		g.setStrokeStyle(GraphicsContext.SOLID);
 		g.drawLine(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
-		{ // draw a maroon circle at the center of the area
-			g.setColor(Colors.MAROON);
+		{ // draw a circle at the center of the area
+			g.setColor(MicroEJColors.CORAL);
 
 			final int diameter = DISPLAY_WIDTH / 2;
 
@@ -61,13 +63,13 @@ public class Primitives extends Displayable {
 			g.fillCircle(x, y, diameter);
 		}
 
-		{ // draw a red rounded rectangle at the center of the area
-			g.setColor(Colors.RED);
+		{ // draw a rounded rectangle at the center of the area
+			g.setColor(MicroEJColors.POMEGRANATE);
 
 			final int rectangleWidth = DISPLAY_WIDTH / 3;
 			final int rectangleHeight = DISPLAY_HEIGHT / 3;
-			final int arcHeight = 20;
-			final int arcWidth = 20 * (DISPLAY_WIDTH / DISPLAY_HEIGHT);
+			final int arcHeight = 40;
+			final int arcWidth = 40 * (DISPLAY_WIDTH / DISPLAY_HEIGHT);
 
 			// Note that x and y parameters are the top left coordinates
 			// of the rectangle bounding box.
@@ -80,8 +82,8 @@ public class Primitives extends Displayable {
 			g.fillRoundRect(x, y, rectangleWidth, rectangleHeight, arcWidth, arcHeight);
 		}
 
-		{ // draw a yellow ellipse at the center of the area
-			g.setColor(Colors.YELLOW);
+		{ // draw an ellipse at the center of the area
+			g.setColor(MicroEJColors.TURQUOISE);
 
 			final int ellipseWidth = DISPLAY_WIDTH / 4;
 			final int ellipseHeight = DISPLAY_HEIGHT / 4;
@@ -95,8 +97,8 @@ public class Primitives extends Displayable {
 			g.fillEllipse(x, y, ellipseWidth, ellipseHeight);
 		}
 
-		{ // draw a blue circle arc at the center of the area
-			g.setColor(Colors.BLUE);
+		{ // draw a circle arc at the center of the area
+			g.setColor(MicroEJColors.BONDI);
 
 			final int diameter = DISPLAY_HEIGHT / 6;
 			final int radius = diameter / 2;
@@ -107,11 +109,13 @@ public class Primitives extends Displayable {
 			// has to be applied to center the circle on the display
 			final int x = displayCenterX - radius;
 			final int y = displayCenterY - radius;
-			g.fillCircleArc(x, y, diameter, 25, 310);
+			final int startAngle = 25;
+			final int arcAngle = 310;
+			g.fillCircleArc(x, y, diameter, startAngle, arcAngle);
 		}
 
-		{ // draw a green triangle at the center of the area
-			g.setColor(Colors.LIME);
+		{ // draw a triangle at the center of the area
+			g.setColor(MicroEJColors.CHICK);
 
 			final int radius = DISPLAY_HEIGHT / 20;
 			final int centerX = displayCenterX;
