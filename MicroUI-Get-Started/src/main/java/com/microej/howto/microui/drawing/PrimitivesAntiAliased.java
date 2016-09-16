@@ -7,8 +7,9 @@
 package com.microej.howto.microui.drawing;
 
 
+import com.microej.howto.microui.MicroEJColors;
+
 import ej.microui.MicroUI;
-import ej.microui.display.Colors;
 import ej.microui.display.Display;
 import ej.microui.display.Displayable;
 import ej.microui.display.GraphicsContext;
@@ -39,16 +40,16 @@ public class PrimitivesAntiAliased extends Displayable {
 		final int displayCenterY = DISPLAY_HEIGHT / 2;
 
 		// fill up background with black
-		g.setColor(Colors.BLACK);
+		g.setColor(MicroEJColors.CONCRETE_BLACK_75);
 		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 		// fill up half the area with white
-		g.setColor(Colors.WHITE);
+		g.setColor(MicroEJColors.WHITE);
 		g.fillRect(0, 0, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT);
 
 		{ // antialiased rendering
 			// draw a gray line across the area diagonal
-			g.setColor(Colors.GRAY);
+			g.setColor(MicroEJColors.TURQUOISE);
 
 			// specify line thickness
 			AntiAliasedShapes.Singleton.setThickness(10);
@@ -58,7 +59,7 @@ public class PrimitivesAntiAliased extends Displayable {
 		}
 
 		{ // draw a maroon circle at the center of the area
-			g.setColor(Colors.MAROON);
+			g.setColor(MicroEJColors.CORAL);
 
 			final int diameter = DISPLAY_WIDTH / 2;
 
@@ -78,8 +79,8 @@ public class PrimitivesAntiAliased extends Displayable {
 				// so we cannot optimize the drawing performed by
 				// AntiAliasedShapes using g.setBackgroundColor(...) API
 
-				AntiAliasedShapes.Singleton.setThickness(9);
 				// specify line thickness
+				AntiAliasedShapes.Singleton.setThickness(9);
 				AntiAliasedShapes.Singleton.setFade(9);
 				AntiAliasedShapes.Singleton.drawCircle(g, x, y, diameter);
 			}
@@ -88,7 +89,7 @@ public class PrimitivesAntiAliased extends Displayable {
 
 		{
 			// draw a red rounded rectangle at the center of the area
-			g.setColor(Colors.RED);
+			g.setColor(MicroEJColors.POMEGRANATE);
 
 			final int rectangleWidth = DISPLAY_WIDTH / 3;
 			final int rectangleHeight = DISPLAY_HEIGHT / 3;
@@ -136,7 +137,7 @@ public class PrimitivesAntiAliased extends Displayable {
 
 		{
 			// draw a yellow ellipse at the center of the area
-			g.setColor(Colors.YELLOW);
+			g.setColor(MicroEJColors.TURQUOISE);
 
 			final int ellipseWidth = DISPLAY_WIDTH / 4;
 			final int ellipseHeight = DISPLAY_HEIGHT / 4;
@@ -154,7 +155,7 @@ public class PrimitivesAntiAliased extends Displayable {
 				// using g.setBackgroundColor(...) API.
 				// This will avoid reading the color of each pixel in memory
 				// before merging it with the foreground color.
-				g.setBackgroundColor(Colors.RED);
+				g.setBackgroundColor(MicroEJColors.TURQUOISE);
 				// specify line thickness
 				AntiAliasedShapes.Singleton.setThickness(8);
 				// specify line thickness
@@ -166,7 +167,7 @@ public class PrimitivesAntiAliased extends Displayable {
 
 		{
 			// draw a blue circle arc at the center of the area
-			g.setColor(Colors.BLUE);
+			g.setColor(MicroEJColors.BONDI);
 
 			final int diameter = DISPLAY_HEIGHT / 6;
 			final int radius = diameter / 2;
@@ -186,7 +187,7 @@ public class PrimitivesAntiAliased extends Displayable {
 				// using g.setBackgroundColor(...) API.
 				// This will avoid reading the color of each pixel in memory
 				// before merging it with the foreground color.
-				g.setBackgroundColor(Colors.YELLOW);
+				g.setBackgroundColor(MicroEJColors.BONDI);
 
 				// specify line thickness
 				AntiAliasedShapes.Singleton.setThickness(6);
@@ -212,7 +213,7 @@ public class PrimitivesAntiAliased extends Displayable {
 		}
 
 		{ // draw a green triangle at the center of the area
-			g.setColor(Colors.LIME);
+			g.setColor(MicroEJColors.CHICK);
 
 			final int radius = DISPLAY_HEIGHT / 20;
 			final int centerX = displayCenterX;
