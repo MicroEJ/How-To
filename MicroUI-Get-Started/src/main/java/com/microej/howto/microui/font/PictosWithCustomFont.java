@@ -7,6 +7,8 @@
 package com.microej.howto.microui.font;
 
 
+import com.microej.howto.microui.MicroEJColors;
+
 import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.microui.display.Display;
@@ -57,9 +59,12 @@ public class PictosWithCustomFont extends Displayable {
 		final int DISPLAY_HEIGHT = getDisplay().getHeight();
 
 		// fill up background with black
-		g.setColor(Colors.BLACK);
+		g.setColor(MicroEJColors.CONCRETE_BLACK_75);
 		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
+		//useful for antialiasing optimization
+		g.setBackgroundColor(MicroEJColors.CONCRETE_BLACK_75);
+		
 		final Font myCustomFont = Font.getFont(CUSTOM_FONT_ID, CUSTOM_FONT_SIZE, Font.STYLE_PLAIN);
 		if (myCustomFont == Font.getDefaultFont()) {
 			System.out.println("Unable to find custom font! Using default font instead");
@@ -67,15 +72,15 @@ public class PictosWithCustomFont extends Displayable {
 
 		g.setFont(myCustomFont);
 		// use White color to render text
-		g.setColor(Colors.WHITE);
+		g.setColor(MicroEJColors.WHITE);
 
 		final String message = getMessage();
 		
 		g.drawString(message, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 4,
 				GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
-		// use Yellow color to render text
-		g.setColor(Colors.YELLOW);
+		// use 'Chick' color to render text
+		g.setColor(MicroEJColors.CHICK);
 		g.drawString(message, DISPLAY_WIDTH / 2, (DISPLAY_HEIGHT / 4) * 3,
 				GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
