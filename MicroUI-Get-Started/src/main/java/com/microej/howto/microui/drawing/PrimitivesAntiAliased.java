@@ -89,6 +89,9 @@ public class PrimitivesAntiAliased extends Displayable {
 		}
 
 		{
+			//the rounded rectangle is drawn inside the circle, which has a unified background
+			//to speed up antialiasing operations, we inform the GraphicsContext of the background color
+			g.setBackgroundColor(MicroEJColors.CORAL);
 			// draw a rounded rectangle at the center of the area
 			g.setColor(MicroEJColors.POMEGRANATE);
 
@@ -104,18 +107,8 @@ public class PrimitivesAntiAliased extends Displayable {
 			// display
 			final int x = displayCenterX - rectangleWidth / 2;
 			final int y = displayCenterY - rectangleHeight / 2;
-
-			g.fillRoundRect(x, y, rectangleWidth, rectangleHeight, arcWidth, arcHeight);
-
-			{ // antialiased bordering
-				// Since we are drawing on the edge of the rounded
-				// rectangle,
-				// and that the thickness is greater than 1,
-				// background colors to consider are
-				// - the one of the rounded rectangle
-				// - the one of the enclosing circle
-				// So we cannot optimize the drawing performed by
-				// AntiAliasedShapes using g.setBackgroundColor(...) API
+			
+			{ // antialiased bordering is done first
 
 				final int halfRectangleWidth = rectangleWidth/2;
 				final int halfRectangleHeight = rectangleHeight/2;
@@ -145,6 +138,17 @@ public class PrimitivesAntiAliased extends Displayable {
 				final int bottomRightEllipseX = displayCenterX + halfRectangleWidth - arcWidth;
 				final int bottomRightEllipseY = displayCenterY + halfRectangleHeight - arcHeight;
 
+				//for antialiased corners, use less thickness when drawing ellipses so as to minimize pixel artifacts on junction points with straight lines
+				AntiAliasedShapes.Singleton.setThickness(1);
+				AntiAliasedShapes.Singleton.setFade(1);
+
+				//top, bottom, left and right corners
+				AntiAliasedShapes.Singleton.drawEllipse(g, topLeftEllipseX, topLeftEllipseY, arcWidth, arcHeight);
+				AntiAliasedShapes.Singleton.drawEllipse(g, bottomLeftEllipseX, bottomLeftEllipseY, arcWidth, arcHeight);
+				AntiAliasedShapes.Singleton.drawEllipse(g, topRightEllipseX, topRightEllipseY, arcWidth, arcHeight);
+				AntiAliasedShapes.Singleton.drawEllipse(g, bottomRightEllipseX, bottomRightEllipseY, arcWidth, arcHeight);
+
+				//for antialiased straight lines, use slightly more thickness
 				AntiAliasedShapes.Singleton.setThickness(2);
 				AntiAliasedShapes.Singleton.setFade(2);
 				
@@ -154,16 +158,17 @@ public class PrimitivesAntiAliased extends Displayable {
 				AntiAliasedShapes.Singleton.drawLine(g, verticalSidesStartX, verticalSidesStartY,verticalSidesStartX, verticalSidesEndY);
 				AntiAliasedShapes.Singleton.drawLine(g, verticalSidesEndX, verticalSidesStartY,verticalSidesEndX, verticalSidesEndY);
 
-				//use less thickness when drawing corners using ellipse so as to avoid pixel artifacts on junction points with straight lines
-				AntiAliasedShapes.Singleton.setThickness(1);
-				AntiAliasedShapes.Singleton.setFade(1);
+				//hide pixel artifacts between antialiased corners and rounded rectangle regular corners by drawing ellipses over them
+				//'cheat' on top left corner because the accumulated rounding makes the top left too close to the rounded rectangle center
+				g.fillEllipse(topLeftEllipseX -1 , topLeftEllipseY -1 , arcWidth, arcHeight);
+				g.fillEllipse(bottomLeftEllipseX, bottomLeftEllipseY, arcWidth, arcHeight);
+				g.fillEllipse(topRightEllipseX, topRightEllipseY, arcWidth, arcHeight);
+				g.fillEllipse(bottomRightEllipseX, bottomRightEllipseY, arcWidth, arcHeight);
 
-				//top, bottom, left and right corners
-				AntiAliasedShapes.Singleton.drawEllipse(g, topLeftEllipseX, topLeftEllipseY, arcWidth, arcHeight);
-				AntiAliasedShapes.Singleton.drawEllipse(g, bottomLeftEllipseX, bottomLeftEllipseY, arcWidth, arcHeight);
-				AntiAliasedShapes.Singleton.drawEllipse(g, topRightEllipseX, topRightEllipseY, arcWidth, arcHeight);
-				AntiAliasedShapes.Singleton.drawEllipse(g, bottomRightEllipseX, bottomRightEllipseY, arcWidth, arcHeight);
 			}
+
+			//draw rounded rectangle inside its antialiased borders
+			g.fillRoundRect(x, y, rectangleWidth, rectangleHeight, arcWidth, arcHeight);
 
 		}
 
