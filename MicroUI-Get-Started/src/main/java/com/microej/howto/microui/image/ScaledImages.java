@@ -45,11 +45,19 @@ public class ScaledImages extends Displayable {
 			final int IMAGE_WIDTH = microejImage.getWidth();
 			final int IMAGE_HEIGHT = microejImage.getHeight();
 
-			// compute scaling factors on both dimensions					
-			final float horizontalScalingFactor = DISPLAY_WIDTH / IMAGE_WIDTH;
-			final float verticalScalingFactor = DISPLAY_HEIGHT / IMAGE_HEIGHT;
+			// compute scaling factors on both dimensions (ensure float division is used)
+			final float horizontalScalingFactor = (float) DISPLAY_WIDTH / (float) IMAGE_WIDTH;
+			final float verticalScalingFactor = (float) DISPLAY_HEIGHT / (float) IMAGE_HEIGHT;
+
 			// keep only the smallest one
-			final float actualScalingFactor = Math.min(horizontalScalingFactor, verticalScalingFactor);
+			final float smallestScalingFactor = Math.min(horizontalScalingFactor, verticalScalingFactor);
+
+			float actualScalingFactor = smallestScalingFactor;
+			// if enlarging, round scaling factor for better rendering
+			if ( smallestScalingFactor > 1.0  )
+			{
+				actualScalingFactor = Math.round(smallestScalingFactor);
+			}				
 			
 			// compute image top left anchor
 			final int imageWidthScaled = (int) (IMAGE_WIDTH * actualScalingFactor);
