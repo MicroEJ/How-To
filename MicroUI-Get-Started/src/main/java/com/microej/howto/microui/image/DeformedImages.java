@@ -8,6 +8,8 @@ package com.microej.howto.microui.image;
 
 import java.io.IOException;
 
+import com.microej.howto.microui.MicroEJColors;
+
 import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.microui.display.Display;
@@ -86,12 +88,12 @@ public class DeformedImages extends Displayable {
 
 			// draw grid for visual alignment control
 			// divide display in 4 sections
-			g.setColor(Colors.YELLOW);
+			g.setColor(MicroEJColors.ABSINTHE);
 			g.drawLine(0, DISPLAY_CENTER_Y, DISPLAY_WIDTH, DISPLAY_CENTER_Y);
 			g.drawLine(DISPLAY_CENTER_X, 0, DISPLAY_CENTER_X, DISPLAY_HEIGHT);
 
 			// divide each section along horizontal & vertical axis
-			g.setColor(Colors.MAGENTA);
+			g.setColor(MicroEJColors.TURQUOISE);
 			g.drawLine(0, top, DISPLAY_WIDTH, top);
 			g.drawLine(0, bottom, DISPLAY_WIDTH, bottom);
 			g.drawLine(left, 0, left, DISPLAY_HEIGHT);

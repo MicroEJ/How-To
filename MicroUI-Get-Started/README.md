@@ -94,8 +94,13 @@ For each example:
 _All dependencies are retrieved transitively by Ivy resolver_.
 
 # Credits
-Font Awesome by Dave Gandy - http://fontawseome.io
-(SIL OFL 1.1 license - http://scripts.sil.org/OFL)
+
+
+| <p align="center">Font</p> | <p align="center">Author</p> | <p align="center">License</p> |
+| --- | :---: | --- |
+| Font Awesome | Dave Gandy <br/> http://fontawseome.io  | [SIL OFL 1.1 license - http://scripts.sil.org/OFL](/MicroUI-Get-Started/src/main/resources/fonts/OFL.txt)|
+| Sans | Adobe |[SIL Open Font License.txt](/MicroUI-Get-Started/src/main/resources/fonts/Source - SIL Open Font License.txt)|
+
 
 # Source
 N/A

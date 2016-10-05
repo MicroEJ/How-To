@@ -104,67 +104,9 @@ public class PrimitivesAntiAliased extends Displayable {
 			// display
 			final int x = displayCenterX - rectangleWidth / 2;
 			final int y = displayCenterY - rectangleHeight / 2;
-
+			
 			g.fillRoundRect(x, y, rectangleWidth, rectangleHeight, arcWidth, arcHeight);
-
-			{ // antialiased bordering
-				// Since we are drawing on the edge of the rounded
-				// rectangle,
-				// and that the thickness is greater than 1,
-				// background colors to consider are
-				// - the one of the rounded rectangle
-				// - the one of the enclosing circle
-				// So we cannot optimize the drawing performed by
-				// AntiAliasedShapes using g.setBackgroundColor(...) API
-
-				final int halfRectangleWidth = rectangleWidth/2;
-				final int halfRectangleHeight = rectangleHeight/2;
-
-				final int halfArcWidth = arcWidth/2;
-				final int halfArcHeight = arcHeight/2;
-
-				final int horizontalSidesStartX = displayCenterX - halfRectangleWidth + halfArcWidth;
-				final int horizontalSidesEndX = displayCenterX + halfRectangleWidth - halfArcWidth;
-				final int horizontalSidesStartY = displayCenterY - halfRectangleHeight;
-				final int horizontalSidesEndY = displayCenterY + halfRectangleHeight;
-
-				final int verticalSidesStartY = displayCenterY - halfRectangleHeight + halfArcHeight;
-				final int verticalSidesEndY = displayCenterY + halfRectangleHeight - halfArcHeight;
-				final int verticalSidesStartX = displayCenterX - halfRectangleWidth;
-				final int verticalSidesEndX = displayCenterX + halfRectangleWidth;
-
-				final int topLeftEllipseX = displayCenterX - halfRectangleWidth;
-				final int topLeftEllipseY = displayCenterY - halfRectangleHeight;
-
-				final int bottomLeftEllipseX = displayCenterX - halfRectangleWidth;
-				final int bottomLeftEllipseY = displayCenterY + halfRectangleHeight - arcHeight;
-						
-				final int topRightEllipseX = displayCenterX + halfRectangleWidth - arcWidth;
-				final int topRightEllipseY = displayCenterY - halfRectangleHeight;
-
-				final int bottomRightEllipseX = displayCenterX + halfRectangleWidth - arcWidth;
-				final int bottomRightEllipseY = displayCenterY + halfRectangleHeight - arcHeight;
-
-				AntiAliasedShapes.Singleton.setThickness(2);
-				AntiAliasedShapes.Singleton.setFade(2);
-				
-				//top , bottom, left and right straight lines
-				AntiAliasedShapes.Singleton.drawLine(g, horizontalSidesStartX, horizontalSidesStartY,horizontalSidesEndX, horizontalSidesStartY);
-				AntiAliasedShapes.Singleton.drawLine(g, horizontalSidesStartX, horizontalSidesEndY,horizontalSidesEndX, horizontalSidesEndY);
-				AntiAliasedShapes.Singleton.drawLine(g, verticalSidesStartX, verticalSidesStartY,verticalSidesStartX, verticalSidesEndY);
-				AntiAliasedShapes.Singleton.drawLine(g, verticalSidesEndX, verticalSidesStartY,verticalSidesEndX, verticalSidesEndY);
-
-				//use less thickness when drawing corners using ellipse so as to avoid pixel artifacts on junction points with straight lines
-				AntiAliasedShapes.Singleton.setThickness(1);
-				AntiAliasedShapes.Singleton.setFade(1);
-
-				//top, bottom, left and right corners
-				AntiAliasedShapes.Singleton.drawEllipse(g, topLeftEllipseX, topLeftEllipseY, arcWidth, arcHeight);
-				AntiAliasedShapes.Singleton.drawEllipse(g, bottomLeftEllipseX, bottomLeftEllipseY, arcWidth, arcHeight);
-				AntiAliasedShapes.Singleton.drawEllipse(g, topRightEllipseX, topRightEllipseY, arcWidth, arcHeight);
-				AntiAliasedShapes.Singleton.drawEllipse(g, bottomRightEllipseX, bottomRightEllipseY, arcWidth, arcHeight);
-			}
-
+			//no primitives for antialiased rounded rectangle available yet
 		}
 
 		{
@@ -212,44 +154,9 @@ public class PrimitivesAntiAliased extends Displayable {
 			final int y = displayCenterY - radius;
 			final int startAngle = 25;
 			final int arcAngle = 310;
-			final int endAngle = startAngle + arcAngle;
 
-			{ // antialiased bordering
-				// The background is made up of a single solid color,
-				// so we can optimize the drawing performed by AntiAliasedShapes
-				// using g.setBackgroundColor(...) API.
-				// This will avoid reading the color of each pixel in memory
-				// before merging it with the foreground color.
-				g.setBackgroundColor(MicroEJColors.TURQUOISE);
-
-				final int thicknessCompensation = 1;
-				final int thickness = 2;
-
-				// specify line thickness and fade
-				AntiAliasedShapes.Singleton.setThickness(thickness);
-				AntiAliasedShapes.Singleton.setFade(2);
-
-				AntiAliasedShapes.Singleton.drawCircleArc(g, x, y, diameter, startAngle , arcAngle);
-				// The background is not homogeneous anymore, so we can not reuse the optimization.
-				g.removeBackgroundColor();
-
-				g.fillCircleArc(x, y, diameter   , startAngle  , arcAngle );
-
-
-				double startAngleXOffset = (radius + thickness/2) * Math.sin(Math.toRadians(startAngle - thicknessCompensation + 90 ));
-				double startAngleYOffset = (radius + thickness/2) * Math.cos(Math.toRadians(startAngle - thicknessCompensation + 90 ));
-
-				double endAngleXOffset = (radius + thickness/2) * Math.sin(Math.toRadians(endAngle + thicknessCompensation + 90 ));
-				double endAngleYOffset = (radius + thickness/2) * Math.cos(Math.toRadians(endAngle + thicknessCompensation + 90 ));
-
-				//g.setColor(MicroEJColors.POMEGRANATE);
-				AntiAliasedShapes.Singleton.drawLine(g, displayCenterX, displayCenterY,
-						(int) (displayCenterX + startAngleXOffset), (int) (displayCenterY + startAngleYOffset));
-				AntiAliasedShapes.Singleton.drawLine(g, displayCenterX, displayCenterY,
-						(int) (displayCenterX + endAngleXOffset), (int) (displayCenterY + endAngleYOffset));
-
-			}
-
+			g.fillCircleArc(x, y, diameter, startAngle, arcAngle);
+			//no primitives for antialiased circle arc available yet
 		}
 
 		{ // draw a triangle at the center of the area
@@ -268,6 +175,8 @@ public class PrimitivesAntiAliased extends Displayable {
 			g.fillPolygon(xys);
 
 			{ // antialiased bordering
+				// The background is not homogeneous anymore, so we can not reuse the optimization.
+				g.removeBackgroundColor();
 				// specify line thickness
 				AntiAliasedShapes.Singleton.setThickness(2);
 				// specify line thickness
