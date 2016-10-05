@@ -10,6 +10,7 @@ import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.microui.display.Display;
 import ej.microui.display.Displayable;
+import ej.microui.display.Font;
 import ej.microui.display.GraphicsContext;
 import ej.microui.util.EventHandler;
 
@@ -31,13 +32,17 @@ public class Text extends Displayable{
 
 		final int DISPLAY_WIDTH = getDisplay().getWidth();
 		final int DISPLAY_HEIGHT = getDisplay().getHeight();
-
+		final int FONT_HEIGHT = 24;
+		
 		// fill up background with black
 		g.setColor(Colors.BLACK);
 		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 		// use White color to render text
 		g.setColor(Colors.WHITE);
+		final Font sourceSansPro = Font.getFont(Font.LATIN, FONT_HEIGHT, Font.STYLE_PLAIN);		
+		g.setFont(sourceSansPro);
+
 		g.drawString("Hello World !", DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2,
 				GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 

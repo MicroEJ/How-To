@@ -10,6 +10,7 @@ import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.microui.display.Display;
 import ej.microui.display.Displayable;
+import ej.microui.display.Font;
 import ej.microui.display.GraphicsContext;
 import ej.microui.event.Event;
 import ej.microui.event.EventGenerator;
@@ -42,12 +43,15 @@ public class InputEvents extends Displayable implements EventHandler {
 
 		final int DISPLAY_WIDTH = display.getWidth();
 		final int DISPLAY_HEIGHT = display.getHeight();
+		final int FONT_HEIGHT = 24;
 
 		// fill up background with black
 		g.setColor(Colors.BLACK);
 		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
 		// use White color to render text
+		final Font sourceSansPro = Font.getFont(Font.LATIN, FONT_HEIGHT, Font.STYLE_PLAIN);
+		g.setFont(sourceSansPro);
 		g.setColor(Colors.WHITE);
 
 		g.drawString(message, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2,

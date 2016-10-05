@@ -6,12 +6,15 @@
  */
 package com.microej.howto.microui.image;
 
+import com.microej.howto.microui.MicroEJColors;
+
 import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.microui.display.Display;
 import ej.microui.display.Displayable;
 import ej.microui.display.GraphicsContext;
 import ej.microui.display.Image;
+import ej.microui.display.shape.AntiAliasedShapes;
 import ej.microui.util.EventHandler;
 
 
@@ -20,7 +23,7 @@ import ej.microui.util.EventHandler;
  */
 public class TilingWithImages extends Displayable {
 
-	private static final int TILE_SIZE = 20;
+	private static final int TILE_SIZE = 24;
 
 	public TilingWithImages(Display display) {
 		super(display);
@@ -44,10 +47,16 @@ public class TilingWithImages extends Displayable {
 		//draw one tile
 		{
 			GraphicsContext squareTileGraphicsContext = squareTile.getGraphicsContext();
-			squareTileGraphicsContext.setColor(Colors.BLACK);
+			squareTileGraphicsContext.setColor(MicroEJColors.CONCRETE_BLACK_75);
 			squareTileGraphicsContext.fillRect(0, 0, squareTile.getWidth(), squareTile.getHeight());
-			squareTileGraphicsContext.setColor(Colors.YELLOW);
-			int xys[] = { 0, TILE_SIZE, TILE_SIZE / 2, 0, TILE_SIZE, TILE_SIZE };
+			squareTileGraphicsContext.setColor(MicroEJColors.CHICK);
+			final int BORDER_THICKNESS = 2;
+			int xys[] = {
+					0 + BORDER_THICKNESS , 0 + BORDER_THICKNESS,
+					TILE_SIZE - BORDER_THICKNESS , 0 + BORDER_THICKNESS,
+					TILE_SIZE - BORDER_THICKNESS, TILE_SIZE - BORDER_THICKNESS,
+					0 + BORDER_THICKNESS, TILE_SIZE - BORDER_THICKNESS
+				};
 			squareTileGraphicsContext.fillPolygon(xys);
 		}
 
@@ -65,7 +74,7 @@ public class TilingWithImages extends Displayable {
 		}
 
 		final int alphaIncrement = GraphicsContext.OPAQUE / nbTilesX;
-		int currentAlpha = 0;
+		int currentAlpha = alphaIncrement;
 		int yOffsetColumn = (DISPLAY_HEIGHT - squareTileColumn.getHeight()) / 2;
 		for (int x = 0; x < nbTilesX; x++, currentAlpha += alphaIncrement) {
 			g.drawImage(squareTileColumn, x * TILE_SIZE, yOffsetColumn, GraphicsContext.LEFT | GraphicsContext.TOP, currentAlpha);
