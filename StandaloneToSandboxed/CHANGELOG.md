@@ -15,7 +15,7 @@ Bugfixes:
   
 ## 1.0.1 (2016-07-22)
 Features:
-  - Initial revision.
+  - Minor text formatting changes.
 
   ## 1.0.0 (2016-07-01)
 Features:
