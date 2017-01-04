@@ -61,10 +61,3 @@ A sandboxed app needs a specific entry point which is not the main of the standa
 		1. Set **Host** field to your board IP address
 7. Press **Apply**
 8. Press **Run**
-
-
-# Changes
-- See the change log file [CHANGELOG.md](StandaloneToSandboxed/CHANGELOG.md).
-
-# License
-- See the license file [LICENSE.md](LICENSE.md) located at the root of this repository.
