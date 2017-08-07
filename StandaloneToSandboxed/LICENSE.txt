@@ -1,12 +1,24 @@
-The software contained in this package is part of MicroEJ Technology and is licensed under the following terms and conditions.
+Copyright (c) 2016, IS2T S.A.
+All rights reserved.
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-IF YOU ARE NOT A MICROEJ (STUDIO OR SDK) LICENSEE – READ ONLY LICENSE
-Subject to the terms and conditions contained herein, Industrial Smart Software Technology grants You a non-exclusive, 
-non-transferable, worldwide, and royalty-free license to view and read the source code of this Software solely for purposes of Your internal evaluation. 
-You shall not copy, modify, create derivative works of, publicly display, publicly perform, disclose, distribute, or otherwise use this Software.
+* Redistributions of source code must retain the above copyright
+  notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright
+  notice, this list of conditions and the following disclaimer in the
+  documentation and/or other materials provided with the distribution.
+* Neither the name of IS2T S.A. nor the names of its contributors may be 
+  used to endorse or promote products derived from this software without 
+  specific prior written permission.
 
-IF YOU ARE A MICROEJ STUDIO LICENSEE
-You can import this Software within MicroEJ Studio and use it under the terms and conditions of MicroEJ Studio.
-
-IF YOU ARE A MICROEJ SDK LICENSEE
-You can import this Software within MicroEJ SDK and use it under the terms and conditions of MicroEJ SDK.
+THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE REGENTS AND CONTRIBUTORS BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

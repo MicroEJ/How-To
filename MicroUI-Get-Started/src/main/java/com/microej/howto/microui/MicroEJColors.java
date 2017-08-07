@@ -2,7 +2,7 @@
  * Java
  *
  * Copyright 2016 IS2T. All rights reserved.
- * IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * Use of this source code is governed by a BSD-style license that can be found at http://www.is2t.com/open-source-bsd-license/.
  */
 package com.microej.howto.microui;
 
@@ -22,7 +22,7 @@ public interface MicroEJColors {
 	int WHITE = 0xffffff;
 	int CONCRETE_WHITE_75 = 0xe5e9eb;
 	int CONCRETE_WHITE_50 = 0xcbd3d7;
-	int CONCRETE_WHITE_25 = 0xe5e9eb;
+	int CONCRETE_WHITE_25 = 0xb1bdc3;
 	int CONCRETE = 0x97a7af;
 	int CONCRETE_BLACK_25 = 0x717d83;
 	int CONCRETE_BLACK_50 = 0x4b5357;

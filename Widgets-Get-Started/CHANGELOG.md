@@ -1,16 +1,7 @@
-<!--
-	Markdown
--->
-<!--
-Changelog template:
+## 1.0.1 (2017-08-07)
+Bug fixes:
+  * Fix readme.
 
-## Revision (YYYY-mm-dd)
-Features:
-  * List here the new features.
-  
-Bugfixes:
-  * List here the bug fixes.
--->
   
 ## 1.0.0 (2016-08-25)
 Features:
