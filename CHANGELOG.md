@@ -1,16 +1,7 @@
-<!--
-	Markdown
--->
-<!--
-Changelog template:
-
-## Revision (YYYY-mm-dd)
+## 1.2.0 (2017-08-07)
 Features:
-  - List here the new features.
-  
-Bugfixes:
-  - List here the bug fixes.
--->
+  - Add Widgets-Get-Started project.
+  - Add Storage-Get-Started project.
 
 ## 1.1.0 (2016-08-25)
 Features:

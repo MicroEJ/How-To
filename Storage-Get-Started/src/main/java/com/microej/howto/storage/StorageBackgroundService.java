@@ -15,7 +15,7 @@ import ej.wadapps.app.BackgroundService;
 import ej.wadapps.storage.Storage;
 
 /**
- * 
+ * BackgroundService storing then loading some data.
  */
 public class StorageBackgroundService implements BackgroundService {
 	private static final String KEY = "MY_DATA"; //$NON-NLS-1$
@@ -25,6 +25,10 @@ public class StorageBackgroundService implements BackgroundService {
 	public void onStart() {
 		// Get the storage service.
 		Storage storage = ServiceLoaderFactory.getServiceLoader().getService(Storage.class);
+		if(storage==null){
+			System.out.println("Storage unavailable.");
+			return;
+		}
 
 		// Store a data with the storage.
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(DATA.getBytes())) {
@@ -66,7 +70,7 @@ public class StorageBackgroundService implements BackgroundService {
 
 	@Override
 	public void onStop() {
-		// TODO Auto-generated method stub
+		// Not used
 
 	}
 

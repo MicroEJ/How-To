@@ -9,7 +9,7 @@ MicroEJ firmware's disables access to the file system in application context. To
 This service is called <code>Storage</code> and like any other services it can be retrieved by using the default `ServiceLoader` (if you want more information about Service, please read the firmware documentation).
 > `Storage storage = ServiceLoaderFactory.getServiceLoader().getService(Storage.class);`
 
-This service is based on key/value principe. The value is java's `InputStream` and the keys are java's `String` (with some restrictions on the allowed characters, see the javadoc). 
+This service is based on key/value principle. The value is java's `InputStream` and the keys are java's `String` (with some restrictions on the allowed characters, see the javadoc). 
 
 # Usage
 ## Store data
@@ -38,7 +38,7 @@ try (InputStream stream = storage.load(key)) {
 The application must close the input stream when it is no longer needed.
 
 ## List all stored data
-An applciation can list all stored data by calling the <code>getIds</code> method. This method returns all data key's already stored.
+An application can list all stored data by calling the <code>getIds</code> method. This method returns all data key's already stored.
 ```java		
 try {
     for (String k : storage.getIds()) {
@@ -68,7 +68,7 @@ try {
 
 ## Run on device
 ### Build
-1. Right Click on the example to build `.java` file
+1. Right Click on the example
 2. Select **Run as -> Run Configuration** 
 3. Select **MicroEJ Application** configuration kind
 4. Click on **New launch configuration** icon
