@@ -1,3 +1,7 @@
+## 1.2.1 (2017-08-17)
+Features:
+   - Update Storage-Get-Started project.
+
 ## 1.2.0 (2017-08-07)
 Features:
   - Add Widgets-Get-Started project.
