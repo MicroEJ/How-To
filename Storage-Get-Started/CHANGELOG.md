@@ -1,3 +1,7 @@
+## 1.0.3 (2017-08-17)
+Bug Fixes:
+  * Retrieve and display the value stored.
+  
 ## 1.0.2 (2017-08-07)
 Bug Fixes:
   * Minor format fixes
