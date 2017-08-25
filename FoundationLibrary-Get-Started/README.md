@@ -1,7 +1,7 @@
 # How to create a Foundation Library #
 A MicroEJ Foundation Library is a MicroEJ library that provides core runtime APIs or hardware-dependent functionality. It is often connected to underlying C low-level APIs.
 
-![LLAPI](assets\schema1.png)
+![LLAPI](assets/schema1.png)
 
 ## Prerequisites ##
 1. MicroEJ DSK 4.1.1  installed
