@@ -14,10 +14,10 @@ A MicroEJ Foundation Library is a MicroEJ library that provides core runtime API
 ## Define your API
 * Select **File > EasyAnt Project **
 	* Select  **build-microej-javaapi** Skeleton.
- <br/> If you use MicroEJ SDK 4.1.1, you have to change **microej.lib.name** and **rip.printableName** in [module.ivy](mylib-api/module.ivy) (microej.lib.name="mylib-1.0-api" rip.printableName="mylib-1.0-api")
+ <br/> If you use MicroEJ SDK 4.1.1, Edit [module.ivy](mylib-api/module.ivy)n and update **microej.lib.name** and **rip.printableName** like this (microej.lib.name="mylib-1.0-api" rip.printableName="mylib-1.0-api")
 
 	* Select  **File > Java > Class** menu item. <br />
-In this class, define all methods but don't write the implementation. Each methods throw a RuntimeException.
+In this class, you have to define all methods but don't write the implementation. Each methods throw a RuntimeException.
 ```
 public class MyLib {
 	/**
