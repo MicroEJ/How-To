@@ -1,3 +1,7 @@
+## 1.3.0 (2017-08-25)
+Features:
+   - Add FoundationLibrary-Get-Started project.
+
 ## 1.2.1 (2017-08-17)
 Features:
    - Update Storage-Get-Started project.
