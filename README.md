@@ -15,8 +15,9 @@ Note that to run them on board :
 **Available Examples**:
 * [Storage-Get-Started](Storage-Get-Started): Explains how to store/retrieve information in a sandboxed app.
 * [StandaloneToSandboxed](StandaloneToSandboxed): Explains how to convert a standalone app into a sandboxed app.
-* [MicroUI-Get-Started](MicroUI-Get-Started) contains simple examples to understand how to use the main MicroUI library APIs.
-* [Widgets-Get-Started](Widgets-Get-Started) contains simple examples to understand how to use the main widget library APIs.
+* [MicroUI-Get-Started](MicroUI-Get-Started) : Contains simple examples to understand how to use the main MicroUI library APIs.
+* [Widgets-Get-Started](Widgets-Get-Started) : Contains simple examples to understand how to use the main widget library APIs.
+* [Proguard-Get-Started](Proguard-Get-Started) : Explains how to integrate Proguard in MicroEJ Studio/SDK.
 
 # Requirements
 * MicroEJ Studio or SDK 4.0 or later
