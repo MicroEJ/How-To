@@ -1,8 +1,9 @@
 #
+# Module.pro 1.0
+#
 # Copyright 2017 IS2T. All rights reserved.
-# IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
-# 
-# Example Module.pro
+# Use of this source code is subject to license terms.
+#
 
 -verbose
 -printusage
