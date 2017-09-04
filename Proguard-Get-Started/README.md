@@ -1,7 +1,7 @@
 # Overview
 This document explains how to use <a href="https://www.guardsquare.com/en/proguard">Proguard</a> in your application.
 ProGuard is an open source command-line tool that shrinks, optimizes and obfuscates Java code. It is able to optimize bytecode as well as detect and remove unused instructions. For example, Proguard can be used to remove all log message in binary production.
-MicroEJ use proguard version 5.1.
+MicroEJ uses proguard version 5.1.
 
 # Requirements
 * MicroEJ Studio or SDK 4.1.1 or later
@@ -49,9 +49,8 @@ We compare the bytecode. You can find the **.jar** of your application in folder
 
 **Example Java**
 ```
-Logger LOGGER = Logger.getLogger(Main.class.getName());
 public Main() {
-  System.out.println("1");
+    System.out.println("1");
 	LOGGER.severe("severe call");
 	System.out.println("2");
 	LOGGER.config("config call");
@@ -90,3 +89,11 @@ public Main() {
 21  ldc <String "3"> [3]
 23  invokevirtual java.io.PrintStream.println(java.lang.String) : void [13]
 ```
+
+* Java code
+```
+public Main() {
+    System.out.println("1");
+	System.out.println("2");
+	System.out.println("3");
+}
