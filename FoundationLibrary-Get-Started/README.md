@@ -1,5 +1,5 @@
 # How to create a Foundation Library #
-A MicroEJ Foundation Library is a MicroEJ library that provides core runtime APIs or hardware-dependent functionality. It is often connected to underlying C low-level APIs.
+A Foundation Library is a library that provides core runtime APIs or hardware-dependent functionality. It is often connected to underlying C low-level APIs.
 
 ![LLAPI](assets/schema1.png)
 
@@ -9,15 +9,16 @@ A MicroEJ Foundation Library is a MicroEJ library that provides core runtime API
 	- [Getting started](http://developer.microej.com/getting-started-sdk.html)
 3. Knowledge about Java and C programming
 4. Basic knowledge about MicroEJ (building platform and deploy app)
+5. Knowledge how to communicate from Java to C [Example-Standalone-Java-C-Interface](https://github.com/MicroEJ/Example-Standalone-Java-C-Interface)
 
 # Create a Foundation library
 ## Define your API
 * Select **File > EasyAnt Project **
-	* Select  **build-microej-javaapi** Skeleton.
- <br/> If you use MicroEJ SDK 4.1.1, Edit [module.ivy](mylib-api/module.ivy)n and update **microej.lib.name** and **rip.printableName** like this (microej.lib.name="mylib-1.0-api" rip.printableName="mylib-1.0-api")
+	* Select  **build-microej-javaapi** skeleton.
+  <br/> If you use MicroEJ SDK 4.1.1, Edit [module.ivy](mylib-api/module.ivy) and update **microej.lib.name** and **rip.printableName** (e.g., microej.lib.name="mylib-1.0-api" and rip.printableName="mylib-1.0-api")
 
-	* Select  **File > Java > Class** menu item. <br />
-In this class, you have to define all methods but don't write the implementation. Each methods throw a RuntimeException.
+	* Create a new class **File > Java > Class** menu item. <br />
+In this class, define all the foundation lib's methods, their implementations throw a new RuntimeException.
 ```
 public class MyLib {
 	/**
@@ -33,25 +34,30 @@ public class MyLib {
 		}
 }
 ```
+### Build the API
 Right-click on the chosen firmware project and select **Build With EasyAnt**. This may take several minutes.
-After successful build, the application artifacts are available in application project build folder [target~/artifacts] and contains:
+After successful build, the application artifacts are available in application project build folder **target~/artifacts** and contains:
 		* **Jar** file (MyLib-api.jar)
 		* **Rip** file (MyLib-api.rip)
-
+### Add the API to a platform 
 Unzip the file rip and copy the content directory in your **platform-configuration/dropins/javaAPIs**. <br />
-**Rebuild** your platform. <br />After successful build, the Javadoc of your API is available in the MicroEJ Resource Center View.
+**Rebuild** your platform. <br />
+After successful build, the Javadoc of your API is available in the MicroEJ Resource Center View.
 
 ## Write implementation
 
 ### Java
  * **File > EasyAnt Project**
- 	* Select **build-microej-javaimpl** Skeleton.
+ 	* Create a new class with **build-microej-javaimpl** skeleton.
 
 Only if you use MicroEJ SDK 4.1.1 :<br/>
  * In [module.ivy](mylib-impl/module.ivy)
-     * Update the revision to 3.+
+     * Update build type revision to 3.+
+	  ```
+     		   <ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javaimpl" microej.lib.name="mylib-impl-1.0" rip.printableName="mylib-impl Impl" revision="3.+">
+		 ```
      * Change microej.lib.name="mylib-impl-1.0" rip.printableName="mylib-impl-1.0"
-     * Update dependency :
+     * Update EDC dependency :
 		 ```
 		 	  <dependency org="ej.api" name="edc" rev="[1.2.0-RC0,2.0.0-RC0[" conf="provided->*" />
 		 ```
@@ -70,9 +76,23 @@ Only if you use MicroEJ SDK 4.1.1 :<br/>
 			</natures>
 	```
 
-* Select **File > Java > Class** menu item.
+ * Create a new **File > Java > Class** .
+	* Class Name : **MyLibNatives**
+	* Define your native interfaces :
+	```
+		/**
+		 * Class define all native.
+		 */
+		 public class MyLibNatives {
+			public native static int factorial(int number);
+		 }
+	```
+
+Java and Native calls are separate. With this organization, it is more easy to write the MOCK and to split the two parts if one wants to change support of implementation.
+
+* Create a new class **File > Java > Class** .
 	* Class Name : **MyLib**  [MyLib.java](/mylib-impl/src/main/java/com/mycompany/MyLib.java)
-	* Copy and paste the following code :  
+	* Use your native functions :  
 	```
 		/**
 		* @see API javadoc
@@ -87,20 +107,7 @@ Only if you use MicroEJ SDK 4.1.1 :<br/>
 			return MyLibNatives.factorial(number);
 		}
 	```
-	In **Java**, you can test input value and throw an exception if the input value isn't correct. But we use the c language is faster for mathematical operations.
-
-* Select **File > Java > Class** menu item.
-	* Class Name : **MyLibNatives**
-	* Copy and paste the following code :
-	```
-		/**
-		 * Class define all native.
-		 */
-		 public class MyLibNatives {
-			public native static int factorial(int number);
-		 }
-	```
-Java and Native calls are separate. With this organization, it is more easy to write the MOCK and to split the two parts if one wants to change support of implementation.
+	In **Java**, you can test input value and throw an exception if the input value isn't correct. 
 
 ### Native C
 
@@ -131,29 +138,20 @@ Copy and paste the following code inside the file content/include/LLMYLIB_impl.h
 	#endif
 ```
 
-Right-click on the chosen firmware project and select Build With EasyAnt. This may take several minutes.
-After successful build, the application artifacts are available in application project build folder target~/artifacts and contains:
-- **Jar** file (MyLib-api.jar)
-- **Rip** file (MyLib-api.rip)
-
-Unzip the **rip** file and copy the content directory in **platform-configuration/dropins/**.
+Rebuild your firmware project, this may take several minutes.
+After successful build, unzip the **rip** file and copy the content directory in **platform-configuration/dropins/**.
 
 **Rebuild your Platform**
 
 ### Write Example Application ###
-* Select **File > MicroEJ Standalone Application Project**
+* Create a new project **File > MicroEJ Standalone Application Project**
 	* Project Name : **mylib-test**
-	* MicroEJ librairies
-		* Check :
-			* **EDC-1.2**
-			* **MYLIB-1.0**
 
 * Select **File > Class >**
 	* Class Name : **TestMyLib**
 	* Copy and paste the following code :
 ```
 	public class TestMyLib {
-
 		public static void main(String[] args) {
 			System.out.println("(5!)=" + MyLib.factorial(5));
 		}
@@ -197,7 +195,7 @@ Note that the mock method in /mylib-mock/.../MyLibNatives.java has the same full
 			* Select **HILENGINE 2.1** (Use the last version)
 * Click on **Finish**
 
-Copy and paste the following code inside the project (**Tips** : If you don't want to make a mistake in definition of methods, copy directly [MyLibNatives.java](mylib-impl\src\main\java\com\mycompany\MyLibNatives.java) from your implementation in the project ) :
+Copy and paste the following code inside the project (**Note** : If you don't want to make a mistake in definition of methods, copy directly [MyLibNatives.java](mylib-impl\src\main\java\com\mycompany\MyLibNatives.java) from your implementation in the project ) :
 
 ```
 package com.mycompany;
@@ -246,11 +244,6 @@ public class MyLibNatives {
 			* Notice that "Execute on Device" radio button option is checked
 	* Click on "Run"
 
-### Opening the generated C project (BSP specific)
-* From the **Project Explorer** view
-	* Navigate to the [FoundationLibrary-bsp/Project/MicroEJ/MDK-ARM] folder
-	* Double-click on the [Project.uvproj] file (this will open the BSP project in the MicroVision IDE)
-
 ### Getting a linker error (BSP specific)
 * From the MicroVision IDE
 	* Select **Project > Build Target** menu item (or press F7 keyboard shortcut)
@@ -287,30 +280,14 @@ This is perfectly normal since in [MyLibTest.java] we declared **factorial** as 
 				return number * LLMYLIB_IMPL_factorial(number-1);
 		}
 ```
-* Right-click on the file that you just created
-	* Select **Properties** context menu item
-		* Copy the value of the **Resource > Location** field into the clipboard
-
 #### Adding the C file to the BSP IDE project structure (BSP specific)
-* Select the root node of your project
-	* Right-Click and select **Add Group** this will add a group called "New Group"
-	* Select this group and hit **F2** key so as to rename it to "Natives"
-	* Right-Click on the **Natives** group and select **Add Existing Files to group 'Natives'...**
-	* Navigate to the "[LLMYLIB_impl.c](/mylib-impl/src/main/c/LLMYLIB_impl.c)"
-	* Click **Add**
-	* Click **Close**
+* Add the previous file in your platform with your IDE.
 
 #### Getting a clean link (BSP specific)
-* Select **Project > Build Target** menu item (or press F7 keyboard shortcut)
-```
-		*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-		Build target 'standalone'
-		".\standalone\standalone.axf" - 0 Error(s), 0 Warning(s).
-		Build Time Elapsed:  00:00:02
-```
+* Build target
+
 ### Flashing the board (BSP specific)
-* Connect your board
-* Select **Flash > Download** menu item (or press F8 keyboard shortcut).
+* Connect and flash your board.
 
 ### Checking the behavior
 * Set up a terminal on the board serial port and press the reset input. You shall get the following output :
