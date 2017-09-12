@@ -1,24 +1,29 @@
-# How to create a Foundation Library #
+# How to Create a Foundation Library #
+
 A Foundation Library is a library that provides core runtime APIs or hardware-dependent functionality. It is often connected to underlying C low-level APIs.
 
 ![LLAPI](assets/schema1.png)
 
 ## Prerequisites ##
-1. MicroEJ DSK 4.1.1  installed
-2. A Platform available in your workspace
-	- [Getting started](http://developer.microej.com/getting-started-sdk.html)
-3. Knowledge about Java and C programming
-4. Basic knowledge about MicroEJ (building platform and deploy app)
-5. Knowledge how to communicate from Java to C [Example-Standalone-Java-C-Interface](https://github.com/MicroEJ/Example-Standalone-Java-C-Interface)
 
-# Create a Foundation library
-## Define your API
+1. MicroEJ SDK 4.1.1 installed
+2. A MicroEJ 4.1 Platform Reference Implementation imported into the MicroEJ repository. Please consult (http://developer.microej.com) for a list available evaluation platforms.
+3. An activated Evaluation or Production license.
+4. Knowledge about Java and C programming
+5. Basic knowledge about MicroEJ (platform and standalone application build)
+6. Knowledge how to communicate from Java to C [Example-Standalone-Java-C-Interface](https://github.com/MicroEJ/Example-Standalone-Java-C-Interface)
+
+# Create a Foundation Library
+
+## Define the API Project
+
 * Select **File > EasyAnt Project **
 	* Select  **build-microej-javaapi** skeleton.
   <br/> If you use MicroEJ SDK 4.1.1, Edit [module.ivy](mylib-api/module.ivy) and update **microej.lib.name** and **rip.printableName** (e.g., microej.lib.name="mylib-1.0-api" and rip.printableName="mylib-1.0-api")
 
 	* Create a new class **File > Java > Class** menu item. <br />
-In this class, define all the foundation lib's methods, their implementations throw a new RuntimeException.
+In this class, define all the foundation libraries apis methods, their implementations throw a new RuntimeException.
+
 ```
 public class MyLib {
 	/**
@@ -34,19 +39,25 @@ public class MyLib {
 		}
 }
 ```
+
 ### Build the API
+
 Right-click on the chosen firmware project and select **Build With EasyAnt**. This may take several minutes.
 After successful build, the application artifacts are available in application project build folder **target~/artifacts** and contains:
-		* **Jar** file (MyLib-api.jar)
-		* **Rip** file (MyLib-api.rip)
-### Add the API to a platform 
-Unzip the file rip and copy the content directory in your **platform-configuration/dropins/javaAPIs**. <br />
+
+* **Jar** file (MyLib-api.jar), that will be referenced by the application project
+* **Rip** file (MyLib-api.rip), that will be embedded into the platform
+
+### Add the API to a Platform 
+
+Unzip the **Rip** file (MyLib-api.rip) and copy the content directory in your **platform-configuration/dropins/javaAPIs**. <br />
 **Rebuild** your platform. <br />
 After successful build, the Javadoc of your API is available in the MicroEJ Resource Center View.
 
 ## Write implementation
 
 ### Java
+
  * **File > EasyAnt Project**
  	* Create a new class with **build-microej-javaimpl** skeleton.
 
@@ -144,6 +155,7 @@ After successful build, unzip the **rip** file and copy the content directory in
 **Rebuild your Platform**
 
 ### Write Example Application ###
+
 * Create a new project **File > MicroEJ Standalone Application Project**
 	* Project Name : **mylib-test**
 
@@ -159,7 +171,9 @@ After successful build, unzip the **rip** file and copy the content directory in
 ```
 
 # Building for the simulator
+
 ## Getting a java.lang.UnsatisfiedLinkError exception
+
 * Right-click on the project > **Run As > MicroEJ Application**
 ```
 	The result of the previous step shall lead to this error message
@@ -218,6 +232,7 @@ public class MyLibNatives {
 }
 ```
 ## Export this mock in your platform ##
+
 * Right-Click on [mylib-mock]  
 	* **Export**
 		* **Java**
@@ -234,8 +249,11 @@ public class MyLibNatives {
 
 		SUCCESS
 ```
+
 # Running the application on target
+
 ## Building for the target
+
 	* Copy the simulator launcher
 	* In **Execution** tab
 		* In Target frame
@@ -245,6 +263,7 @@ public class MyLibNatives {
 	* Click on "Run"
 
 ### Getting a linker error (BSP specific)
+
 * From the MicroVision IDE
 	* Select **Project > Build Target** menu item (or press F7 keyboard shortcut)
 	* A linker error message shall appear :
@@ -255,7 +274,9 @@ public class MyLibNatives {
 This is perfectly normal since in [MyLibTest.java] we declared **factorial** as a native function, when building the MicroEJ project, the generated linker configuration file expects to find a C function definition matching the qualified name of the function.
 
 ## Fixing the linker error
+
 ### C Native function implementation
+
 * Select **File > New > Source Folder** menu item
 	* Set the **Folder Name** field to "src/main/c"
 * Right-Click on the folder that you just created
@@ -281,15 +302,19 @@ This is perfectly normal since in [MyLibTest.java] we declared **factorial** as 
 		}
 ```
 #### Adding the C file to the BSP IDE project structure (BSP specific)
+
 * Add the previous file in your platform with your IDE.
 
 #### Getting a clean link (BSP specific)
+
 * Build target
 
 ### Flashing the board (BSP specific)
+
 * Connect and flash your board.
 
 ### Checking the behavior
+
 * Set up a terminal on the board serial port and press the reset input. You shall get the following output :
 	```
 	VM START
