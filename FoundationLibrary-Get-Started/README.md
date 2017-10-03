@@ -129,7 +129,7 @@ Copy and paste the following code inside the file content/include/LLMYLIB_impl.h
 	}
 	#endif
 	#endif
-	```
+```
 
 Rebuild your firmware project, this may take several minutes.
 After successful build, unzip the **rip** file and copy the content directory in **platform-configuration/dropins/**.
