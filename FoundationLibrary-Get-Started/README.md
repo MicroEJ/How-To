@@ -6,7 +6,7 @@ A Foundation Library is a library that provides core runtime APIs or hardware-de
 
 ## Prerequisites ##
 
-1. MicroEJ SDK 4.1.1 installed
+1. MicroEJ SDK 4.1.2 installed
 2. A MicroEJ 4.1 Platform Reference Implementation imported into the MicroEJ repository. Please consult (http://developer.microej.com) for a list available evaluation platforms.
 3. An activated Evaluation or Production license.
 4. Knowledge about Java and C programming
@@ -19,8 +19,6 @@ A Foundation Library is a library that provides core runtime APIs or hardware-de
 
 * Select **File > EasyAnt Project **
 	* Select  **build-microej-javaapi** skeleton.
-  <br/> If you use MicroEJ SDK 4.1.1, Edit [module.ivy](mylib-api/module.ivy) and update **microej.lib.name** and **rip.printableName** (e.g., microej.lib.name="mylib-1.0-api" and rip.printableName="mylib-1.0-api")
-
 	* Create a new class **File > Java > Class** menu item. <br />
 In this class, define all the foundation libraries apis methods, their implementations throw a new RuntimeException.
 
@@ -61,32 +59,6 @@ After successful build, the Javadoc of your API is available in the MicroEJ Reso
  * **File > EasyAnt Project**
  	* Create a new class with **build-microej-javaimpl** skeleton.
 
-Only if you use MicroEJ SDK 4.1.1 :<br/>
- * In [module.ivy](mylib-impl/module.ivy)
-     * Update build type revision to 3.+
-	  ```
-     		   <ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javaimpl" microej.lib.name="mylib-impl-1.0" rip.printableName="mylib-impl Impl" revision="3.+">
-		 ```
-     * Change microej.lib.name="mylib-impl-1.0" rip.printableName="mylib-impl-1.0"
-     * Update EDC dependency :
-		 ```
-		 	  <dependency org="ej.api" name="edc" rev="[1.2.0-RC0,2.0.0-RC0[" conf="provided->*" />
-		 ```
-     * Copy and paste the following code inside the [.project](mylib-impl/.project) file :
-		 ```
-			<buildSpec>
-				<buildCommand>
-					<name>org.eclipse.jdt.core.javabuilder</name>
-					<arguments>
-					</arguments>
-				</buildCommand>
-			</buildSpec>
-			<natures>
-				<nature>org.eclipse.jdt.core.javanature</nature>
-				<nature>org.apache.ivyde.eclipse.ivynature</nature>
-			</natures>
-	```
-
  * Create a new **File > Java > Class** .
 	* Class Name : **MyLibNatives**
 	* Define your native interfaces :
@@ -122,7 +94,7 @@ Java and Native calls are separate. With this organization, it is more easy to w
 
 ### Native C
 
-Copy and paste the following code inside the file content/intern/include/LLMYLIB_impl.h . 	
+Copy and paste the following code inside the file content/include/intern/LLMYLIB_impl.h . 	
 ```
 	 #define LLMYLIB_IMPL_factorial Java_com_mycompany_MyLibNatives_factorial
 ```
@@ -131,23 +103,33 @@ Copy and paste the following code inside the file content/intern/include/LLMYLIB
 
 Copy and paste the following code inside the file content/include/LLMYLIB_impl.h.
 ```
-  	#include <stdint.h>
-		#include <intern/LLMYLIB_impl.h>
+  	#ifndef LLMYLIB_IMPL
+	#define LLMYLIB_IMPL
 
-		#ifdef __cplusplus
-		extern "C" {
-			#endif
+	/**
+	 * @file
+	 * @brief MicroEJ factorial low level API
+	 * @author My Company
+	 * @version 1.0.0
+	 */
 
-	 /*
-		* Returns the factorial
-		*/
-		uint32_t LLMYLIB_IMPL_factorial(uint32_t number);
+	#include <stdint.h>
+	#include <intern/LLMYLIB_impl.h>
 
-		#ifdef __cplusplus
+	#ifdef __cplusplus
+	extern "C" {
+	#endif
+
+	/*
+	 * Returns the factorial
+	 */
+	uint32_t LLMYLIB_IMPL_factorial(uint32_t number);
+
+	#ifdef __cplusplus
 	}
 	#endif
 	#endif
-```
+	```
 
 Rebuild your firmware project, this may take several minutes.
 After successful build, unzip the **rip** file and copy the content directory in **platform-configuration/dropins/**.
@@ -219,7 +201,7 @@ package com.mycompany;
  */
 public class MyLibNatives {
 
-	public int factorial(int number) {
+	public static int factorial(int number) {
 		if (number == 0) {
 			return 1;
 		}
@@ -239,7 +221,7 @@ public class MyLibNatives {
 			* **Jar** File
 				* **Export** destination platform-configuration/dropins/mocks/dropins
 				* **Finish**
-
+* Re Build your platform
 * Right-click on the project  **Run As > MicroEJ Application**.
 ```
 		=============== [ Initialization Stage ] ===============
@@ -277,7 +259,7 @@ This is perfectly normal since in [MyLibTest.java] we declared **factorial** as 
 
 ### C Native function implementation
 
-* Select **File > New > Source Folder** menu item
+* Select your implemententation project and add a new directory, Select **File > New > Source Folder** menu item
 	* Set the **Folder Name** field to "src/main/c"
 * Right-Click on the folder that you just created
 	* Select **New > File** context menu item
@@ -301,6 +283,7 @@ This is perfectly normal since in [MyLibTest.java] we declared **factorial** as 
 				return number * LLMYLIB_IMPL_factorial(number-1);
 		}
 ```
+
 #### Adding the C file to the BSP IDE project structure (BSP specific)
 
 * Add the previous file in your platform with your IDE.
