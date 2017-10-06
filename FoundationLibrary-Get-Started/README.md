@@ -18,7 +18,7 @@ A Foundation Library is a library that provides core runtime APIs or hardware-de
 ## Define the API Project
 
 * Select **File > EasyAnt Project **
-	* Select  **build-microej-javaapi** skeleton.
+	* Select **build-microej-javaapi** skeleton.
 	* Create a new class **File > Java > Class** menu item. <br />
 In this class, define all the foundation libraries apis methods, their implementations throw a new RuntimeException.
 
@@ -58,6 +58,7 @@ After successful build, the Javadoc of your API is available in the MicroEJ Reso
 
  * **File > EasyAnt Project**
  	* Create a new class with **build-microej-javaimpl** skeleton.
+	* Note : You need to respect the **Semantic Versioning** in **Revision** field. Moreover, you have to respect the version specified in the previous step.
 
  * Create a new **File > Java > Class** .
 	* Class Name : **MyLibNatives**
@@ -303,4 +304,4 @@ This is perfectly normal since in [MyLibTest.java] we declared **factorial** as 
 	VM START
 	(5!)=120
 	VM END (exit code = 0)
-		```
+	```
