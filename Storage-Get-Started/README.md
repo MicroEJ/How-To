@@ -5,11 +5,11 @@
 -->
 
 # Overview
-MicroEJ firmware's disables access to the file system in application context. To store/retrieve information you should use a service provided by the firmware.
+MicroEJ multisandbox firmware demos disable access to the file system in the application context. To store/retrieve information you should use a service provided by the firmware.
 This service is called <code>Storage</code> and like any other services it can be retrieved by using the default `ServiceLoader` (if you want more information about Service, please read the firmware documentation).
 > `Storage storage = ServiceLoaderFactory.getServiceLoader().getService(Storage.class);`
 
-This service is based on key/value principle. The value is java's `InputStream` and the keys are java's `String` (with some restrictions on the allowed characters, see the javadoc). 
+This service is based on key/value principle. The value is Java's `InputStream` and the keys are Java's `String` (with some restrictions on the allowed characters, see the javadoc). 
 
 # Usage
 ## Store data
@@ -70,10 +70,10 @@ try {
 ### Build
 1. Right Click on the example
 2. Select **Run as -> Run Configuration** 
-3. Select **MicroEJ Application** configuration kind
+3. Select **MicroEJ Application** configuration
 4. Click on **New launch configuration** icon
 5. In **Execution** tab
-	1. In **Target** frame, in **Platform** field, select a relevant virtual device.
+	1. In **Target** frame, in **Platform** field, select the relevant virtual device.
 	2. In **Execution** frame
 		1. Select **Execute on Device**
 		2. In **Settings** field, select **Local Deployment(...)**
