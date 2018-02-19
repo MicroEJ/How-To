@@ -1,11 +1,12 @@
 <!--
 	IVY
 	
-	Copyright 2017 IS2T. All rights reserved.
-	IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+	Copyright 2017-2018 IS2T. All rights reserved.
+	For demonstration purpose only.
+	IS2T PROPRIETARY. Use is subject to license terms.
 -->
 <ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:m="http://ant.apache.org/ivy/extra"> 
-	<info organisation="com.microej.howto" module="microui" status="integration" revision="1.0.3">
+	<info organisation="com.microej.howto" module="microui" status="integration" revision="1.0.4">
 		<ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javalib" revision="3.+">
 		</ea:build>
 		<ea:property name="test.run.excludes.pattern" value="**/*$*.class, **/nonauto/**/*.class, **/framework/**/*.class, **/TestAll.class, **/TestButton.class, **/TestButtonComposite.class, **/TestButtonImage.class"/>
