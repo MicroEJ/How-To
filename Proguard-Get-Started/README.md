@@ -1,7 +1,7 @@
 # Overview
 This document explains how to use <a href="https://www.guardsquare.com/en/proguard">Proguard</a> in your application.
 ProGuard is an open source command-line tool that shrinks, optimizes and obfuscates Java code. It is able to optimize bytecode as well as detect and remove unused instructions. For example, Proguard can be used to remove all log message in binary production.
-MicroEJ uses proguard version 5.1.
+This project is based on Proguard version 5.1.
 
 # Requirements
 * MicroEJ Studio or SDK 4.1.1 or later
@@ -9,15 +9,15 @@ MicroEJ uses proguard version 5.1.
 # Usage
 ## ADD THE DEPENDENCIES
 1. Open the `module.ivy`.
-2. Copy following code inside `<ea:build organisation=...></ea:build>` :
+2. Copy the following code inside `<ea:build organisation=...></ea:build>` :
 ```
 <ea:plugin organisation="com.is2t.easyant.plugins" module="obf-proguard" revision="+"/>
 ```
 
 ## ADD PROGUARD RULES
 1.  **File** → **New** → **File**
-    * File name : **module.pro** → you must create the file with this name.
-2. Copy following code inside this file
+    * File name : **module.pro** → you must create a file with this name.
+2. Copy the following code inside this file
 ```
     -assumenosideeffects class java.util.logging.Logger {
     public static java.util.logging.Logger getLogger(...);   
@@ -36,7 +36,7 @@ An example file is available @[module.pro](module.pro).
 
 ## BUILD EASYANT
 1. Click on **Build selected EasyAnt projects**.
-2. Verify **Proguard** is call during the build. Open **EasyAnt Console** and search  following lines :  
+2. Verify **Proguard** is called during the build. Open **EasyAnt Console** and search for the following lines :  
 ```
 obf-proguard:obfuscate:
      [move] Moving 1 file to C:\Users\mmartins\Documents\Work\SupportWorkspace\a\target~\build-env
@@ -45,7 +45,7 @@ obf-proguard:obfuscate:
  ```
 
 ## CHECKING
-We compare the bytecode. You can find the **.jar** of your application in folder **target~/artifacts**.
+Bytecode is compared. You can find the **.jar** of your application in the folder **target~/artifacts**.
 
 **Example Java**
 ```

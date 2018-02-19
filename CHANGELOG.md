@@ -1,3 +1,8 @@
+## 1.3.1 (2018-01-31)
+Bug fixes:
+   - Update Proguard-Get-Started.
+   - Update Storage-Get-Started.
+
 ## 1.3.0 (2017-09-04)
 Features:
    - Add Proguard-Get-Started project.
@@ -19,3 +24,7 @@ Features:
 Features:
   - Initial revision.
 
+[//]: # (Markdown)
+[//]: # (Copyright 2017-2018 IS2T. All rights reserved.)
+[//]: # (For demonstration purpose only.)
+[//]: # (IS2T PROPRIETARY. Use is subject to license terms.)
