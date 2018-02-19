@@ -1,3 +1,7 @@
+## 1.0.4 (2018-01-31)
+Bug fixes:
+  - Fix typos.
+ 
 ## 1.0.3 (2017-08-17)
 Bug Fixes:
   * Retrieve and display the value stored.
@@ -22,3 +26,8 @@ Features:
 ## 1.0.0 (2016-08-25)
 Features:
   * Initial revision.
+
+[//]: # (Markdown)
+[//]: # (Copyright 2017-2018 IS2T. All rights reserved.)
+[//]: # (For demonstration purpose only.)
+[//]: # (IS2T PROPRIETARY. Use is subject to license terms.)
