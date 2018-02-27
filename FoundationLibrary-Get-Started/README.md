@@ -1,3 +1,9 @@
+<!--
+	Readme
+	Copyright 2018 IS2T. All rights reserved.
+	IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+-->
+
 # How to Create a Foundation Library #
 
 A Foundation Library is a library that provides core runtime APIs or hardware-dependent functionality. It is often connected to underlying C low-level APIs.
@@ -6,23 +12,35 @@ A Foundation Library is a library that provides core runtime APIs or hardware-de
 
 ## Prerequisites ##
 
-1. MicroEJ SDK 4.1.2 installed
-2. A MicroEJ 4.1 Platform Reference Implementation imported into the MicroEJ repository. Please consult (http://developer.microej.com) for a list available evaluation platforms.
+1. MicroEJ SDK 4.1.4 installed.
+2. A MicroEJ 4.1 Platform Reference Implementation imported into the MicroEJ repository. See (https://developer.microej.com/getting-started-sdk-stm.html).
 3. An activated Evaluation or Production license.
-4. Knowledge about Java and C programming
-5. Basic knowledge about MicroEJ (platform and standalone application build)
-6. Knowledge how to communicate from Java to C [Example-Standalone-Java-C-Interface](https://github.com/MicroEJ/Example-Standalone-Java-C-Interface)
+4. Knowledge about Java and C programming.
+5. Basic knowledge about MicroEJ (platform and standalone application build).
+6. Knowledge how to communicate from Java to C .[Example-Standalone-Java-C-Interface](https://github.com/MicroEJ/Example-Standalone-Java-C-Interface)
 
 # Create a Foundation Library
 
 ## Define the API Project
 
-* Select **File > EasyAnt Project **
-	* Select **build-microej-javaapi** skeleton.
-	* Create a new class **File > Java > Class** menu item. <br />
+* Select **File > New > Other > EasyAnt > EasyAnt Project**
+	* Set the project settings.
+		* Project Name: mylib-api
+		* Organizaton: com.mycompany.api
+		* Module: mylib
+		* Revision:  1.0.0
+	* Select **com.is2t.easyant.skeletons#microej-javaapi;+** skeleton.
+	* Click on finish.
+
+* Select **File > New > Class**
+	* Package: **com.mycompany**.
+	* Name: **MyLib**.
+
 In this class, define all the foundation libraries apis methods, their implementations throw a new RuntimeException.
 
 ```
+package com.mycompany;
+
 public class MyLib {
 	/**
 	 * Returns the factorial of number.
@@ -40,44 +58,59 @@ public class MyLib {
 
 ### Build the API
 
-Right-click on the chosen firmware project and select **Build With EasyAnt**. This may take several minutes.
-After successful build, the application artifacts are available in application project build folder **target~/artifacts** and contains:
+Right-click on the API project and click on **Build With EasyAnt**. This may take several minutes.
+After successful build, the API project build folder **target~/artifacts** contains:
 
-* **Jar** file (MyLib-api.jar), that will be referenced by the application project
-* **Rip** file (MyLib-api.rip), that will be embedded into the platform
+* **Jar** file (mylib.jar), that will be referenced by an application or a firmware.
+* **Rip** file (mylib.rip), that will be embedded into a platform.
 
 ### Add the API to a Platform 
 
-Unzip the **Rip** file (MyLib-api.rip) and copy the content directory in your **platform-configuration/dropins/javaAPIs**. <br />
-**Rebuild** your platform. <br />
+* Unzip the **Rip** file (mylib.rip) and copy the content directory in the **dropins/javaAPIs** directory of the __platform-configuration__ project.
+* Rebuild your platform.
+
 After successful build, the Javadoc of your API is available in the MicroEJ Resource Center View.
 
-## Write implementation
+## Define the Implementation Project
 
-### Java
+### Java 
 
- * **File > EasyAnt Project**
- 	* Create a new class with **build-microej-javaimpl** skeleton.
-	* Note : You need to respect the **Semantic Versioning** in **Revision** field. Moreover, you have to respect the version specified in the previous step.
+* Select **File > New > Other > EasyAnt > EasyAnt Project**
+	* Set the project settings. 
+		* Project Name: mylib-impl
+		* Organizaton: com.mycompany.impl
+		* Module: mylib
+		* Revision:  1.0.0
+	* Select **com.is2t.easyant.skeletons#microej-javaimpl;+** skeleton.
+	* Click on finish.
 
- * Create a new **File > Java > Class** .
-	* Class Name : **MyLibNatives**
-	* Define your native interfaces :
-	```
-		/**
-		 * Class define all native.
-		 */
-		 public class MyLibNatives {
-			public native static int factorial(int number);
-		 }
-	```
+ * Select **File > New > Class** .
+	* Package: **com.mycompany**
+	* Name : **MyLibNatives**
+	
+Define your native interfaces :
+```
+package com.mycompany;
+
+/**
+ * Class define all native.
+ */
+public class MyLibNatives {
+	public native static int factorial(int number);
+}
+```
 
 Java and Native calls are separate. With this organization, it is more easy to write the MOCK and to split the two parts if one wants to change support of implementation.
 
-* Create a new class **File > Java > Class** .
-	* Class Name : **MyLib**  [MyLib.java](/mylib-impl/src/main/java/com/mycompany/MyLib.java)
+* Select **File > New > Class** .
+	* Package: **com.mycompany**
+	* Name : **MyLib**  [MyLib.java](/mylib-impl/src/main/java/com/mycompany/MyLib.java)
 	* Use your native functions :  
 	```
+	package com.mycompany;
+
+	public class MyLib {
+		
 		/**
 		* @see API javadoc
 		*/
@@ -90,74 +123,87 @@ Java and Native calls are separate. With this organization, it is more easy to w
 			}
 			return MyLibNatives.factorial(number);
 		}
+	}
 	```
 	In **Java**, you can test input value and throw an exception if the input value isn't correct. 
 
 ### Native C
 
-Copy and paste the following code inside the file content/include/intern/LLMYLIB_impl.h . 	
+* Copy and paste the following code inside the file content/include/intern/LLMYLIB_impl.h . 	
 ```
-	 #define LLMYLIB_IMPL_factorial Java_com_mycompany_MyLibNatives_factorial
+#define LLMYLIB_IMPL_factorial Java_com_mycompany_MyLibNatives_factorial
 ```
+**Note** : The **com_mycompany_MyLibNatives** part is the fully qualified name of the **MyLibNatives** class created previously where all **.** are replaced by **_**.
 
-<br/ > **Note** : This file allows to cut the Java part and the C. If you change the packaging of your Java API, you don't have to change your LLAPI, just need to edit this file.
+**Note** : This file allows to cut the Java part and the C. If you change the packaging of your Java Native, you don't have to change your LLAPI, just need to edit this file.
 
 Copy and paste the following code inside the file content/include/LLMYLIB_impl.h.
 ```
-  	#ifndef LLMYLIB_IMPL
-	#define LLMYLIB_IMPL
+#ifndef LLMYLIB_IMPL
+#define LLMYLIB_IMPL
 
-	/**
-	 * @file
-	 * @brief MicroEJ factorial low level API
-	 * @author My Company
-	 * @version 1.0.0
-	 */
+/**
+ * @file
+ * @brief MicroEJ factorial low level API
+ * @author My Company
+ * @version 1.0.0
+ */
 
-	#include <stdint.h>
-	#include <intern/LLMYLIB_impl.h>
+#include <stdint.h>
+#include <intern/LLMYLIB_impl.h>
 
-	#ifdef __cplusplus
-	extern "C" {
-	#endif
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-	/*
-	 * Returns the factorial
-	 */
-	uint32_t LLMYLIB_IMPL_factorial(uint32_t number);
+/*
+ * Returns the factorial
+ */
+uint32_t LLMYLIB_IMPL_factorial(uint32_t number);
 
-	#ifdef __cplusplus
-	}
-	#endif
-	#endif
+#ifdef __cplusplus
+}
+#endif
+#endif
 ```
 
-Rebuild your firmware project, this may take several minutes.
-After successful build, unzip the **rip** file and copy the content directory in **platform-configuration/dropins/**.
+#### Build the Implementation
 
-**Rebuild your Platform**
+Right-click on the Implementation project and click on **Build With EasyAnt**. This may take several minutes.
+After successful build, the Java project build folder **target~/artifacts** contains:
 
-### Write Example Application ###
+* **Rip** file, that will be embedded into a platform.
 
-* Create a new project **File > MicroEJ Standalone Application Project**
+### Add the Implementation to a Platform 
+
+* Unzip the **Rip** file and copy the content directory in the **dropins** directory of the __platform-configuration__ project.
+* Rebuild your platform.
+
+#### Write Example Application ###
+
+* Create a new project **File > New > MicroEJ Standalone Application Project**
 	* Project Name : **mylib-test**
+	* Check **MYLIB-1.0** in the section **Runtime Environment > Select MicroEJ libraries**
 
-* Select **File > Class >**
+* Select **File > New > Class >**
+	* Package: **com.mycompany**
 	* Class Name : **TestMyLib**
 	* Copy and paste the following code :
 ```
-	public class TestMyLib {
-		public static void main(String[] args) {
-			System.out.println("(5!)=" + MyLib.factorial(5));
-		}
+package com.mycompany;
+
+public class TestMyLib {
+	public static void main(String[] args) {
+		System.out.println("(5!)=" + MyLib.factorial(5));
 	}
+}
 ```
 
 # Building for the simulator
 
 ## Getting a java.lang.UnsatisfiedLinkError exception
 
-* Right-click on the project > **Run As > MicroEJ Application**
+* Right-click on the example project **Run As > MicroEJ Application**
 ```
 	The result of the previous step shall lead to this error message
 	Exception in thread "main" java.lang.UnsatisfiedLinkError: No HIL client implementor found (timeout)
@@ -181,18 +227,18 @@ This is perfectly normal since in MyLibTest.java we declared **factorial** as a 
 
 Since our Java application relies on native C functions, on an embedded target, we would need to provide a C implementation. But given that we are running it on a Java simulator, we can emulate those functions using a Java mock.
 
+* Select **File > New > Other > EasyAnt > EasyAnt Project**
+	* Set the project settings. 
+		* Project Name: mylib-mock
+		* Organizaton: com.mycompany.mock
+		* Module: mylib
+		* Revision:  1.0.0
+	* Select **com.is2t.easyant.skeletons#microej-mock;+** skeleton.
+	* Click on finish.
+
 The [mylib-mock project](/mylib-mock/) provides the mocks required for running the Java application on simulator.
 
-Note that the mock method in /mylib-mock/.../MyLibNatives.java has the same fully qualified name (package-name.class-name.method-name) as the one declaring the native in /mylib-impl/.../MyLibNatives.java. This allows the linker to find which method simulates the native function.
-
-* New **Java Project** > mylib-mock
-* Click on **Next**
-	* Select **Libraries**
-		* Add **Variables**
-			* Select **HILENGINE 2.1** (Use the last version)
-* Click on **Finish**
-
-Copy and paste the following code inside the project (**Note** : If you don't want to make a mistake in definition of methods, copy directly [MyLibNatives.java](mylib-impl\src\main\java\com\mycompany\MyLibNatives.java) from your implementation in the project ) :
+* Copy and paste the following code inside the project (**Note** : If you don't want to make a mistake in definition of methods, copy directly [MyLibNatives.java](mylib-impl\src\main\java\com\mycompany\MyLibNatives.java) from your implementation in the project ) :
 
 ```
 package com.mycompany;
@@ -214,16 +260,24 @@ public class MyLibNatives {
 	}
 }
 ```
-## Export this mock in your platform ##
 
-* Right-Click on [mylib-mock]  
-	* **Export**
-		* **Java**
-			* **Jar** File
-				* **Export** destination platform-configuration/dropins/mocks/dropins
-				* **Finish**
-* Re Build your platform
-* Right-click on the project  **Run As > MicroEJ Application**.
+Note that the mock method in /mylib-mock/.../MyLibNatives.java has the same fully qualified name (package-name.class-name.method-name) as the one declaring the native in /mylib-impl/.../MyLibNatives.java. This allows the linker to find which method simulates the native function.
+
+### Build the mock
+
+Right-click on the mock project and click on **Build With EasyAnt**. This may take several minutes.
+After successful build, the Java project build folder **target~/artifacts** contains:
+
+* **Rip** file, that will be embedded into a platform.
+
+### Add the Implementation to a Platform 
+
+* Unzip the **Rip** file and copy the content directory in the **dropins** directory of the __platform-configuration__ project.
+* Rebuild your platform.
+
+## Relaunch the example
+
+ Right-click on the example project  **Run As > MicroEJ Application**.
 ```
 		=============== [ Initialization Stage ] ===============
 		=============== [ Launching on Simulator ] ===============
@@ -267,27 +321,27 @@ This is perfectly normal since in [MyLibTest.java] we declared **factorial** as 
 	* Set the **File Name** field to "[LLMYLIB_impl.c](/mylib-impl/src/main/c/LLMYLIB_impl.c)"
 	* Copy and paste the following code inside the generated [LLMYLIB_impl.c]. Notice the C function follows the strict naming define in the **content/intern/include/LLMYLIB_impl.h**.
 ```
-		#include "LLMYLIB_impl.h"
-		#include "sni.h"
+#include "LLMYLIB_impl.h"
+#include "sni.h"
 
-		/**
-		* @file
-		* @brief MicroEJ factorial low level API
-		* @author My Company
-		* @version 1.0.0
-		*/
-		uint32_t LLMYLIB_IMPL_factorial(uint32_t number)
-		{
-			if(number == 0)
-				return 1;
-			else
-				return number * LLMYLIB_IMPL_factorial(number-1);
-		}
+/**
+ * @file
+ * @brief MicroEJ factorial low level API
+ * @author My Company
+ * @version 1.0.0
+ */
+uint32_t LLMYLIB_IMPL_factorial(uint32_t number)
+{
+	if(number == 0)
+		return 1;
+	else
+		return number * LLMYLIB_IMPL_factorial(number-1);
+}
 ```
 
 #### Adding the C file to the BSP IDE project structure (BSP specific)
 
-* Add the previous file in your platform with your IDE.
+* Add the previous file in your bsp project with your IDE.
 
 #### Getting a clean link (BSP specific)
 

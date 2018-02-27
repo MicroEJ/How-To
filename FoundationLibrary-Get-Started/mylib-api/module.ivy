@@ -1,12 +1,12 @@
 <!--
 	Ivy
 	
-	Copyright 2016 IS2T. All rights reserved.
+	Copyright 2018 IS2T. All rights reserved.
 	IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 -->
 <ivy-module version="2.0" xmlns:ea="http://www.easyant.org"> 
-	<info organisation="com.mycompany" module="mylib-api" status="integration" revision="0.1.0">
-		<ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javaapi" microej.lib.name="mylib-1.0-api"  rip.printableName="mylib-1.0-api" revision="4.+">
+	<info organisation="com.mycompany.api" module="mylib" status="integration" revision="1.0.0">
+		<ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javaapi" microej.lib.name="mylib-1.0-api"  rip.printableName="mylib API" revision="4.+">
 		</ea:build>
 	</info>
 	<configurations defaultconfmapping="default->default;provided->provided">

@@ -1,11 +1,17 @@
+/*
+ * Java
+ *
+ * Copyright 2018 IS2T. All rights reserved.
+ * IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
 package com.mycompany;
 
 /**
- * Class define all native.
+ * @see javadoc API
  */
 public class MyLibNatives {
 
-	public static int factorial(int number){
+	public static int factorial(int number) {
 		if (number == 0) {
 			return 1;
 		}

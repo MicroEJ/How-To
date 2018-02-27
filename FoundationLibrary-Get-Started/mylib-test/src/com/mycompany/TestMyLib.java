@@ -6,9 +6,8 @@
  */
 package com.mycompany;
 
-/**
- * Class define all native.
- */
-public class MyLibNatives {
-	public native static int factorial(int number);
+public class TestMyLib {
+	public static void main(String[] args) {
+		System.out.println("(5!)=" + MyLib.factorial(5));
+	}
 }

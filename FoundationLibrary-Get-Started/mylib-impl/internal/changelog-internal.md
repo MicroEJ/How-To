@@ -1,8 +1,6 @@
 <!--
 	Markdown
-	
-	Copyright 2016 IS2T. All rights reserved.
-	Modification and distribution is permitted under certain conditions.
+	Copyright 2018 IS2T. All rights reserved.
 	IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 -->
 
@@ -22,7 +20,7 @@ Bugfixes:
   -  List here the bug fixes (WI xxxx).
 -->
 
-## 0.1.0  (2016-xx-xx)
+## 1.0.0-RC
 
 Features:
 

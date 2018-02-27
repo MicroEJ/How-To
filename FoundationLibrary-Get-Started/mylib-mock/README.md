@@ -4,4 +4,4 @@
 	IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 -->
 # Description
-MicroEJ Java library: mylib.
+Mock library: mylib.

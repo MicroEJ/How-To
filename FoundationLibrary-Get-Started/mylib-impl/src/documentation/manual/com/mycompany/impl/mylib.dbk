@@ -2,13 +2,12 @@
 <!--
 	Docbook
 	
-	Copyright 2016 IS2T. All rights reserved.
-	Modification and distribution is permitted under certain conditions.
+	Copyright 2018 IS2T. All rights reserved.
 	IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 -->
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<section id="mylib-api">
-	<title>mylib-api</title>
+<section id="mylib">
+	<title>mylib</title>
 	<para>
 	</para>
 </section>

@@ -1,11 +1,12 @@
+/*
+ * Java
+ *
+ * Copyright 2018 IS2T. All rights reserved.
+ * IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
 package com.mycompany;
 
-/**
- *
- *
- */
 public class MyLib {
-
 	/**
 	 * Returns the factorial of number.
 	 *

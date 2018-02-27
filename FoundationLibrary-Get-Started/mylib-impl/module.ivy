@@ -1,12 +1,12 @@
 <!--
 	Ivy
 	
-	Copyright 2016 IS2T. All rights reserved.
+	Copyright 2018 IS2T. All rights reserved.
 	IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 -->
 <ivy-module version="2.0" xmlns:ea="http://www.easyant.org"> 
-	<info organisation="com.mycompany" module="mylib-impl" status="integration" revision="0.1.0">
-		<ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javaimpl" microej.lib.name="mylib-1.0" rip.printableName="mylib-1.0" revision="3.+">
+	<info organisation="com.mycompany.impl" module="mylib" status="integration" revision="1.0.0">
+		<ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javaimpl" microej.lib.name="mylib-1.0" rip.printableName="mylib Impl" revision="3.+">
 		</ea:build>
 	</info>
 	<configurations defaultconfmapping="default->default;provided->provided">
@@ -24,6 +24,6 @@
 	
 	<dependencies>
 		<!-- your project dependencies goes here -->
-		<dependency org="ej.api" name="edc" rev="[1.2.0-RC0,2.0.0-RC0[" conf="provided->*" />
+		<dependency org="ej.api" name="edc" rev="[1.2.0-RC0,2.0.0-RC0[" conf="provided"/>
 	</dependencies>
 </ivy-module>

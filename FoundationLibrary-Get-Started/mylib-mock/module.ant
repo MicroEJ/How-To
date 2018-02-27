@@ -1,0 +1,17 @@
+<!--
+	ANT
+	
+	Copyright 2018 IS2T. All rights reserved.
+	IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+-->
+<project name="com.mycompany.mock;mylib" xmlns:ea="antlib:org.apache.easyant">
+
+	<ea:plugin module="abstract-compile" revision="0.9" />
+	
+    <target name="-mylib:augment-classpath" extensionOf="abstract-compile:compile-ready">
+    	<ea:path pathid="compile.main.classpath" overwrite="append">
+			<fileset dir="${basedir}/lib" includes="HILEngine.jar" />
+		</ea:path>
+    </target>
+
+</project>
