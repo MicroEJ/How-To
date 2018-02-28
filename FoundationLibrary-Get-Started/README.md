@@ -1,160 +1,143 @@
 <!--
-	Readme
+	Markdown
 	Copyright 2018 IS2T. All rights reserved.
-	IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+	Use of this source code is governed by a BSD-style license that can be found at http://www.microej.com/open-source-bsd-license/.
 -->
 
-# How to Create a Foundation Library #
+# How to Setup a new Foundation Library
 
 A Foundation Library is a library that provides core runtime APIs or hardware-dependent functionality. It is often connected to underlying C low-level APIs.
 
 ![LLAPI](assets/schema1.png)
 
-## Prerequisites ##
+## Prerequisites
 
 1. MicroEJ SDK 4.1.4 installed.
-2. A MicroEJ 4.1 Platform Reference Implementation imported into the MicroEJ repository. See (https://developer.microej.com/getting-started-sdk-stm.html).
+2. A MicroEJ 4.1 Platform Reference Implementation imported into the MicroEJ repository. See https://developer.microej.com/getting-started-sdk.html.
 3. An activated Evaluation or Production license.
-4. Knowledge about Java and C programming.
-5. Basic knowledge about MicroEJ (platform and standalone application build).
-6. Knowledge how to communicate from Java to C .[Example-Standalone-Java-C-Interface](https://github.com/MicroEJ/Example-Standalone-Java-C-Interface)
+4. Basic knowledge about Java and C programming.
+5. Basic knowledge about MicroEJ (Platform build and Standalone Application launch).
 
-# Create a Foundation Library
+## Create the Foundation Library API
 
-## Define the API Project
+### Define the API Project
 
 * Select **File > New > Other > EasyAnt > EasyAnt Project**
 	* Set the project settings.
 		* Project Name: mylib-api
-		* Organizaton: com.mycompany.api
+		* Organization: com.mycompany.api
 		* Module: mylib
-		* Revision:  1.0.0
+		* Revision: 1.0.0
 	* Select **com.is2t.easyant.skeletons#microej-javaapi;+** skeleton.
-	* Click on finish.
+	* Click on **Finish**.
 
 * Select **File > New > Class**
 	* Package: **com.mycompany**.
 	* Name: **MyLib**.
 
-In this class, define all the foundation libraries apis methods, their implementations throw a new RuntimeException.
+* Copy and paste the following code into this class:
 
-```
-package com.mycompany;
-
-public class MyLib {
-	/**
-	 * Returns the factorial of number.
-	 *
-	 * @param number
-	 *            Number to returns the factorial
-	 *
-	 * @return the factorial of number.
-	 */
-		public static int factorial(int number) {
-			throw new RuntimeException();
-		}
-}
-```
-
-### Build the API
-
-Right-click on the API project and click on **Build With EasyAnt**. This may take several minutes.
-After successful build, the API project build folder **target~/artifacts** contains:
-
-* **Jar** file (mylib.jar), that will be referenced by an application or a firmware.
-* **Rip** file (mylib.rip), that will be embedded into a platform.
-
-### Add the API to a Platform 
-
-* Unzip the **Rip** file (mylib.rip) and copy the content directory in the **dropins/javaAPIs** directory of the __platform-configuration__ project.
-* Rebuild your platform.
-
-After successful build, the Javadoc of your API is available in the MicroEJ Resource Center View.
-
-## Define the Implementation Project
-
-### Java 
-
-* Select **File > New > Other > EasyAnt > EasyAnt Project**
-	* Set the project settings. 
-		* Project Name: mylib-impl
-		* Organizaton: com.mycompany.impl
-		* Module: mylib
-		* Revision:  1.0.0
-	* Select **com.is2t.easyant.skeletons#microej-javaimpl;+** skeleton.
-	* Click on finish.
-
- * Select **File > New > Class** .
-	* Package: **com.mycompany**
-	* Name : **MyLibNatives**
-	
-Define your native interfaces :
 ```
 package com.mycompany;
 
 /**
- * Class define all native.
+ * My Foundation Library.
  */
-public class MyLibNatives {
-	public native static int factorial(int number);
+public class MyLib {
+	/**
+	 * Computes the factorial of an integer.
+	 *
+	 * @param number
+	 *            a positive integer
+	 *
+	 * @return the factorial of number.
+	 */
+	public static int factorial(int number) {
+		throw new RuntimeException();
+	}
 }
+
 ```
 
-Java and Native calls are separate. With this organization, it is more easy to write the MOCK and to split the two parts if one wants to change support of implementation.
+This class defines a _factorial_ API. The method content is filled with **throw a new RuntimeException** just for successful compilation.
+
+### Build the API Project
+
+Right-click on **mylib-api** project and select **Build With EasyAnt**. 
+After successful build, the project build directory **target~/artifacts** contains:
+
+* **Jar** file (mylib.jar), that will be used by an Application.
+* **Rip** file (mylib.rip), that will be embedded into a Platform.
+
+### Add the API to the Platform
+
+* Unzip **mylib.rip** and copy all the files of the **content** directory into the **dropins** directory of the __[platform]-configuration__ project.
+* Rebuild the Platform.
+
+The API documentation is available in the MicroEJ Resource Center View (**Help > MicroEJ Resource Center > Javadoc**).
+
+## Create the Foundation Library Implementation
+
+### Define the Implementation Project
+
+* Select **File > New > Other > EasyAnt > EasyAnt Project**
+	* Set the project settings. 
+		* Project Name: mylib-impl
+		* Organization: com.mycompany.impl
+		* Module: mylib
+		* Revision: 1.0.0
+	* Select **com.is2t.easyant.skeletons#microej-javaimpl;+** skeleton.
+	* Click on **Finish**.
 
 * Select **File > New > Class** .
 	* Package: **com.mycompany**
-	* Name : **MyLib**  [MyLib.java](/mylib-impl/src/main/java/com/mycompany/MyLib.java)
-	* Use your native functions :  
-	```
-	package com.mycompany;
+	* Name : **MyLib**
 
-	public class MyLib {
-		
-		/**
-		* @see API javadoc
-		*/
-		public static int factorial(int number) {
-			if (number < 0) {
-				throw new IllegalArgumentException("Factorial cannot be negative");
-			}
-			if (number == 0 || number == 1) {
-				return 1;
-			}
-			return MyLibNatives.factorial(number);
+* Copy and paste the following code into this class:
+
+```
+package com.mycompany;
+
+@SuppressWarnings({ "javadoc", "nls" })
+public class MyLib {
+
+	public static int factorial(int number) {
+		if (number < 0) {
+			throw new IllegalArgumentException("Factorial cannot be negative");
 		}
+		return factorial0(number);
 	}
-	```
-	In **Java**, you can test input value and throw an exception if the input value isn't correct. 
 
-### Native C
-
-* Copy and paste the following code inside the file content/include/intern/LLMYLIB_impl.h . 	
+	public native static int factorial0(int number);
+}
+	
 ```
-#define LLMYLIB_IMPL_factorial Java_com_mycompany_MyLibNatives_factorial
-```
-**Note** : The **com_mycompany_MyLibNatives** part is the fully qualified name of the **MyLibNatives** class created previously where all **.** are replaced by **_**.
 
-**Note** : This file allows to cut the Java part and the C. If you change the packaging of your Java Native, you don't have to change your LLAPI, just need to edit this file.
+This class defines the _factorial_ implementation. It first checks the argument validity and then redirects to a native method for speed considerations.
 
-Copy and paste the following code inside the file content/include/LLMYLIB_impl.h.
+### Write the C Header File
+
+* Create a new file named **include/LLMYLIB_impl.h** into the **content** directory of the __[platform]-configuration__ project.
+* Copy and paste the following code into this file:
+
 ```
 #ifndef LLMYLIB_IMPL
 #define LLMYLIB_IMPL
 
 /**
  * @file
- * @brief MicroEJ factorial low level API
+ * @brief MicroEJ factorial Low Level API
  * @author My Company
  * @version 1.0.0
  */
 
 #include <stdint.h>
-#include <intern/LLMYLIB_impl.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define LLMYLIB_IMPL_factorial Java_com_mycompany_MyLib_factorial0
 
 /*
  * Returns the factorial
@@ -165,30 +148,43 @@ uint32_t LLMYLIB_IMPL_factorial(uint32_t number);
 }
 #endif
 #endif
+
 ```
 
-#### Build the Implementation
+This file defines the _factorial_ C prototype. The **com_mycompany_MyLib** part is the fully qualified name of the **MyLib** class created previously where all **.** are replaced by **_**.
 
-Right-click on the Implementation project and click on **Build With EasyAnt**. This may take several minutes.
-After successful build, the Java project build folder **target~/artifacts** contains:
+The _#define_ statement allows to separate the Java part and the C part. 
+This is called the Low Level API of the Foundation Library.
+If the fully qualified name of the Java native method is updated, the C implementation code do not need to be updated.
 
-* **Rip** file, that will be embedded into a platform.
 
-### Add the Implementation to a Platform 
 
-* Unzip the **Rip** file and copy the content directory in the **dropins** directory of the __platform-configuration__ project.
-* Rebuild your platform.
+### Build the Implementation Project
 
-#### Write Example Application ###
+Right-click on **mylib-impl** project and select **Build With EasyAnt**.
+After successful build, the project build directory **target~/artifacts** contains:
+
+* **Rip** file (mylib.rip), that will be embedded into a Platform.
+
+### Add the Implementation to the Platform 
+
+* Unzip **mylib.rip** and copy all the files of the **content** directory into the **dropins** directory of the __[platform]-configuration__ project.
+* Rebuild the Platform.
+
+## Test the Foundation Library from an Example
+
+### Define the Application Project
 
 * Create a new project **File > New > MicroEJ Standalone Application Project**
-	* Project Name : **mylib-test**
+	* Project Name: **mylib-test**
 	* Check **MYLIB-1.0** in the section **Runtime Environment > Select MicroEJ libraries**
 
-* Select **File > New > Class >**
+* Select **File > New > Class**
 	* Package: **com.mycompany**
-	* Class Name : **TestMyLib**
-	* Copy and paste the following code :
+	* Class Name: **TestMyLib**
+	
+* Copy and paste the following code into this class:
+
 ```
 package com.mycompany;
 
@@ -197,58 +193,62 @@ public class TestMyLib {
 		System.out.println("(5!)=" + MyLib.factorial(5));
 	}
 }
+
 ```
 
-# Building for the simulator
+This class defined a main entry point that prints the result of _5!_.
 
-## Getting a java.lang.UnsatisfiedLinkError exception
+### Launch the Application on Simulator
 
-* Right-click on the example project **Run As > MicroEJ Application**
+* Right-click on **mylib-test** project and select **Run As > MicroEJ Application**. 
+
+The application is started. After a dozen of seconds, the following trace shall appear in the console view:
+
 ```
 	The result of the previous step shall lead to this error message
 	Exception in thread "main" java.lang.UnsatisfiedLinkError: No HIL client implementor found (timeout)
-		at java.lang.Throwable.fillInStackTrace(Throwable.java:79)
-		at java.lang.Throwable.<init>(Throwable.java:30)
-		at java.lang.Error.<init>(Error.java:10)
-		at java.lang.LinkageError.<init>(LinkageError.java:10)
-		at java.lang.UnsatisfiedLinkError.<init>(UnsatisfiedLinkError.java:10)
-		at com.mycompany.MyLib.factorial(MyLib.java:16)
-		at my.company.TestMyLib.main(TestMyLib.java:8)
-		at java.lang.MainThread.run(Thread.java:836)
-		at java.lang.Thread.runWrapper(Thread.java:372)
-	=============== [ Completed Successfully ] ===============
+        at java.lang.Throwable.fillInStackTrace(Throwable.java:79)
+        at java.lang.Throwable.<init>(Throwable.java:30)
+        at java.lang.Error.<init>(Error.java:10)
+        at java.lang.LinkageError.<init>(LinkageError.java:10)
+        at java.lang.UnsatisfiedLinkError.<init>(UnsatisfiedLinkError.java:10)
+        at com.mycompany.MyLib.factorial(MyLib.java:15)
+        at com.mycompany.TestMyLib.main(TestMyLib.java:5)
+        at java.lang.MainThread.run(Thread.java:836)
+        at java.lang.Thread.runWrapper(Thread.java:372)
 
-	SUCCESS
 ```
-This is perfectly normal since in MyLibTest.java we declared **factorial** as a native function, when running the simulator, the Hardware In the Loop (HIL) engines expects to find some Java implementation emulating the behavior of the native function.
 
+This is the normal behavior because **factorial0** native method is currently not implemented. 
+The HIL engine (Hardware In the Loop) did not find a Platform Mock-up implementing the native method.
 
-## Adding a mock of the native function to the JPF
+## Create the Foundation Library Mock-up
 
-Since our Java application relies on native C functions, on an embedded target, we would need to provide a C implementation. But given that we are running it on a Java simulator, we can emulate those functions using a Java mock.
+### Define the Mock-up Project
+
+To each MicroEJ native method is associated a Java Mock-up method that implements the simulated behavior. 
+A Mock-up project is a standard Java project (J2SE).
 
 * Select **File > New > Other > EasyAnt > EasyAnt Project**
 	* Set the project settings. 
 		* Project Name: mylib-mock
-		* Organizaton: com.mycompany.mock
+		* Organization: com.mycompany.mock
 		* Module: mylib
-		* Revision:  1.0.0
+		* Revision: 1.0.0
 	* Select **com.is2t.easyant.skeletons#microej-mock;+** skeleton.
-	* Click on finish.
+	* Click on **Finish**.
 
-The [mylib-mock project](/mylib-mock/) provides the mocks required for running the Java application on simulator.
-
-* Copy and paste the following code inside the project (**Note** : If you don't want to make a mistake in definition of methods, copy directly [MyLibNatives.java](mylib-impl\src\main\java\com\mycompany\MyLibNatives.java) from your implementation in the project ) :
+* Select **File > New > Class**
+	* Package: **com.mycompany**
+	* Class Name: **MyLib**
+* Copy and paste the following code into this class:
 
 ```
 package com.mycompany;
 
-/**
- * @see javadoc API
- */
-public class MyLibNatives {
+public class MyLib {
 
-	public static int factorial(int number) {
+	public static int factorial0(int number) {
 		if (number == 0) {
 			return 1;
 		}
@@ -259,67 +259,74 @@ public class MyLibNatives {
 		return fact;
 	}
 }
+
 ```
+This class defines the implementation _factorial0_ method on Simulator. 
+The Mock-up method has the same prototype than the implementation one, except the **native** modifier. 
+The HIL engine will link the native method to the Mock-up method.
 
-Note that the mock method in /mylib-mock/.../MyLibNatives.java has the same fully qualified name (package-name.class-name.method-name) as the one declaring the native in /mylib-impl/.../MyLibNatives.java. This allows the linker to find which method simulates the native function.
+### Build the Mock-up Project
 
-### Build the mock
+* Right-click on the **mylib-mock** project and select **Build With EasyAnt**.
 
-Right-click on the mock project and click on **Build With EasyAnt**. This may take several minutes.
-After successful build, the Java project build folder **target~/artifacts** contains:
+After successful build, the project build directory **target~/artifacts** contains:
 
-* **Rip** file, that will be embedded into a platform.
+* **Rip** file (mylib.rip), that will be embedded into a Platform.
 
-### Add the Implementation to a Platform 
+### Add the Mock-up to the Platform 
 
-* Unzip the **Rip** file and copy the content directory in the **dropins** directory of the __platform-configuration__ project.
-* Rebuild your platform.
+* Unzip **mylib.rip** and copy all the files of the **content** directory into the **dropins** directory of the __[platform]-configuration__ project.
+* Rebuild the Platform.
 
-## Relaunch the example
+### Launch the Application on Simulator
 
- Right-click on the example project  **Run As > MicroEJ Application**.
+* Right-click on **mylib-test** project and select **Run As > MicroEJ Application**. 
+
+The following trace shall appear in the console view:
+ 
 ```
 		=============== [ Initialization Stage ] ===============
 		=============== [ Launching on Simulator ] ===============
 		(5!)=120
 		=============== [ Completed Successfully ] ===============
 
-		SUCCESS
 ```
 
-# Running the application on target
+## Implement Low Level API on Device
 
-## Building for the target
+### Launch the Application on Device
 
-	* Copy the simulator launcher
-	* In **Execution** tab
-		* In Target frame
-			* Click the Browse button next to the JPF Field and select your platform
-		* In Execution frame
-			* Notice that "Execute on Device" radio button option is checked
-	* Click on "Run"
+* Duplicate the Simulation launcher
+	* Go to **Run > Run Configuration...**
+	* Select **mylib-test TestMyLib** launcher
+	* Right-Click and select **Duplicate**
+	* In **Execution** tab, select  **Execute on Device"**
+* Click on **Run**
 
-### Getting a linker error (BSP specific)
+The file *microejapp.o* is generated to a well known location for the C project.
 
-* From the MicroVision IDE
-	* Select **Project > Build Target** menu item (or press F7 keyboard shortcut)
-	* A linker error message shall appear :
-		```
-			Undefined symbol Java_com_mycompany_MyLibNatives_factorial (referred from microejapp.o).
-		```
+### Build the C Project
 
-This is perfectly normal since in [MyLibTest.java] we declared **factorial** as a native function, when building the MicroEJ project, the generated linker configuration file expects to find a C function definition matching the qualified name of the function.
+This section is Platform specific. Please consult the documentation of the imported Platform for how to proceed in details.
 
-## Fixing the linker error
+* Open the Platform C project into the C IDE 
+* Compile and link the project
+ 
+A similar linker error than the following shall appear in the C IDE console view:
+		
+```
+Undefined symbol Java_com_mycompany_MyLib_factorial0 (referred from microejapp.o).
+```
 
-### C Native function implementation
+This is the normal behavior because the symbol **Java_com_mycompany_MyLib_factorial0** is currently not implemented in C code. 
+The third-party linker did not find an object file implementing the native function.
 
-* Select your implemententation project and add a new directory, Select **File > New > Source Folder** menu item
-	* Set the **Folder Name** field to "src/main/c"
-* Right-Click on the folder that you just created
-	* Select **New > File** context menu item
-	* Set the **File Name** field to "[LLMYLIB_impl.c](/mylib-impl/src/main/c/LLMYLIB_impl.c)"
-	* Copy and paste the following code inside the generated [LLMYLIB_impl.c]. Notice the C function follows the strict naming define in the **content/intern/include/LLMYLIB_impl.h**.
+### Write the C Implementation File
+
+* In the C project, create a new File called **LLMYLIB_impl.c**
+* Add it to the C Project configuration
+* Copy and paste the following code to the file:
+
 ```
 #include "LLMYLIB_impl.h"
 #include "sni.h"
@@ -337,25 +344,36 @@ uint32_t LLMYLIB_IMPL_factorial(uint32_t number)
 	else
 		return number * LLMYLIB_IMPL_factorial(number-1);
 }
+
+```
+This file defines a basic C implementation of the _factorial0_ function.
+
+### Test the C Project
+
+* Link the C Project. 
+ 
+The link shall produce the executable file.
+
+* Program the executable file on the device.
+ 
+The following trace shall appear on the standard output:
+
+```
+VM START
+(5!)=120
+VM END (exit code = 0)
 ```
 
-#### Adding the C file to the BSP IDE project structure (BSP specific)
+# Advanced Configuration
 
-* Add the previous file in your bsp project with your IDE.
+Configure MicroEJ SDK for day to day developments, for taking Implementation project sources prior to Platform Implementation:
 
-#### Getting a clean link (BSP specific)
+* Select **Window > Preferences > MicroEJ > Settings**
+* Check **Resolve Foundation Library in workspace**
 
-* Build target
+This avoid to rebuild the Foundation Library implementation and the Platform each time the implementation code changes.
+	
+# Further Reading
 
-### Flashing the board (BSP specific)
-
-* Connect and flash your board.
-
-### Checking the behavior
-
-* Set up a terminal on the board serial port and press the reset input. You shall get the following output :
-	```
-	VM START
-	(5!)=120
-	VM END (exit code = 0)
-	```
+* Communication mechanisms from Java to C: [Example-Standalone-Java-C-Interface](https://github.com/MicroEJ/Example-Standalone-Java-C-Interface))
+* Simulation mock specification: Section 20.3 of the Device Developer's Guide
