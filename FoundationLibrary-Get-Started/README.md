@@ -385,5 +385,5 @@ This avoid to rebuild the Foundation Library implementation and the Platform eac
 	
 # Further Reading
 
-* Communication mechanisms from Java to C: [Example-Standalone-Java-C-Interface](https://github.com/MicroEJ/Example-Standalone-Java-C-Interface))
+* Communication mechanisms from Java to C: [Example-Standalone-Java-C-Interface](https://github.com/MicroEJ/Example-Standalone-Java-C-Interface)
 * Simulation mock specification: Section 20.3 of the Device Developer's Guide
