@@ -1,4 +1,4 @@
-## 1.3.0 (2017-08-25)
+## 1.3.0 (2018-03-01)
 Features:
    - Add FoundationLibrary-Get-Started project.
 
