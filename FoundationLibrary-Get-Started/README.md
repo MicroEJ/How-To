@@ -6,9 +6,9 @@
 
 # How to Setup a new Foundation Library
 
-A Foundation Library is a library that provides core runtime APIs or hardware-dependent functionality. It is often connected to underlying C low-level APIs.
+This example describes how to setup a new Foundation Library in MicroEJ SDK.
 
-![LLAPI](assets/schema1.png)
+A Foundation Library is a library that provides core runtime APIs or hardware-dependent functionality. It is often connected to underlying C low-level APIs.
 
 ## Prerequisites
 
@@ -17,6 +17,16 @@ A Foundation Library is a library that provides core runtime APIs or hardware-de
 3. An activated Evaluation or Production license.
 4. Basic knowledge about Java and C programming.
 5. Basic knowledge about MicroEJ (Platform build and Standalone Application launch).
+
+## Overview
+
+A Foundation Library is composed of
+* A MicroEJ API project: contains API skeletons for compilation purpose.
+* A MicroEJ Implementation project: contains the runtime code executed by the Platform and Low Level C header files.
+* C code: contains the implementation of native methods linked to the C project.
+* Java Mock-up project: contains the implementation of native methods for simulation.
+
+![LLAPI](overview.png)
 
 ## Create the Foundation Library API
 
