@@ -74,7 +74,7 @@ This class defines a _factorial_ API. The method content is filled with **throw 
 ### Build the API Project
 
 Right-click on **mylib-api** project and select **Build With EasyAnt**. 
-After successful build, the project build directory **target~/artifacts** contains:
+After a successful build, the project build directory **target~/artifacts** contains:
 
 * **Jar** file (mylib.jar), that will be used by an Application.
 * **Rip** file (mylib.rip), that will be embedded into a Platform.
@@ -123,7 +123,7 @@ public class MyLib {
 	
 ```
 
-This class defines the _factorial_ implementation. It first checks the argument validity and then redirects to a native method for speed considerations.
+This class defines the _factorial_ implementation. It first checks the argument validity and then redirects to a native method for speed consideration.
 
 ### Write the C Header File
 
@@ -172,7 +172,7 @@ If the fully qualified name of the Java native method is updated, the C implemen
 ### Build the Implementation Project
 
 Right-click on **mylib-impl** project and select **Build With EasyAnt**.
-After successful build, the project build directory **target~/artifacts** contains:
+After a successful build, the project build directory **target~/artifacts** contains:
 
 * **Rip** file (mylib.rip), that will be embedded into a Platform.
 
@@ -212,7 +212,7 @@ This class defined a main entry point that prints the result of _5!_.
 
 * Right-click on **mylib-test** project and select **Run As > MicroEJ Application**. 
 
-The application is started. After a dozen of seconds, the following trace shall appear in the console view:
+The application is started. After a few seconds, the following trace shall appear in the console view:
 
 ```
 	The result of the previous step shall lead to this error message
@@ -229,7 +229,7 @@ The application is started. After a dozen of seconds, the following trace shall 
 
 ```
 
-This is the normal behavior because **factorial0** native method is currently not implemented. 
+This is the normal behavior because **factorial0** native method is currently not implemented (see below). 
 The HIL engine (Hardware In the Loop) did not find a Platform Mock-up implementing the native method.
 
 ## Create the Foundation Library Mock-up
@@ -279,7 +279,7 @@ The HIL engine will link the native method to the Mock-up method.
 
 * Right-click on the **mylib-mock** project and select **Build With EasyAnt**.
 
-After successful build, the project build directory **target~/artifacts** contains:
+After a successful build, the project build directory **target~/artifacts** contains:
 
 * **Rip** file (mylib.rip), that will be embedded into a Platform.
 
@@ -317,13 +317,13 @@ The file *microejapp.o* is generated to a well known location for the C project.
 
 ### Build the C Project
 
-This section is Platform specific. Please consult the documentation of the imported Platform for how to proceed in details.
-
 * Open the Platform C project into the C IDE 
 * Compile and link the project
+
+Please consult the documentation of the imported Platform for more details on the proceedings.
  
-A similar linker error than the following shall appear in the C IDE console view:
-		
+A similar linker error than the one below should appear in the C IDE console view:
+
 ```
 Undefined symbol Java_com_mycompany_MyLib_factorial0 (referred from microejapp.o).
 ```
@@ -376,12 +376,12 @@ VM END (exit code = 0)
 
 # Advanced Configuration
 
-Configure MicroEJ SDK for day to day developments, for taking Implementation project sources prior to Platform Implementation:
+Configure MicroEJ SDK for using Implementation project sources before the Platform Implementation:
 
 * Select **Window > Preferences > MicroEJ > Settings**
 * Check **Resolve Foundation Library in workspace**
 
-This avoid to rebuild the Foundation Library implementation and the Platform each time the implementation code changes.
+This avoids to rebuild the Foundation Library implementation and the Platform each time the implementation code changes.
 	
 # Further Reading
 
