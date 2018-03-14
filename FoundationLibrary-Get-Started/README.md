@@ -42,6 +42,7 @@ A Foundation Library is composed of
 	* Click on **Finish**.
 
 * Select **File > New > Class**
+	* Source folder: **mylib-api/src/main/java**.
 	* Package: **com.mycompany**.
 	* Name: **MyLib**.
 
@@ -100,6 +101,7 @@ The API documentation is available in the MicroEJ Resource Center View (**Help >
 	* Click on **Finish**.
 
 * Select **File > New > Class** .
+	* Source folder: **mylib-impl/src/main/java**.
 	* Package: **com.mycompany**
 	* Name : **MyLib**
 
@@ -127,7 +129,7 @@ This class defines the _factorial_ implementation. It first checks the argument 
 
 ### Write the C Header File
 
-* Create a new file named **include/LLMYLIB_impl.h** into the **content** directory of the __[platform]-configuration__ project.
+* Create a new file named **include/LLMYLIB_impl.h** into the **content** directory of the implementation project.
 * Copy and paste the following code into this file:
 
 ```
@@ -190,6 +192,7 @@ After a successful build, the project build directory **target~/artifacts** cont
 	* Check **MYLIB-1.0** in the section **Runtime Environment > Select MicroEJ libraries**
 
 * Select **File > New > Class**
+	* Source folder: **mylib-test/src**.
 	* Package: **com.mycompany**
 	* Class Name: **TestMyLib**
 	
@@ -215,7 +218,6 @@ This class defined a main entry point that prints the result of _5!_.
 The application is started. After a few seconds, the following trace shall appear in the console view:
 
 ```
-	The result of the previous step shall lead to this error message
 	Exception in thread "main" java.lang.UnsatisfiedLinkError: No HIL client implementor found (timeout)
         at java.lang.Throwable.fillInStackTrace(Throwable.java:79)
         at java.lang.Throwable.<init>(Throwable.java:30)
@@ -249,6 +251,7 @@ A Mock-up project is a standard Java project (J2SE).
 	* Click on **Finish**.
 
 * Select **File > New > Class**
+	* Source folder: **mylib-mock/src/main/java**.
 	* Package: **com.mycompany**
 	* Class Name: **MyLib**
 * Copy and paste the following code into this class:
@@ -334,7 +337,7 @@ The third-party linker did not find an object file implementing the native funct
 ### Write the C Implementation File
 
 * In the C project, create a new File called **LLMYLIB_impl.c**
-* Add it to the C Project configuration
+* Add the C file to the compilation objects by adding it to the C Project configuration
 * Copy and paste the following code to the file:
 
 ```
@@ -349,10 +352,14 @@ The third-party linker did not find an object file implementing the native funct
  */
 uint32_t LLMYLIB_IMPL_factorial(uint32_t number)
 {
-	if(number == 0)
+	if (number == 0) {
 		return 1;
-	else
-		return number * LLMYLIB_IMPL_factorial(number-1);
+	}
+	uint32_t fact = 1; // this will be the result
+	for (uint32_t i = 1; i <= number; i++) {
+		fact *= i;
+	}
+	return fact;
 }
 
 ```
