@@ -1,3 +1,7 @@
+## 1.4.0 (2018-03-01)
+Features:
+   - Add FoundationLibrary-Get-Started project.
+
 ## 1.3.1 (2018-01-31)
 Bug fixes:
    - Update Proguard-Get-Started.
