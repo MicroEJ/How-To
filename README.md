@@ -13,7 +13,7 @@ Note that to run them on board :
 
 # Details
 **Available Examples**:
-* [FoundationLibrary-Get-Started](FoundationLibrary-Get-Started): Contains a tutorial on how to add a foundation library for both simulated and embedded runtime.
+* [FoundationLibrary-Get-Started](FoundationLibrary-Get-Started): Contains a tutorial on how to add a Foundation Library for both simulated and embedded runtime.
 * [MicroUI-Get-Started](MicroUI-Get-Started) : Contains simple examples to understand how to use the main MicroUI library APIs.
 * [Proguard-Get-Started](Proguard-Get-Started) : Explains how to integrate Proguard in MicroEJ Studio/SDK.
 * [Storage-Get-Started](Storage-Get-Started): Explains how to store/retrieve information in a sandboxed app.
