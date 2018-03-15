@@ -346,7 +346,7 @@ The third-party linker did not find an object file implementing the native funct
 
 /**
  * @file
- * @brief MicroEJ factorial low level API
+ * @brief MicroEJ factorial low level API (the implementation does not support unsigned integer overflow)
  * @author My Company
  * @version 1.0.0
  */
