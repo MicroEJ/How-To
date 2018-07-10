@@ -15,6 +15,7 @@ Note that to run them on board :
 **Available Examples**:
 * [FoundationLibrary-Get-Started](FoundationLibrary-Get-Started): Contains a tutorial on how to add a Foundation Library for both simulated and embedded runtime.
 * [MicroUI-Get-Started](MicroUI-Get-Started) : Contains simple examples to understand how to use the main MicroUI library APIs.
+* [Mock-Get-Started](Mock-Get-Started) : Explains how to create a mock for a SNI function for the simulator..
 * [Proguard-Get-Started](Proguard-Get-Started) : Explains how to integrate Proguard in MicroEJ Studio/SDK.
 * [Storage-Get-Started](Storage-Get-Started): Explains how to store/retrieve information in a sandboxed app.
 * [StandaloneToSandboxed](StandaloneToSandboxed): Explains how to convert a standalone app into a sandboxed app.
@@ -31,3 +32,9 @@ Each subfolder contains a distinct how-to described in the **README.md** file of
 
 # License
 - See the license file [LICENSE.md](LICENSE.md) located at the root of this repository.
+
+
+[//]: # (Markdown)
+[//]: # (Copyright 2017-2018 IS2T. All rights reserved.)
+[//]: # (For demonstration purpose only.)
+[//]: # (IS2T PROPRIETARY. Use is subject to license terms.)

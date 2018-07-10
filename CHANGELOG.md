@@ -1,3 +1,7 @@
+## 1.5.0 (2018-07-10)
+Features:
+   - Add Mock-Get-Started project.
+
 ## 1.4.0 (2018-03-01)
 Features:
    - Add FoundationLibrary-Get-Started project.
