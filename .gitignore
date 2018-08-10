@@ -4,3 +4,6 @@
 **/target~/*
 **/launches/*
 FoundationLibrary-Get-Started/~$schema.pptx
+Single-App-to-Multi-App/feature_hello/src/.generated~/
+Single-App-to-Multi-App-Platform/java/Kernel/com.microej.kernel.SimpleKernel/
+Multi-App-Security-Manager/java/Kernel/com.microej.kernel.SimpleKernel/
