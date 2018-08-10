@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Kernel API
+	
+	Copyright 2018 IS2T. All rights reserved.
+	For demonstration purpose only.
+	IS2T PROPRIETARY. Use is subject to license terms.
+-->
+<require>
+	
+	<type name="com.microej.Led"/>
+	<method name="com.microej.Led.switchLed(boolean)void"/>
+</require>
