@@ -29,7 +29,7 @@ It can be ported to any hardware with a **LED** and a **File System**.
 
 This tutorial is built upon an understanding of the MicroEJ SDK, MicroEJ architectures, MicroEJ Platforms and MicroEJ applications as well as at least one native BSP compiler and IDE.
 
-The user of this tutorial should be able to create a “Hello World” application in Java, build the application, build the BSP and flash the firmware image onto the targeted board.
+The user of this tutorial should be able to create a "Hello World" application in Java, build the application, build the BSP and flash the firmware image onto the targeted board.
 
 Other development boards, reference platforms and compilers can be used, however the instructions in this tutorial are specifically written for these items and will not apply without changes to other environments.
 
@@ -57,7 +57,7 @@ Import the example projects into MicroEJ SDK:
 # Add a Native Function in the Platform to Control a LED
 
 Modify the platform to add the capability to call a native C function from Java.
-  
+
 1. Configure modules
     1. Open the [XXX]-configuration/[XXX].platform` file
     2. Go to **Content** tab.
@@ -100,7 +100,7 @@ Modify the platform to add the capability to call a native C function from Java.
     - [LEDs.c](native/src-led/LEDs.c) provides the implementation of the native C function defined in `NativeAPIs`
     - This implementation is done for the STM32F746-DISCO board, to add it to Keil IDE follow these steps:
         1. Open the Keil project in the platform [XXX]-bsp/ project
-        2. Right-click on the `MicroEJ/Core` folder 
+        2. Right-click on the `MicroEJ/Core` folder
         3. Select **Add Existing Files to Group 'MicroEJ/Core'**
             1. Browse to the file [LEDs.c](native/src-led/LEDs.c) in the native repository
             2. Click **Add**
@@ -145,7 +145,7 @@ This section will adapt the existing MicroEJ platform project to run a Kernel wi
     - In the [module.ivy](java/Kernel/module.ivy), the example depends on:
         - `ej.api#edc`: to provide the EDC Java APIs to the kernel
         - `ej.api#bon`: to provide the BON Java APIs to the kernel
-        - `ej.api#kf`: to provide the KF APIs to the kernel to load a feature 
+        - `ej.api#kf`: to provide the KF APIs to the kernel to load a feature
         - `com.microej.kernelapi#edc`: to provide the EDC APIs to the feature
         - `com.microej.kernelapi#bon`: to provide the BON APIs to the feature
 
@@ -163,7 +163,7 @@ This section will adapt the existing MicroEJ platform project to run a Kernel wi
         2. Create [kernel.api](java/Kernel/src/main/resources/kernel.api) file at the root of a /resources folder
              - Define the types that are open to the Features
              - Define the methods that are open to the Features
-             
+
 5. Generate the microejapp.o file
     1. Right-click on the `Kernel` project
     2. Select **Run-As**->**Run Configuration**
@@ -185,7 +185,7 @@ This section will adapt the existing MicroEJ platform project to run a Kernel wi
     - `void Java_com_microej_kernel_FeatureInputStream_closeFeature()` to close the feature stream
     - An example using FatFs file system (FS) is provided in [inputStream.c](native/src-feature/inputStream.c)
         - This example will look for features in the FS /tmp/application_1.fo first, then , once the feature is loaded, increment the feature search number.
-    
+
 - Add the implementation to your BSP project using the third party C IDE
     1. Using the Keil IDE, right-click on the `MicroEJ/Core` folder
     2. Select **Add Existing Files to Group 'MicroEJ/Core'**
@@ -292,7 +292,7 @@ This exception occurs when the kernel has changed since the `.fo` file generatio
 
 If the error still occurs, check that the kernel used for the generation of the `.fo` file is the kernel flashed on the board.
 
-## [M101] - Input image file has no debug information : 
+## [M101] - Input image file has no debug information :
 
 When building the `application_1.fo` file an error **M101** occurs
 
