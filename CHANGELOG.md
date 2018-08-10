@@ -1,3 +1,8 @@
+## 1.5.1 (2018-08-10)
+
+Bug fixes:
+  - Use only ASCII characters.
+
 ## 1.5.0 (2018-08-10)
 
 Features:
