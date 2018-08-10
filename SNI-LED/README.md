@@ -1,5 +1,8 @@
 # Overview
+
 This document describes how to add a native call to a monolithic application running on a mono-sandbox platform.
+
+
 
 # Requirements
 
@@ -23,7 +26,7 @@ It can be ported to any hardware with a **LED**.
 
 This tutorial is built upon an understanding of the MicroEJ SDK, MicroEJ architectures, MicroEJ Platforms and MicroEJ applications as well as at least one native BSP compiler and IDE.
 
-The user of this tutorial should be able to create a “Hello World” application in Java, build the application, build the BSP and flash the firmware image onto the targeted board.
+The user of this tutorial should be able to create a "Hello World" application in Java, build the application, build the BSP and flash the firmware image onto the targeted board.
 
 Other development boards, reference platforms and compilers can be used, however the instructions in this tutorial are specifically written for these items and will not apply without changes to other environments.
 
@@ -49,7 +52,7 @@ Import the example projects into MicroEJ SDK:
 # Add a Native Function in the Platform to Control a LED
 
 Modify the platform to add the capability to call a native C function from Java.
-  
+
 1. Configure modules
     1. Open the [XXX]-configuration/[XXX].platform` file
     2. Go to **Content** tab.
@@ -92,7 +95,7 @@ Modify the platform to add the capability to call a native C function from Java.
     - [LEDs.c](native/src-led/LEDs.c) provides the implementation of the native C function defined in `NativeAPIs`
     - This implementation is done for the STM32F746-DISCO board, to add it to Keil IDE follow these steps:
         1. Open the Keil project in the platform [XXX]-bsp/ project
-        2. Right-click on the `MicroEJ/Core` folder 
+        2. Right-click on the `MicroEJ/Core` folder
         3. Select **Add Existing Files to Group 'MicroEJ/Core'**
             1. Browse to the file [LEDs.c](native/src-led/LEDs.c) in the native repository
             2. Click **Add**
