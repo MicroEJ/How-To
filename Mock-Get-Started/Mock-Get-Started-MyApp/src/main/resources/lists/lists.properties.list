@@ -1,0 +1,13 @@
+# Copyright 2018 IS2T. All rights reserved.
+# For demonstration purpose only.
+# IS2T PROPRIETARY. Use is subject to license terms.
+
+# Implementations to use
+ej.style.font.loader.FontLoader=com.microej.example.mock.style.WidgetsFontLoader
+ej.widget.basic.image.ImageTheme=com.microej.example.mock.style.WidgetsImageTheme
+
+# Transitions with screenshots, uncomment the line below to use it.
+com.microej.demo.widget.transition.screenshot=SET
+
+ej.animation.Animator.period=50
+ej.microui.event.generator.Keyboard=ej.widget.keyboard.SystemKeyboard
