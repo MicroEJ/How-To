@@ -1,5 +1,5 @@
 # Overview
-This project uses different way to communicate with the native world.
+This project uses different ways to communicate with the native world.
 
 ## Code highlight
 * [com.microej.example.mock.MySNI](src\main\java\com\microej\example\mock\MySNI.java) describes the SNI functions
@@ -9,12 +9,13 @@ This project uses different way to communicate with the native world.
 # Usage
 1. Right Click on the project
 2. Select **Run as -> Run Configuration**
-3. Select **MicroEJ Application** configuration kind
-4. Stop the run
+3. Select **Run Configuration** configuration kind
 5. Click on **New launch configuration** icon
+5. In **Execution** tab
+    * Set the target platform
 6. In **Configuration** tab
-	* Go to **Libraries -> Shielded Plug**
-		* Set the database to **${project_loc:Mock-Get-Started-MyApp}/src/main/resources/database-definition.xml**
+    * Go to **Libraries -> Shielded Plug**
+        * Set the database to **${project_loc:Mock-Get-Started-MyApp}/src/main/resources/database-definition.xml**
 7. Press **Apply**
 8. Press **Run**
 

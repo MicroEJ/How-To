@@ -7,15 +7,15 @@ For this example a native function will be used: `public static native int foo()
 This function will be in `MyClass` at `my.package`
 
 * Add a native method to your Java application. This native method will have two implementations:
-	* One in C code in the platform BSP project (this part is not covered in this document)
-	* One in Java (J2SE) in a new Java project for the simulator
-	
+    * One in C code in the platform BSP project (this part is not covered in this document)
+    * One in Java (J2SE) in a new Java project for the simulator
+    
 ### Implement the J2SE mock
 * Create a new Java project `Mock`
-	* Open `File` > `New` > `EasyAnt project`
-	* Choose `com.is2t.easyant.skeleton#microej-mock;+` as skeleton
-	* Fulfill the form
-	* Click on `Finish`
+    * Open `File` > `New` > `EasyAnt project`
+    * Choose `com.is2t.easyant.skeleton#microej-mock;+` as skeleton
+    * Fulfill the form
+    * Click on `Finish`
 * Create a class with the **same name, same package** as your SNI (e.g. `my.package.MyClass`)
 * Implement the SNI function as public with the **same signature** (as `public`, without the `native` keyword) (e.g. `public native int foo()`)
 
