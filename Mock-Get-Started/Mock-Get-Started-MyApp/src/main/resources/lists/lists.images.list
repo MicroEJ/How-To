@@ -1,0 +1,8 @@
+# Copyright 2018 IS2T. All rights reserved.
+# For demonstration purpose only.
+# IS2T PROPRIETARY. Use is subject to license terms.
+
+images/switch_checked.png:A8
+images/switch_unchecked.png:A8
+images/Connection.png:A8
+images/Connection-Off.png:A8

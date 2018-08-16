@@ -1,3 +1,8 @@
+## 1.6.0 (2018-08-16)
+
+Features:
+  - Add Mock-Get-Started.
+
 ## 1.5.1 (2018-08-10)
 
 Bug fixes:
