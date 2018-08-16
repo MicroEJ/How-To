@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	ANT Buildfile
+
+  	Copyright 2018 IS2T. All rights reserved.
+	For demonstration purpose only.
+	IS2T PROPRIETARY. Use is subject to license terms.
+
+-->
+<project name="mock-s3-init">
+
+	<import file="${scripts.dir}/extension-init.xml" />
+
+	<target name="init/mock-s3" extensionOf="init/execution" if="onS3">
+		<augment id="hil.main.classpath">
+			<fileset dir="${platform.dir}/mocks" includes="mockmock.jar"/>
+		</augment>
+	</target>
+
+</project>
