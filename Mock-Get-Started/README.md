@@ -1,5 +1,5 @@
 # Overview
-This project explain how to create a mock for a SNI function for the simulator.
+This project explain how to create a mock for SNI and SP functions on the simulator.
 
 # Usage
 ## How to add a mock to your project
@@ -47,8 +47,9 @@ N/A
 # Restrictions
 None.
 
-
-[//]: # (Markdown)
-[//]: # (Copyright 2017-2018 IS2T. All rights reserved.)
-[//]: # (For demonstration purpose only.)
-[//]: # (IS2T PROPRIETARY. Use is subject to license terms.)
+<!--
+	Markdown
+	Copyright 2017-2018 IS2T. All rights reserved.
+	For demonstration purpose only.
+	IS2T PROPRIETARY. Use is subject to license terms.
+-->
