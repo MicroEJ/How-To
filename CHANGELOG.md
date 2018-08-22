@@ -1,3 +1,8 @@
+## 1.6.0 (2018-08-22)
+
+Bug fixes:
+  - Add typo fixes.
+
 ## 1.6.0 (2018-08-16)
 
 Features:
