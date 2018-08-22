@@ -21,7 +21,7 @@ Note that to run them on board :
 * [Storage-Get-Started](Storage-Get-Started): Explains how to store/retrieve information in a sandboxed app.
 * [StandaloneToSandboxed](StandaloneToSandboxed): Explains how to convert a standalone app into a sandboxed app.
 * [Widgets-Get-Started](Widgets-Get-Started) : Contains simple examples to understand how to use the main widget library APIs.
-* [Mock-Get-Started](Mock-Get-Started) : Explains how to create a mock with an  user interface for a SNI function for the simulator..
+* [Mock-Get-Started](Mock-Get-Started) : Explains how to create a mock with an  user interface for SNI and SP functions on the simulator.
 * [SNI-LED](SNI-LED): Use a native (C) function to toggle a LED.
 * [Single-App-to-Multi-App-Platform](Single-App-to-Multi-App-Platform): Modify an existing standalone application associated with a Single-app Platform to be loaded dynamically.
 * [Multi-App-Security-Manager](Multi-App-Security-Manager): Describes how to add a security manager to a multi-sandboxed platform.
