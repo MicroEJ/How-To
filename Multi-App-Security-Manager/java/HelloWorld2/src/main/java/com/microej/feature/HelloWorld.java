@@ -21,7 +21,7 @@ public class HelloWorld {
 	 *            not used.
 	 */
 	public static void main(String[] args) {
-		System.out.println("Hello World !"); //$NON-NLS-1$
+		System.out.println("Hello World 2 !"); //$NON-NLS-1$
 		boolean on = false;
 		while (true) {
 			Led.switchLed(on);

@@ -5,6 +5,9 @@ This document describes how to go from a monolithic application running on a mon
 2. Run a Multi Sandbox kernel
 3. Adapt the hello world to run as be feature (i.e an APP)
 
+Important notice,
+In order to ease the reader's understanding, the project from this HowTo in released in the final, working state one should obtain when following the instructions below.
+
 
 
 # Requirements
@@ -37,7 +40,7 @@ Other development boards, reference platforms and compilers can be used, however
 
 # Setup the workspace
 
-Import the example projects into MicroEJ SDK:
+Import the example projects into the MicroEJ SDK:
 - Click on **File** -> **Import**
 - Select **General** -> **Existing Project into Workspace**
 - **Browse** to root directory
@@ -55,6 +58,8 @@ Import the example projects into MicroEJ SDK:
 
 
 # Add a Native Function in the Platform to Control a LED
+
+If you followed the How-To [SNI-LED](../SNI-LED/README.md), this part has already been done, go to **Run a Multi-App Kernel**.
 
 Modify the platform to add the capability to call a native C function from Java.
 
@@ -74,7 +79,7 @@ Modify the platform to add the capability to call a native C function from Java.
     1. Native function definition
        - The project `NativeAPIs` is used to define the native functions
        - [com.microej.Led](java/NativeAPIs/src/main/java/com/microej/Led.java) defines the native function to manage the LED
-            - `Led.initNative()` is called at the start-up to initialize the LED
+            - `Led.initNative()` is called at start-up to initialize the LED
             `private static native void initNative();`
             - `Led.switchLed(boolean on)` is called to set the state of the LED
                 - `public static void switchLed(boolean on);` provides the APIs to the java code.
@@ -131,8 +136,8 @@ This section will adapt the existing MicroEJ platform project to run a Kernel wi
     - `LLKERNEL_impl.h` has been added to the MicroEJ headers directory, this file is used for the RAM buffer where the APPs are dynamically linked
         - [LLKERNEL_SDRAM.c](native/src-kf/LLKERNEL_SDRAM.c) is an implementation using the on-board SDRAM
         - Add the implementation to your BSP project using the third party C IDE
-            1. Using the Keil IDE, right-click on the `MicroEJ/Core` folder
-            2. Select **Add Existing Files to Group 'MicroEJ/Core'**
+            1. Using the Keil IDE, right-click on the `MicroEJ/KF` folder
+            2. Select **Add Existing Files to Group 'MicroEJ/KF'**
                 1. Browse to the file [LLKERNEL_SDRAM.c](native/src-kf/LLKERNEL_SDRAM.c) in the native repository
                 2. Click **Add**
                 3. Click **Close**
@@ -142,7 +147,7 @@ This section will adapt the existing MicroEJ platform project to run a Kernel wi
 ### Create the kernel project
 
 1. Expose the foundation APIs to the feature
-    - In the [module.ivy](java/Kernel/module.ivy), the example depends on:
+    - In the [module.ivy](java/Kernel/module.ivy) file, the example depends on:
         - `ej.api#edc`: to provide the EDC Java APIs to the kernel
         - `ej.api#bon`: to provide the BON Java APIs to the kernel
         - `ej.api#kf`: to provide the KF APIs to the kernel to load a feature
@@ -155,7 +160,7 @@ This section will adapt the existing MicroEJ platform project to run a Kernel wi
         - [com.microej.kernel.SimpleKernel](java/Kernel/src/main/java/com/microej/kernel/SimpleKernel.java) gets a feature input stream and loads it.
 
 3. Add an entry point
-    - [SimpleKernel.java](java/Kernel/src/main/java/com/microej/kernel/SimpleKernel.java) provides a main to load the features.
+    - [SimpleKernel.java](java/Kernel/src/main/java/com/microej/kernel/SimpleKernel.java) provides a main() method to load the features.
 
 4. Expose the native function to the feature
     - Features cannot access classes and methods which are not exposed by the Kernel. To provide the feature access to the `Led` class and the `switchLed` method:
@@ -184,6 +189,7 @@ This section will adapt the existing MicroEJ platform project to run a Kernel wi
     - `jint Java_com_microej_kernel_FeatureInputStream_readIntoArray(jbyte *out, jint outOffset, jint outLen)` to read the data
     - `void Java_com_microej_kernel_FeatureInputStream_closeFeature()` to close the feature stream
     - An example using FatFs file system (FS) is provided in [inputStream.c](native/src-feature/inputStream.c)
+        - [inputStream.c](native/src-feature/inputStream.c) defines ff_convert and ff_wtoupper, those functions are required by FatFS, if your project already defines it, comment them out.
         - This example will look for features in the FS /tmp/application_1.fo first, then , once the feature is loaded, increment the feature search number.
 
 - Add the implementation to your BSP project using the third party C IDE

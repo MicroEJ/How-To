@@ -2,6 +2,9 @@
 
 This document describes how to add a native call to a monolithic application running on a mono-sandbox platform.
 
+Important notice,
+In order to ease the reader's understanding, the project from this HowTo in released in the final, working state one should obtain when following the instructions below.
+
 
 
 # Requirements
@@ -34,7 +37,7 @@ Other development boards, reference platforms and compilers can be used, however
 
 # Setup the workspace
 
-Import the example projects into MicroEJ SDK:
+Import the example projects into the MicroEJ SDK:
 - Click on **File** -> **Import**
 - Select **General** -> **Existing Project into Workspace**
 - **Browse** to root directory
@@ -69,7 +72,7 @@ Modify the platform to add the capability to call a native C function from Java.
     1. Native function definition
        - The project `NativeAPIs` is used to define the native functions
        - [com.microej.Led](java/NativeAPIs/src/main/java/com/microej/Led.java) defines the native function to manage the LED
-            - `Led.initNative()` is called at the start-up to initialize the LED
+            - `Led.initNative()` is called at start-up to initialize the LED
             `private static native void initNative();`
             - `Led.switchLed(boolean on)` is called to set the state of the LED
                 - `public static void switchLed(boolean on);` provides the APIs to the java code.
