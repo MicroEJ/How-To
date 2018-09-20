@@ -1,3 +1,8 @@
+## 1.0.1 (2019-09-20)
+
+Bug fixes:
+  - Typo fixes.
+
 ## 1.0.0 
 Features:
   - Initial revision.

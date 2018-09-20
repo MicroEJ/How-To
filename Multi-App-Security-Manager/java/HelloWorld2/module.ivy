@@ -6,7 +6,7 @@
    IS2T PROPRIETARY. Use is subject to license terms.
  -->
 <ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:m="http://ant.apache.org/ivy/extra"> 
-    <info organisation="com.microej.demo.kernel.hello" module="hello" status="integration" revision="0.1.0">
+    <info organisation="com.microej.demo.kernel.hello" module="hello2" status="integration" revision="0.1.0">
         <ea:build organisation="com.is2t.easyant.buildtypes" module="build-application" revision="5.5.+">
         	<ea:property name="test.run.includes.pattern" value="**/_AllTests_*.class"/>
         </ea:build>
