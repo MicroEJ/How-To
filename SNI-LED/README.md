@@ -3,7 +3,7 @@
 This document describes how to add a native call to a monolithic application running on a mono-sandbox platform.
 
 Important notice,
-In order to ease the reader's understanding, the project from this HowTo in released in the final, working state one should obtain when following the instructions below.
+In order to ease the reader's understanding, the project from this HowTo is released in the final, working state one should obtain when following the instructions below.
 
 
 

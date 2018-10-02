@@ -6,7 +6,7 @@ This document describes how to go from a monolithic application running on a mon
 3. Adapt the hello world to run as be feature (i.e an APP)
 
 Important notice,
-In order to ease the reader's understanding, the project from this HowTo in released in the final, working state one should obtain when following the instructions below.
+In order to ease the reader's understanding, the project from this HowTo is released in the final, working state one should obtain when following the instructions below.
 
 
 
