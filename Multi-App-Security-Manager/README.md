@@ -1,9 +1,12 @@
 # Overview
 This document describes how to add a security manager to a multi-sandboxed platform.
-The security manager will provide access to a kernel LED native function to one feature and forbid the access to a second feature.
+The security manager will allow access to a kernel LED native function to one feature and forbid access to a second feature.
 
 1. Check the permission before the native call.
 2. Add security manager to the kernel.
+
+Important notice,
+In order to ease the reader's understanding, the project from this HowTo is released in the final, working state one should obtain when following the instructions below.
 
 
 
@@ -18,7 +21,7 @@ This platform must:
 
 # Setup the workspace
 
-Import the example projects into MicroEJ SDK:
+Import the example projects into the MicroEJ SDK:
 - Click on **File** -> **Import**
 - Select **General** -> **Existing Project into Workspace**
 - **Browse** to root directory
@@ -29,7 +32,7 @@ Import the example projects into MicroEJ SDK:
 
 ## Projects Overview
 
-- `Single-App-to-Multi-App-Platform` contains this README
+- `Multi-App-Security-Manager` contains this README
 - `HelloWorld` is a feature named "Hello" application using the LED
 - `HelloWorld2` is the same feature as `HelloWorld` with a different [kf name](java\HelloWorld2\src\main\resources\kf\Hello.kf) "Hello2" 
 - `NativeAPIs` is a project that defines the native functions to manage the LED
@@ -39,7 +42,7 @@ Import the example projects into MicroEJ SDK:
 
 # Check the Permission
 
-1. Create a [LedPermission](NativeAPIs\src\main\java\com\microej\LedPermission.java) class that extends `java.security.BasicPermission`
+1. Create an [LedPermission](NativeAPIs\src\main\java\com\microej\LedPermission.java) class that extends `java.security.BasicPermission`
 2. In [Led](NativeAPIs\src\main\java\com\microej\Led.java), check the permission before calling `switchLedNative(boolean on);`
 
 ```
@@ -65,7 +68,7 @@ public static void switchLed(boolean on) throws SecurityException {
 
 # Set the Security Manager
 
-A simple security manager not checking permissions in Kernel mode and delegating the checks otherwise.
+A simple security manager which does not check permissions when called in Kernel mode and performs the checks otherwise.
 
 ## Create a Security Manager
 
@@ -77,6 +80,7 @@ A simple security manager not checking permissions in Kernel mode and delegating
 @Override
 public void checkPermission(Permission permission) {
     if(!Kernel.isInKernelMode()){
+		// We are not called in kernel mode, so perform the security checks.
         Feature feature = (Feature)Kernel.getContextOwner();
         Kernel.enter();
         FeaturePermissionChecker checker = permissionsMap.get(permission.getClass());
@@ -86,6 +90,7 @@ public void checkPermission(Permission permission) {
             noCheckerFound(permission, feature);
         }
     } else {
+		// We are called in kernel mode, so allow the operation always.
         kernelPermission(permission);
     }
 }
@@ -122,7 +127,7 @@ System.setSecurityManager(securityManager);
 
 ## Rebuild the kernel with the security manager implementation
 
-1. In MicroEJ SDK, generate the microejapp.o file
+1. In the MicroEJ SDK, generate the microejapp.o file
     1. Right-click on the `Kernel` project
     2. Select **Run-As**->**Run Configuration**
     3. Right-click on **MicroEJ Application**
@@ -138,7 +143,7 @@ System.setSecurityManager(securityManager);
 
 ## Build the features
 
-1. In MicroEJ SDK, generate `application_1.fo`
+1. In the MicroEJ SDK, generate `application_1.fo`
     1. Right-click on the HelloWorld project
     2. Select **Run-As**->**Run Configuration**
     3. Right-click on **MicroEJ Application**
