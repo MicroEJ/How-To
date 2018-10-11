@@ -1,3 +1,7 @@
+## 1.0.5 (2018-10-11)
+Bug fixes:
+  - Fix minor api versions.
+
 ## 1.0.4 (2018-01-31)
 Bug fixes:
   - Fix typos.

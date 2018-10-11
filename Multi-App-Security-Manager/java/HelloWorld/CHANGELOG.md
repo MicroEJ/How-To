@@ -1,3 +1,7 @@
+## 0.1.1 (2018-10-11)
+Bug fixes:
+   * Fix minor api versions.
+
 ## 0.1.0
 Features:
   - Initial revision.

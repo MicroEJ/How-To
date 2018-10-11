@@ -1,3 +1,8 @@
+## 1.1.2 (2018-10-11)
+Bug fixes:
+   * Fix minor api versions.
+
+  
 ## 1.1.1 (2018-08-22)
 
 Bug fixes:
