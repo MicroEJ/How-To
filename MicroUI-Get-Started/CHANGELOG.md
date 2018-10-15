@@ -1,17 +1,7 @@
-<!--
-	Markdown
--->
-<!--
-Changelog template:
+## 1.0.2 (2018-10-11)
+Bug fixes:
+   * Fix minor api versions.
 
-## Revision (YYYY-mm-dd)
-Features:
-  * List here the new features.
-  
-Bugfixes:
-  * List here the bug fixes.
--->
-  
 ## 1.0.1 (2016-10-03)
 Features:
   * Bigger font size for the following samples
@@ -28,3 +18,11 @@ Features:
 ## 1.0.0 (2016-08-25)
 Features:
   * Initial revision.
+
+<!--
+	Markdown
+	
+	Copyright 2016-2018 IS2T. All rights reserved.
+	For demonstration purpose only.
+ 	IS2T PROPRIETARY. Use is subject to license terms.
+-->
