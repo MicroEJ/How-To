@@ -127,10 +127,10 @@ def generateEJF(directory):
 	
 	if len(style) == 0:
 		style = 'p'
-	header.write('</FontCharacterProperties><FontProperties Baseline="'+str(int(height*2/3))+'" Filter="" Height="'+str(height)+'" Name="'+directory[2:]+'" Space="2" Style="'+style+'" Width="-1"><Identifier Value="34"/></FontProperties></FontGenerator>')
+	header.write('</FontCharacterProperties><FontProperties Baseline="'+str(int(height*2/3))+'" Filter="" Height="'+str(height)+'" Name="'+directory[2:]+'_out_'+str(height)+'px" Space="2" Style="'+style+'" Width="-1"><Identifier Value="34"/></FontProperties></FontGenerator>')
 	header.close()
 	make_archive(directory,'zip',directory)
-	ejf = directory+'.ejf'
+	ejf = directory+'_out_'+str(height)+'px.ejf'
 	if os.path.exists(ejf):
 		os.remove(ejf)
 	os.rename(directory+'.zip', ejf)
