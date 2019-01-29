@@ -8,7 +8,7 @@ This document explains how to use Fontforge to generate a MicroEJ Font.
 
 # Usage
 ## Install the dependencies
-1. Download and Install Python and PIL [how to](https://wp.stolaf.edu/it/installing-pil-pillow-cimage-on-windows-and-mac/)
+1. Download and Install Python and Pillow [how to](https://pillow.readthedocs.io/en/3.0.x/index.html)
 2. Download and install FontForge [website](https://fontforge.github.io)
 3. Add ffpython installed by Fontforge to the system path
 
