@@ -31,6 +31,8 @@ def genFontForgeFile(fileName):
 	file.write("maxSize = outputSizeInPx + 1\n")
 	file.write("height = outputSizeInPx\n")
 	file.write("if algorithm == 0:\n")
+	file.write("	height=int(math.floor(outputSizeInPx*emHeight/(capHeight+F.descent)))\n")
+	file.write("elif algorithm == 1:\n")
 	file.write("	height=int(math.floor(outputSizeInPx*emHeight/capHeight))\n")
 	file.write("while(maxSize>outputSizeInPx):\n")
 	file.write("	maxSize=0\n")
@@ -114,7 +116,18 @@ def generateEJF(directory):
 			id = entry[:-4]
 			os.rename(srcPath, os.path.join(directory, id))
 			header.write('<Character Index="'+id+'" LeftSpace="0" RightSpace="0"/>')
-	header.write('</FontCharacterProperties><FontProperties Baseline="'+str(int(height*2/3))+'" Filter="" Height="'+str(height)+'" Name="'+directory[2:]+'" Space="2" Style="p" Width="-1"><Identifier Value="34"/></FontProperties></FontGenerator>')
+			
+	style = ""
+	if "bold" in directory.lower():
+		style = 'b'
+	if "italic" in directory.lower():
+		style = style + 'i'
+	if "underline" in directory.lower():
+		style = style + 'u'
+	
+	if len(style) == 0:
+		style = 'p'
+	header.write('</FontCharacterProperties><FontProperties Baseline="'+str(int(height*2/3))+'" Filter="" Height="'+str(height)+'" Name="'+directory[2:]+'" Space="2" Style="'+style+'" Width="-1"><Identifier Value="34"/></FontProperties></FontGenerator>')
 	header.close()
 	make_archive(directory,'zip',directory)
 	ejf = directory+'.ejf'
@@ -125,10 +138,12 @@ def generateEJF(directory):
 	print("EJF file can be found at "+os.path.abspath(ejf))	
 			
 def main(fontFile, outputSizeInPx, startRange, endRange, bpp, algorithm):
-	algo = "capitalHeight"
+	algo = "bodyHeight"
 	if algorithm==1:
-		algo = "emHeight"
+		algo = "capitalHeight"
 	elif algorithm==2:
+		algo = "emHeight"
+	elif algorithm==3:
 		algo = "bestFit"
 
 	directory = os.path.splitext(fontFile)[0]+'_'+algo+'_'+str(outputSizeInPx)+'px'
@@ -149,9 +164,10 @@ def checkparam():
 		print("\t\tendRange: (default = 0x24F)  hexadecimal value of the last unicode character last character to export, it is recommanded to export a wide range")
 		print("\t\tbpp: (default = 0x24F) the bpp to use for the export")
 		print("\t\talgorithm: (default = 0) the algorithm to use : ")
-		print("\t\t\t0: capitalHeight => The sizeInPixel define the size of a capital X (the generated image height zill be the bigest height required to print all the character in range)")
-		print("\t\t\t1: emHeight => The sizeInPixel define the size of an em (the generated image height will be the bigest height required to print all the character in range)")
-		print("\t\t\t2: bestFit => The sizeInPixel define the size of the final output (the size of the font used will be the biggest possible to fit all the characters within the sizeInPixel)")
+		print("\t\t\t0: bodyHeight => The sizeInPixel define the height of `Xg` (the generated image height will be the bigest height required to print all the character in range)")
+		print("\t\t\t1: capitalHeight => The sizeInPixel define the size of a capital X (the generated image height will be the bigest height required to print all the character in range)")
+		print("\t\t\t2: emHeight => The sizeInPixel define the size of an em (the generated image height will be the bigest height required to print all the character in range)")
+		print("\t\t\t3: bestFit => The sizeInPixel define the size of the final output (the size of the font used will be the biggest possible to fit all the characters within the sizeInPixel)")
 		exit(-1)
 	
 checkparam()

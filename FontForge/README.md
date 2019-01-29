@@ -24,9 +24,10 @@ python fontConverter fontFilePath sizeInPixel [startRange endRange [bpp [algorit
                 endRange: (default = 0x24F)  hexadecimal value of the last unicode character last character to export, it is recommanded to export a wide range
                 bpp: (default = 0x24F) the bpp to use for the export
                 algorithm: (default = 0) the algorithm to use :
-                        0: capitalHeight => The sizeInPixel define the size of a capital X (the generated image height zill be the bigest height required to print all the character in range)
-                        1: emHeight => The sizeInPixel define the size of an em (the generated image height will be the bigest height required to print all the character in range)
-                        2: bestFit => The sizeInPixel define the size of the final output (the size of the font used will be the biggest possible to fit all the characters within the sizeInPixel)
+                        0: bodyHeight => The sizeInPixel define the height of `Xg` (the generated image height will be the bigest height required to print all the character in range)
+                        1: capitalHeight => The sizeInPixel define the size of a capital X (the generated image height will be the bigest height required to print all the character in range)
+                        2: emHeight => The sizeInPixel define the size of an em (the generated image height will be the bigest height required to print all the character in range)
+                        3: bestFit => The sizeInPixel define the size of the final output (the size of the font used will be the biggest possible to fit all the characters within the sizeInPixel)
 ```
 
 The output should looks like:
