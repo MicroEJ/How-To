@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Application-Id: storage
-Application-Version: 1.0.0
+Application-Version: 1.0.5
 Application-PrintableName: Storage
 Application-Description: An example which explain the usage of the storage service.
 Application-BackgroundServices: com.microej.howto.storage.StorageBackgroundService

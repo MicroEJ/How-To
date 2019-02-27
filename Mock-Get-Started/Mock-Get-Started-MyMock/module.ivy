@@ -6,7 +6,7 @@
  	IS2T PROPRIETARY. Use is subject to license terms.
 -->
 <ivy-module version="2.0" xmlns:ea="http://www.easyant.org"> 
-    <info organisation="com.microej.example" module="mock" status="integration" revision="0.1.0">      
+    <info organisation="com.microej.example" module="mock" status="integration" revision="0.1.1">      
         <ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-mock" revision="1.+"/>
         <ea:property name="no.obfuscation" value="SET" />
     </info>
@@ -23,6 +23,8 @@
 	
     <dependencies>
         <!-- your project dependencies goes here -->
-		<dependency org="ej.api" name="sp" rev="[2.0.0-RC0,3.0.0-RC0[" conf="provided->*" />
+      	<dependency org="ej.api" name="edc" rev="[1.2.0-RC0,1.3.0-RC0[" conf="provided->*" />
+      	<dependency org="ej.api" name="bon" rev="[1.2.0-RC0,1.3.0-RC0[" conf="provided->*" />
+		<dependency org="ej.api" name="sp" rev="[2.0.0-RC0,2.1.0-RC0[" conf="provided->*" />
     </dependencies>
 </ivy-module>

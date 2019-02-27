@@ -1,3 +1,13 @@
+## 1.7.0 (2019-02-27)
+
+Features:
+  - Add FontForge usage.
+
+## 1.6.3 (2018-10-11)
+
+Bug fixes:
+  - Fix minor api versions.
+
 ## 1.6.2 (2018-09-20)
 
 Bug fixes:
@@ -64,7 +74,7 @@ Features:
 
 <!--
 	Markdown
-	Copyright 2017-2018 IS2T. All rights reserved.
+	Copyright 2017-2019 IS2T. All rights reserved.
 	For demonstration purpose only.
 	IS2T PROPRIETARY. Use is subject to license terms.
 -->
