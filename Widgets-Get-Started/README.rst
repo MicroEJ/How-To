@@ -13,8 +13,6 @@ order :
 .. figure:: screenshots/Gradient.png
    :alt: Gradient
 
-   Gradient
-
 Usage
 =====
 
@@ -54,16 +52,14 @@ Build
 Requirements
 ============
 
--  MicroEJ Studio or SDK 4.0 or later
--  A platform with at least:
+This example has been tested on:
 
-   -  EDC-1.2 or later
-   -  BON-1.3 or later
-   -  MICROUI-2.2 or later
-   -  MWT-2.3 or later
+-  MicroEJ SDK 5.1
+-  With a ST STM32F746G-DISCO (480x272 display) board platform that contains:
 
--  Add the following line to your ``module.ivy`` or your ``ivy.xml``: >
-   ``<dependency org="ej.library.ui" name="widget" rev="2.4.1"/>``
+   -  EDC-1.2
+   -  BON-1.3
+   -  MICROUI-2.2
 
 Dependencies
 ============
