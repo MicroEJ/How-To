@@ -12,8 +12,9 @@ Requirements
 This how-to has been tested on
 
 -  MicroEJ Studio or SDK 5.1
--  Python with PIL module (2)
--  FontForge (FontForge-2017-07-31)
+-  Python (3.8.0) with Pillow module (6.2.1)
+-  FontForge (FontForge-2019-08-01 64 bits)
+   -  if you have a 64 bits OS, install a 64 bits font forge
 -  Windows 10
 
 Usage
