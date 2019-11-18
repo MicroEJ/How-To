@@ -18,8 +18,6 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import com.is2t.hil.HIL;
-import com.is2t.hil.StopListener;
 import com.microej.example.mock.MySNI;
 
 /**
@@ -46,14 +44,6 @@ public class MyMockFrame extends JFrame {
 	 * Forbid instantiation.
 	 */
 	private MyMockFrame() {
-		HIL.getInstance().addStopListener(new StopListener() {
-
-			@Override
-			public void stop(boolean isEvalVersion) {
-				dispose();
-			}
-		});
-
 		// Sets the UI look and feel.
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
