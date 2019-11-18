@@ -1,3 +1,7 @@
+<!--
+	Markdown
+-->
+
 # Overview
 This project uses different ways to communicate with the native world.
 
@@ -33,8 +37,6 @@ N/A
 # Restrictions
 None.
 
-
-[//]: # (Markdown)
-[//]: # (Copyright 2017-2018 IS2T. All rights reserved.)
-[//]: # (For demonstration purpose only.)
-[//]: # (IS2T PROPRIETARY. Use is subject to license terms.)
+---
+_Copyright 2017-2019 MicroEJ Corp. All rights reserved. 
+_Use of this source code is governed by a BSD-style license that can be found with this software._  
