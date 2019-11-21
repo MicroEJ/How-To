@@ -11,7 +11,12 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>com.is2t.microej.wadapps.workbench.wadappsWorkbenchBuilder</name>
+			<name>com.is2t.microej.addonprocessor.addonProcessorBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.is2t.microej.wadapps.workbench.wadappsWorkbenchChecker</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
