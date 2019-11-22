@@ -115,7 +115,6 @@ Modify the platform to add the capability to call a native C function from Java.
 2. Adapt this HelloWorld to run into a Multi Sandbox kernel [Single-App-to-Multi-App-Platform](../Single-App-to-Multi-App-Platform/).
 
 <!--
- - Copyright 2018 IS2T. All rights reserved.
- - For demonstration purpose only.
- - IS2T PROPRIETARY. Use is subject to license terms.
+ - Copyright 2018-2019 MicroEJ Corp. All rights reserved.
+ - Use of this source code is governed by a BSD-style license that can be found with this software.
 -->
