@@ -8,8 +8,7 @@ package com.microej.howto.microui.image;
 
 import java.io.IOException;
 
-import com.microej.howto.microui.MicroEJColors;
-
+import ej.library.ui.MicroEJColors;
 import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.microui.display.Display;
