@@ -5,6 +5,5 @@ target~/
 launches/*.properties
 .generated~/
 src-adpgenerated/
-FoundationLibrary-Get-Started/~$schema.pptx
 Single-App-to-Multi-App-Platform/java/Kernel/com.microej.kernel.SimpleKernel/
 Multi-App-Security-Manager/java/Kernel/com.microej.kernel.SimpleKernel/
