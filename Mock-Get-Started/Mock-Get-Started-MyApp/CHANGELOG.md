@@ -1,23 +1,26 @@
-<!--
-	Markdown
--->
-<!--
-Changelog template:
+# Changelog
 
-## Revision (YYYY-mm-dd)
-Features:
-  - List here the new features.
-  
-Bug fixes:
-  - List here the bug fixes.
--->
+All notable changes to this project will be documented in this file.
 
-## 0.1.1 (2018-10-11)
-Bug fixes:
-   * Fix minor api versions.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.1.0 (2018-07-09)
-Features:
+## 0.2.0 - 2019-11-22
+
+### Changed
+
+   - Update to MMM.
+
+## 0.1.1 - 2018-10-11
+
+### Fixed
+
+   - Fix minor api versions.
+
+## 0.1.0 - 2018-07-09
+
+### Added
+
   - Initial revision.
 
 ---
