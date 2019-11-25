@@ -13,17 +13,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.0.2 - 2019-09-20
 
-Bug fixes:
+### Fixed
+
   - Typo fixes.
 
 ## 1.0.1 - 2018-08-10
 
-Bug fixes:
+### Fixed
+
   - Use only ASCII characters.
 
 ## 1.0.0
 
-Features:
+### Added
+
   - Initial revision.
 
 ---  
