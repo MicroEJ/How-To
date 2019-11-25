@@ -131,7 +131,7 @@ Requirements
 This example has been tested on:
 
 -  MicroEJ SDK 5.1
--  With a Platform Reference that contains:
+-  With a Platform that contains:
 
    -  EDC-1.2
    -  BON-1.2
