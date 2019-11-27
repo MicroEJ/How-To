@@ -69,8 +69,9 @@ Import the example projects into the MicroEJ SDK:
   - Check **Search for nested projects** checkbox
   - Select all the projects
   - Click on **Finish**
-     .. image:: screenshots/ImportProjects.png
-       :alt: Import context
+
+   .. image:: screenshots/ImportProjects.png
+      :alt: Import context
 
 
 Projects Overview
@@ -137,7 +138,7 @@ from Java.
 4. Build the HelloWorld Java application
 
    1. Right-click on the HelloWorld project
-   2. Select **Run-As**->**Run Configuration**
+   2. Select **Run-As** -> **Run Configuration**
    3. Right-click on **MicroEJ Application**
    4. Select **New**
    5. In **Execution** tab
@@ -161,7 +162,7 @@ from Java.
    -  This implementation is done for the STM32F746-DISCO board, to add
       it to Keil IDE follow these steps:
 
-      1. Open the Keil project in the platform [XXX]-bsp/ project
+      1. Open the Keil project in the platform ``[XXX]-bsp`` project
       2. Right-click on the ``MicroEJ/Core`` folder
       3. Select **Add Existing Files to Group ‘MicroEJ/Core’**
 
