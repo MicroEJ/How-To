@@ -33,5 +33,7 @@
         <dependency org="ej.api" name="edc" rev="1.2.3" />
       	<dependency org="ej.api" name="bon" rev="1.2.3" />
         <dependency org="ej.api" name="kf" rev="1.4.4" />
+        
+        <dependency org="com.microej.demo.kernel.hello" name="native_apis" rev="0.2.0" />
     </dependencies>
 </ivy-module>
