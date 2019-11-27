@@ -1,14 +1,13 @@
 /*
  * Java
  *
- * Copyright 2016 IS2T. All rights reserved.
- * Use of this source code is subject to license terms.
+ * Copyright 2016-2019 MicroEJ Corp. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.howto.microui.drawing;
 
 
-import com.microej.howto.microui.MicroEJColors;
-
+import ej.library.ui.MicroEJColors;
 import ej.microui.MicroUI;
 import ej.microui.display.Display;
 import ej.microui.display.Displayable;
@@ -18,10 +17,12 @@ import ej.microui.util.EventHandler;
 
 /**
  * This class shows how to draw lines (straight or curved) of varying thickness
- * and fade using the AntialiasedShapes class.<br/>
+ * and fade using the AntialiasedShapes class.
  *
+ * <p>
  * Drawings are similar to the ones of the {@link Primitives} example, except
  * that antialiased bordering is added.
+ * </p>
  *
  */
 public class PrimitivesAntiAliased extends Displayable {
@@ -29,7 +30,7 @@ public class PrimitivesAntiAliased extends Displayable {
 	public PrimitivesAntiAliased(Display display) {
 		super(display);
 	}
-	
+
 	@Override
 	public void paint(GraphicsContext g) {
 
@@ -104,7 +105,7 @@ public class PrimitivesAntiAliased extends Displayable {
 			// display
 			final int x = displayCenterX - rectangleWidth / 2;
 			final int y = displayCenterY - rectangleHeight / 2;
-			
+
 			g.fillRoundRect(x, y, rectangleWidth, rectangleHeight, arcWidth, arcHeight);
 			//no primitives for antialiased rounded rectangle available yet
 		}

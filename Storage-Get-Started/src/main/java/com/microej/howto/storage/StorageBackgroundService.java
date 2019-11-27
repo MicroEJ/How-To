@@ -1,8 +1,8 @@
 /*
  * Java
  *
- * Copyright 2017 IS2T. All rights reserved.
- * IS2T PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * Copyright 2017-2019 MicroEJ Corp. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.howto.storage;
 
@@ -21,13 +21,13 @@ import ej.wadapps.storage.Storage;
  *
  */
 public class StorageBackgroundService implements BackgroundService {
-	
+
 	/** Logger */
 	private static final Logger LOGGER = Logger.getLogger(StorageBackgroundService.class.getName());
-	
+
 	/** * A key example. */
 	private static final String KEY = "MY_DATA"; //$NON-NLS-1$
-	
+
 	/** A value example. **/
 	private static final String DATA = "DATA"; //$NON-NLS-1$
 

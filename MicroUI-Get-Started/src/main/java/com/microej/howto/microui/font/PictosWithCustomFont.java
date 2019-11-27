@@ -1,16 +1,14 @@
 /*
  * Java
  *
- * Copyright 2016 IS2T. All rights reserved.
- * Use of this source code is subject to license terms.
+ * Copyright 2016-2019 MicroEJ Corp. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.howto.microui.font;
 
 
-import com.microej.howto.microui.MicroEJColors;
-
+import ej.library.ui.MicroEJColors;
 import ej.microui.MicroUI;
-import ej.microui.display.Colors;
 import ej.microui.display.Display;
 import ej.microui.display.Displayable;
 import ej.microui.display.Font;
@@ -21,8 +19,8 @@ import ej.microui.util.EventHandler;
  * This class shows how to print pictograms to the screen using a custom font
  * via MicroUI APIs
  *
- * @see <b><code>Help > Help Contents > Font Designer User Guide</code></b> for
- *      indications on how to create a MicroEJ font
+ * @see <b><code>Help &gt; Help Contents &gt; Font Designer User Guide</code></b>
+ *      for indications on how to create a MicroEJ font
  */
 public class PictosWithCustomFont extends Displayable {
 
@@ -64,7 +62,7 @@ public class PictosWithCustomFont extends Displayable {
 
 		//useful for antialiasing optimization
 		g.setBackgroundColor(MicroEJColors.CONCRETE_BLACK_75);
-		
+
 		final Font myCustomFont = Font.getFont(CUSTOM_FONT_ID, CUSTOM_FONT_SIZE, Font.STYLE_PLAIN);
 		if (myCustomFont == Font.getDefaultFont()) {
 			System.out.println("Unable to find custom font! Using default font instead");
@@ -75,7 +73,7 @@ public class PictosWithCustomFont extends Displayable {
 		g.setColor(MicroEJColors.WHITE);
 
 		final String message = getMessage();
-		
+
 		g.drawString(message, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 4,
 				GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
