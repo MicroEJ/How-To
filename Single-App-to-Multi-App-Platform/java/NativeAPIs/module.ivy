@@ -10,18 +10,13 @@
         <ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javalib" revision="4.+" />
     </info>
     
-    <configurations defaultconfmapping="default->default;provided->provided">
-		<conf name="default" visibility="public" description="Dependency needed by embedded application."/>
+	<configurations defaultconfmapping="default->default;provided->provided">
+		<conf name="default" visibility="public" description="Runtime dependencies to other artifacts"/>
 		<conf name="provided" visibility="public" description="Compile-time dependencies to APIs provided by the platform"/>
-		<conf name="platform" visibility="public" description="Build-time dependency, specify the platform to use"/>
-		<conf name="vdruntime" visibility="public" description="Dependency needed for simulation"/>
 		<conf name="documentation" visibility="public" description="Documentation related to the artifact (javadoc, PDF)"/>
-		<conf name="source" visibility="public" description="Source code"/>
 		<conf name="dist" visibility="public" description="Contains extra files like README.md, licenses"/>
+		<conf name="source" visibility="public" description="Source code"/>
  		<conf name="test" visibility="private" description="Dependencies for test execution. It is not required for normal use of the application, and is only available for the test compilation and execution phases."/>
-		<conf name="kernelapi" visibility="private" description="Configuration used to fetch the runtime environment."/>
-		<conf name="systemapp" visibility="private" description="System apps to package into the firmware and the virtual device."/>
-		<conf name="systemapp-fw" visibility="private" description="System apps to package into the firmware only."/>
 	</configurations>
     
     <publications>
