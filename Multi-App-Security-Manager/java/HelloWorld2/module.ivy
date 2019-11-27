@@ -1,9 +1,8 @@
 <!--
    Ivy
 
-   Copyright 2017-2018 IS2T. All rights reserved.
-   For demonstration purpose only.
-   IS2T PROPRIETARY. Use is subject to license terms.
+   Copyright 2017-2019 MicroEJ Corp. All rights reserved.
+   Use of this source code is governed by a BSD-style license that can be found with this software.
  -->
 <ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:m="http://ant.apache.org/ivy/extra"> 
     <info organisation="com.microej.demo.kernel.hello" module="hello2" status="integration" revision="0.1.1">

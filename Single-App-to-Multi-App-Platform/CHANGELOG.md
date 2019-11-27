@@ -11,13 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - Update to MicroEJ 5.
   
-## 1.0.2 (2019-09-20)
+## 1.0.2 - 2019-09-20
 
 ### Fixed
 
   - Typo fixes.
 
-## 1.0.1 (2018-08-10)
+## 1.0.1 - 2018-08-10
 
 ### Fixed
 
