@@ -15,6 +15,7 @@ Note that to run them on board :
 # Details
 
 **Available Examples**:
+* [FontForge](FontForge): Explains how to use Fontforge to generate a MicroEJ Font.
 * [FoundationLibrary-Get-Started](FoundationLibrary-Get-Started): Contains a tutorial on how to add a Foundation Library for both simulated and embedded runtime.
 * [MicroUI-Get-Started](MicroUI-Get-Started) : Contains simple examples to understand how to use the main MicroUI library APIs.
 * [Proguard-Get-Started](Proguard-Get-Started) : Explains how to integrate Proguard in MicroEJ Studio/SDK.
@@ -40,7 +41,7 @@ Each subfolder contains a distinct how-to described in the **README.md** file of
 
 <!--
 	Markdown
-	Copyright 2017-2018 IS2T. All rights reserved.
+	Copyright 2017-2019 IS2T. All rights reserved.
 	For demonstration purpose only.
 	IS2T PROPRIETARY. Use is subject to license terms.
 -->

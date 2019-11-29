@@ -1,9 +1,9 @@
-**/bin/*
-**/.metadata/*
-**/.sonar/*
-**/target~/*
-**/launches/*
-FoundationLibrary-Get-Started/~$schema.pptx
-Single-App-to-Multi-App/feature_hello/src/.generated~/
+bin/
+.metadata/
+.sonar/
+target~/
+launches/*.properties
+.generated~/
+src-adpgenerated/
 Single-App-to-Multi-App-Platform/java/Kernel/com.microej.kernel.SimpleKernel/
 Multi-App-Security-Manager/java/Kernel/com.microej.kernel.SimpleKernel/

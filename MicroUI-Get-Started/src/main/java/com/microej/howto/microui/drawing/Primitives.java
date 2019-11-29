@@ -1,16 +1,14 @@
 /*
  * Java
  *
- * Copyright 2016 IS2T. All rights reserved.
- * Use of this source code is subject to license terms.
+ * Copyright 2016-2019 MicroEJ Corp. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.howto.microui.drawing;
 
 
-import com.microej.howto.microui.MicroEJColors;
-
+import ej.library.ui.MicroEJColors;
 import ej.microui.MicroUI;
-import ej.microui.display.Colors;
 import ej.microui.display.Display;
 import ej.microui.display.Displayable;
 import ej.microui.display.GraphicsContext;

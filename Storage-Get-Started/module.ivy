@@ -1,12 +1,11 @@
 <!--
 	IVY
 	
-	Copyright 2017-2018 IS2T. All rights reserved.
-	For demonstration purpose only.
-	IS2T PROPRIETARY. Use is subject to license terms.
+	Copyright 2017-2019 MicroEJ Corp. All rights reserved.
+	Use of this source code is governed by a BSD-style license that can be found with this software.
 -->
-<ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:m="http://ant.apache.org/ivy/extra"> 
-	<info organisation="com.microej.howto" module="microui" status="integration" revision="1.0.5">
+<ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:m="http://ant.apache.org/ivy/extra" xmlns:ej="https://developer.microej.com" ej:version="2.0.0"> 
+	<info organisation="com.microej.howto" module="microui" status="integration" revision="1.0.6">
 		<ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javalib" revision="4.+">
 		</ea:build>
 		<ea:property name="test.run.excludes.pattern" value="**/*$*.class, **/nonauto/**/*.class, **/framework/**/*.class, **/TestAll.class, **/TestButton.class, **/TestButtonComposite.class, **/TestButtonImage.class"/>
@@ -27,9 +26,10 @@
 	</publications>
 
 	<dependencies>
-		<dependency org="ej.api" name="edc" rev="[1.2.0-RC0,1.3.0-RC0[" conf="provided->*" />
-		<dependency org="ej.api" name="bon" rev="[1.2.0-RC0,1.3.0-RC0[" conf="provided->*" />
-		<dependency org="ej.api" name="kf" rev="[1.4.0-RC0,1.5.0-RC0[" conf="provided->*" />
-		<dependency org="ej.library.wadapps" name="framework" rev="[1.0.0-RC0,2.0.0-RC0[" />
+		<dependency org="ej.api" name="edc" rev="1.2.3" />
+		<dependency org="ej.api" name="bon" rev="1.3.0" />
+		<dependency org="ej.api" name="kf" rev="1.4.4" />
+		
+		<dependency org="ej.library.wadapps" name="framework" rev="1.11.0" />
 	</dependencies>
 </ivy-module>

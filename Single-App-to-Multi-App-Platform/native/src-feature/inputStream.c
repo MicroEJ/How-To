@@ -1,7 +1,6 @@
 /*
- * Copyright 2014-2018 IS2T. All rights reserved.
- * For demonstration purpose only.
- * IS2T PROPRIETARY. Use is subject to license terms.
+ * Copyright 2014-2019 MicroEJ Corp. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"

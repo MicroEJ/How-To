@@ -1,8 +1,8 @@
 /*
  * Java
  *
- * Copyright 2016 IS2T. All rights reserved.
- * Use of this source code is subject to license terms.
+ * Copyright 2016-2019 MicroEJ Corp. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.howto.microui.animation;
 
@@ -20,11 +20,14 @@ import ej.microui.display.Image;
 import ej.microui.util.EventHandler;
 
 /**
- * This class shows how to create an animation using MicroUI and TimerTask.<p/>
+ * This class shows how to create an animation using MicroUI and TimerTask.
  *
- * It will draw the MicroEJ robot moving from one side of the screen to the other.<p/>
+ * <p>
+ * It will draw the MicroEJ robot moving from one side of the screen to the
+ * other.
+ * </p>
  *
- * Note that the whole display is redrawn on every frame.<p/>
+ * Note that the whole display is redrawn on every frame.
  *
  * @see FlyingImage
  * @see TimerTask
@@ -39,6 +42,9 @@ public class AnimationSampleWithFullRepaint extends Displayable {
 
 	/**
 	 * Instantiate an AnimationSampleWithFullRepaint.
+	 *
+	 * @param display
+	 *            the display to use.
 	 */
 	public AnimationSampleWithFullRepaint(Display display) {
 		super(display);
@@ -52,9 +58,9 @@ public class AnimationSampleWithFullRepaint extends Displayable {
 		} catch (IOException e) {
 			throw new AssertionError(e);
 		}
-		
+
 		this.show();
-		
+
 	}
 
 	/**
@@ -62,7 +68,7 @@ public class AnimationSampleWithFullRepaint extends Displayable {
 	 */
 	private class HorizontalAnimatorTask extends TimerTask {
 
-		private final int ABSOLUTE_INCREMENT = 2;
+		private static final int ABSOLUTE_INCREMENT = 2;
 		private final AnimationSampleWithFullRepaint animated;
 		private int horizontalIncrement = ABSOLUTE_INCREMENT;
 		private final int leftLimit;

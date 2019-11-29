@@ -1,13 +1,12 @@
 <!--
    Ivy
 
-   Copyright 2017-2018 IS2T. All rights reserved.
-   For demonstration purpose only.
-   IS2T PROPRIETARY. Use is subject to license terms.
+   Copyright 2017-2019 MicroEJ Corp. All rights reserved.
+   Use of this source code is governed by a BSD-style license that can be found with this software.
  -->
-<ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:m="http://ant.apache.org/ivy/extra"> 
-    <info organisation="com.microej.demo.kernel.hello" module="hello2" status="integration" revision="0.1.1">
-        <ea:build organisation="com.is2t.easyant.buildtypes" module="build-application" revision="5.5.+">
+<ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:m="http://ant.apache.org/ivy/extra" xmlns:ej="https://developer.microej.com" ej:version="2.0.0"> 
+    <info organisation="com.microej.demo.kernel.hello" module="hello2" status="integration" revision="0.2.0">
+        <ea:build organisation="com.is2t.easyant.buildtypes" module="build-application" revision="7.+">
         	<ea:property name="test.run.includes.pattern" value="**/_AllTests_*.class"/>
         </ea:build>
     </info>
@@ -31,8 +30,10 @@
 			Put MicroEJ API dependencies to the "provided->*" configuration
 			Other regular runtime dependencies are in the "default" configuration  
 		-->
-        <dependency org="ej.api" name="edc" rev="[1.2.0-RC0,1.3.0-RC0[" conf="provided->*" />
-      	<dependency org="ej.api" name="bon" rev="[1.2.0-RC0,1.3.0-RC0[" conf="provided->*" />
-        <dependency org="ej.api" name="kf" rev="[1.4.0-RC0,1.5.0-RC0[" conf="provided->*" />
+        <dependency org="ej.api" name="edc" rev="1.2.3" />
+      	<dependency org="ej.api" name="bon" rev="1.2.3" />
+        <dependency org="ej.api" name="kf" rev="1.4.4" />
+        
+        <dependency org="com.microej.demo.kernel.hello" name="native_apis" rev="0.2.0" />
     </dependencies>
 </ivy-module>
