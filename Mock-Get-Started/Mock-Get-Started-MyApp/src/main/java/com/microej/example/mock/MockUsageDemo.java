@@ -1,9 +1,8 @@
 /*
  * Java
  *
- * Copyright 2018 IS2T. All rights reserved.
- * For demonstration purpose only.
- * IS2T PROPRIETARY. Use is subject to license terms.
+ * Copyright 2018-2019 MicroEJ Corp. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.example.mock;
 
@@ -91,8 +90,8 @@ public class MockUsageDemo {
 	/**
 	 * Shows the page corresponding to the given class.
 	 *
-	 * @param clazz
-	 *            the class of the page to show.
+	 * @param page
+	 *            the page to show.
 	 */
 	public static void show(Widget page) {
 		TransitionContainer.show(page, true);

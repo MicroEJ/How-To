@@ -1,80 +1,105 @@
-## 1.7.0 (2019-02-27)
+# Changelog
 
-Features:
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## 1.8.0 - 2019-11-27
+
+### Changed
+
+  - Update all projects to MMM.
+  
+## 1.7.0 - 2019-02-27
+
+### Added
+
   - Add FontForge usage.
 
-## 1.6.3 (2018-10-11)
+## 1.6.3 - 2018-10-11
 
-Bug fixes:
+### Fixed
+
   - Fix minor api versions.
 
-## 1.6.2 (2018-09-20)
+## 1.6.2 - 2018-09-20
 
-Bug fixes:
+### Fixed
+
   - Typo fixes.
 
-## 1.6.1 (2018-08-22)
+## 1.6.1 - 2018-08-22
 
-Bug fixes:
+### Fixed
+
   - Typo fixes.
 
-## 1.6.0 (2018-08-16)
+## 1.6.0 - 2018-08-16
 
-Features:
+### Added
+
   - Add Mock-Get-Started.
 
-## 1.5.1 (2018-08-10)
+## 1.5.1 - 2018-08-10
 
-Bug fixes:
+### Fixed
+
   - Use only ASCII characters.
 
-## 1.5.0 (2018-08-10)
+## 1.5.0 - 2018-08-10
 
-Features:
+### Added
+
    - Add Single-App-to-Multi-App-Platform project.
    - Add SNI-LED project.
    - Add Multi-App-Security-Manager project.
 
-## 1.4.0 (2018-03-01)
+## 1.4.0 - 2018-03-01
 
-Features:
+### Added
+
    - Add FoundationLibrary-Get-Started project.
 
-## 1.3.1 (2018-01-31)
+## 1.3.1 - 2018-01-31
 
-Bug fixes:
+### Fixed
+
    - Update Proguard-Get-Started.
    - Update Storage-Get-Started.
 
-## 1.3.0 (2017-09-04)
+## 1.3.0 - 2017-09-04
 
-Features:
+### Added
+
    - Add Proguard-Get-Started project.
 
-## 1.2.1 (2017-08-17)
+## 1.2.1 - 2017-08-17
 
-Features:
+### Added
+
    - Update Storage-Get-Started project.
 
-## 1.2.0 (2017-08-07)
+## 1.2.0 - 2017-08-07
 
-Features:
+### Added
+
   - Add Widgets-Get-Started project.
   - Add Storage-Get-Started project.
 
-## 1.1.0 (2016-08-25)
+## 1.1.0 - 2016-08-25
 
-Features:
+### Added
+
   - Add MicroUI-Get-Started project.
 
-## 1.0.0 (2016-07-01)
+## 1.0.0 - 2016-07-01
 
-Features:
+### Added
+
   - Initial revision.
 
-<!--
-	Markdown
-	Copyright 2017-2019 IS2T. All rights reserved.
-	For demonstration purpose only.
-	IS2T PROPRIETARY. Use is subject to license terms.
--->
+---  
+_Markdown_   
+_Copyright 2017-2019 MicroEJ Corp. All rights reserved._  
+_Use of this source code is governed by a BSD-style license that can be found with this software._  

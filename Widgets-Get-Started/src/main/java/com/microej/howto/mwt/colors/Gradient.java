@@ -1,8 +1,8 @@
 /*
  * Java
  *
- * Copyright 2016 IS2T. All rights reserved.
- * Use of this source code is subject to license terms.
+ * Copyright 2016-2019 MicroEJ Corp. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.howto.mwt.colors;
 
@@ -23,7 +23,8 @@ public class Gradient extends Displayable {
 	public Gradient(Display display) {
 		super(display);
 	}
-	
+
+	@Override
 	public void paint(GraphicsContext g) {
 
 		final int DISPLAY_WIDTH = getDisplay().getWidth();
@@ -34,7 +35,7 @@ public class Gradient extends Displayable {
 		final int SMALL_GRADIENT_WIDTH = 32;
 		final int MEDIUM_GRADIENT_WIDTH = 64;
 		final int SMALL_PLUS_MEDIUM_GRADIENT_WIDTH = SMALL_GRADIENT_WIDTH + MEDIUM_GRADIENT_WIDTH ;
-		
+
 		int[] redToWhiteGradient = getGradient(g, Colors.RED, Colors.WHITE);
 		int[] tealToWhiteGradient = getGradient(g, Colors.TEAL, Colors.WHITE);
 		int[] whiteToBlackGradient = getGradient(g, Colors.WHITE, Colors.BLACK);
@@ -44,7 +45,7 @@ public class Gradient extends Displayable {
 		// draw small width gradient
 		{
 			drawGradientLeftToRight(g, tealToWhiteGradient, 0, 0, SMALL_GRADIENT_WIDTH, THREE_QUARTERS_HEIGHT);
-			drawGradientLeftToRight(g, whiteToMagentaGradient, DISPLAY_WIDTH - SMALL_GRADIENT_WIDTH, 0, DISPLAY_WIDTH , THREE_QUARTERS_HEIGHT);			
+			drawGradientLeftToRight(g, whiteToMagentaGradient, DISPLAY_WIDTH - SMALL_GRADIENT_WIDTH, 0, DISPLAY_WIDTH , THREE_QUARTERS_HEIGHT);
 		}
 
 		// draw medium width gradient
@@ -54,7 +55,7 @@ public class Gradient extends Displayable {
 			drawGradientRightToLeft(g, redToWhiteGradient, SMALL_GRADIENT_WIDTH, QUARTER_HEIGHT, SMALL_PLUS_MEDIUM_GRADIENT_WIDTH, THREE_QUARTERS_HEIGHT);
 			drawGradientRightToLeft(g, whiteToBlueGradient, DISPLAY_WIDTH - SMALL_PLUS_MEDIUM_GRADIENT_WIDTH, QUARTER_HEIGHT, DISPLAY_WIDTH - SMALL_GRADIENT_WIDTH , THREE_QUARTERS_HEIGHT);
 		}
-		
+
 		//draw large width gradient
 		{
 			drawGradientLeftToRight(g, whiteToBlackGradient, HALF_WIDTH, 0, DISPLAY_WIDTH - SMALL_PLUS_MEDIUM_GRADIENT_WIDTH  , QUARTER_HEIGHT );
@@ -95,9 +96,9 @@ public class Gradient extends Displayable {
 	}
 
 	/**
-	 * 
+	 *
 	 * Gets a color index within the bounds of a gradient's index range from an estimated color index
-	 * 
+	 *
 	 * @param gradient the gradient to pick colors from
 	 * @param estimatedColorIndex the floating point value close to the desired color index
 	 * @return
@@ -108,10 +109,10 @@ public class Gradient extends Displayable {
 		final int actualColorIndex;
 		if ( roundedIndex < 0 )
 		{
-			//if accumulated inaccuracy makes it so that roundedIndex is lower than 0, we might end up getting an ArrayOutOfBoundsException 
+			//if accumulated inaccuracy makes it so that roundedIndex is lower than 0, we might end up getting an ArrayOutOfBoundsException
 			actualColorIndex = 0;
 		} else {
-			//if accumulated inaccuracy makes it so that roundedIndex is greater than gradient.length, we might end up getting an ArrayOutOfBoundsException 
+			//if accumulated inaccuracy makes it so that roundedIndex is greater than gradient.length, we might end up getting an ArrayOutOfBoundsException
 			actualColorIndex = Math.min(gradient.length, roundedIndex);
 		}
 		return actualColorIndex;
@@ -120,10 +121,10 @@ public class Gradient extends Displayable {
 	/**
 	 * Fills the rectangle specified by (xStart,yStart,yEnd,yEnd) with horizontal stripes
 	 * of homogeneous width using colors from the gradient for each stripe. <p/>
-	 * 
+	 *
 	 * Gradient colors are used either from start to finish or from finish to
 	 * start depending on the startToFinish parameter. <p/>
-	 * 
+	 *
 	 * If the width of the rectangle is greater than the number of colors in the gradient then
 	 * the number of stripes is the number of colors in the gradient. <p/>
 	 * If the width of the rectangle is smaller than the number of colors in the gradient then
@@ -138,7 +139,7 @@ public class Gradient extends Displayable {
 	 * @param startToFinish
 	 */
 	private static void drawHorizontalGradient(GraphicsContext g, int[] gradient, int xStart, int yStart, int xEnd, int yEnd,
-		boolean startToFinish) {
+			boolean startToFinish) {
 		final int xWidth = xEnd - xStart;
 		final int yHeight = yEnd - yStart;
 
@@ -203,14 +204,14 @@ public class Gradient extends Displayable {
 	/**
 	 * Fills the rectangle specified by (xStart,yStart,yEnd,yEnd) with vertical stripes
 	 * of homogeneous height using colors from the gradient for each stripe. <p/>
-	 * 
+	 *
 	 * Gradient colors are used either from start to finish or from finish to
 	 * start depending on the startToFinish parameter. <p/>
-	 * 
+	 *
 	 * If the height of the rectangle is greater than the number of colors in the
 	 * gradient then the number of stripes is the number of colors in the
 	 * gradient. <p/>
-	 * 
+	 *
 	 * If the side of the rectangle matching the horizontal parameter is smaller
 	 * than the number of colors in the gradient then the number of stripes is
 	 * set to the size of this side.
@@ -281,7 +282,7 @@ public class Gradient extends Displayable {
 			}
 		}
 	}
-	
+
 	public static int[] getGradient(GraphicsContext g, int startColor, int endColor) {
 		// get color components
 		float currentRed = ColorHelper.getRed(startColor);

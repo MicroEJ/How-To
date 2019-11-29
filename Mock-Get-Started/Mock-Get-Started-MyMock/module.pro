@@ -1,8 +1,7 @@
 # Proguard Configuration File
 #
-# Copyright 2017-2018 IS2T. All rights reserved.
-# For demonstration purpose only.
-# IS2T PROPRIETARY. Use is subject to license terms.
+# Copyright 2017-2019 MicroEJ Corp. All rights reserved. 
+# Use of this source code is governed by a BSD-style license that can be found with this software.
 
 
 # Keep all the classes that are mock entry points

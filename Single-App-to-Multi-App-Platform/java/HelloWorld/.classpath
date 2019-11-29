@@ -3,6 +3,5 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=test&amp;ivyXmlPath=module.ivy&amp;confs=*"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/NativeAPIs"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
