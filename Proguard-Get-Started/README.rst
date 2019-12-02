@@ -45,7 +45,7 @@ ADD PROGUARD RULES
    ::
 
        -assumenosideeffects class java.util.logging.Logger {
-       public static java.util.logging.Logger getLogger(...);   
+       public static java.util.logging.Logger getLogger(...);
        public static Logger getLogger(...);
        public void log(...);
        public void severe(...);
@@ -115,7 +115,8 @@ the folder **target~/artifacts**.
 
 **Proguard**
 
-- After Proguard processing, we can see than **severe(…) and config(…)** are removed.
+- After Proguard processing, we can see than **severe(…) and config(…)** are
+  removed.
 
    ::
 

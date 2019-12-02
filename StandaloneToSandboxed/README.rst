@@ -25,7 +25,8 @@ ADD THE DEPENDENCIES
    ``<dependencies></dependencies>``
 3. Open the ``module.ivy`` file from the **sandboxed project**
 4. Paste the copied dependencies into ``<dependencies></dependencies>``
-5. Add the following dependency : ``<dependency org="ej.library.wadapps" name="framework" rev="1.11.0" />``
+5. Add the following dependency : ``<dependency org="ej.library.wadapps"
+   name="framework" rev="1.11.0" />``
 
 COPY THE SOURCES AND RESOURCES
 ------------------------------
@@ -100,7 +101,8 @@ LOCAL DEPLOY
 4. Click on **New launch configuration** icon
 5. In **Execution** tab
 
-   1. In **Target** frame, in **Platform** field, select a relevant virtual device
+   1. In **Target** frame, in **Platform** field, select a relevant virtual
+      device
    2. In **Execution** frame
 
       1. Select **Execute on Device**

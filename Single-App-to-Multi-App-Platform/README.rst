@@ -67,7 +67,7 @@ these items and will not apply without changes to other environments.
 Setup the workspace
 ===================
 
-Import the example projects into the MicroEJ SDK: 
+Import the example projects into the MicroEJ SDK:
 
   - Click on **File** -> **Import**
   - Select **General** -> **Existing Project into Workspace**
@@ -104,7 +104,7 @@ from Java.
    1. Open the ``[XXX]-configuration/[XXX].platform`` file
    2. Go to **Content** tab.
    3. Check **Java to C interface** -> **SNI API** module
-   
+
      .. image:: screenshots/CheckSNI.png
        :alt: Check SNI
 
@@ -124,7 +124,8 @@ from Java.
 
       -  The project ``NativeAPIs`` is used to define the native
          functions
-      -  `com.microej.Led <java/NativeAPIs/src/main/java/com/microej/Led.java>`__
+      -  `com.microej.Led <java/NativeAPIs/src/main/java/com/microej/
+         Led.java>`__
          defines the native function to manage the LED
 
          -  ``Led.initNative()`` is called at start-up to initialize the
@@ -143,8 +144,8 @@ from Java.
    2. Call the native function in the HelloWorld application
 
       -  The project ``HelloWorld`` depends on ``NativeAPIs``
-      -  `com.microej.feature.HelloWorld <java/HelloWorld/src/main/java/com/microej/feature/HelloWorld.java>`__
-         uses ``LED`` to toggle the LED
+      -  `com.microej.feature.HelloWorld <java/HelloWorld/src/main/java/com/
+         microej/feature/HelloWorld.java>`__ uses ``LED`` to toggle the LED
 
 4. Build the HelloWorld Java application
 
@@ -258,14 +259,17 @@ Create the kernel project
 
    -  An example is provided in `kernel <java/Kernel>`__
 
-      -  `com.microej.kernel.FeatureInputStream <java/Kernel/src/main/java/com/microej/kernel/FeatureInputStream.java>`__
+      -  `com.microej.kernel.FeatureInputStream <java/Kernel/src/main/java/com/
+         microej/kernel/FeatureInputStream.java>`__
          is used to create an input stream to receive the feature.
-      -  `com.microej.kernel.SimpleKernel <java/Kernel/src/main/java/com/microej/kernel/SimpleKernel.java>`__
+      -  `com.microej.kernel.SimpleKernel <java/Kernel/src/main/java/com/
+         microej/kernel/SimpleKernel.java>`__
          gets a feature input stream and loads it.
 
 3. Add an entry point
 
-   -  `SimpleKernel.java <java/Kernel/src/main/java/com/microej/kernel/SimpleKernel.java>`__
+   -  `SimpleKernel.java <java/Kernel/src/main/java/com/microej/kernel/
+      SimpleKernel.java>`__
       provides a main() method to load the features.
 
 4. Expose the native function to the feature
@@ -301,14 +305,17 @@ Create the kernel project
 Adapt the platform
 ~~~~~~~~~~~~~~~~~~
 
--  `com.microej.kernel.FeatureInputStream <java/Kernel/src/main/java/com/microej/kernel/FeatureInputStream.java>`__
+-  `com.microej.kernel.FeatureInputStream <java/Kernel/src/main/java/com/
+   microej/kernel/FeatureInputStream.java>`__
    expects the native functions
 
    -  ``void Java_com_microej_kernel_FeatureInputStream_init()`` is
       called once to initialize the native stack
-   -  ``jboolean Java_com_microej_kernel_FeatureInputStream_isFeatureAvailable()``
+   -  ``jboolean
+      Java_com_microej_kernel_FeatureInputStream_isFeatureAvailable()``
       to check if a feature is available
-   -  ``jint Java_com_microej_kernel_FeatureInputStream_readIntoArray(jbyte *out, jint outOffset, jint outLen)``
+   -  ``jint Java_com_microej_kernel_FeatureInputStream_readIntoArray(jbyte
+      *out, jint outOffset, jint outLen)``
       to read the data
    -  ``void Java_com_microej_kernel_FeatureInputStream_closeFeature()``
       to close the feature stream
@@ -363,13 +370,14 @@ Adapt the Hello World to Run as a Feature
 
    -  `module.ivy <java/HelloWorld/module.ivy>`__ contains a dependency
       to
-      ``<dependency org="ej.api" name="kf" rev="[1.4.0-RC0,2.0.0-RC0[" conf="provided->*" />``
+      ``<dependency org="ej.api" name="kf" rev="[1.4.0-RC0,2.0.0-RC0["
+      conf="provided->*" />``
 
 2. Create a ``FeatureEntryPoint`` that calls back
    ``com.microej.feature.HelloWorld.main()`` on the ``start()``
 
-   -  `com.microej.feature.MyFeatureEntryPoint <java/HelloWorld/src/main/java/com/microej/feature/MyFeatureEntryPoint.java>`__
-      does it
+   -  `com.microej.feature.MyFeatureEntryPoint <java/HelloWorld/src/main/
+      java/com/microej/feature/MyFeatureEntryPoint.java>`__ does it
 
 3. Add a [FeatureName].kf file to your features resources see
    `Hello.kf <java/HelloWorld/src/main/resources/kf/Hello.kf>`__

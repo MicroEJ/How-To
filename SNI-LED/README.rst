@@ -61,7 +61,7 @@ these items and will not apply without changes to other environments.
 Setup the workspace
 ===================
 
-Import the example projects into the MicroEJ SDK: 
+Import the example projects into the MicroEJ SDK:
 
   - Click on **File** -> **Import**
   - Select **General** -> **Existing Project into Workspace**
@@ -113,7 +113,8 @@ from Java.
 
       -  The project ``NativeAPIs`` is used to define the native
          functions
-      -  `com.microej.Led <java/NativeAPIs/src/main/java/com/microej/Led.java>`__
+      -  `com.microej.Led <java/NativeAPIs/src/main/java/com/microej/
+         Led.java>`__
          defines the native function to manage the LED
 
          -  ``Led.initNative()`` is called at start-up to initialize the
@@ -132,7 +133,8 @@ from Java.
    2. Call the native function in the HelloWorld application
 
       -  The project ``HelloWorld`` depends on ``NativeAPIs``
-      -  `com.microej.feature.HelloWorld <java/HelloWorld/src/main/java/com/microej/feature/HelloWorld.java>`__
+      -  `com.microej.feature.HelloWorld <java/HelloWorld/src/main/java/com/
+         microej/feature/HelloWorld.java>`__
          uses ``LED`` to toggle the LED
 
 4. Build the HelloWorld Java application

@@ -59,7 +59,8 @@ Create a Mock with a UI
 A mock can show a separate UI to ease input/output. An example is
 provided
 
--  An application using native function `Mock-Get-Started-MyApp <Mock-Get-Started-MyApp>`__
+-  An application using native function `Mock-Get-Started-MyApp
+   <Mock-Get-Started-MyApp>`__
 -  A mock opening a UI `Mock-Get-Started-MyMock <Mock-Get-Started-MyMock>`__
 
 
