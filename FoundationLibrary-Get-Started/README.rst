@@ -26,7 +26,7 @@ This example has been tested on:
    -  EDC-1.2
    -  BON-1.3
    -  SP-2.0
-   
+
    See https://developer.microej.com/getting-started-sdk.html.
 
 Knowledge
@@ -39,12 +39,15 @@ Knowledge
 Overview
 --------
 
-A Foundation Library is composed of 
+A Foundation Library is composed of
 
 -  A MicroEJ API project: contains API skeletons for compilation purpose.
--  A MicroEJ Implementation project: contains the runtime code executed by the Platform and Low Level C header files.
--  C code: contains the implementation of native methods linked to the C project.
--  Java Mock-up project: contains the implementation of native methods for simulation.
+-  A MicroEJ Implementation project: contains the runtime code executed by the
+   Platform and Low Level C header files.
+-  C code: contains the implementation of native methods linked to the C
+   project.
+-  Java Mock-up project: contains the implementation of native methods for
+   simulation.
 
 .. figure:: resources/overview.png
    :alt: LLAPI
@@ -161,7 +164,6 @@ Define the Implementation Project
 
        public native static int nativeFactorial(int number);
    }
-       
 
 This class defines the *factorial* implementation. It first checks the
 argument validity and then redirects to a native method for speed
@@ -206,8 +208,7 @@ Write the C Header File
 
 This file defines the *factorial* C prototype. The
 **com_mycompany_MyLib** part is the fully qualified name of the
-**MyLib** class created previously where all **.** are replaced by
-\**_**.
+**MyLib** class created previously where all **.** are replaced by **_**.
 
 The *#define* statement allows to separate the Java part and the C part.
 This is called the Low Level API of the Foundation Library. If the fully
@@ -249,7 +250,8 @@ Define the Application Project
 
 -  Open **module.ivy**
 
-      - Add the dependency ``<dependency org="com.mycompany.api" name="mylib" rev="1.0.0" />``
+      - Add the dependency ``<dependency org="com.mycompany.api" name="mylib"
+        rev="1.0.0" />``
 
 -  Òpen file **Main.java**
 

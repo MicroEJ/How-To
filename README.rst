@@ -29,11 +29,13 @@ Note that to run them on board :
 Details
 =======
 
-**Available Examples**: 
+**Available Examples**:
 
-- `FontForge <FontForge>`__: Explains how to use Fontforge to generate a MicroEJ Font.
-- `FoundationLibrary-Get-Started <FoundationLibrary-Get-Started>`__: 
-  Contains a tutorial on how to add a Foundation Library for both simulated and embedded runtime.
+- `FontForge <FontForge>`__: Explains how to use Fontforge to generate a
+  MicroEJ Font.
+- `FoundationLibrary-Get-Started <FoundationLibrary-Get-Started>`__:
+  Contains a tutorial on how to add a Foundation Library for both simulated
+  and embedded runtime.
 - `MicroUI-Get-Started <MicroUI-Get-Started>`__ : Contains simple examples
   to understand how to use the main MicroUI library APIs.
 - `Proguard-Get-Started <Proguard-Get-Started>`__ : Explains how to
