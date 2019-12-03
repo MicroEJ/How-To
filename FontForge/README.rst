@@ -91,4 +91,3 @@ Import the images to an EJF
 In MicroEJ SDK
 1. Import the MicroEJ font
 2. Adapt the base line to Map your font's base line
-
