@@ -11,7 +11,8 @@ like any other services it can be retrieved by using the default
 ``ServiceLoader`` (if you want more information about Service, please
 read the firmware documentation).
 
-   ``Storage storage = ServiceLoaderFactory.getServiceLoader().getService(Storage.class);``
+   ``Storage storage =
+   ServiceLoaderFactory.getServiceLoader().getService(Storage.class);``
 
 This service is based on key/value principle. The value is Java’s
 ``InputStream`` and the keys are Java’s ``String`` (with some

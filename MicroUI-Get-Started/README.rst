@@ -8,84 +8,96 @@ This library contains simple examples to understand how to use the main
 MicroUI library APIs. It is recommended to study them in the following
 order :
 
--  `com.microej.howto.microui.drawing.Primitives </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/Primitives.java>`__
+-  `com.microej.howto.microui.drawing.Primitives </MicroUI-Get-Started/src/
+   main/java/com/microej/howto/microui/drawing/Primitives.java>`__
 
 .. figure:: screenshots/Primitives.png
    :alt: Primitives
 
    Primitives
 
--  `com.microej.howto.microui.drawing.PrimitivesAntiAliased </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/PrimitivesAntiAliased.java>`__
+-  `com.microej.howto.microui.drawing.PrimitivesAntiAliased
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/drawing/PrimitivesAntiAliased.java>`__
 
 .. figure:: screenshots/PrimitivesAntiAliased.png
    :alt: PrimitivesAntiAliased
 
    PrimitivesAntiAliased
 
--  `com.microej.howto.microui.font.Text </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/Text.java>`__
+-  `com.microej.howto.microui.font.Text
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/Text.java>`__
 
 .. figure:: screenshots/Text.png
    :alt: Text
 
    Text
 
--  `com.microej.howto.microui.font.PictosWithCustomFont </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/PictosWithCustomFont.java>`__
+-  `com.microej.howto.microui.font.PictosWithCustomFont
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/font/PictosWithCustomFont.java>`__
 
 .. figure:: screenshots/PictosWithCustomFont.png
    :alt: PictosWithCustomFont
 
    PictosWithCustomFont
 
--  `com.microej.howto.microui.image.TransparentImages </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TransparentImages.java>`__
+-  `com.microej.howto.microui.image.TransparentImages
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TransparentImages.java>`__
 
 .. figure:: screenshots/TransparentImages.png
    :alt: TransparentImages
 
    TransparentImages
 
--  `com.microej.howto.microui.image.FlippedImages </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/FlippedImages.java>`__
+-  `com.microej.howto.microui.image.FlippedImages
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/FlippedImages.java>`__
 
 .. figure:: screenshots/FlippedImages.png
    :alt: FlippedImages
 
    FlippedImages
 
--  `com.microej.howto.microui.image.RotatedImages </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/RotatedImages.java>`__
+-  `com.microej.howto.microui.image.RotatedImages
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/RotatedImages.java>`__
 
 .. figure:: screenshots/RotatedImages.png
    :alt: RotatedImages
 
    RotatedImages
 
--  `com.microej.howto.microui.image.ScaledImages </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/ScaledImages.java>`__
+-  `com.microej.howto.microui.image.ScaledImages
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/ScaledImages.java>`__
 
 .. figure:: screenshots/ScaledImages.png
    :alt: ScaledImages
 
    ScaledImages
 
--  `com.microej.howto.microui.image.TilingWithImages </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TilingWithImages.java>`__
+-  `com.microej.howto.microui.image.TilingWithImages
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/TilingWithImages.java>`__
 
 .. figure:: screenshots/TilingWithImages.png
    :alt: TilingWithImages
 
    TilingWithImages
 
--  `com.microej.howto.microui.image.DeformedImages </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/DeformedImages.java>`__
+-  `com.microej.howto.microui.image.DeformedImages
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/image/DeformedImages.java>`__
 
 .. figure:: screenshots/DeformedImages.png
    :alt: DeformedImages
 
    DeformedImages
 
--  `com.microej.howto.microui.events.InputEvents </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/events/InputEvents.java>`__
+-  `com.microej.howto.microui.events.InputEvents
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/events/InputEvents.java>`__
 
 .. figure:: screenshots/InputEvents.png
    :alt: InputEvents
 
    InputEvents
 
--  `com.microej.howto.microui.animation.AnimationSampleWithFullRepaint </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFullRepaint.java>`__
+-  `com.microej.howto.microui.animation.AnimationSampleWithFullRepaint
+   </MicroUI-Get-Started/src/main/java/com/microej/howto/microui/animation/AnimationSampleWithFullRepaint.java>`__
 
 Note that the same set of resources (images and fonts) is used across
 all of the examples.
@@ -93,13 +105,13 @@ all of the examples.
 Usage
 =====
 
-For each example: 
+For each example:
 
-## Run on MicroEJ Simulator 
+## Run on MicroEJ Simulator
 ---------------------------
 
 1. Right Click on the example to run ``.java`` file
-2. Select **Run as -> MicroEJ Application** 
+2. Select **Run as -> MicroEJ Application**
 3. Select your platform 4. Press **Ok**
 
 Run on device

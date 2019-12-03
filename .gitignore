@@ -7,3 +7,4 @@ launches/*.properties
 src-adpgenerated/
 Single-App-to-Multi-App-Platform/java/Kernel/com.microej.kernel.SimpleKernel/
 Multi-App-Security-Manager/java/Kernel/com.microej.kernel.SimpleKernel/
+.vscode/
