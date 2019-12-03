@@ -21,15 +21,15 @@ Requirements
 
 This tutorial is built upon the
 `Single-App-to-Multi-App-Platform <../Single-App-to-Multi-App-Platform>`__
-platform. This platform must: 
+platform. This platform must:
 
-- Implement LEDs native function in the kernel 
+- Implement LEDs native function in the kernel
 - Load at least two features
 
 Setup the workspace
 ===================
 
-Import the example projects into the MicroEJ SDK: 
+Import the example projects into the MicroEJ SDK:
 
   - Click on **File** -> **Import**
   - Select **General** -> **Existing Project into Workspace**
@@ -48,7 +48,7 @@ Projects Overview
 -  ``HelloWorld`` is a feature named “Hello” application using the LED
 -  ``HelloWorld2`` is the same feature as ``HelloWorld`` with a
    different `kf
-   name <java\HelloWorld2\src\main\resources\kf\Hello.kf>`__ “Hello2”
+   name <java/HelloWorld2/src/main/resources/kf/Hello.kf>`__ “Hello2”
 -  ``NativeAPIs`` is a project that defines the native functions to
    manage the LED
 -  ``Kernel`` is the kernel entry point and function to load the
@@ -58,9 +58,9 @@ Check the Permission
 ====================
 
 1. Create an
-   `LedPermission <NativeAPIs\src\main\java\com\microej\LedPermission.java>`__
+   `LedPermission <NativeAPIs/src/main/java/com/microej/LedPermission.java>`__
    class that extends ``java.security.BasicPermission``
-2. In `Led <NativeAPIs\src\main\java\com\microej\Led.java>`__, check the
+2. In `Led <NativeAPIs/src/main/java/com/microej/Led.java>`__, check the
    permission before calling ``switchLedNative(boolean on);``
 
 ::
@@ -92,14 +92,18 @@ Create a Security Manager
 -------------------------
 
 1. Create
-   `com.microej.kernel.security.KernelSecurityManager <java\Kernel\src\main\java\com\microej\kernel\security\KernelSecurityManager.java>`__
+   `com.microej.kernel.security.KernelSecurityManager <java/Kernel/src/main/
+   java/com/microej/kernel/security/KernelSecurityManager.java>`__
    that extends ``java.lang.SecurityManager``.
 2. Create an interface
-   `com.microej.kernel.security.FeaturePermissionChecker <java\Kernel\src\main\java\com\microej\kernel\security\KernelSecurityManager.java>`__
+   `com.microej.kernel.security.FeaturePermissionChecker <java/Kernel/src/main/
+   java/com/microej/kernel/security/KernelSecurityManager.java>`__
    that defines
-   ``public void checkPermission(Permission p, Feature f) throws SecurityException;``
+   ``public void checkPermission(Permission p, Feature f) throws
+   SecurityException;``
 3. In
-   `com.microej.kernel.security.KernelSecurityManager <java\Kernel\src\main\java\com\microej\kernel\security\KernelSecurityManager.java>`__
+   `com.microej.kernel.security.KernelSecurityManager <java/Kernel/src/main/
+   java/com/microej/kernel/security/KernelSecurityManager.java>`__
    overrides ``public void checkPermission(Permission permission)`` to
    delegate the check.
 
@@ -127,7 +131,8 @@ Create the Checkers
 -------------------
 
 1. Create
-   `com.microej.kernel.security.LedPermissionChecker <java\Kernel\src\main\java\com\microej\kernel\security\LedPermissionChecker.java>`__
+   `com.microej.kernel.security.LedPermissionChecker <java/Kernel/src/main/
+   java/com/microej/kernel/security/LedPermissionChecker.java>`__
    that implements
    ``com.microej.kernel.security.FeaturePermissionChecker``.
 
@@ -148,7 +153,8 @@ Instantiate the Security Manager
 --------------------------------
 
 Modify the Kernel entry point
-`com.microej.kernel.SimpleKernel.main(String[]) <java\Kernel\src\main\java\com\microej\kernel\SimpleKernel.java>`__
+`com.microej.kernel.SimpleKernel.main(String[]) <java/Kernel/src/main/java/com/
+microej/kernel/SimpleKernel.java>`__
 to instantiate the SecurityManager.
 
 ::
