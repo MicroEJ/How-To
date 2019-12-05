@@ -13,8 +13,8 @@ This how-to has been tested on
 
 -  MicroEJ Studio or SDK 5.1
 -  Python (3.8.0) with Pillow module (6.2.1)
--  FontForge (FontForge-2019-08-01 64 bits)
-   -  if you have a 64 bits OS, install a 64 bits font forge
+-  FontForge (FontForge-2019-08-01 64-bit)
+   -  if you have a 64-bit OS, install a 64-bit font forge
 -  Windows 10
 
 Usage
@@ -23,11 +23,12 @@ Usage
 Install the dependencies
 ------------------------
 
-1. Download and Install Python and Pillow `how
+1. Download and Install Python and Pillow: `how
    to <https://pillow.readthedocs.io/en/3.0.x/index.html>`__
-2. Download and install FontForge
+2. Download and install FontForge:
    `website <https://fontforge.github.io>`__
-3. Add ffpython installed by Fontforge to the system path
+3. Add ffpython, available in `[Fontforge installation directory]/bin`,
+   to the system path
 
 Usage
 -----
@@ -85,9 +86,20 @@ Algorithm
    the size of the printed characters may vary, but the size of the EJF
    file will stay the same.
 
-Import the images to an EJF
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Import the images into an EJF
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In MicroEJ SDK
+In MicroEJ SDK:
+
 1. Import the MicroEJ font
 2. Adapt the base line to Map your font's base line
+
+Troubleshooting
+===============
+
+DLL load failed
+---------------
+
+When using a 64-bit Windows and a 32-bit version of FontForge,
+the script fails to load some DLL. Using a 64-bit version should
+fix the use. `Font forge 64-bit portable <https://sourceforge.net/projects/fontforgebuilds/files/x86_64/Portable/>`__
