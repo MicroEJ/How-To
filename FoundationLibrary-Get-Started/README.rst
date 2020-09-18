@@ -5,7 +5,7 @@ How to Setup a new Foundation Library
 =====================================
 
 This example describes how to setup a new Foundation Library in MicroEJ
-SDK.
+SDK and how to distribute it through a MicroEJ Platform.
 
 A Foundation Library is a library that provides core runtime APIs or
 hardware-dependent functionality. It is often connected to underlying C

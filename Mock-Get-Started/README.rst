@@ -1,4 +1,4 @@
-.. Copyright 2019 MicroEJ Corp. All rights reserved.
+.. Copyright 2019-2020 MicroEJ Corp. All rights reserved.
 .. Use of this source code is governed by a BSD-style license that can be found with this software.
 
 Overview
@@ -27,12 +27,7 @@ at ``my.package``
 Implement the J2SE mock
 ~~~~~~~~~~~~~~~~~~~~~~~
 
--  Create a new Java project ``Mock``
-
-   -  Open ``File`` > ``New`` > ``EasyAnt project``
-   -  Choose ``com.is2t.easyant.skeleton#microej-mock;+`` as skeleton
-   -  Fulfill the form
-   -  Click on ``Finish``
+-  Create a new module project (https://docs.microej.com/en/latest/ApplicationDeveloperGuide/mmm.html#module-project-skeleton) using the ``microej-mock`` skeleton.
 
 -  Create a class with the **same name, same package** as your SNI
    (e.g. ``my.package.MyClass``)
@@ -43,8 +38,8 @@ Implement the J2SE mock
 Export the mock
 ~~~~~~~~~~~~~~~
 
--  Build the Mock project with EasyAnt (**right click on the project** >
-   ``build with EasyAnt``).
+-  Build the Mock project (**right click on the project** >
+   ``Build Module``).
 -  A ``.rip`` file is created in the ``target~/artifacts`` folder in the
    Mock project.
 -  From the ``.rip`` unzip the content of ``content`` folder into the
@@ -69,7 +64,7 @@ Requirements
 
 This example has been tested on:
 
--  MicroEJ SDK 5.1
+-  MicroEJ SDK 5.1.0
 -  With a platform that contains:
 
    -  EDC-1.2
@@ -80,7 +75,7 @@ This example has been tested on:
 Dependencies
 ============
 
-*All dependencies are retrieved transitively by Ivy resolver*.
+*All dependencies are retrieved transitively by MicroEJ Module Manager*.
 
 Source
 ======

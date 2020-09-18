@@ -1,10 +1,14 @@
 /*
  * Java
  *
- * Copyright 2018-2019 MicroEJ Corp. All rights reserved. 
+ * Copyright 2018-2020 MicroEJ Corp. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.example.mock.style;
+
+import com.microej.example.mock.widget.Connected;
+import com.microej.example.mock.widget.TemperatureWidget;
+import com.microej.example.mock.widget.TextReceiver;
 
 import ej.microui.display.Colors;
 import ej.microui.display.Font;
@@ -31,6 +35,7 @@ import ej.style.selector.combinator.AndCombinator;
 import ej.style.text.SimpleTextManager;
 import ej.style.util.EditableStyle;
 import ej.style.util.StyleHelper;
+import ej.widget.basic.Button;
 import ej.widget.basic.Image;
 import ej.widget.basic.Label;
 import ej.widget.basic.drawing.CheckBox;
@@ -49,6 +54,7 @@ import ej.widget.basic.picto.PictoProgress;
 import ej.widget.basic.picto.PictoRadio;
 import ej.widget.basic.picto.PictoSlider;
 import ej.widget.basic.picto.PictoSwitch;
+import ej.widget.container.Split;
 import ej.widget.keyboard.Key;
 import ej.widget.keyboard.Keyboard;
 import ej.widget.keyboard.KeyboardText;
@@ -67,6 +73,9 @@ public class StylesheetPopulator {
 	private static final int KEYBOARD_HIGHLIGHT_COLOR = MicroEJColors.CORAL;
 	private static final int TEXT_PLACEHOLDER_COLOR = MicroEJColors.CONCRETE_WHITE_25;
 	private static final int TEXT_SELECTION_COLOR = MicroEJColors.CONCRETE_WHITE_50;
+
+	private static final int SEND_TEXT_BUTTON_INACTIVE_COLOR = 0xeaeaea;
+	private static final int SEND_TEXT_BUTTON_ACTIVE_COLOR = 0xd6d6d6;
 
 	private static final int KEY_CORNER_RADIUS = 10;
 
@@ -96,6 +105,29 @@ public class StylesheetPopulator {
 		EditableStyle style = new EditableStyle();
 		style.setBackground(NoBackground.NO_BACKGROUND);
 		stylesheet.addRule(labelTypeSelector, style);
+
+		style.clear();
+		style.setBackground(NoBackground.NO_BACKGROUND);
+		style.setMargin(new ComplexOutline(0, 0, 0, 27));
+		stylesheet.addRule(new TypeSelector(Connected.class), style);
+		stylesheet.addRule(new TypeSelector(Split.class), style);
+		stylesheet.addRule(new TypeSelector(TemperatureWidget.class), style);
+		stylesheet.addRule(new TypeSelector(TextReceiver.class), style);
+
+		// Sets the inactive send text button style
+		style.clear();
+		style.setBackgroundColor(SEND_TEXT_BUTTON_INACTIVE_COLOR);
+		style.setBorder(new SimpleRectangularBorder(2));
+		style.setBorderColor(FOREGROUND);
+		style.setAlignment(GraphicsContext.HCENTER | GraphicsContext.VCENTER);
+		style.setMargin(new ComplexOutline(6, 25, 6, 25));
+		stylesheet.addRule(new TypeSelector(Button.class), style);
+
+
+		// Sets the active send text button style
+		style.clear();
+		style.setBackgroundColor(SEND_TEXT_BUTTON_ACTIVE_COLOR);
+		stylesheet.addRule(new AndCombinator(new TypeSelector(Button.class), new StateSelector(State.Active)), style);
 
 		// Sets the scroll style
 		style.clear();
@@ -159,12 +191,12 @@ public class StylesheetPopulator {
 
 		style.clear();
 		style.setBorder(new SimpleRoundedBorder(1000, 2));
-		style.setPadding(new ComplexOutline(4, 20, 4, 4));
+		style.setPadding(new ComplexOutline(4, 20, 4, 6));
 		style.setAlignment(GraphicsContext.LEFT | GraphicsContext.VCENTER);
 		stylesheet.addRule(switchBoxTypeSelector, style);
 
 		style.clear();
-		style.setPadding(new ComplexOutline(4, 4, 4, 20));
+		style.setPadding(new ComplexOutline(4, 6, 4, 20));
 		style.setAlignment(GraphicsContext.RIGHT | GraphicsContext.VCENTER);
 		stylesheet.addRule(new AndCombinator(switchBoxTypeSelector, stateCheckedSelector), style);
 

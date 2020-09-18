@@ -5,13 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.8.2 - 219-12-05
+## 1.8.3 - 2020-09-14
+
+### Fixed
+
+   - Fix `Mock-Get-Started` README for MicroEJ SDK 5.x.
+
+## 1.8.2 - 2019-12-05
 
 ### Fixed
 
   - Fix Font forge typo.
 
-## 1.8.1 - 219-12-03
+## 1.8.1 - 2019-12-03
 
 ### Fixed
 
@@ -113,5 +119,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---  
 _Markdown_   
-_Copyright 2017-2019 MicroEJ Corp. All rights reserved._  
+_Copyright 2017-2020 MicroEJ Corp. All rights reserved._  
 _Use of this source code is governed by a BSD-style license that can be found with this software._  

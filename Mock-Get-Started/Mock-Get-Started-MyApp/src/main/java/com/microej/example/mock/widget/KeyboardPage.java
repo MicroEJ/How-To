@@ -1,7 +1,7 @@
 /*
  * Java
  *
- * Copyright 2018-2019 MicroEJ Corp. All rights reserved. 
+ * Copyright 2018-2020 MicroEJ Corp. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.example.mock.widget;
@@ -113,6 +113,7 @@ public class KeyboardPage extends Dock {
 	@Override
 	public void showNotify() {
 		super.showNotify();
+		textInput.setText(EMPTY_STRING);
 		MockUsageDemo.getPanel().setFocus(this.textInput);
 	}
 
@@ -163,7 +164,6 @@ public class KeyboardPage extends Dock {
 
 	private void submit() {
 		MySNI.sendText(textInput.getText());
-		MockUsageDemo.show(new MyPage());
+		MockUsageDemo.showMainPage();
 	}
-
 }

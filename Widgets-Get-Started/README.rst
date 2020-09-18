@@ -8,7 +8,7 @@ This library contains simple examples to understand how to use the main
 Widgets library APIs. It is recommended to study them in the following
 order :
 
--  `com.microej.howto.mwt.colors.Gradient <Widgets-Get-Started/src/main/java/
+-  `com.microej.howto.mwt.colors.Gradient <src/main/java/
    com/microej/howto/mwt/colors/Gradient.java>`__
 
 .. figure:: screenshots/Gradient.png

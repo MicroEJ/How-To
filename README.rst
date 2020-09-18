@@ -1,4 +1,4 @@
-.. Copyright 2018-2019 MicroEJ Corp. All rights reserved.
+.. Copyright 2018-2020 MicroEJ Corp. All rights reserved.
 .. Use of this source code is governed by a BSD-style license that can be found with this software.
 
 Overview
@@ -6,7 +6,7 @@ Overview
 
 This project gathers the MicroEJ’s how-tos. How-tos with some code are
 developed as standalone applications and as such can be run by following
-the associated instructions (see **README.md** file of each example).
+the associated instructions (see **README.rst** file of each example).
 
 Note that to run them on board :
 
