@@ -1,4 +1,4 @@
-.. Copyright 2018-2019 MicroEJ Corp. All rights reserved.
+.. Copyright 2018-2021 MicroEJ Corp. All rights reserved.
 .. Use of this source code is governed by a BSD-style license that can be found with this software.
 
 Overview
@@ -58,9 +58,9 @@ Check the Permission
 ====================
 
 1. Create an
-   `LedPermission <NativeAPIs/src/main/java/com/microej/LedPermission.java>`__
+   `LedPermission <java/NativeAPIs/src/main/java/com/microej/LedPermission.java>`__
    class that extends ``java.security.BasicPermission``
-2. In `Led <NativeAPIs/src/main/java/com/microej/Led.java>`__, check the
+2. In `Led <java/NativeAPIs/src/main/java/com/microej/Led.java>`__, check the
    permission before calling ``switchLedNative(boolean on);``
 
 ::

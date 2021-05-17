@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-  - Add link to dowload FontForge as portable 64 bits.
+  - Add link to download FontForge as portable 64 bits.
 
 ### Fixed
 
@@ -31,5 +31,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---  
 _Markdown_   
-_Copyright 2019 MicroEJ Corp. All rights reserved._  
+_Copyright 2019-2021 MicroEJ Corp. All rights reserved._  
 _Use of this source code is governed by a BSD-style license that can be found with this software._  

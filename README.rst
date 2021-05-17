@@ -1,4 +1,4 @@
-.. Copyright 2018-2020 MicroEJ Corp. All rights reserved.
+.. Copyright 2018-2021 MicroEJ Corp. All rights reserved.
 .. Use of this source code is governed by a BSD-style license that can be found with this software.
 
 Overview
@@ -65,7 +65,7 @@ This example has been tested on:
 Usage
 =====
 
-Each subfolder contains a distinct how-to described in the **README.md**
+Each subfolder contains a distinct how-to described in the **README.rst**
 file of each example.
 
 Changes

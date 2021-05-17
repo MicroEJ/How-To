@@ -1,4 +1,4 @@
-.. Copyright 2018-2019 MicroEJ Corp. All rights reserved.
+.. Copyright 2018-2021 MicroEJ Corp. All rights reserved.
 .. Use of this source code is governed by a BSD-style license that can be found with this software.
 
 Overview
@@ -93,7 +93,7 @@ Projects Overview
 Add a Native Function in the Platform to Control a LED
 ======================================================
 
-If you followed the How-To `SNI-LED <../SNI-LED/README.md>`__, this part
+If you followed the How-To `SNI-LED <../SNI-LED/README.rst>`__, this part
 has already been done, go to **Run a Multi-App Kernel**.
 
 Modify the platform to add the capability to call a native C function

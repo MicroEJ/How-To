@@ -1,4 +1,4 @@
-.. Copyright 2019 MicroEJ Corp. All rights reserved.
+.. Copyright 2019-2021 MicroEJ Corp. All rights reserved.
 .. Use of this source code is governed by a BSD-style license that can be found with this software.
 
 Overview
@@ -9,11 +9,11 @@ This project uses different ways to communicate with the native world.
 Code highlight
 --------------
 
--  `com.microej.example.mock.MySNI <src\main\java\com\microej\example\mock\MySNI.java>`__
+-  `com.microej.example.mock.MySNI <src/main/java/com/microej/example/mock/MySNI.java>`__
    describes the SNI functions
--  `com.microej.example.mock.MySP <src\main\java\com\microej\example\mock\MySP.java>`__
+-  `com.microej.example.mock.MySP <src/main/java/com/microej/example/mock/MySP.java>`__
    uses the Shielded Plug
--  `database-definition.xml <resources\database-definition.xml>`__
+-  `database-definition.xml <src/main/resources/database-definition.xml>`__
    describes the database used for Shielded plug.
 
 Usage
