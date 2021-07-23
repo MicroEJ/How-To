@@ -1,7 +1,7 @@
 /*
  * Java
  *
- * Copyright 2018-2019 MicroEJ Corp. All rights reserved. 
+ * Copyright 2018-2019 MicroEJ Corp. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.example.mock;
@@ -90,8 +90,7 @@ public class MySP {
 	/**
 	 * Sets the connectionListener.
 	 *
-	 * @param connectionListener
-	 *            the connectionListener to set.
+	 * @param connectionListener the connectionListener to set.
 	 */
 	public void setConnectionListener(OnStateChangeListener connectionListener) {
 		this.connectionListener = connectionListener;
@@ -100,8 +99,7 @@ public class MySP {
 	/**
 	 * Sets the temperatureListener.
 	 *
-	 * @param temperatureListener
-	 *            the temperatureListener to set.
+	 * @param temperatureListener the temperatureListener to set.
 	 */
 	public void setTemperatureListener(OnValueChangeListener temperatureListener) {
 		this.temperatureListener = temperatureListener;

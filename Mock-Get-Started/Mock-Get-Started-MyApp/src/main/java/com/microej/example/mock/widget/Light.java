@@ -8,22 +8,25 @@ package com.microej.example.mock.widget;
 
 import com.microej.example.mock.MySNI;
 
-import ej.widget.basic.image.ImageSwitch;
-import ej.widget.composed.Toggle;
+import ej.widget.basic.Label;
+import ej.widget.container.Flow;
+import ej.widget.container.LayoutOrientation;
 import ej.widget.listener.OnStateChangeListener;
 
 /**
  *
  */
-public class Light extends Toggle implements OnStateChangeListener {
+public class Light extends Flow implements OnStateChangeListener {
 
-	/**
-	 *
-	 */
+	private final Toggle toggle;
+
 	public Light() {
-		super(new ImageSwitch(), "");
-		MySNI.switchLight(isChecked());
-		addOnStateChangeListener(this);
+		super(LayoutOrientation.HORIZONTAL);
+		toggle = new Toggle("");
+		toggle.addOnStateChangeListener(this);
+		addChild(new Label("Light"));
+		addChild(toggle);
+		MySNI.switchLight(toggle.isChecked());
 	}
 
 	@Override

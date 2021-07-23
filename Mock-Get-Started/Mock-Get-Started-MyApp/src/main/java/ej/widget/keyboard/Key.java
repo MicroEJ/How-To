@@ -1,51 +1,54 @@
 /*
- * Java
- *
- * Copyright 2018-2019 MicroEJ Corp. All rights reserved. 
+ * Copyright 2016-2021 MicroEJ Corp. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package ej.widget.keyboard;
 
+import ej.annotation.Nullable;
 import ej.bon.Timer;
 import ej.bon.TimerTask;
-import ej.components.dependencyinjection.ServiceLoaderFactory;
 import ej.microui.event.Event;
-import ej.microui.event.generator.Keyboard;
+import ej.microui.event.generator.Buttons;
 import ej.microui.event.generator.Pointer;
-import ej.style.State;
+import ej.mwt.event.DesktopEventGenerator;
+import ej.mwt.event.PointerEventDispatcher;
 import ej.widget.basic.Label;
-import ej.widget.composed.Wrapper;
-import ej.widget.listener.OnClickListener;
+import ej.widget.basic.OnClickListener;
 
 /**
- * Represents one of the keys of a keyboard
+ * Represents one of the keys of a keyboard.
  */
-public class Key extends Wrapper {
+public class Key extends Label {
+
+	/**
+	 * Active state.
+	 */
+	public static final int ACTIVE = 1;
 
 	private static final int REPEAT_DELAY = 600;
 	private static final int REPEAT_PERIOD = 60;
 
-	private final Keyboard keyboard;
-	private final Label label;
-	private OnClickListener onClickListener;
+	private final KeyboardEventGenerator keyboard;
+	private final Timer timer;
+	private @Nullable OnClickListener onClickListener;
+	private @Nullable TimerTask repeatTask;
 	private boolean repeatable;
-	private TimerTask repeatTask;
 	private boolean pressed;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 *
-	 * @param keyboard
-	 *            the keyboard
+	 * @param keyboardEventGenerator
+	 *            the keyboard event generator
+	 * @param timer
+	 *            the timer used to repeat events when the user keeps pressing the key
 	 */
-	public Key(Keyboard keyboard) {
-		this.keyboard = keyboard;
-		this.label = new Label();
+	public Key(KeyboardEventGenerator keyboardEventGenerator, Timer timer) {
+		this.keyboard = keyboardEventGenerator;
+		this.timer = timer;
 		this.onClickListener = null;
 		this.repeatable = false;
 		this.repeatTask = null;
-		setWidget(this.label);
-		setEnabled(false);
 	}
 
 	/**
@@ -56,11 +59,12 @@ public class Key extends Wrapper {
 	 */
 	public void setStandard(final char character) {
 		setEnabled(true);
-		this.label.setText(String.valueOf(character));
+
+		setText(String.valueOf(character));
 		this.onClickListener = new OnClickListener() {
 			@Override
 			public void onClick() {
-				Key.this.keyboard.send(Keyboard.TEXT_INPUT, character);
+				Key.this.keyboard.send(character);
 			}
 		};
 		this.repeatable = true;
@@ -75,7 +79,7 @@ public class Key extends Wrapper {
 	 * @param classSelector
 	 *            the class selector to set
 	 */
-	public void setStandard(final char character, String classSelector) {
+	public void setStandard(final char character, int classSelector) {
 		setStandard(character);
 		addClassSelector(classSelector);
 	}
@@ -90,7 +94,7 @@ public class Key extends Wrapper {
 	 */
 	public void setSpecial(String text, OnClickListener listener) {
 		setEnabled(true);
-		this.label.setText(text);
+		setText(text);
 		this.onClickListener = listener;
 		this.repeatable = false;
 		removeAllClassSelectors();
@@ -106,9 +110,10 @@ public class Key extends Wrapper {
 	 * @param classSelector
 	 *            the class selector to set
 	 */
-	public void setSpecial(String text, OnClickListener listener, String classSelector) {
+	public void setSpecial(String text, OnClickListener listener, int classSelector) {
 		setSpecial(text, listener);
 		addClassSelector(classSelector);
+		requestLayOut();
 	}
 
 	/**
@@ -116,97 +121,87 @@ public class Key extends Wrapper {
 	 */
 	public void setBlank() {
 		setEnabled(false);
-		this.label.setText(""); //$NON-NLS-1$
+		setText(""); //$NON-NLS-1$
 		this.onClickListener = null;
 		this.repeatable = false;
 		removeAllClassSelectors();
 	}
 
 	@Override
-	public void gainFocus() {
-		super.gainFocus();
-		updateStyle();
-	}
-
-	@Override
-	public void lostFocus() {
-		super.lostFocus();
-		updateStyle();
-	}
-
-	@Override
-	public boolean isInState(State state) {
-		return (this.pressed && state == State.Active) || (state == State.Focus && hasFocus())
-				|| super.isInState(state);
-	}
-
-	@Override
-	public void requestFocus() {
-		getPanel().setFocus(this);
-	}
-
-	@Override
-	public boolean requestFocus(int direction) throws IllegalArgumentException {
-		if (hasFocus()) {
-			return false;
-		} else {
-			requestFocus();
-			return true;
-		}
+	public boolean isInState(int state) {
+		return (this.pressed && state == ACTIVE) || super.isInState(state);
 	}
 
 	@Override
 	public boolean handleEvent(int event) {
 		switch (Event.getType(event)) {
-		case Event.POINTER:
-			int action = Pointer.getAction(event);
+		case Pointer.EVENT_TYPE:
+			int action = Buttons.getAction(event);
 			switch (action) {
-			case Pointer.PRESSED:
-				this.pressed = true;
-				updateStyle();
-				this.onClickListener.onClick();
+			case Buttons.PRESSED:
+				setPressed(true);
+				OnClickListener clickListener = this.onClickListener;
+				if (clickListener != null) {
+					clickListener.onClick();
+				}
 				startRepeatTask();
 				break;
-			case Pointer.RELEASED:
+			case Buttons.RELEASED:
 				if (this.pressed) {
 					// Update button state & style before external handling.
-					this.pressed = false;
-					updateStyle();
+					setPressed(false);
 					stopRepeatTask();
 					return true;
 				}
 				// Don't exit when the button is dragged, because the user can drag inside the button.
 				// case Pointer.DRAGGED:
-			case Pointer.EXITED:
+			}
+			break;
+		case DesktopEventGenerator.EVENT_TYPE:
+			action = DesktopEventGenerator.getAction(event);
+			if (action == PointerEventDispatcher.EXITED) {
 				if (this.pressed) {
-					this.pressed = false;
-					updateStyle();
+					setPressed(false);
 					stopRepeatTask();
 				}
-				break;
 			}
-			return false;
+			break;
+		default:
+			break;
 		}
 		return super.handleEvent(event);
 	}
 
+	private void setPressed(boolean pressed) {
+		this.pressed = pressed;
+		// for image buttons change style if active
+		updateStyle();
+		requestRender();
+	}
+
 	private void startRepeatTask() {
 		if (this.repeatable && this.onClickListener != null) {
-			this.repeatTask = new TimerTask() {
+			TimerTask repeatTask = new TimerTask() {
 				@Override
 				public void run() {
-					Key.this.onClickListener.onClick();
+					OnClickListener clickListener = Key.this.onClickListener;
+					if (clickListener != null) {
+						clickListener.onClick();
+					}
 				}
 			};
-			Timer timer = ServiceLoaderFactory.getServiceLoader().getService(Timer.class, Timer.class);
-			timer.schedule(this.repeatTask, REPEAT_DELAY, REPEAT_PERIOD);
+			Timer timer = this.timer;
+			this.repeatTask = repeatTask;
+			timer.schedule(repeatTask, REPEAT_DELAY, REPEAT_PERIOD);
 		}
 	}
 
 	private void stopRepeatTask() {
-		if (this.repeatTask != null) {
-			this.repeatTask.cancel();
+		TimerTask repeatTask = this.repeatTask;
+		if (repeatTask != null) {
+			repeatTask.cancel();
 			this.repeatTask = null;
 		}
 	}
+
 }
