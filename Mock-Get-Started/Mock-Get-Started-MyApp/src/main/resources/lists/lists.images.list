@@ -5,3 +5,6 @@ images/switch_checked.png:A8
 images/switch_unchecked.png:A8
 images/Connection.png:A8
 images/Connection-Off.png:A8
+images/toggle-background.png:A4
+images/toggle-cursor-off.png:ARGB4444
+images/toggle-cursor-on.png:ARGB4444

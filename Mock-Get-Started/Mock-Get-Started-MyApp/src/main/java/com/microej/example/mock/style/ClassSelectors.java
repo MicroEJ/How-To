@@ -1,7 +1,7 @@
 /*
  * Java
  *
- * Copyright 2018-2019 MicroEJ Corp. All rights reserved. 
+ * Copyright 2018-2019 MicroEJ Corp. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.example.mock.style;
@@ -9,49 +9,50 @@ package com.microej.example.mock.style;
 /**
  * Class selectors used in the stylesheet.
  */
-public interface ClassSelectors {
+public enum ClassSelectors {
 
-
+	UNUSED,
 	/**
 	 * The form class selector.
 	 */
-	String FORM = "form"; //$NON-NLS-1$
-
+	FORM,
 	/**
 	 * The result label class selector.
 	 */
-	String RESULT_LABEL = "result_label"; //$NON-NLS-1$
+	RESULT_LABEL,
 
 	/**
 	 * The space class selector.
 	 */
-	String SPACE_KEY_SELECTOR = "space_key"; //$NON-NLS-1$
+	SPACE_KEY_SELECTOR,
 	/**
 	 * The backspace class selector.
 	 */
-	String BACKSPACE_KEY_SELECTOR = "backspace_key"; //$NON-NLS-1$
+	BACKSPACE_KEY_SELECTOR,
 	/**
 	 * The shift key inactive class selector.
 	 */
-	String SHIFT_KEY_INACTIVE_SELECTOR = "shift_key_inactive"; //$NON-NLS-1$
+	SHIFT_KEY_INACTIVE_SELECTOR,
 	/**
 	 * The shift key active class selector.
 	 */
-	String SHIFT_KEY_ACTIVE_SELECTOR = "shift_key_active"; //$NON-NLS-1$
+	SHIFT_KEY_ACTIVE_SELECTOR,
 	/**
 	 * The switch mapping class selector.
 	 */
-	String SWITCH_MAPPING_KEY_SELECTOR = "switch_mapping_key"; //$NON-NLS-1$
+	SWITCH_MAPPING_KEY_SELECTOR,
 	/**
 	 * The special key class selector.
 	 */
-	String SPECIAL_KEY_SELECTOR = "special_key"; //$NON-NLS-1$
+	SPECIAL_KEY_SELECTOR,
 	/**
 	 * The selection class selector.
 	 */
-	String CLASS_SELECTOR_SELECTION = "keyboard-text-selection"; //$NON-NLS-1$
+	CLASS_SELECTOR_SELECTION,
 	/**
 	 * The clear button class selector.
 	 */
-	String CLASS_SELECTOR_CLEAR_BUTTON = "keyboard-text-clear-button"; //$NON-NLS-1$
+	CLASS_SELECTOR_CLEAR_BUTTON;
+
+
 }
