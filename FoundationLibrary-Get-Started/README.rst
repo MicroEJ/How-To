@@ -1,4 +1,4 @@
-.. Copyright 2019 MicroEJ Corp. All rights reserved.
+.. Copyright 2019-2021 MicroEJ Corp. All rights reserved.
 .. Use of this source code is governed by a BSD-style license that can be found with this software.
 
 How to Setup a new Foundation Library
@@ -134,7 +134,7 @@ Define the Implementation Project
 
       -  Project Name: mylib-impl
       -  Organization: com.mycompany.impl
-      -  Module: mylib
+      -  Module: mylib-impl
       -  Revision: 1.0.0
 
    -  Select **com.is2t.easyant.skeletons#microej-javaimpl;+** skeleton.
@@ -222,12 +222,12 @@ Right-click on **mylib-impl** project and select **Build With EasyAnt**.
 After a successful build, the project build directory
 **target~/artifacts** contains:
 
--  **Rip** file (mylib.rip), that will be embedded into a Platform.
+-  **Rip** file (mylib-impl.rip), that will be embedded into a Platform.
 
 Add the Implementation to the Platform
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Unzip **mylib.rip** and copy all the files of the **content**
+-  Unzip **mylib-impl.rip** and copy all the files of the **content**
    directory into the **dropins** directory of the
    **[platform]-configuration** project.
 -  Rebuild the Platform.
@@ -317,7 +317,7 @@ project (J2SE).
 
       -  Project Name: mylib-mock
       -  Organization: com.mycompany.mock
-      -  Module: mylib
+      -  Module: mylib-mock
       -  Revision: 1.0.0
 
    -  Select **com.is2t.easyant.skeletons#microej-mock;+** skeleton.
@@ -363,12 +363,12 @@ Build the Mock-up Project
 After a successful build, the project build directory
 **target~/artifacts** contains:
 
--  **Rip** file (mylib.rip), that will be embedded into a Platform.
+-  **Rip** file (mylib-mock.rip), that will be embedded into a Platform.
 
 Add the Mock-up to the Platform
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Unzip **mylib.rip** and copy all the files of the **content**
+-  Unzip **mylib-mock.rip** and copy all the files of the **content**
    directory into the **dropins** directory of the
    **[platform]-configuration** project.
 -  Rebuild the Platform.
