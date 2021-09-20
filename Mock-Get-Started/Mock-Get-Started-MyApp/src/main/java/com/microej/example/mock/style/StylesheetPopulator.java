@@ -143,7 +143,6 @@ public class StylesheetPopulator {
 		// Keyboard
 		TypeSelector keyboardSelector = new TypeSelector(Keyboard.class);
 		EditableStyle keyboardStyle = stylesheet.getSelectorStyle(keyboardSelector);
-		// keyboardStyle.setFont(textFont);
 		keyboardStyle.setBackground(new RectangularBackground(KEYBOARD_BACKGROUND_COLOR));
 
 		Selector labelSelector = new TypeSelector(Label.class);

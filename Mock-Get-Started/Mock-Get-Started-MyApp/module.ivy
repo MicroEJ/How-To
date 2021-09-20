@@ -22,13 +22,9 @@
 	</publications>
 	
 	<dependencies>
-		<!--
-		<dependency org="ej.api" name="edc" rev="1.2.3"  />
-		<dependency org="ej.api" name="bon" rev="1.3.0"  />
-		-->
+
 		<dependency org="ej.api" name="microui" rev="3.0.3"  />
-		<dependency org="ej.api" name="sp" rev="2.0.2"  />
-		
+		<dependency org="ej.api" name="sp" rev="2.0.2"  />	
 		<dependency org="ej.library.runtime" name="components" rev="3.3.0"/>
 		<dependency org="ej.library.runtime" name="service" rev="1.1.1"/>
 		<dependency org="ej.library.ui" name="widget" rev="4.0.0"/>

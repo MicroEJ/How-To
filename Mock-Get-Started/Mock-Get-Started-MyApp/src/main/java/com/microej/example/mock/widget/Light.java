@@ -13,10 +13,17 @@ import ej.widget.container.Flow;
 import ej.widget.container.LayoutOrientation;
 import ej.widget.listener.OnStateChangeListener;
 
+/**
+ * The Class Light which implements the state change listener.
+ */
 public class Light extends Flow implements OnStateChangeListener {
 
+	/** The toggle. */
 	private final Toggle toggle;
 
+	/**
+	 * Instantiates a new light toggle.
+	 */
 	public Light() {
 		super(LayoutOrientation.HORIZONTAL);
 		toggle = new Toggle("");
@@ -26,6 +33,11 @@ public class Light extends Flow implements OnStateChangeListener {
 		MySNI.switchLight(toggle.isChecked());
 	}
 
+	/**
+	 * On state change.
+	 *
+	 * @param newState the new state
+	 */
 	@Override
 	public void onStateChange(boolean newState) {
 		MySNI.switchLight(newState);

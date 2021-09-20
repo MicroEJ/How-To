@@ -14,7 +14,7 @@ import ej.widget.container.LayoutOrientation;
 import ej.widget.container.List;
 
 /**
- *
+ * The page which lists the items
  */
 public class MyPage extends List {
 

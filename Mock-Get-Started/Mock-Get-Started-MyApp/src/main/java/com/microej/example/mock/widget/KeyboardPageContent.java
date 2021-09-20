@@ -42,7 +42,6 @@ import ej.widget.keyboard.TextField;
 	private final Keyboard keyboard;
 	/** First name text field. */
 	private final TextField firstName;
-	// private final Label resultLabel;
 	/** Page content. */
 	private final SimpleDock content;
 
@@ -63,7 +62,6 @@ import ej.widget.keyboard.TextField;
 
 		Grid textGrid = new Grid(LayoutOrientation.HORIZONTAL, 2);
 		textGrid.addChild(list);
-		// textGrid.addChild(this.resultLabel);
 
 		dock.setFirstChild(textGrid);
 		dock.setCenterChild(this.keyboard);

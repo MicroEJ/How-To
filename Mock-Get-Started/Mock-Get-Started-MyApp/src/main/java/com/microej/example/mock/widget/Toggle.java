@@ -66,8 +66,6 @@ public class Toggle extends Widget implements Animation {
 	 */
 	public Toggle(String text) {
 		this.text = text;
-		// this.checked = false; VM_DONE
-		// this.animEndTime = 0; VM_DONE
 	}
 
 

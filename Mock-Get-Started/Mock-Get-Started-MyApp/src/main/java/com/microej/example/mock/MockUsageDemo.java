@@ -16,13 +16,10 @@ import ej.microui.display.Display;
 import ej.mwt.Desktop;
 import ej.mwt.Widget;
 
-// TODO: Auto-generated Javadoc
 /**
  * This demo illustrates the widgets library.
  */
 public class MockUsageDemo {
-
-
 
 	/**
 	 * Instantiates a new mock usage demo.
@@ -62,7 +59,7 @@ public class MockUsageDemo {
 
 
 	/**
-	 * Show keyboard page.
+	 * Shows the keyboard page.
 	 */
 	public static void showKeyboardPage() {
 		KeyboardPage keyboardpage = new KeyboardPage();
@@ -81,12 +78,6 @@ public class MockUsageDemo {
 		Display.getDisplay().requestShow(displayable);
 	}
 
-	/**
-	 * Creates the desktop.
-	 *
-	 * @param page the page
-	 * @return the desktop
-	 */
 	private static Desktop createDesktop(Widget page) {
 		Desktop desktop = new Desktop();
 		desktop.setWidget(page);
