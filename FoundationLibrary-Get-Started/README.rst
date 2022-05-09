@@ -1,4 +1,4 @@
-.. Copyright 2019 MicroEJ Corp. All rights reserved.
+.. Copyright 2019-2022 MicroEJ Corp. All rights reserved.
 .. Use of this source code is governed by a BSD-style license that can be found with this software.
 
 How to Setup a new Foundation Library
@@ -19,12 +19,12 @@ Software
 
 This example has been tested on:
 
--  MicroEJ SDK 5.1
--  With a MicroEJ 5 Platform Reference Implementation imported into the
+-  MicroEJ SDK 5.4.1
+-  With a MicroEJ 5 Demonstration Platform imported into the
    MicroEJ repository that contains:
 
-   -  EDC-1.2
-   -  BON-1.3
+   -  EDC-1.3
+   -  BON-1.4
    -  SP-2.0
 
    See https://developer.microej.com/getting-started-sdk.html.
@@ -60,7 +60,7 @@ Create the Foundation Library API
 Define the API Project
 ~~~~~~~~~~~~~~~~~~~~~~
 
--  Select **File > New > Other > EasyAnt > EasyAnt Project**
+-  Select **File > New > Module Project**
 
    -  Set the project settings.
 
@@ -69,7 +69,7 @@ Define the API Project
       -  Module: mylib
       -  Revision: 1.0.0
 
-   -  Select **com.is2t.easyant.skeletons#microej-javaapi;+** skeleton.
+   -  Select **microej-javaapi** skeleton.
    -  Click on **Finish**.
 
 -  Select **File > New > Class**
@@ -107,7 +107,7 @@ This class defines a *factorial* API. The method content is filled with
 Build the API Project
 ~~~~~~~~~~~~~~~~~~~~~
 
-Right-click on **mylib-api** project and select **Build With EasyAnt**.
+Right-click on **mylib-api** project and select **Build Module**.
 After a successful build, the project build directory
 **target~/artifacts** contains:
 
@@ -128,17 +128,22 @@ Create the Foundation Library Implementation
 Define the Implementation Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Select **File > New > Other > EasyAnt > EasyAnt Project**
+-  Select **File > New > Module Project**
 
    -  Set the project settings.
 
       -  Project Name: mylib-impl
       -  Organization: com.mycompany.impl
-      -  Module: mylib
+      -  Module: mylib-impl
       -  Revision: 1.0.0
 
-   -  Select **com.is2t.easyant.skeletons#microej-javaimpl;+** skeleton.
+   -  Select **microej-javaimpl** skeleton.
    -  Click on **Finish**.
+
+-  Open **mylib-impl/module.ivy**
+
+   - replace ``microej.lib.name="mylib-impl-1.0"`` with ``microej.lib.name="mylib-1.0"``
+   - Save the file.
 
 -  Select **File > New > Class** .
 
@@ -218,16 +223,16 @@ implementation code do not need to be updated.
 Build the Implementation Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Right-click on **mylib-impl** project and select **Build With EasyAnt**.
+Right-click on **mylib-impl** project and select **Build Module**.
 After a successful build, the project build directory
 **target~/artifacts** contains:
 
--  **Rip** file (mylib.rip), that will be embedded into a Platform.
+-  **Rip** file (mylib-impl.rip), that will be embedded into a Platform.
 
 Add the Implementation to the Platform
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Unzip **mylib.rip** and copy all the files of the **content**
+-  Unzip **mylib-impl.rip** and copy all the files of the **content**
    directory into the **dropins** directory of the
    **[platform]-configuration** project.
 -  Rebuild the Platform.
@@ -238,22 +243,20 @@ Test the Foundation Library from an Example
 Define the Application Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Create a new project **File > New > MicroEJ Standalone Application
-   Project**
+-  Create a new project **File > New > Standalone Application Project**
 
-    -  Set the project settings.
+   -  Set the project settings.
 
       -  Project Name: mylib-test
       -  Organization: com.mycompany.test
-      -  Module: mylib
+      -  Module: mylib-test
       -  Revision: 1.0.0
 
 -  Open **module.ivy**
 
-      - Add the dependency ``<dependency org="com.mycompany.api" name="mylib"
-        rev="1.0.0" />``
+   - Add the dependency ``<dependency org="com.mycompany.api" name="mylib" rev="1.0.0" />``
 
--  Òpen file **Main.java**
+-  Open file **Main.java**
 
    -  Source folder: **mylib-test/src**.
    -  Package: **com.mycompany**
@@ -311,16 +314,16 @@ To each MicroEJ native method is associated a Java Mock-up method that
 implements the simulated behavior. A Mock-up project is a standard Java
 project (J2SE).
 
--  Select **File > New > Other > EasyAnt > EasyAnt Project**
+-  Select **File > New > Module Project**
 
    -  Set the project settings.
 
       -  Project Name: mylib-mock
       -  Organization: com.mycompany.mock
-      -  Module: mylib
+      -  Module: mylib-mock
       -  Revision: 1.0.0
 
-   -  Select **com.is2t.easyant.skeletons#microej-mock;+** skeleton.
+   -  Select **microej-mock** skeleton.
    -  Click on **Finish**.
 
 -  Select **File > New > Class**
@@ -357,18 +360,17 @@ method to the Mock-up method.
 Build the Mock-up Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Right-click on the **mylib-mock** project and select **Build With
-   EasyAnt**.
+-  Right-click on the **mylib-mock** project and select **Build Module**.
 
 After a successful build, the project build directory
 **target~/artifacts** contains:
 
--  **Rip** file (mylib.rip), that will be embedded into a Platform.
+-  **Rip** file (mylib-mock.rip), that will be embedded into a Platform.
 
 Add the Mock-up to the Platform
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Unzip **mylib.rip** and copy all the files of the **content**
+-  Unzip **mylib-mock.rip** and copy all the files of the **content**
    directory into the **dropins** directory of the
    **[platform]-configuration** project.
 -  Rebuild the Platform.
@@ -484,6 +486,5 @@ Further Reading
 
 -  Communication mechanisms from Java to C:
    `Example-Standalone-Java-C-Interface <https://github.com/MicroEJ/Example-Standalone-Java-C-Interface>`__
--  Simulation mock specification: Section 20.3 of the Device Developer’s
-   Guide
+-  `Simulation mock specification <https://docs.microej.com/en/latest/PlatformDeveloperGuide/mock.html>`__
 -  Generate a mock with an UI: `Mock-Get-Started <https://github.com/MicroEJ/How-To/tree/master/Mock-Get-Started>`__

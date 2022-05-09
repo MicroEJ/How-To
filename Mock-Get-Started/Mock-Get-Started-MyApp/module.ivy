@@ -5,7 +5,7 @@
 	Use of this source code is governed by a BSD-style license that can be found with this software.
 -->
 <ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:ej="https://developer.microej.com" ej:version="2.0.0"> 
-	<info organisation="com.microej.example.mock" module="app" status="integration" revision="0.2.1">
+	<info organisation="com.microej.example.mock" module="app" status="integration" revision="2.0.0">
 		<ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javalib" revision="4.+"/>
 	</info>
  
@@ -22,12 +22,11 @@
 	</publications>
 	
 	<dependencies>
-		<dependency org="ej.api" name="edc" rev="1.2.3"  />
-		<dependency org="ej.api" name="bon" rev="1.3.0"  />
-		<dependency org="ej.api" name="microui" rev="2.0.6"  />
-		<dependency org="ej.api" name="sp" rev="2.0.2"  />
-		
+
+		<dependency org="ej.api" name="microui" rev="3.0.3"  />
+		<dependency org="ej.api" name="sp" rev="2.0.2"  />	
 		<dependency org="ej.library.runtime" name="components" rev="3.3.0"/>
-		<dependency org="ej.library.ui" name="widget" rev="2.4.1"/>
+		<dependency org="ej.library.runtime" name="service" rev="1.1.1"/>
+		<dependency org="ej.library.ui" name="widget" rev="4.0.0"/>
 	</dependencies>
 </ivy-module>

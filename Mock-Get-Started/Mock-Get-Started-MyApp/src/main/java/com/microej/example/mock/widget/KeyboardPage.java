@@ -1,169 +1,183 @@
 /*
- * Java
- *
- * Copyright 2018-2020 MicroEJ Corp. All rights reserved.
+ * Copyright 2015-2021 MicroEJ Corp. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.example.mock.widget;
 
-import com.microej.example.mock.MockUsageDemo;
-import com.microej.example.mock.MySNI;
-import com.microej.example.mock.keyboard.LowerCaseLayout;
-import com.microej.example.mock.keyboard.NumericLayout;
-import com.microej.example.mock.keyboard.SymbolLayout;
-import com.microej.example.mock.keyboard.UpperCaseLayout;
-import com.microej.example.mock.style.ClassSelectors;
 
-import ej.components.dependencyinjection.ServiceLoaderFactory;
+
+import com.microej.example.mock.style.MicroEJColors;
+
+import ej.microui.display.Colors;
+import ej.microui.display.Font;
 import ej.mwt.Widget;
+import ej.mwt.style.EditableStyle;
+import ej.mwt.style.background.NoBackground;
+import ej.mwt.style.background.RectangularBackground;
+import ej.mwt.style.background.RoundedBackground;
+import ej.mwt.style.outline.FlexibleOutline;
+import ej.mwt.style.outline.border.FlexibleRectangularBorder;
+import ej.mwt.style.outline.border.RoundedBorder;
+import ej.mwt.stylesheet.cascading.CascadingStylesheet;
+import ej.mwt.stylesheet.selector.ClassSelector;
+import ej.mwt.stylesheet.selector.Selector;
+import ej.mwt.stylesheet.selector.StateSelector;
+import ej.mwt.stylesheet.selector.TypeSelector;
+import ej.mwt.stylesheet.selector.combinator.AndCombinator;
+import ej.mwt.util.Alignment;
 import ej.widget.basic.Label;
-import ej.widget.container.Dock;
-import ej.widget.container.List;
-import ej.widget.container.Scroll;
+import ej.widget.keyboard.Key;
 import ej.widget.keyboard.Keyboard;
-import ej.widget.keyboard.KeyboardText;
-import ej.widget.keyboard.Layout;
-import ej.widget.listener.OnClickListener;
-import ej.widget.listener.OnFocusListener;
+import ej.widget.keyboard.TextField;
+import ej.widget.util.font.StrictFontLoader;
+
 
 /**
  * This page illustrates a keyboard.
  */
-public class KeyboardPage extends Dock {
+public class KeyboardPage {
 
-	private static final String EMPTY_STRING = ""; //$NON-NLS-1$
-	private static final String FIRST_NAME = "Text to send"; //$NON-NLS-1$
-	private static final String RESULT_EMPTY = "Please set the text to send"; //$NON-NLS-1$
-	private static final String SPECIAL_SUBMIT = "Send"; //$NON-NLS-1$
+	/** Form color ID. */
+	/* package */ static final int FORM = 9;
+	/** Result label ID. */
+	/* package */ static final int RESULT_LABEL = 10;
+	/** Page content rolor ID. */
+	/* package */ static final int CONTENT = 301;
 
-	private static final int MAX_TEXT_LENGTH = 33;
-
-	private final Keyboard keyboard;
-
-	private KeyboardText textInput;
-	private Label resultLabel;
+	/** Keyboard background color. */
+	private static final int KEYBOARD_BACKGROUND_COLOR = MicroEJColors.CONCRETE_BLACK_75;
+	/** Keyboard key color. */
+	private static final int KEYBOARD_KEY_COLOR = Colors.WHITE;
+	/** Keyboard key highlight color. */
+	private static final int KEYBOARD_HIGHLIGHT_COLOR = 0xd9d5d3;
+	/** Text field placeholder color. */
+	private static final int TEXT_PLACEHOLDER_COLOR = MicroEJColors.CONCRETE_BLACK_25;
+	/** Text field color. */
+	private static final int TEXT_COLOR = 0xf4f4f4;
+	/** Selected text background color. */
+	private static final int TEXT_SELECTION_BACKGROUND = TEXT_COLOR;
+	/** Selected text color. */
+	private static final int TEXT_SELECTION_COLOR = TEXT_PLACEHOLDER_COLOR;
+	/** Shift key background. */
+	private static final int SHIFT_KEY_BACKGROUND = 0xcbd3d7;
+	/** Key font. */
+	private static final String SOURCE_SANS_PRO = "source_sans_pro"; //$NON-NLS-1$
+	/** Key font size. */
+	private static final int FONT_SIZE = 20;
+	/** Text field font size. */
+	private static final int LARGE_FONT_SIZE = 30;
+	/** Key corner radius. */
+	private static final int KEY_CORNER_RADIUS = 13;
 
 	/**
-	 * Creates a keyboard page.
-	 */
-	public KeyboardPage() {
-		super();
-
-		this.keyboard = new Keyboard();
-
-		// set keyboard layouts
-		Layout[] layouts = new Layout[] { new LowerCaseLayout(), new UpperCaseLayout(), new NumericLayout(),
-				new SymbolLayout() };
-		setKeyboardLayouts(layouts);
-
-		Widget editionContent = createForm();
-		setCenter(editionContent);
-	}
-
-	/**
-	 * Creates the page form.
+	 * Populates the Keyboard Page using the provided stylesheet
 	 *
-	 * @return a widget containing the form.
+	 * @param stylesheet the stylesheet
 	 */
-	/**
-	 * Creates the widget representing the main content of the page
-	 */
-	private Widget createForm() {
-		// first name
-		this.textInput = new KeyboardText(EMPTY_STRING, FIRST_NAME);
-		this.textInput.setMaxTextLength(MAX_TEXT_LENGTH);
-		this.textInput.addOnFocusListener(new OnFocusListener() {
-			@Override
-			public void onGainFocus() {
-				showKeyboard(true);
-			}
+	public void populateStylesheet(CascadingStylesheet stylesheet) {
+		StrictFontLoader fontLoader = new StrictFontLoader();
+		Font textFont = fontLoader.getFont(SOURCE_SANS_PRO, FONT_SIZE);
 
-			@Override
-			public void onLostFocus() {
-				// Nothing to do.
-			}
-		});
+		// Keyboard
+		TypeSelector keyboardSelector = new TypeSelector(Keyboard.class);
+		EditableStyle keyboardStyle = stylesheet.getSelectorStyle(keyboardSelector);
+		keyboardStyle.setFont(textFont);
+		keyboardStyle.setBackground(new RectangularBackground(KEYBOARD_BACKGROUND_COLOR));
 
-		// result label
-		this.resultLabel = new Label(RESULT_EMPTY);
-		this.resultLabel.addClassSelector(ClassSelectors.RESULT_LABEL);
+		Selector labelSelector = new TypeSelector(Label.class);
+		EditableStyle labelStyle = stylesheet.getSelectorStyle(labelSelector);
+		labelStyle.setBackground(NoBackground.NO_BACKGROUND);
 
-		// list
-		List list = new List(false);
-		list.add(this.textInput);
-		list.add(this.resultLabel);
-		list.addClassSelector(ClassSelectors.FORM);
+		Selector keySelector = new TypeSelector(Key.class);
+		EditableStyle keyStyle = stylesheet.getSelectorStyle(keySelector);
+		keyStyle.setColor(KEYBOARD_KEY_COLOR);
+		keyStyle.setBackground(NoBackground.NO_BACKGROUND);
+		keyStyle.setHorizontalAlignment(Alignment.HCENTER);
+		keyStyle.setVerticalAlignment(Alignment.VCENTER);
+		keyStyle.setMargin(new FlexibleOutline(3, 2, 3, 2));
 
-		// scroll
-		final Scroll scroll = new Scroll(false, false);
-		scroll.setWidget(list);
-		return scroll;
+		Selector keyBackground = new ClassSelector(Keyboard.KEY_BACKGROUND);
+		EditableStyle keyBackgroundStyle = stylesheet.getSelectorStyle(keyBackground);
+		keyBackgroundStyle.setBackground(new RectangularBackground(KEYBOARD_BACKGROUND_COLOR));
+
+		StateSelector activeSelector = new StateSelector(Key.ACTIVE);
+		AndCombinator activeKeySelector = new AndCombinator(keySelector, activeSelector);
+		EditableStyle activeKeyStyle = stylesheet.getSelectorStyle(activeKeySelector);
+		activeKeyStyle.setColor(Colors.BLACK);
+		activeKeyStyle.setBackground(new RoundedBackground(KEYBOARD_HIGHLIGHT_COLOR, KEY_CORNER_RADIUS));
+		activeKeyStyle.setBorder(new RoundedBorder(KEYBOARD_HIGHLIGHT_COLOR, KEY_CORNER_RADIUS, 2));
+
+		ClassSelector spaceKeySelector = new ClassSelector(Keyboard.SPACE_KEY_SELECTOR);
+		EditableStyle spaceKeyStyle = stylesheet.getSelectorStyle(spaceKeySelector);
+		spaceKeyStyle.setBackground(new RoundedBackground(KEYBOARD_KEY_COLOR, KEY_CORNER_RADIUS));
+		spaceKeyStyle.setBorder(new RoundedBorder(KEYBOARD_KEY_COLOR, KEY_CORNER_RADIUS, 2));
+
+		ClassSelector activeShiftKeySelector = new ClassSelector(Keyboard.SHIFT_KEY_ACTIVE_SELECTOR);
+		EditableStyle activeShiftKeyStyle = stylesheet.getSelectorStyle(activeShiftKeySelector);
+		activeShiftKeyStyle.setBackground(new RoundedBackground(SHIFT_KEY_BACKGROUND, KEY_CORNER_RADIUS));
+		activeShiftKeyStyle.setBorder(new RoundedBorder(SHIFT_KEY_BACKGROUND, KEY_CORNER_RADIUS, 2));
+
+		ClassSelector specialKeySelector = new ClassSelector(Keyboard.SPECIAL_KEY_SELECTOR);
+		EditableStyle specialKeyStyle = stylesheet.getSelectorStyle(specialKeySelector);
+		specialKeyStyle.setColor(Colors.WHITE);
+		specialKeyStyle.setBackground(new RoundedBackground(MicroEJColors.CORAL, KEY_CORNER_RADIUS));
+		specialKeyStyle.setBorder(new RoundedBorder(MicroEJColors.CORAL, KEY_CORNER_RADIUS, 2));
+		specialKeyStyle.setFont(textFont);
+
+		specialKeySelector = new ClassSelector(Keyboard.INITIAL_SPECIAL_KEY_SELECTOR);
+		specialKeyStyle = stylesheet.getSelectorStyle(specialKeySelector);
+		specialKeyStyle.setColor(Colors.WHITE);
+		specialKeyStyle.setFont(textFont);
+
+		// Text fields
+		TypeSelector textSelector = new TypeSelector(TextField.class);
+		EditableStyle textStyle = stylesheet.getSelectorStyle(textSelector);
+		textStyle.setColor(TEXT_COLOR);
+		textStyle.setBackground(new RectangularBackground(TEXT_PLACEHOLDER_COLOR));
+		textStyle.setHorizontalAlignment(Alignment.LEFT);
+		textStyle.setVerticalAlignment(Alignment.VCENTER);
+		textStyle.setMargin(new FlexibleOutline(4, 5, 5, 5));
+		textStyle.setPadding(new FlexibleOutline(0, 1, 1, 1));
+		textStyle.setExtraInt(TextField.SELECTION_BACKGROUND, TEXT_SELECTION_BACKGROUND);
+		textStyle.setExtraInt(TextField.SELECTION_COLOR, TEXT_SELECTION_COLOR);
+		textStyle.setExtraObject(TextField.CLEAR_BUTTON_FONT, fontLoader.getFont(SOURCE_SANS_PRO, LARGE_FONT_SIZE));
+
+		activeSelector = new StateSelector(TextField.ACTIVE);
+		AndCombinator focusedTextSelector = new AndCombinator(textSelector, activeSelector);
+		EditableStyle focusedTextStyle = stylesheet.getSelectorStyle(focusedTextSelector);
+		focusedTextStyle.setBackground(new RectangularBackground(TEXT_PLACEHOLDER_COLOR));
+
+		StateSelector emptySelector = new StateSelector(TextField.EMPTY);
+		AndCombinator placeholderTextSelector = new AndCombinator(textSelector, emptySelector);
+		EditableStyle placeholderTextStyle = stylesheet.getSelectorStyle(placeholderTextSelector);
+		placeholderTextStyle.setBackground(NoBackground.NO_BACKGROUND);
+		placeholderTextStyle.setColor(TEXT_PLACEHOLDER_COLOR);
+		placeholderTextStyle.setBorder(new FlexibleRectangularBorder(TEXT_PLACEHOLDER_COLOR, 1, 1, 1, 1));
+
+		ClassSelector resultLabelSelector = new ClassSelector(RESULT_LABEL);
+		EditableStyle resultLabelStyle = stylesheet.getSelectorStyle(resultLabelSelector);
+		resultLabelStyle.setHorizontalAlignment(Alignment.LEFT);
+		resultLabelStyle.setVerticalAlignment(Alignment.VCENTER);
+		resultLabelStyle.setColor(Colors.WHITE);
+		resultLabelStyle.setBackground(NoBackground.NO_BACKGROUND);
+		resultLabelStyle.setMargin(new FlexibleOutline(4, 5, 4, 5));
+
+		ClassSelector formSelector = new ClassSelector(FORM);
+		EditableStyle formStyle = stylesheet.getSelectorStyle(formSelector);
+		formStyle.setMargin(new FlexibleOutline(5, 10, 5, 10));
+
+		ClassSelector contentSelector = new ClassSelector(CONTENT);
+		EditableStyle contentStyle = stylesheet.getSelectorStyle(contentSelector);
+		contentStyle.setBackground(new RectangularBackground(MicroEJColors.CONCRETE_BLACK_75));
 	}
 
 	/**
-	 * Sets the keyboard layouts to use
+	 * Gets the content widget.
 	 *
-	 * @param keyboardLayouts
-	 *            the four keyboard layouts to use
+	 * @return the content widget
 	 */
-	public void setKeyboardLayouts(Layout[] keyboardLayouts) {
-		this.keyboard.setLayouts(keyboardLayouts);
+	public Widget getContentWidget() {
+		return new KeyboardPageContent().getContentWidget();
 	}
 
-	@Override
-	public void showNotify() {
-		super.showNotify();
-		textInput.setText(EMPTY_STRING);
-		MockUsageDemo.getPanel().setFocus(this.textInput);
-	}
-
-	/**
-	 * Gets the keyboard
-	 *
-	 * @return the keyboard
-	 */
-	protected Keyboard getKeyboard() {
-		return this.keyboard;
-	}
-
-	/**
-	 * Shows the keyboard
-	 */
-	protected void showKeyboard() {
-		// show keyboard dialog
-		if (this.keyboard.getParent() != this) {
-			addBottom(this.keyboard);
-			revalidate();
-		}
-	}
-
-	/**
-	 * Hides the keyboard
-	 */
-	protected void hideKeyboard() {
-		remove(this.keyboard);
-		revalidate();
-	}
-
-	private void showKeyboard(boolean first) {
-		showKeyboard();
-		getKeyboard().setSpecialKey(SPECIAL_SUBMIT, new OnClickListener() {
-			@Override
-			public void onClick() {
-				submit();
-			}
-		});
-		textInput.setActive(true);
-
-		ej.microui.event.generator.Keyboard keyboard = ServiceLoaderFactory.getServiceLoader()
-				.getService(ej.microui.event.generator.Keyboard.class);
-		if (keyboard != null) {
-			keyboard.setEventHandler(textInput);
-		}
-	}
-
-	private void submit() {
-		MySNI.sendText(textInput.getText());
-		MockUsageDemo.showMainPage();
-	}
 }

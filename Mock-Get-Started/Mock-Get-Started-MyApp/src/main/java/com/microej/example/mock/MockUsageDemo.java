@@ -9,26 +9,21 @@ package com.microej.example.mock;
 import com.microej.example.mock.style.StylesheetPopulator;
 import com.microej.example.mock.widget.KeyboardPage;
 import com.microej.example.mock.widget.MyPage;
+import com.microej.example.mock.widget.TransitionDisplayable;
 
 import ej.microui.MicroUI;
-import ej.microui.event.Event;
-import ej.microui.event.generator.Pointer;
+import ej.microui.display.Display;
 import ej.mwt.Desktop;
-import ej.mwt.MWT;
-import ej.mwt.Panel;
-import ej.widget.container.transition.SlideTransitionContainer;
-import ej.widget.container.transition.TransitionContainer;
+import ej.mwt.Widget;
 
 /**
  * This demo illustrates the widgets library.
  */
 public class MockUsageDemo {
 
-	private static Panel Panel;
-	private static TransitionContainer TransitionContainer;
-	private static MyPage mainPage;
-	private static KeyboardPage keyboardPage;
-
+	/**
+	 * Instantiates a new mock usage demo.
+	 */
 	// Prevents initialization.
 	private MockUsageDemo() {
 	}
@@ -36,8 +31,7 @@ public class MockUsageDemo {
 	/**
 	 * Application entry point.
 	 *
-	 * @param args
-	 *            not used.
+	 * @param args not used.
 	 */
 	public static void main(String[] args) {
 		start();
@@ -49,60 +43,46 @@ public class MockUsageDemo {
 	public static void start() {
 		// Start MicroUI framework.
 		MicroUI.start();
+		showMainPage();
 
-		// Initialize stylesheet rules.
-		StylesheetPopulator.initialize();
 
-		// Create the navigator.
-		TransitionContainer = new SlideTransitionContainer(MWT.LEFT, false);
-
-		// Show the main page.
-		mainPage = new MyPage();
-		TransitionContainer.show(mainPage, false);
-
-		keyboardPage = new KeyboardPage();
-
-		// Show the navigator.
-		Desktop desktop = new Desktop() {
-			@Override
-			public boolean handleEvent(int event) {
-				// set panel focus to null when we click on a blank space
-				int type = Event.getType(event);
-				if (type == Event.POINTER) {
-					int action = Pointer.getAction(event);
-					if (action == Pointer.RELEASED) {
-						getPanel().setFocus(null);
-					}
-				}
-				return super.handleEvent(event);
-			}
-		};
-		Panel = new Panel();
-		Panel.setWidget(TransitionContainer);
-		Panel.showFullScreen(desktop);
-		desktop.show();
-	}
-
-	/**
-	 * Gets the panel.
-	 *
-	 * @return the panel.
-	 */
-	public static Panel getPanel() {
-		return Panel;
 	}
 
 	/**
 	 * Shows the main page of the application.
 	 */
 	public static void showMainPage() {
-		TransitionContainer.show(mainPage, false);
+		Desktop desktop = createDesktop(new MyPage());
+		StylesheetPopulator.initialize(desktop);
+		displayPage(desktop);
 	}
+
 
 	/**
 	 * Shows the keyboard page.
 	 */
 	public static void showKeyboardPage() {
-		TransitionContainer.show(keyboardPage, true);
+		KeyboardPage keyboardpage = new KeyboardPage();
+		Desktop desktop = createDesktop(keyboardpage.getContentWidget());
+		displayPage(desktop);
 	}
+
+	/**
+	 * Display page.
+	 *
+	 * @param desktop the desktop
+	 */
+	public static void displayPage(Desktop desktop) {
+		StylesheetPopulator.initialize(desktop);
+		TransitionDisplayable displayable = new TransitionDisplayable(desktop, true);
+		Display.getDisplay().requestShow(displayable);
+	}
+
+	private static Desktop createDesktop(Widget page) {
+		Desktop desktop = new Desktop();
+		desktop.setWidget(page);
+		return desktop;
+	}
+
 }
+
