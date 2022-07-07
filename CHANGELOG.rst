@@ -8,6 +8,25 @@ The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
 ------------------
+3.0.0 - 2022-07-07
+------------------
+
+Changed
+=======
+
+- Update `MicroUI-Get-Started <MicroUI-Get-Started/CHANGELOG.md>`_ to ``3.0.0``.
+- Update `Mock-Get-Started <Mock-Get-Started/CHANGELOG.md>`_ to ``2.0.1``.
+- Update `FontForge <FontForge/CHANGELOG.md>`_ to ``1.1.1``.
+- Update `FoundationLibrary-Get-Started <FoundationLibrary-Get-Started/CHANGELOG.md>`_ to ``1.2.1``.
+- Update `Multi-App-Security-Manager <Multi-App-Security-Manager/CHANGELOG.md>`_ to ``1.0.2``.
+- Update `Proguard-Get-Started <Proguard-Get-Started/CHANGELOG.md>`_ to ``1.0.3``.
+- Update `Single-App-to-Multi-App-Platform <Single-App-to-Multi-App-Platform/CHANGELOG.md>`_ to ``1.0.4``.
+- Update `SNI-LED <SNI-LED/CHANGELOG.md>`_ to ``1.0.4``.
+- Update `StandaloneToSandboxed <StandaloneToSandboxed/CHANGELOG.md>`_ to ``1.0.4``.
+- Update `Storage-Get-Started <Storage-Get-Started/CHANGELOG.md>`_ to ``1.0.7``.
+- Remove Widgets-Get-Started.
+
+------------------
 2.0.0 - 2022-05-09
 ------------------
 
@@ -15,7 +34,7 @@ Changed
 =======
 
 - Update `Mock-Get-Started <Mock-Get-Started/CHANGELOG.md>`_ to ``2.0.0``.
-- Update `FoundationLibrary-Get-Started <Mock-Get-Started/CHANGELOG.md>`_ to ``1.2.0``.
+- Update `FoundationLibrary-Get-Started <FoundationLibrary-Get-Started/CHANGELOG.md>`_ to ``1.2.0``.
 
 ------------------
 1.8.4 - 2021-05-17

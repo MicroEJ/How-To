@@ -1,7 +1,7 @@
 /*
  * Java
  *
- * Copyright 2016-2019 MicroEJ Corp. All rights reserved.
+ * Copyright 2016-2022 MicroEJ Corp. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.howto.microui.font;
@@ -12,46 +12,35 @@ import ej.microui.display.Display;
 import ej.microui.display.Displayable;
 import ej.microui.display.Font;
 import ej.microui.display.GraphicsContext;
-import ej.microui.util.EventHandler;
+import ej.microui.display.Painter;
 
 /**
- * This class shows how to print text to the screen using the default system
- * font via MicroUI APIs.
- * 
- * Note that default font use 1 bit per pixel (bpp) only and therefore does not support antialiasing.
- * On displays supporting 16 bpp, such limited fonts are not really suitable.
+ * This class shows how to easily print text to the screen using the SourceSansPro font via MicroUI APIs.
  */
-public class Text extends Displayable{
+public class Text extends Displayable {
 
-	public Text(Display display) {
-		super(display);
-	}
+	private static final String FONT_PATH = "/fonts/source_sans_pro_24.ejf"; //$NON-NLS-1$
+	private static final String HELLO_WORLD = "Hello World !"; //$NON-NLS-1$
 
 	@Override
-	public void paint(GraphicsContext g) {
+	public void render(GraphicsContext g) {
 
-		final int DISPLAY_WIDTH = getDisplay().getWidth();
-		final int DISPLAY_HEIGHT = getDisplay().getHeight();
-		final int FONT_HEIGHT = 24;
-		
+		final Display display = Display.getDisplay();
+
+		final int displayWidth = display.getWidth();
+		final int displayHeight = display.getHeight();
+
 		// fill up background with black
 		g.setColor(Colors.BLACK);
-		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+		Painter.fillRectangle(g, 0, 0, displayWidth, displayHeight);
 
 		// use White color to render text
 		g.setColor(Colors.WHITE);
-		final Font sourceSansPro = Font.getFont(Font.LATIN, FONT_HEIGHT, Font.STYLE_PLAIN);		
-		g.setFont(sourceSansPro);
+		final Font font = Font.getFont(FONT_PATH);
 
-		g.drawString("Hello World !", DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2,
-				GraphicsContext.HCENTER | GraphicsContext.VCENTER);
+		Painter.drawString(g, HELLO_WORLD, font, displayWidth / 2 - font.stringWidth(HELLO_WORLD) / 2,
+				displayHeight / 2 - font.getHeight() / 2);
 
-	}
-
-	@Override
-	public EventHandler getController() {
-		// No event handling is required for this sample.
-		return null;
 	}
 
 	/**
@@ -65,11 +54,14 @@ public class Text extends Displayable{
 		// runtime environment
 		MicroUI.start();
 
-		// We will need to access the display to draw stuff
-		final Display display = Display.getDefaultDisplay();
+		Text sample = new Text();
+		Display.getDisplay().requestShow(sample);
+	}
 
-		Text sample = new Text(display);
-		sample.show();
+	@Override
+	public boolean handleEvent(int event) {
+		// No event handling is required for this sample.
+		return false;
 	}
 
 }

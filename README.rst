@@ -1,3 +1,17 @@
+.. Copyright 2018-2022 MicroEJ Corp. All rights reserved.
+.. Use of this source code is governed by a BSD-style license that can be found with this software.
+
+.. image:: https://shields.microej.com/endpoint?url=https://repository.microej.com/packages/badges/sdk_5.4.json
+   :alt: sdk_5.4 badge
+   :align: left
+.. image:: https://shields.microej.com/endpoint?url=https://repository.microej.com/packages/badges/arch_7.16.json
+   :alt: arch_7.16 badge
+   :align: left
+.. image:: https://shields.microej.com/endpoint?url=https://repository.microej.com/packages/badges/gui_3.json
+   :alt: gui_3 badge
+  
+
+
 Overview
 ========
 
@@ -29,8 +43,7 @@ Details
   convert a Standalone Application into a Sandboxed Application.
 - `Storage-Get-Started <Storage-Get-Started>`__: Explains how to
   store/retrieve information in a Sandboxed Application.
-- `Widgets-Get-Started <Widgets-Get-Started>`__ : Contains simple examples
-  to understand how to use the main widget library APIs.
+
 
 Requirements
 ============
@@ -46,7 +59,7 @@ file of each example.
 Changes
 =======
 
--  See the change log file `CHANGELOG.md <CHANGELOG.md>`__ located at
+-  See the change log file `CHANGELOG.rst <CHANGELOG.rst>`__ located at
    the root of this repository.
 
 License

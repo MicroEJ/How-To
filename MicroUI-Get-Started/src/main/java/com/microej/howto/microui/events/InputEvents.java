@@ -1,7 +1,7 @@
 /*
  * Java
  *
- * Copyright 2016-2019 MicroEJ Corp. All rights reserved.
+ * Copyright 2016-2022 MicroEJ Corp. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.howto.microui.events;
@@ -12,117 +12,102 @@ import ej.microui.display.Display;
 import ej.microui.display.Displayable;
 import ej.microui.display.Font;
 import ej.microui.display.GraphicsContext;
+import ej.microui.display.Painter;
 import ej.microui.event.Event;
-import ej.microui.event.EventGenerator;
+import ej.microui.event.generator.Buttons;
 import ej.microui.event.generator.Pointer;
-import ej.microui.util.EventHandler;
 
 /**
- * This class shows how to handle touch input events
+ * This class shows how to handle touch input events.
  */
-public class InputEvents extends Displayable implements EventHandler {
+public class InputEvents extends Displayable {
 
+	private static final String FONT_PATH = "/fonts/source_sans_pro_24.ejf"; //$NON-NLS-1$
 
-	private final Display display;
 	private int nbClicks;
 	private int pointerX;
 	private int pointerY;
-	private String message;
+	private String topMessage;
+	private String bottomMessage;
 
-	public InputEvents(Display display) {
-		super(display);
-		this.display = display;
-		nbClicks = 0;
-		pointerX = 0;
-		pointerY = 0;
-		this.message = "Touch the screen!";
+	/**
+	 * Instantiates an InputEvents instance.
+	 */
+	public InputEvents() {
+		this.nbClicks = 0;
+		this.pointerX = 0;
+		this.pointerY = 0;
+		this.topMessage = "Please touch the screen to start!"; //$NON-NLS-1$
+		this.bottomMessage = ""; //$NON-NLS-1$
+
 	}
 
 	@Override
-	public void paint(GraphicsContext g) {
+	public void render(GraphicsContext g) {
 
-		final int DISPLAY_WIDTH = display.getWidth();
-		final int DISPLAY_HEIGHT = display.getHeight();
-		final int FONT_HEIGHT = 24;
+		final Display display = Display.getDisplay();
+
+		final int displayWidth = display.getWidth();
+		final int displayHeight = display.getHeight();
 
 		// fill up background with black
 		g.setColor(Colors.BLACK);
-		g.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+		Painter.fillRectangle(g, 0, 0, displayWidth, displayHeight);
 
 		// use White color to render text
-		final Font sourceSansPro = Font.getFont(Font.LATIN, FONT_HEIGHT, Font.STYLE_PLAIN);
-		g.setFont(sourceSansPro);
 		g.setColor(Colors.WHITE);
 
-		g.drawString(message, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2,
-				GraphicsContext.HCENTER | GraphicsContext.VCENTER);
+		final Font font = Font.getFont(FONT_PATH);
 
-	}
+		final int displayHalfWidth = displayWidth / 2;
+		final int displayHalfHeight = displayHeight / 2;
+		final int fontHeight = font.getHeight();
 
-	@Override
-	public EventHandler getController() {
-		return this;
+		// draw texts
+		Painter.drawString(g, this.topMessage, font, displayHalfWidth - font.stringWidth(this.topMessage) / 2,
+				displayHalfHeight - fontHeight);
+
+		Painter.drawString(g, this.bottomMessage, font, displayHalfWidth - font.stringWidth(this.bottomMessage) / 2,
+				displayHalfHeight + fontHeight / 2);
+
 	}
 
 	@Override
 	public boolean handleEvent(int event) {
-		boolean eventProcessed = false;
-
-		// Gets the event generator.
-		final int genId = Event.getGeneratorID(event);
-		EventGenerator gen;
-		try {
-			gen = EventGenerator.get(genId);
-		} catch (IndexOutOfBoundsException e) {
-			gen = null;
-			message = "unknown event " + event;
-		}
-
-		if (gen != null) {
-			// Gets the type of event.
-			final int type = Event.getType(event);
-			if (Event.POINTER == type) {
-				Pointer pointer = (Pointer) gen;
-
-				pointerX = pointer.getAbsoluteX();
-				pointerY = pointer.getAbsoluteY();
-
-				if (Pointer.isReleased(event)) {
-					nbClicks++;
-				}
-
-				message = "NbClicks : " + nbClicks + " - Last Click at : " + pointerX + " , " + pointerY;
-
-			} else { // The event is NOT a pointer.
-				// Gets the event raw data.
-				final int data = Event.getData(event);
-				message = "Event not managed, type=" + type + " data=" + data;
+		int type = Event.getType(event);
+		if (type == Pointer.EVENT_TYPE) {
+			Pointer pointer = (Pointer) Event.getGenerator(event);
+			int action = Buttons.getAction(event);
+			this.pointerX = pointer.getAbsoluteX();
+			this.pointerY = pointer.getAbsoluteY();
+			if (action == Buttons.RELEASED) {
+				this.nbClicks++;
 			}
-			eventProcessed = true;
+			this.topMessage = "Clicks count : " + this.nbClicks; //$NON-NLS-1$
+			this.bottomMessage = "Pointer position at x = " + this.pointerX + ", y = " + this.pointerY; //$NON-NLS-1$ //$NON-NLS-2$
+			requestRender();
+
+			// event is consumed
+			return true;
 		}
 
-		if (eventProcessed) {
-			this.repaint();
-		}
-		return eventProcessed;
+		return false;
+
 	}
 
 	/**
 	 * Entry Point for the example.
 	 *
 	 * @param args
-	 *             Not used.
+	 *            Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics
 		// runtime environment
 		MicroUI.start();
 
-		final Display display = Display.getDefaultDisplay();
-
-		InputEvents sample = new InputEvents(display);
-		sample.show();
+		InputEvents sample = new InputEvents();
+		Display.getDisplay().requestShow(sample);
 	}
-
 
 }

@@ -1,11 +1,11 @@
 <!--
 	IVY
 	
-	Copyright 2018-2019 MicroEJ Corp. All rights reserved. 
+	Copyright 2018-2022 MicroEJ Corp. All rights reserved. 
 	Use of this source code is governed by a BSD-style license that can be found with this software.
 -->
 <ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:ej="https://developer.microej.com" ej:version="2.0.0"> 
-    <info organisation="com.microej.example" module="mock" status="integration" revision="2.0.0">      
+    <info organisation="com.microej.example" module="mock" status="integration" revision="0.2.1">      
         <ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-mock" revision="1.+"/>
         <ea:property name="no.obfuscation" value="SET" />
     </info>

@@ -1,104 +1,111 @@
 /*
  * Java
  *
- * Copyright 2016-2019 MicroEJ Corp. All rights reserved.
+ * Copyright 2016-2022 MicroEJ Corp. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.howto.microui.image;
 
-import java.io.IOException;
-
+import ej.drawing.TransformPainter;
 import ej.microui.MicroUI;
 import ej.microui.display.Colors;
 import ej.microui.display.Display;
 import ej.microui.display.Displayable;
 import ej.microui.display.GraphicsContext;
 import ej.microui.display.Image;
-import ej.microui.display.transform.ImageFlip;
-import ej.microui.display.transform.ImageFlip.Action;
-import ej.microui.util.EventHandler;
-
+import ej.microui.display.Painter;
 
 /**
- * This class shows how to use the ImageFlip utility class
+ * This class shows how to use the TransformPainter utility class with flip draw methods.
  */
 public class FlippedImages extends Displayable {
 
-	public FlippedImages(Display display) {
-		super(display);
+	private final Display display = Display.getDisplay();
+
+	private final int displayWidth = this.display.getWidth();
+	private final int displayHeight = this.display.getHeight();
+
+	private final int left = this.displayWidth / 4;
+	private final int top = this.displayHeight / 4;
+	private final int right = 3 * this.displayWidth / 4;
+	private final int bottom = 3 * this.displayHeight / 4;
+
+	private final Image image;
+
+	private final int halfImageWidth;
+	private final int halfImageHeight;
+
+	/**
+	 * Instanciates a new FlippedImages instance and assign image related variable values.
+	 */
+	public FlippedImages() {
+		super();
+		this.image = Image.getImage("/images/mascot.png"); //$NON-NLS-1$
+		this.halfImageWidth = this.image.getWidth() / 2;
+		this.halfImageHeight = this.image.getHeight() / 2;
+
 	}
 
 	@Override
-	public void paint(GraphicsContext g) {
-
-		final int DISPLAY_WIDTH = getDisplay().getWidth();
-		final int DISPLAY_HEIGHT = getDisplay().getHeight();
-
-		final int left = DISPLAY_WIDTH / 4;
-		final int top = DISPLAY_HEIGHT / 4;
-		final int right = 3 * DISPLAY_WIDTH / 4;
-		final int bottom = 3 * DISPLAY_HEIGHT / 4;
+	public void render(GraphicsContext g) {
 
 		// fill up background with black
 		g.setColor(Colors.BLACK);
-		g.fillRect(0, 0,DISPLAY_WIDTH, DISPLAY_HEIGHT);
+		Painter.fillRectangle(g, 0, 0, this.displayWidth, this.displayHeight);
 
+		// draw 4 images with and without flipping aspect
+		drawTopLeftImage(g);
 
-		try {
-			Image microejImage = Image.createImage("/images/microej.png");
+		drawTopRightFlippedImage(g);
 
-			{ // top-left corner - no flip
-				g.drawImage(microejImage, left, top,
-						GraphicsContext.HCENTER | GraphicsContext.VCENTER);
-			}
+		drawBottomLeftFlippedImage(g);
 
-			{ // top-right corner - 90° flip
-				ImageFlip.Singleton.setAction(Action.FLIP_90);
-				ImageFlip.Singleton.draw(g, microejImage, right, top,
-						GraphicsContext.HCENTER | GraphicsContext.VCENTER);
-			}
-
-			{ // bottom-left corner - 180° flip
-				ImageFlip.Singleton.setAction(Action.FLIP_180);
-				ImageFlip.Singleton.draw(g, microejImage, left, bottom,
-						GraphicsContext.HCENTER | GraphicsContext.VCENTER);
-			}
-
-			{ // bottom-right corner - 270° flip
-				ImageFlip.Singleton.setAction(Action.FLIP_270);
-				ImageFlip.Singleton.draw(g, microejImage, right, bottom,
-						GraphicsContext.HCENTER | GraphicsContext.VCENTER);
-			}
-
-		} catch (IOException e) {
-			throw new AssertionError(e);
-		}
+		drawBottomRightFlippedImage(g);
 
 	}
 
-	@Override
-	public EventHandler getController() {
-		// No event handling is required for this sample.
+	private void drawTopLeftImage(GraphicsContext g) {
+		// top-left corner - no flip
+		Painter.drawImage(g, this.image, this.left - this.halfImageWidth, this.top - this.halfImageHeight);
+	}
 
-		return null;
+	private void drawTopRightFlippedImage(GraphicsContext g) {
+		// top-right corner - 90° flip
+		TransformPainter.drawFlippedImage(g, this.image, this.right - this.halfImageWidth,
+				this.top - this.halfImageHeight, TransformPainter.Flip.FLIP_90);
+	}
+
+	private void drawBottomLeftFlippedImage(GraphicsContext g) {
+		// bottom-left corner - 180° flip
+		TransformPainter.drawFlippedImage(g, this.image, this.left - this.halfImageWidth,
+				this.bottom - this.halfImageHeight, TransformPainter.Flip.FLIP_180);
+	}
+
+	private void drawBottomRightFlippedImage(GraphicsContext g) {
+		// bottom-right corner - 270° flip
+		TransformPainter.drawFlippedImage(g, this.image, this.right - this.halfImageWidth,
+				this.bottom - this.halfImageHeight, TransformPainter.Flip.FLIP_270);
 	}
 
 	/**
 	 * Entry Point for the example.
 	 *
 	 * @param args
-	 *             Not used.
+	 *            Not used.
 	 */
 	public static void main(String[] args) {
 		// A call to MicroUI.start is required to initialize the graphics
 		// runtime environment
 		MicroUI.start();
 
-		// We will need to access the display to draw stuff
-		final Display display = Display.getDefaultDisplay();
+		FlippedImages sample = new FlippedImages();
+		Display.getDisplay().requestShow(sample);
+	}
 
-		FlippedImages transparentImages = new FlippedImages(display);
-		transparentImages.show();
+	@Override
+	public boolean handleEvent(int event) {
+		// No event handling is required for this sample.
+		return false;
 	}
 
 }

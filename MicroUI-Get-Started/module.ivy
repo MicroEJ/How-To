@@ -1,14 +1,13 @@
 <!--
 	IVY
 	
-	Copyright 2014-2019 MicroEJ Corp. All rights reserved.
+	Copyright 2014-2022 MicroEJ Corp. All rights reserved.
 	Use of this source code is governed by a BSD-style license that can be found with this software.
 -->
 <ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:ej="https://developer.microej.com" ej:version="2.0.0"> 
-	<info organisation="com.microej.howto" module="microui" status="integration" revision="2.0.0">
-		<ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javalib" revision="4.+">
+	<info organisation="com.microej.howto" module="microui" status="integration" revision="3.0.0">
+		<ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javalib" revision="6.0.+">
 		</ea:build>
-		<ea:property name="test.run.excludes.pattern" value="**/*$*.class, **/nonauto/**/*.class, **/framework/**/*.class, **/TestAll.class, **/TestButton.class, **/TestButtonComposite.class, **/TestButtonImage.class"/>
 	</info>
 
 	<configurations defaultconfmapping="default->default;provided->provided">
@@ -26,10 +25,12 @@
 	</publications>
 
 	<dependencies>
-		<dependency org="ej.api" name="edc" rev="1.2.3" />
-		<dependency org="ej.api" name="bon" rev="1.2.3" />
-		<dependency org="ej.api" name="microui" rev="2.0.6" />
+		<dependency org="ej.api" name="edc" rev="1.3.4" />
+		<dependency org="ej.api" name="bon" rev="1.4.0" />
+		<dependency org="ej.api" name="microui" rev="3.1.0" />
+		<dependency org="ej.api" name="drawing" rev="1.0.3" />
 		
+		<dependency org="ej.library.ui" name="mwt" rev="3.3.0" />
 		<dependency org="ej.library.ui" name="microej-colors" rev="1.0.0" />
 	</dependencies>
 </ivy-module>
