@@ -258,9 +258,9 @@ Define the Application Project
 
 -  Open file **Main.java**
 
-   -  Source folder: **mylib-test/src**.
-   -  Package: **com.mycompany**
-   -  Class Name: **TestMyLib**
+   -  Source folder: **mylib-test/src/main/java**.
+   -  Package: **com.mycompany.test**
+   -  Class Name: **Main**
 
 -  Copy and paste the following code into this class:
 
